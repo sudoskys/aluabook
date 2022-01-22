@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Blog on LUA book</title>
-    <link>http://example.org/posts/</link>
+    <link>https://lua.dianas.cyou/posts/</link>
     <description>Recent content in Blog on LUA book</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 28 Sep 2014 00:00:00 +0000</lastBuildDate><atom:link href="http://example.org/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 28 Sep 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://lua.dianas.cyou/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>文档语法</title>
-      <link>http://example.org/posts/creating-a-new-theme/</link>
+      <link>https://lua.dianas.cyou/posts/creating-a-new-theme/</link>
       <pubDate>Sun, 28 Sep 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://example.org/posts/creating-a-new-theme/</guid>
+      <guid>https://lua.dianas.cyou/posts/creating-a-new-theme/</guid>
       <description>文档语法 #   Markdown content
 info|warning|danger
   MacOS MacOS Content #  Linux Linux Content #  Windows Windows Content #     问题 ...  本文档使用的代码来自于     Contribute   导航 0012121000   #  欢迎各位补充本文档   文档格式 #  This tutorial will show you how to create a simple theme in Hugo. I assume that you are familiar with HTML, the bash command line, and that you are comfortable using Markdown to format content.</description>

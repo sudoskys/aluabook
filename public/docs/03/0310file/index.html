@@ -8,7 +8,7 @@
 <meta name="color-scheme" content="light dark"><meta property="og:title" content="03-10 文件处理" />
 <meta property="og:description" content="递归搜索文件实例 #  require &#34;import&#34; function find(catalog,name) local n=0 local t=os.clock() local ret={} require &#34;import&#34; import &#34;java.io.File&#34; import &#34;java.lang.String&#34; function FindFile(catalog,name) local name=tostring(name) local ls=catalog.listFiles() or File{} for 次数=0,#ls-1 do --local 目录=tostring(ls[次数]) local f=ls[次数] if f.isDirectory() then--如果是文件夹则继续匹配 FindFile(f,name) else--如果是文件则 n=n&#43;1 if n%1000==0 then --print(n,os.clock()-t) end local nm=f.Name if string.find(nm,name) then --thread(insert,目录) table.insert(ret,nm) print(nm) end end luajava.clear(f) end end FindFile(catalog,name) print(&#34;ok&#34;,n,#ret) end import &#34;java.io.File&#34; catalog=File(&#34;sdcard/&#34;) name=&#34;.j?pn?g&#34; --task(find,catalog,name,print) thread(find,catalog,name) 获取Lua文件的执行路径 #  activity." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://example.org/docs/03/0310file/" /><meta property="article:section" content="docs" />
+<meta property="og:url" content="https://lua.dianas.cyou/docs/03/0310file/" /><meta property="article:section" content="docs" />
 
 
 
@@ -69,7 +69,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/01/" class="">01 初步认识LUA</a>
+    <a href="https://lua.dianas.cyou/docs/01/" class="">01 初步认识LUA</a>
   
 
           
@@ -82,7 +82,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/01/0101sudo/" class="">01-01 开发素养</a>
+    <a href="https://lua.dianas.cyou/docs/01/0101sudo/" class="">01-01 开发素养</a>
   
 
         </li>
@@ -95,7 +95,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/01/0102alua/" class="">01-02 认识Alua写法</a>
+    <a href="https://lua.dianas.cyou/docs/01/0102alua/" class="">01-02 认识Alua写法</a>
   
 
         </li>
@@ -113,7 +113,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/02/" class="">02 常用函数</a>
+    <a href="https://lua.dianas.cyou/docs/02/" class="">02 常用函数</a>
   
 
           
@@ -131,7 +131,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/03/" class="">03 MLUA教程</a>
+    <a href="https://lua.dianas.cyou/docs/03/" class="">03 MLUA教程</a>
   
 
           
@@ -144,7 +144,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/03/0301when/" class="">03-01 when的用法</a>
+    <a href="https://lua.dianas.cyou/docs/03/0301when/" class="">03-01 when的用法</a>
   
 
         </li>
@@ -157,7 +157,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/03/0302defer/" class="">03-02 Defer关键字</a>
+    <a href="https://lua.dianas.cyou/docs/03/0302defer/" class="">03-02 Defer关键字</a>
   
 
         </li>
@@ -170,7 +170,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/03/0303luawebviewzidingyi/" class="">03-03 LuaWebView自定义进度条</a>
+    <a href="https://lua.dianas.cyou/docs/03/0303luawebviewzidingyi/" class="">03-03 LuaWebView自定义进度条</a>
   
 
         </li>
@@ -183,7 +183,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/03/0304string/" class="">03-04 字符串</a>
+    <a href="https://lua.dianas.cyou/docs/03/0304string/" class="">03-04 字符串</a>
   
 
         </li>
@@ -196,7 +196,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/03/0305layout/" class="">03-05 界面&amp;布局</a>
+    <a href="https://lua.dianas.cyou/docs/03/0305layout/" class="">03-05 界面&amp;布局</a>
   
 
         </li>
@@ -209,7 +209,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/03/0306system/" class="">03-06 系统调用</a>
+    <a href="https://lua.dianas.cyou/docs/03/0306system/" class="">03-06 系统调用</a>
   
 
         </li>
@@ -222,7 +222,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/03/0307caculate/" class="">03-07 各式算法</a>
+    <a href="https://lua.dianas.cyou/docs/03/0307caculate/" class="">03-07 各式算法</a>
   
 
         </li>
@@ -235,7 +235,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/03/0308sent/" class="">03-08 信息&amp;发送</a>
+    <a href="https://lua.dianas.cyou/docs/03/0308sent/" class="">03-08 信息&amp;发送</a>
   
 
         </li>
@@ -248,7 +248,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/03/0309sthing/" class="">03-09 事件</a>
+    <a href="https://lua.dianas.cyou/docs/03/0309sthing/" class="">03-09 事件</a>
   
 
         </li>
@@ -261,7 +261,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/03/0310file/" class=" active">03-10 文件处理</a>
+    <a href="https://lua.dianas.cyou/docs/03/0310file/" class=" active">03-10 文件处理</a>
   
 
         </li>
@@ -274,7 +274,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/03/0311animation/" class="">03-11 动画</a>
+    <a href="https://lua.dianas.cyou/docs/03/0311animation/" class="">03-11 动画</a>
   
 
         </li>

@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>01 初步认识LUA on LUA book</title>
-    <link>http://example.org/docs/01/</link>
+    <link>https://lua.dianas.cyou/docs/01/</link>
     <description>Recent content in 01 初步认识LUA on LUA book</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language><atom:link href="http://example.org/docs/01/index.xml" rel="self" type="application/rss+xml" />
+    <language>zh-cn</language><atom:link href="https://lua.dianas.cyou/docs/01/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>01-01 开发素养</title>
-      <link>http://example.org/docs/01/0101sudo/</link>
+      <link>https://lua.dianas.cyou/docs/01/0101sudo/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://example.org/docs/01/0101sudo/</guid>
+      <guid>https://lua.dianas.cyou/docs/01/0101sudo/</guid>
       <description>素养 #   From sudoskys  对于不少小伙伴来说，Androlua是你们接触的第一个开发工具，那么如何使用优美的lua写出规范的代码，提升自己写代码的气质捏？
 请阅读以下内容。
  📜命名规范 #  常见命名规范 #  小驼峰式 第一个单词首字母小写，后面其他单词首字母大写
@@ -24,10 +24,10 @@
     
     <item>
       <title>01-02 认识Alua写法</title>
-      <link>http://example.org/docs/01/0102alua/</link>
+      <link>https://lua.dianas.cyou/docs/01/0102alua/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://example.org/docs/01/0102alua/</guid>
+      <guid>https://lua.dianas.cyou/docs/01/0102alua/</guid>
       <description>打印 #  print&amp;#34;Hello World！&amp;#34; print(&amp;#34;Hello World&amp;#34;) 注释 #  单行注释 -- 多行注释 --[[]] 字符串 #  a=&amp;#34;String&amp;#34; a=[[String]] a=[===[String]===] 赋值 #  a=&amp;#34;Hello World&amp;#34; --lua支持多重赋值 a,b=&amp;#34;String a&amp;#34;,&amp;#34;String b&amp;#34; --交换值 a,b=&amp;#34;String a&amp;#34;,&amp;#34;String b&amp;#34; a,b=b,a For循环 #  --给定条件进行循环 --输出从1到10 for i=1,10 do print(i) end --输出从10到1 for i=10,1,-1 do print(i) end --打印数组a中所有的值 a={&amp;#34;a&amp;#34;,&amp;#34;b&amp;#34;,&amp;#34;c&amp;#34;,&amp;#34;d&amp;#34;} for index,content in pairs(a) do print(content) end While循环 #  --只要条件为真便会一直循环下去 --输出1到10 a=0 while a~=10 do a=a+1 print(a) end --输出10到1 a=11 while a~=1 do a=a-1 print(a) end --打印数组a中的所有值 shuzu={&amp;#34;a&amp;#34;,&amp;#34;b&amp;#34;,&amp;#34;c&amp;#34;,&amp;#34;d&amp;#34;} a=0 while a~=#shuzu do a=a+1 print(shuzu[a]) end if(判断语句) #  --判断值是否为真 a=true if a then print(&amp;#34;真&amp;#34;) else print(&amp;#34;假&amp;#34;) end --比较值是否相同 a=true b=false if a==b then print(&amp;#34;真&amp;#34;) else print(&amp;#34;假&amp;#34;) end function(函数) #  函数有两个用途 1.</description>
     </item>
     

@@ -8,7 +8,7 @@
 <meta name="color-scheme" content="light dark"><meta property="og:title" content="03-08 信息&amp;发送" />
 <meta property="og:description" content="判断是否有网络 #  local wl=activity.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE).getActiveNetworkInfo(); if wl== nil then print(&#34;无法连接到服务器&#34;) end 发送邮件 #  import &#34;android.content.Intent&#34; i = Intent(Intent.ACTION_SEND) i.setType(&#34;message/rfc822&#34;) i.putExtra(Intent.EXTRA_EMAIL, {&#34;2113075983@.com&#34;}) i.putExtra(Intent.EXTRA_SUBJECT,&#34;Feedback&#34;) i.putExtra(Intent.EXTRA_TEXT,&#34;Content&#34;) activity.startActivity(Intent.createChooser(i, &#34;Choice&#34;)) 自带Http模块 #  获取内容 get函数 Http.get(url,cookie,charset,header,callback) url 网络请求的链接网址 cookie 使用的cookie，也就是服务器的身份识别信息 charset 内容编码 header 请求头 callback 请求完成后执行的函数 除了url和callback其他参数都不是必须的 回调函数接受四个参数值分别是 code 响应代码，2xx表示成功，4xx表示请求错误，5xx表示服务器错误，-1表示出错 content 内容，如果code是-1，则为出错信息 cookie 服务器返回的用户身份识别信息 header 服务器返回的头信息 向服务器发送数据 post函数 Http.post(url,data,cookie,charset,header,callback) 除了增加了一个data外，其他参数和get完全相同 data 向服务器发送的数据 下载文件 download函数 Http.download(url,path,cookie,header,callback) 参数中没有编码参数，其他同get， path 文件保存路径 需要特别注意一点，只支持同时有127个网络请求，否则会出错 Http其实是对Http.HttpTask的封装，Http.HttpTask使用的更加通用和灵活的形式 参数格式如下 Http.HttpTask( url, String method, cookie, charset, header, callback) 所有参数都是必选，没有则传入nil url 请求的网址 method 请求方法可以是get，post，put，delete等 cookie 身份验证信息 charset 内容编码 header 请求头 callback 回调函数 该函数返回的是一个HttpTask对象， 需要调用execute方法才可以执行， t=Http." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://example.org/docs/03/0308sent/" /><meta property="article:section" content="docs" />
+<meta property="og:url" content="https://lua.dianas.cyou/docs/03/0308sent/" /><meta property="article:section" content="docs" />
 
 
 
@@ -69,7 +69,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/01/" class="">01 初步认识LUA</a>
+    <a href="https://lua.dianas.cyou/docs/01/" class="">01 初步认识LUA</a>
   
 
           
@@ -82,7 +82,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/01/0101sudo/" class="">01-01 开发素养</a>
+    <a href="https://lua.dianas.cyou/docs/01/0101sudo/" class="">01-01 开发素养</a>
   
 
         </li>
@@ -95,7 +95,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/01/0102alua/" class="">01-02 认识Alua写法</a>
+    <a href="https://lua.dianas.cyou/docs/01/0102alua/" class="">01-02 认识Alua写法</a>
   
 
         </li>
@@ -113,7 +113,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/02/" class="">02 常用函数</a>
+    <a href="https://lua.dianas.cyou/docs/02/" class="">02 常用函数</a>
   
 
           
@@ -131,7 +131,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/03/" class="">03 MLUA教程</a>
+    <a href="https://lua.dianas.cyou/docs/03/" class="">03 MLUA教程</a>
   
 
           
@@ -144,7 +144,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/03/0301when/" class="">03-01 when的用法</a>
+    <a href="https://lua.dianas.cyou/docs/03/0301when/" class="">03-01 when的用法</a>
   
 
         </li>
@@ -157,7 +157,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/03/0302defer/" class="">03-02 Defer关键字</a>
+    <a href="https://lua.dianas.cyou/docs/03/0302defer/" class="">03-02 Defer关键字</a>
   
 
         </li>
@@ -170,7 +170,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/03/0303luawebviewzidingyi/" class="">03-03 LuaWebView自定义进度条</a>
+    <a href="https://lua.dianas.cyou/docs/03/0303luawebviewzidingyi/" class="">03-03 LuaWebView自定义进度条</a>
   
 
         </li>
@@ -183,7 +183,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/03/0304string/" class="">03-04 字符串</a>
+    <a href="https://lua.dianas.cyou/docs/03/0304string/" class="">03-04 字符串</a>
   
 
         </li>
@@ -196,7 +196,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/03/0305layout/" class="">03-05 界面&amp;布局</a>
+    <a href="https://lua.dianas.cyou/docs/03/0305layout/" class="">03-05 界面&amp;布局</a>
   
 
         </li>
@@ -209,7 +209,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/03/0306system/" class="">03-06 系统调用</a>
+    <a href="https://lua.dianas.cyou/docs/03/0306system/" class="">03-06 系统调用</a>
   
 
         </li>
@@ -222,7 +222,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/03/0307caculate/" class="">03-07 各式算法</a>
+    <a href="https://lua.dianas.cyou/docs/03/0307caculate/" class="">03-07 各式算法</a>
   
 
         </li>
@@ -235,7 +235,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/03/0308sent/" class=" active">03-08 信息&amp;发送</a>
+    <a href="https://lua.dianas.cyou/docs/03/0308sent/" class=" active">03-08 信息&amp;发送</a>
   
 
         </li>
@@ -248,7 +248,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/03/0309sthing/" class="">03-09 事件</a>
+    <a href="https://lua.dianas.cyou/docs/03/0309sthing/" class="">03-09 事件</a>
   
 
         </li>
@@ -261,7 +261,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/03/0310file/" class="">03-10 文件处理</a>
+    <a href="https://lua.dianas.cyou/docs/03/0310file/" class="">03-10 文件处理</a>
   
 
         </li>
@@ -274,7 +274,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/03/0311animation/" class="">03-11 动画</a>
+    <a href="https://lua.dianas.cyou/docs/03/0311animation/" class="">03-11 动画</a>
   
 
         </li>

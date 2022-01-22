@@ -8,7 +8,7 @@
 <meta name="color-scheme" content="light dark"><meta property="og:title" content="03-09 事件" />
 <meta property="og:description" content="事件 #  播放音频 #  --导入包 import &#34;android.media.MediaPlayer&#34; local 音频播放器=MediaPlayer() function 播放音频(路径) 音频播放器.reset() .setDataSource(路径) .prepare() .start() .setOnCompletionListener({ onCompletion=function() print(&#34;播放完毕&#34;) end}) end 强制结束自身并清除自身数据 #  os.execute(&#34;pm clear &#34;..activity.getPackageName()) 调用系统下载 #  --导入包 import &#34;android.content.Context&#34; import &#34;android.net.Uri&#34; downloadManager=activity.getSystemService(Context.DOWNLOAD_SERVICE); url=Uri.parse(&#34;绝对下载链接&#34;); request=DownloadManager.Request(url); request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_MOBILE|DownloadManager.Request.NETWORK_WIFI); request.setDestinationInExternalPublicDir(&#34;目录名，可以是Download&#34;,&#34;下载的文件名&#34;); request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED); downloadManager.enqueue(request); 获取本应用包名 #  activity.getPackageName() 删除ListView中某项 #  adp.remove(pos) 获取剪贴板内容 #  import&#34;android.content.*&#34; --导入包 a=activity.getSystemService(Context.CLIPBOARD_SERVICE).getText() 对话框Dialog #  --简单对话框 AlertDialog.Builder(this).setTitle(&#34;标题&#34;) .setMessage(&#34;简单消息框&#34;) .setPositiveButton(&#34;确定&#34;,nil) .show(); --带有三个按钮的对话框 AlertDialog.Builder(this) .setTitle(&#34;确认&#34;) .setMessage(&#34;确定吗？&#34;) .setPositiveButton(&#34;是&#34;,nil) ." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://example.org/docs/03/0309sthing/" /><meta property="article:section" content="docs" />
+<meta property="og:url" content="https://lua.dianas.cyou/docs/03/0309sthing/" /><meta property="article:section" content="docs" />
 
 
 
@@ -69,7 +69,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/01/" class="">01 初步认识LUA</a>
+    <a href="https://lua.dianas.cyou/docs/01/" class="">01 初步认识LUA</a>
   
 
           
@@ -82,7 +82,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/01/0101sudo/" class="">01-01 开发素养</a>
+    <a href="https://lua.dianas.cyou/docs/01/0101sudo/" class="">01-01 开发素养</a>
   
 
         </li>
@@ -95,7 +95,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/01/0102alua/" class="">01-02 认识Alua写法</a>
+    <a href="https://lua.dianas.cyou/docs/01/0102alua/" class="">01-02 认识Alua写法</a>
   
 
         </li>
@@ -113,7 +113,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/02/" class="">02 常用函数</a>
+    <a href="https://lua.dianas.cyou/docs/02/" class="">02 常用函数</a>
   
 
           
@@ -131,7 +131,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/03/" class="">03 MLUA教程</a>
+    <a href="https://lua.dianas.cyou/docs/03/" class="">03 MLUA教程</a>
   
 
           
@@ -144,7 +144,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/03/0301when/" class="">03-01 when的用法</a>
+    <a href="https://lua.dianas.cyou/docs/03/0301when/" class="">03-01 when的用法</a>
   
 
         </li>
@@ -157,7 +157,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/03/0302defer/" class="">03-02 Defer关键字</a>
+    <a href="https://lua.dianas.cyou/docs/03/0302defer/" class="">03-02 Defer关键字</a>
   
 
         </li>
@@ -170,7 +170,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/03/0303luawebviewzidingyi/" class="">03-03 LuaWebView自定义进度条</a>
+    <a href="https://lua.dianas.cyou/docs/03/0303luawebviewzidingyi/" class="">03-03 LuaWebView自定义进度条</a>
   
 
         </li>
@@ -183,7 +183,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/03/0304string/" class="">03-04 字符串</a>
+    <a href="https://lua.dianas.cyou/docs/03/0304string/" class="">03-04 字符串</a>
   
 
         </li>
@@ -196,7 +196,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/03/0305layout/" class="">03-05 界面&amp;布局</a>
+    <a href="https://lua.dianas.cyou/docs/03/0305layout/" class="">03-05 界面&amp;布局</a>
   
 
         </li>
@@ -209,7 +209,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/03/0306system/" class="">03-06 系统调用</a>
+    <a href="https://lua.dianas.cyou/docs/03/0306system/" class="">03-06 系统调用</a>
   
 
         </li>
@@ -222,7 +222,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/03/0307caculate/" class="">03-07 各式算法</a>
+    <a href="https://lua.dianas.cyou/docs/03/0307caculate/" class="">03-07 各式算法</a>
   
 
         </li>
@@ -235,7 +235,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/03/0308sent/" class="">03-08 信息&amp;发送</a>
+    <a href="https://lua.dianas.cyou/docs/03/0308sent/" class="">03-08 信息&amp;发送</a>
   
 
         </li>
@@ -248,7 +248,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/03/0309sthing/" class=" active">03-09 事件</a>
+    <a href="https://lua.dianas.cyou/docs/03/0309sthing/" class=" active">03-09 事件</a>
   
 
         </li>
@@ -261,7 +261,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/03/0310file/" class="">03-10 文件处理</a>
+    <a href="https://lua.dianas.cyou/docs/03/0310file/" class="">03-10 文件处理</a>
   
 
         </li>
@@ -274,7 +274,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="http://example.org/docs/03/0311animation/" class="">03-11 动画</a>
+    <a href="https://lua.dianas.cyou/docs/03/0311animation/" class="">03-11 动画</a>
   
 
         </li>
