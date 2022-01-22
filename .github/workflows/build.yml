@@ -1,0 +1,54 @@
+name: Build
+
+on: 
+  schedule:
+      - cron: '0 22 * * *'
+  watch:
+      types: [started]
+
+        
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    if: github.event.repository.owner.id == github.event.sender.id  # 自己点的 start
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node-version: [15.x]
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true  # Fetch any Git submodules (true OR recursive)
+          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install JS dependencies
+        run: rm -rf node_modules && yarn install --frozen-lockfile
+
+      - name: Check for linting errors
+        run: yarn run lint
+
+
+  hugo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true  # Fetch any Git submodules (true OR recursive)
+          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: '0.89.4'
+          extended: true
+
+      - name: Build
+        run: hugo --minify
+        working-directory: aluabook
+        
