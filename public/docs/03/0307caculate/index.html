@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="各种算法 #  From MLUA  字符串MD5 #   代码详情 ...  function MD5(str) local HexTable = {&#34;0&#34;,&#34;1&#34;,&#34;2&#34;,&#34;3&#34;,&#34;4&#34;,&#34;5&#34;,&#34;6&#34;,&#34;7&#34;,&#34;8&#34;,&#34;9&#34;,&#34;A&#34;,&#34;B&#34;,&#34;C&#34;,&#34;D&#34;,&#34;E&#34;,&#34;F&#34;} local A = 0x67452301 local B = 0xefcdab89 local C = 0x98badcfe local D = 0x10325476 local S11 = 7 local S12 = 12 local S13 = 17 local S14 = 22 local S21 = 5 local S22 = 9 local S23 = 14 local S24 = 20 local S31 = 4 local S32 = 11 local S33 = 16 local S34 = 23 local S41 = 6 local S42 = 10 local S43 = 15 local S44 = 21 local function F(x,y,z) return (x &amp; y) | ((~x) &amp; z) end local function G(x,y,z) return (x &amp; z) | (y &amp; (~z)) end local function H(x,y,z) return x ~ y ~ z end local function I(x,y,z) return y ~ (x | (~z)) end local function FF(a,b,c,d,x,s,ac) a = a &#43; F(b,c,d) &#43; x &#43; ac a = (((a &amp; 0xffffffff) &lt;&lt; s) | ((a &amp; 0xffffffff) &gt;&gt; 32 - s)) &#43; b return a &amp; 0xffffffff end local function GG(a,b,c,d,x,s,ac) a = a &#43; G(b,c,d) &#43; x &#43; ac a = (((a &amp; 0xffffffff) &lt;&lt; s) | ((a &amp; 0xffffffff) &gt;&gt; 32 - s)) &#43; b return a &amp; 0xffffffff end local function HH(a,b,c,d,x,s,ac) a = a &#43; H(b,c,d) &#43; x &#43; ac a = (((a &amp; 0xffffffff) &lt;&lt; s) | ((a &amp; 0xffffffff) &gt;&gt; 32 - s)) &#43; b return a &amp; 0xffffffff end local function II(a,b,c,d,x,s,ac) a = a &#43; I(b,c,d) &#43; x &#43; ac a = (((a &amp; 0xffffffff) &lt;&lt; s) | ((a &amp; 0xffffffff) &gt;&gt; 32 - s)) &#43; b return a &amp; 0xffffffff end local function MD5StringFill(s) local len = s:len() local mod512 = len * 8 % 512 --需要填充的字节数 local fillSize = (448 - mod512) // 8 if mod512 &gt; 448 then fillSize = (960 - mod512) // 8 end local rTab = {} --记录当前byte在4个字节的偏移 local byteIndex = 1 for i = 1,len do local index = (i - 1) // 4 &#43; 1 rTab[index] = rTab[index] or 0 rTab[index] = rTab[index] | (s:byte(i) &lt;&lt; (byteIndex - 1) * 8) byteIndex = byteIndex &#43; 1 if byteIndex == 5 then byteIndex = 1 end end --先将最后一个字节组成4字节一组 --表示0x80是否已插入 local b0x80 = false local tLen = #rTab if byteIndex ~= 1 then rTab[tLen] = rTab[tLen] | 0x80 &lt;&lt; (byteIndex - 1) * 8 b0x80 = true end --将余下的字节补齐 for i = 1,fillSize // 4 do if not b0x80 and i == 1 then rTab[tLen &#43; i] = 0x80 else rTab[tLen &#43; i] = 0x0 end end --后面加原始数据bit长度 local bitLen = math.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="03-07 各式算法" />
+<meta property="og:description" content="各种算法 #  From MLUA  字符串MD5 #   代码详情 ...  function MD5(str) local HexTable = {&#34;0&#34;,&#34;1&#34;,&#34;2&#34;,&#34;3&#34;,&#34;4&#34;,&#34;5&#34;,&#34;6&#34;,&#34;7&#34;,&#34;8&#34;,&#34;9&#34;,&#34;A&#34;,&#34;B&#34;,&#34;C&#34;,&#34;D&#34;,&#34;E&#34;,&#34;F&#34;} local A = 0x67452301 local B = 0xefcdab89 local C = 0x98badcfe local D = 0x10325476 local S11 = 7 local S12 = 12 local S13 = 17 local S14 = 22 local S21 = 5 local S22 = 9 local S23 = 14 local S24 = 20 local S31 = 4 local S32 = 11 local S33 = 16 local S34 = 23 local S41 = 6 local S42 = 10 local S43 = 15 local S44 = 21 local function F(x,y,z) return (x &amp; y) | ((~x) &amp; z) end local function G(x,y,z) return (x &amp; z) | (y &amp; (~z)) end local function H(x,y,z) return x ~ y ~ z end local function I(x,y,z) return y ~ (x | (~z)) end local function FF(a,b,c,d,x,s,ac) a = a &#43; F(b,c,d) &#43; x &#43; ac a = (((a &amp; 0xffffffff) &lt;&lt; s) | ((a &amp; 0xffffffff) &gt;&gt; 32 - s)) &#43; b return a &amp; 0xffffffff end local function GG(a,b,c,d,x,s,ac) a = a &#43; G(b,c,d) &#43; x &#43; ac a = (((a &amp; 0xffffffff) &lt;&lt; s) | ((a &amp; 0xffffffff) &gt;&gt; 32 - s)) &#43; b return a &amp; 0xffffffff end local function HH(a,b,c,d,x,s,ac) a = a &#43; H(b,c,d) &#43; x &#43; ac a = (((a &amp; 0xffffffff) &lt;&lt; s) | ((a &amp; 0xffffffff) &gt;&gt; 32 - s)) &#43; b return a &amp; 0xffffffff end local function II(a,b,c,d,x,s,ac) a = a &#43; I(b,c,d) &#43; x &#43; ac a = (((a &amp; 0xffffffff) &lt;&lt; s) | ((a &amp; 0xffffffff) &gt;&gt; 32 - s)) &#43; b return a &amp; 0xffffffff end local function MD5StringFill(s) local len = s:len() local mod512 = len * 8 % 512 --需要填充的字节数 local fillSize = (448 - mod512) // 8 if mod512 &gt; 448 then fillSize = (960 - mod512) // 8 end local rTab = {} --记录当前byte在4个字节的偏移 local byteIndex = 1 for i = 1,len do local index = (i - 1) // 4 &#43; 1 rTab[index] = rTab[index] or 0 rTab[index] = rTab[index] | (s:byte(i) &lt;&lt; (byteIndex - 1) * 8) byteIndex = byteIndex &#43; 1 if byteIndex == 5 then byteIndex = 1 end end --先将最后一个字节组成4字节一组 --表示0x80是否已插入 local b0x80 = false local tLen = #rTab if byteIndex ~= 1 then rTab[tLen] = rTab[tLen] | 0x80 &lt;&lt; (byteIndex - 1) * 8 b0x80 = true end --将余下的字节补齐 for i = 1,fillSize // 4 do if not b0x80 and i == 1 then rTab[tLen &#43; i] = 0x80 else rTab[tLen &#43; i] = 0x0 end end --后面加原始数据bit长度 local bitLen = math." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/docs/03/0307caculate/" /><meta property="article:section" content="docs" />
+
+
+
+<title>03-07 各式算法 | LUA book</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.82c5dbd23447cee0b4c2aa3ed08ce0961faa40e1fa370eee4f8c9f02e0d46b5f.css" integrity="sha256-gsXb0jRHzuC0wqo&#43;0Izglh&#43;qQOH6Nw7uT4yfAuDUa18=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.5864140064a36607902403553f21110d5e86d88b71d98b61bc41e2500a4ef661.js" integrity="sha256-WGQUAGSjZgeQJANVPyERDV6G2Itx2YthvEHiUApO9mE=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>LUA book</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/01/" class="">01 初步认识LUA</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/01/0101sudo/" class="">01-01 开发素养</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/01/0102alua/" class="">01-02 认识Alua写法</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/02/" class="">02 常用函数</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/03/" class="">03 MLUA教程</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/03/0301when/" class="">03-01 when的用法</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/03/0302defer/" class="">03-02 Defer关键字</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/03/0303luawebviewzidingyi/" class="">03-03 LuaWebView自定义进度条</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/03/0304string/" class="">03-04 字符串</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/03/0305layout/" class="">03-05 界面&amp;布局</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/03/0306system/" class="">03-06 系统调用</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/03/0307caculate/" class=" active">03-07 各式算法</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/03/0308sent/" class="">03-08 信息&amp;发送</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/03/0309sthing/" class="">03-09 事件</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/03/0310file/" class="">03-10 文件处理</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/03/0311animation/" class="">03-11 动画</a>
+  
+
+        </li>
+      
+    
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/" >
+        Blog
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>03-07 各式算法</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#字符串md5">字符串MD5</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="各种算法">
+  各种算法
+  <a class="anchor" href="#%e5%90%84%e7%a7%8d%e7%ae%97%e6%b3%95">#</a>
+</h1>
+<blockquote class="book-hint info">
+  <strong>From MLUA</strong>
+</blockquote>
+
+<h2 id="字符串md5">
+  字符串MD5
+  <a class="anchor" href="#%e5%ad%97%e7%ac%a6%e4%b8%b2md5">#</a>
+</h2>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>代码详情</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">MD5</span>(str)
+
+<span style="color:#66d9ef">local</span> HexTable <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;0&#34;</span>,<span style="color:#e6db74">&#34;1&#34;</span>,<span style="color:#e6db74">&#34;2&#34;</span>,<span style="color:#e6db74">&#34;3&#34;</span>,<span style="color:#e6db74">&#34;4&#34;</span>,<span style="color:#e6db74">&#34;5&#34;</span>,<span style="color:#e6db74">&#34;6&#34;</span>,<span style="color:#e6db74">&#34;7&#34;</span>,<span style="color:#e6db74">&#34;8&#34;</span>,<span style="color:#e6db74">&#34;9&#34;</span>,<span style="color:#e6db74">&#34;A&#34;</span>,<span style="color:#e6db74">&#34;B&#34;</span>,<span style="color:#e6db74">&#34;C&#34;</span>,<span style="color:#e6db74">&#34;D&#34;</span>,<span style="color:#e6db74">&#34;E&#34;</span>,<span style="color:#e6db74">&#34;F&#34;</span>}
+
+<span style="color:#66d9ef">local</span> A <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x67452301</span>
+
+<span style="color:#66d9ef">local</span> B <span style="color:#f92672">=</span> <span style="color:#ae81ff">0xefcdab89</span>
+
+<span style="color:#66d9ef">local</span> C <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x98badcfe</span>
+
+<span style="color:#66d9ef">local</span> D <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x10325476</span>
+
+<span style="color:#66d9ef">local</span> S11 <span style="color:#f92672">=</span> <span style="color:#ae81ff">7</span>
+
+<span style="color:#66d9ef">local</span> S12 <span style="color:#f92672">=</span> <span style="color:#ae81ff">12</span>
+
+<span style="color:#66d9ef">local</span> S13 <span style="color:#f92672">=</span> <span style="color:#ae81ff">17</span>
+
+<span style="color:#66d9ef">local</span> S14 <span style="color:#f92672">=</span> <span style="color:#ae81ff">22</span>
+
+<span style="color:#66d9ef">local</span> S21 <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>
+
+<span style="color:#66d9ef">local</span> S22 <span style="color:#f92672">=</span> <span style="color:#ae81ff">9</span>
+
+<span style="color:#66d9ef">local</span> S23 <span style="color:#f92672">=</span> <span style="color:#ae81ff">14</span>
+
+<span style="color:#66d9ef">local</span> S24 <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>
+
+<span style="color:#66d9ef">local</span> S31 <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>
+
+<span style="color:#66d9ef">local</span> S32 <span style="color:#f92672">=</span> <span style="color:#ae81ff">11</span>
+
+<span style="color:#66d9ef">local</span> S33 <span style="color:#f92672">=</span> <span style="color:#ae81ff">16</span>
+
+<span style="color:#66d9ef">local</span> S34 <span style="color:#f92672">=</span> <span style="color:#ae81ff">23</span>
+
+<span style="color:#66d9ef">local</span> S41 <span style="color:#f92672">=</span> <span style="color:#ae81ff">6</span>
+
+<span style="color:#66d9ef">local</span> S42 <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>
+
+<span style="color:#66d9ef">local</span> S43 <span style="color:#f92672">=</span> <span style="color:#ae81ff">15</span>
+
+<span style="color:#66d9ef">local</span> S44 <span style="color:#f92672">=</span> <span style="color:#ae81ff">21</span>
+
+<span style="color:#66d9ef">local</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">F</span>(x,y,z)
+
+<span style="color:#66d9ef">return</span> (x <span style="color:#f92672">&amp;</span> y) <span style="color:#f92672">|</span> ((<span style="color:#f92672">~</span>x) <span style="color:#f92672">&amp;</span> z)
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">local</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">G</span>(x,y,z)
+
+<span style="color:#66d9ef">return</span> (x <span style="color:#f92672">&amp;</span> z) <span style="color:#f92672">|</span> (y <span style="color:#f92672">&amp;</span> (<span style="color:#f92672">~</span>z))
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">local</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">H</span>(x,y,z)
+
+<span style="color:#66d9ef">return</span> x <span style="color:#f92672">~</span> y <span style="color:#f92672">~</span> z
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">local</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">I</span>(x,y,z)
+
+<span style="color:#66d9ef">return</span> y <span style="color:#f92672">~</span> (x <span style="color:#f92672">|</span> (<span style="color:#f92672">~</span>z))
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">local</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">FF</span>(a,b,c,d,x,s,ac)
+
+a <span style="color:#f92672">=</span> a <span style="color:#f92672">+</span> F(b,c,d) <span style="color:#f92672">+</span> x <span style="color:#f92672">+</span> ac
+
+a <span style="color:#f92672">=</span> (((a <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xffffffff</span>) <span style="color:#f92672">&lt;&lt;</span> s) <span style="color:#f92672">|</span> ((a <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xffffffff</span>) <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">32</span> <span style="color:#f92672">-</span> s)) <span style="color:#f92672">+</span> b
+
+<span style="color:#66d9ef">return</span> a <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xffffffff</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">local</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">GG</span>(a,b,c,d,x,s,ac)
+
+a <span style="color:#f92672">=</span> a <span style="color:#f92672">+</span> G(b,c,d) <span style="color:#f92672">+</span> x <span style="color:#f92672">+</span> ac
+
+a <span style="color:#f92672">=</span> (((a <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xffffffff</span>) <span style="color:#f92672">&lt;&lt;</span> s) <span style="color:#f92672">|</span> ((a <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xffffffff</span>) <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">32</span> <span style="color:#f92672">-</span> s)) <span style="color:#f92672">+</span> b
+
+<span style="color:#66d9ef">return</span> a <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xffffffff</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">local</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">HH</span>(a,b,c,d,x,s,ac)
+
+a <span style="color:#f92672">=</span> a <span style="color:#f92672">+</span> H(b,c,d) <span style="color:#f92672">+</span> x <span style="color:#f92672">+</span> ac
+
+a <span style="color:#f92672">=</span> (((a <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xffffffff</span>) <span style="color:#f92672">&lt;&lt;</span> s) <span style="color:#f92672">|</span> ((a <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xffffffff</span>) <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">32</span> <span style="color:#f92672">-</span> s)) <span style="color:#f92672">+</span> b
+
+<span style="color:#66d9ef">return</span> a <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xffffffff</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">local</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">II</span>(a,b,c,d,x,s,ac)
+
+a <span style="color:#f92672">=</span> a <span style="color:#f92672">+</span> I(b,c,d) <span style="color:#f92672">+</span> x <span style="color:#f92672">+</span> ac
+
+a <span style="color:#f92672">=</span> (((a <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xffffffff</span>) <span style="color:#f92672">&lt;&lt;</span> s) <span style="color:#f92672">|</span> ((a <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xffffffff</span>) <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">32</span> <span style="color:#f92672">-</span> s)) <span style="color:#f92672">+</span> b
+
+<span style="color:#66d9ef">return</span> a <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xffffffff</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">local</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">MD5StringFill</span>(s)
+
+<span style="color:#66d9ef">local</span> len <span style="color:#f92672">=</span> s:len()
+
+<span style="color:#66d9ef">local</span> mod512 <span style="color:#f92672">=</span> len <span style="color:#f92672">*</span> <span style="color:#ae81ff">8</span> <span style="color:#f92672">%</span> <span style="color:#ae81ff">512</span>
+
+<span style="color:#75715e">--需要填充的字节数</span>
+
+<span style="color:#66d9ef">local</span> fillSize <span style="color:#f92672">=</span> (<span style="color:#ae81ff">448</span> <span style="color:#f92672">-</span> mod512) <span style="color:#f92672">//</span> <span style="color:#ae81ff">8</span>
+
+<span style="color:#66d9ef">if</span> mod512 <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">448</span> <span style="color:#66d9ef">then</span>
+
+fillSize <span style="color:#f92672">=</span> (<span style="color:#ae81ff">960</span> <span style="color:#f92672">-</span> mod512) <span style="color:#f92672">//</span> <span style="color:#ae81ff">8</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">local</span> rTab <span style="color:#f92672">=</span> {}
+
+<span style="color:#75715e">--记录当前byte在4个字节的偏移</span>
+
+<span style="color:#66d9ef">local</span> byteIndex <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>,len <span style="color:#66d9ef">do</span>
+
+<span style="color:#66d9ef">local</span> index <span style="color:#f92672">=</span> (i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">//</span> <span style="color:#ae81ff">4</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+
+rTab[index] <span style="color:#f92672">=</span> rTab[index] <span style="color:#f92672">or</span> <span style="color:#ae81ff">0</span>
+
+rTab[index] <span style="color:#f92672">=</span> rTab[index] <span style="color:#f92672">|</span> (s:byte(i) <span style="color:#f92672">&lt;&lt;</span> (byteIndex <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> <span style="color:#ae81ff">8</span>)
+
+byteIndex <span style="color:#f92672">=</span> byteIndex <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+
+<span style="color:#66d9ef">if</span> byteIndex <span style="color:#f92672">==</span> <span style="color:#ae81ff">5</span> <span style="color:#66d9ef">then</span>
+
+byteIndex <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#75715e">--先将最后一个字节组成4字节一组</span>
+
+<span style="color:#75715e">--表示0x80是否已插入</span>
+
+<span style="color:#66d9ef">local</span> b0x80 <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>
+
+<span style="color:#66d9ef">local</span> tLen <span style="color:#f92672">=</span> <span style="color:#f92672">#</span>rTab
+
+<span style="color:#66d9ef">if</span> byteIndex <span style="color:#f92672">~=</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">then</span>
+
+rTab[tLen] <span style="color:#f92672">=</span> rTab[tLen] <span style="color:#f92672">|</span> <span style="color:#ae81ff">0x80</span> <span style="color:#f92672">&lt;&lt;</span> (byteIndex <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> <span style="color:#ae81ff">8</span>
+
+b0x80 <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#75715e">--将余下的字节补齐</span>
+
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>,fillSize <span style="color:#f92672">//</span> <span style="color:#ae81ff">4</span> <span style="color:#66d9ef">do</span>
+
+<span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> b0x80 <span style="color:#f92672">and</span> i <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">then</span>
+
+rTab[tLen <span style="color:#f92672">+</span> i] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x80</span>
+
+<span style="color:#66d9ef">else</span>
+
+rTab[tLen <span style="color:#f92672">+</span> i] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x0</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#75715e">--后面加原始数据bit长度</span>
+
+<span style="color:#66d9ef">local</span> bitLen <span style="color:#f92672">=</span> math.floor(len <span style="color:#f92672">*</span> <span style="color:#ae81ff">8</span>)
+
+tLen <span style="color:#f92672">=</span> <span style="color:#f92672">#</span>rTab
+
+rTab[tLen <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> bitLen <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xffffffff</span>
+
+rTab[tLen <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> bitLen <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">32</span>
+
+<span style="color:#66d9ef">return</span> rTab
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#75715e">-- Func: 计算MD5</span>
+
+<span style="color:#75715e">-- Param: string</span>
+
+<span style="color:#75715e">-- Return: string</span>
+
+<span style="color:#75715e">---------------------------------------------</span>
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">string</span>.<span style="color:#a6e22e">md5</span>(s)
+
+<span style="color:#75715e">--填充</span>
+
+<span style="color:#66d9ef">local</span> fillTab <span style="color:#f92672">=</span> MD5StringFill(s)
+
+<span style="color:#66d9ef">local</span> result <span style="color:#f92672">=</span> {A,B,C,D}
+
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>,<span style="color:#f92672">#</span>fillTab <span style="color:#f92672">//</span> <span style="color:#ae81ff">16</span> <span style="color:#66d9ef">do</span>
+
+<span style="color:#66d9ef">local</span> a <span style="color:#f92672">=</span> result[<span style="color:#ae81ff">1</span>]
+
+<span style="color:#66d9ef">local</span> b <span style="color:#f92672">=</span> result[<span style="color:#ae81ff">2</span>]
+
+<span style="color:#66d9ef">local</span> c <span style="color:#f92672">=</span> result[<span style="color:#ae81ff">3</span>]
+
+<span style="color:#66d9ef">local</span> d <span style="color:#f92672">=</span> result[<span style="color:#ae81ff">4</span>]
+
+<span style="color:#66d9ef">local</span> offset <span style="color:#f92672">=</span> (i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> <span style="color:#ae81ff">16</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+
+<span style="color:#75715e">--第一轮</span>
+
+a <span style="color:#f92672">=</span> FF(a, b, c, d, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">0</span>], S11, <span style="color:#ae81ff">0xd76aa478</span>)
+
+d <span style="color:#f92672">=</span> FF(d, a, b, c, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>], S12, <span style="color:#ae81ff">0xe8c7b756</span>)
+
+c <span style="color:#f92672">=</span> FF(c, d, a, b, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>], S13, <span style="color:#ae81ff">0x242070db</span>)
+
+b <span style="color:#f92672">=</span> FF(b, c, d, a, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">3</span>], S14, <span style="color:#ae81ff">0xc1bdceee</span>)
+
+a <span style="color:#f92672">=</span> FF(a, b, c, d, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">4</span>], S11, <span style="color:#ae81ff">0xf57c0faf</span>)
+
+d <span style="color:#f92672">=</span> FF(d, a, b, c, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">5</span>], S12, <span style="color:#ae81ff">0x4787c62a</span>)
+
+c <span style="color:#f92672">=</span> FF(c, d, a, b, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">6</span>], S13, <span style="color:#ae81ff">0xa8304613</span>)
+
+b <span style="color:#f92672">=</span> FF(b, c, d, a, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">7</span>], S14, <span style="color:#ae81ff">0xfd469501</span>)
+
+a <span style="color:#f92672">=</span> FF(a, b, c, d, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">8</span>], S11, <span style="color:#ae81ff">0x698098d8</span>)
+
+d <span style="color:#f92672">=</span> FF(d, a, b, c, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">9</span>], S12, <span style="color:#ae81ff">0x8b44f7af</span>)
+
+c <span style="color:#f92672">=</span> FF(c, d, a, b, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">10</span>], S13, <span style="color:#ae81ff">0xffff5bb1</span>)
+
+b <span style="color:#f92672">=</span> FF(b, c, d, a, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">11</span>], S14, <span style="color:#ae81ff">0x895cd7be</span>)
+
+a <span style="color:#f92672">=</span> FF(a, b, c, d, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">12</span>], S11, <span style="color:#ae81ff">0x6b901122</span>)
+
+d <span style="color:#f92672">=</span> FF(d, a, b, c, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">13</span>], S12, <span style="color:#ae81ff">0xfd987193</span>)
+
+c <span style="color:#f92672">=</span> FF(c, d, a, b, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">14</span>], S13, <span style="color:#ae81ff">0xa679438e</span>)
+
+b <span style="color:#f92672">=</span> FF(b, c, d, a, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">15</span>], S14, <span style="color:#ae81ff">0x49b40821</span>)
+
+<span style="color:#75715e">--第二轮</span>
+
+a <span style="color:#f92672">=</span> GG(a, b, c, d, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>], S21, <span style="color:#ae81ff">0xf61e2562</span>)
+
+d <span style="color:#f92672">=</span> GG(d, a, b, c, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">6</span>], S22, <span style="color:#ae81ff">0xc040b340</span>)
+
+c <span style="color:#f92672">=</span> GG(c, d, a, b, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">11</span>], S23, <span style="color:#ae81ff">0x265e5a51</span>)
+
+b <span style="color:#f92672">=</span> GG(b, c, d, a, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">0</span>], S24, <span style="color:#ae81ff">0xe9b6c7aa</span>)
+
+a <span style="color:#f92672">=</span> GG(a, b, c, d, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">5</span>], S21, <span style="color:#ae81ff">0xd62f105d</span>)
+
+d <span style="color:#f92672">=</span> GG(d, a, b, c, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">10</span>], S22, <span style="color:#ae81ff">0x2441453</span>)
+
+c <span style="color:#f92672">=</span> GG(c, d, a, b, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">15</span>], S23, <span style="color:#ae81ff">0xd8a1e681</span>)
+
+b <span style="color:#f92672">=</span> GG(b, c, d, a, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">4</span>], S24, <span style="color:#ae81ff">0xe7d3fbc8</span>)
+
+a <span style="color:#f92672">=</span> GG(a, b, c, d, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">9</span>], S21, <span style="color:#ae81ff">0x21e1cde6</span>)
+
+d <span style="color:#f92672">=</span> GG(d, a, b, c, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">14</span>], S22, <span style="color:#ae81ff">0xc33707d6</span>)
+
+c <span style="color:#f92672">=</span> GG(c, d, a, b, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">3</span>], S23, <span style="color:#ae81ff">0xf4d50d87</span>)
+
+b <span style="color:#f92672">=</span> GG(b, c, d, a, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">8</span>], S24, <span style="color:#ae81ff">0x455a14ed</span>)
+
+a <span style="color:#f92672">=</span> GG(a, b, c, d, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">13</span>], S21, <span style="color:#ae81ff">0xa9e3e905</span>)
+
+d <span style="color:#f92672">=</span> GG(d, a, b, c, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>], S22, <span style="color:#ae81ff">0xfcefa3f8</span>)
+
+c <span style="color:#f92672">=</span> GG(c, d, a, b, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">7</span>], S23, <span style="color:#ae81ff">0x676f02d9</span>)
+
+b <span style="color:#f92672">=</span> GG(b, c, d, a, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">12</span>], S24, <span style="color:#ae81ff">0x8d2a4c8a</span>)
+
+<span style="color:#75715e">--第三轮</span>
+
+a <span style="color:#f92672">=</span> HH(a, b, c, d, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">5</span>], S31, <span style="color:#ae81ff">0xfffa3942</span>)
+
+d <span style="color:#f92672">=</span> HH(d, a, b, c, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">8</span>], S32, <span style="color:#ae81ff">0x8771f681</span>)
+
+c <span style="color:#f92672">=</span> HH(c, d, a, b, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">11</span>], S33, <span style="color:#ae81ff">0x6d9d6122</span>)
+
+b <span style="color:#f92672">=</span> HH(b, c, d, a, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">14</span>], S34, <span style="color:#ae81ff">0xfde5380c</span>)
+
+a <span style="color:#f92672">=</span> HH(a, b, c, d, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>], S31, <span style="color:#ae81ff">0xa4beea44</span>)
+
+d <span style="color:#f92672">=</span> HH(d, a, b, c, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">4</span>], S32, <span style="color:#ae81ff">0x4bdecfa9</span>)
+
+c <span style="color:#f92672">=</span> HH(c, d, a, b, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">7</span>], S33, <span style="color:#ae81ff">0xf6bb4b60</span>)
+
+b <span style="color:#f92672">=</span> HH(b, c, d, a, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">10</span>], S34, <span style="color:#ae81ff">0xbebfbc70</span>)
+
+a <span style="color:#f92672">=</span> HH(a, b, c, d, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">13</span>], S31, <span style="color:#ae81ff">0x289b7ec6</span>)
+
+d <span style="color:#f92672">=</span> HH(d, a, b, c, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">0</span>], S32, <span style="color:#ae81ff">0xeaa127fa</span>)
+
+c <span style="color:#f92672">=</span> HH(c, d, a, b, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">3</span>], S33, <span style="color:#ae81ff">0xd4ef3085</span>)
+
+b <span style="color:#f92672">=</span> HH(b, c, d, a, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">6</span>], S34, <span style="color:#ae81ff">0x4881d05</span>)
+
+a <span style="color:#f92672">=</span> HH(a, b, c, d, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">9</span>], S31, <span style="color:#ae81ff">0xd9d4d039</span>)
+
+d <span style="color:#f92672">=</span> HH(d, a, b, c, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">12</span>], S32, <span style="color:#ae81ff">0xe6db99e5</span>)
+
+c <span style="color:#f92672">=</span> HH(c, d, a, b, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">15</span>], S33, <span style="color:#ae81ff">0x1fa27cf8</span>)
+
+b <span style="color:#f92672">=</span> HH(b, c, d, a, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>], S34, <span style="color:#ae81ff">0xc4ac5665</span>)
+
+<span style="color:#75715e">--第四轮</span>
+
+a <span style="color:#f92672">=</span> II(a, b, c, d, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">0</span>], S41, <span style="color:#ae81ff">0xf4292244</span>)
+
+d <span style="color:#f92672">=</span> II(d, a, b, c, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">7</span>], S42, <span style="color:#ae81ff">0x432aff97</span>)
+
+c <span style="color:#f92672">=</span> II(c, d, a, b, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">14</span>], S43, <span style="color:#ae81ff">0xab9423a7</span>)
+
+b <span style="color:#f92672">=</span> II(b, c, d, a, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">5</span>], S44, <span style="color:#ae81ff">0xfc93a039</span>)
+
+a <span style="color:#f92672">=</span> II(a, b, c, d, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">12</span>], S41, <span style="color:#ae81ff">0x655b59c3</span>)
+
+d <span style="color:#f92672">=</span> II(d, a, b, c, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">3</span>], S42, <span style="color:#ae81ff">0x8f0ccc92</span>)
+
+c <span style="color:#f92672">=</span> II(c, d, a, b, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">10</span>], S43, <span style="color:#ae81ff">0xffeff47d</span>)
+
+b <span style="color:#f92672">=</span> II(b, c, d, a, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>], S44, <span style="color:#ae81ff">0x85845dd1</span>)
+
+a <span style="color:#f92672">=</span> II(a, b, c, d, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">8</span>], S41, <span style="color:#ae81ff">0x6fa87e4f</span>)
+
+d <span style="color:#f92672">=</span> II(d, a, b, c, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">15</span>], S42, <span style="color:#ae81ff">0xfe2ce6e0</span>)
+
+c <span style="color:#f92672">=</span> II(c, d, a, b, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">6</span>], S43, <span style="color:#ae81ff">0xa3014314</span>)
+
+b <span style="color:#f92672">=</span> II(b, c, d, a, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">13</span>], S44, <span style="color:#ae81ff">0x4e0811a1</span>)
+
+a <span style="color:#f92672">=</span> II(a, b, c, d, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">4</span>], S41, <span style="color:#ae81ff">0xf7537e82</span>)
+
+d <span style="color:#f92672">=</span> II(d, a, b, c, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">11</span>], S42, <span style="color:#ae81ff">0xbd3af235</span>)
+
+c <span style="color:#f92672">=</span> II(c, d, a, b, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>], S43, <span style="color:#ae81ff">0x2ad7d2bb</span>)
+
+b <span style="color:#f92672">=</span> II(b, c, d, a, fillTab[offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">9</span>], S44, <span style="color:#ae81ff">0xeb86d391</span>)
+
+<span style="color:#75715e">--加入到之前计算的结果当中</span>
+
+result[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> result[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> a
+
+result[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> result[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">+</span> b
+
+result[<span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> result[<span style="color:#ae81ff">3</span>] <span style="color:#f92672">+</span> c
+
+result[<span style="color:#ae81ff">4</span>] <span style="color:#f92672">=</span> result[<span style="color:#ae81ff">4</span>] <span style="color:#f92672">+</span> d
+
+result[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> result[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xffffffff</span>
+
+result[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> result[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xffffffff</span>
+
+result[<span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> result[<span style="color:#ae81ff">3</span>] <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xffffffff</span>
+
+result[<span style="color:#ae81ff">4</span>] <span style="color:#f92672">=</span> result[<span style="color:#ae81ff">4</span>] <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xffffffff</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#75715e">--将Hash值转换成十六进制的字符串</span>
+
+<span style="color:#66d9ef">local</span> retStr <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>
+
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">4</span> <span style="color:#66d9ef">do</span>
+
+<span style="color:#66d9ef">for</span> _ <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">4</span> <span style="color:#66d9ef">do</span>
+
+<span style="color:#66d9ef">local</span> temp <span style="color:#f92672">=</span> result[i] <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0x0F</span>
+
+<span style="color:#66d9ef">local</span> str <span style="color:#f92672">=</span> HexTable[temp <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>]
+
+result[i] <span style="color:#f92672">=</span> result[i] <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">4</span>
+
+temp <span style="color:#f92672">=</span> result[i] <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0x0F</span>
+
+retStr <span style="color:#f92672">=</span> retStr <span style="color:#f92672">..</span> HexTable[temp <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">..</span> str
+
+result[i] <span style="color:#f92672">=</span> result[i] <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">4</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">return</span> retStr
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">return</span> string.md5(str)
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#75715e">--调用示例</span>
+
+print(MD5(<span style="color:#e6db74">&#34;MLua手册&#34;</span>))
+</code></pre></div>
+    </div>
+  </label>
+</div>
+
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#字符串md5">字符串MD5</a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,103 @@
+{
+  "main": {
+    "id": "f0ff1151ba9352e1",
+    "type": "split",
+    "children": [
+      {
+        "id": "5d55494fb6a1488d",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "docs/03/_index.md",
+            "mode": "source",
+            "source": false
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "07432375c28cb063",
+    "type": "split",
+    "children": [
+      {
+        "id": "f2486c52409fe805",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "084004ac8231631a",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "d97b2873dc679d95",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 186
+  },
+  "right": {
+    "id": "95eff42f869c5599",
+    "type": "split",
+    "children": [
+      {
+        "id": "fc304e70f21bb68c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "0dd371f69f62d2ea",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "docs/03/_index.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "5d55494fb6a1488d",
+  "lastOpenFiles": [
+    "docs/03/_index.md",
+    "docs/03/0306system.md",
+    "docs/03/0309sthing.md",
+    "docs/03/0311Animation.md",
+    "docs/03/0305layout.md",
+    "docs/03/0310file.md",
+    "docs/03/0304string.md",
+    "docs/03/0308sent.md",
+    "docs/01/0102alua.md",
+    "docs/03/0312http.md"
+  ]
+}

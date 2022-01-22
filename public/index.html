@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+<head>
+	<meta name="generator" content="Hugo 0.92.0" />
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Andlua book #  导入语 #  本文档的目的旨在为 Androlua 社区提供支持，也欢迎各位补充本文档    本文档签名 ...     贡献本项目 #  本项目由sudoskys使用hugo发布，如果您想补充本文档，请前往sudoskys
+ Contribute  引用 #   代码版权问题 ...  本文档使用的代码来自于经验所知，取材自群内开源与MLUA手册。 如果有版权问题，请联系 sudoskys     内容参考详注 ...     摘取部分 URL 作者     ### 常见命名规范 四种基本的编程命名规范 f-zyj       ">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="Introduction" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="http://example.org/" />
+
+<title>Introduction | LUA book</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.82c5dbd23447cee0b4c2aa3ed08ce0961faa40e1fa370eee4f8c9f02e0d46b5f.css" integrity="sha256-gsXb0jRHzuC0wqo&#43;0Izglh&#43;qQOH6Nw7uT4yfAuDUa18=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.5864140064a36607902403553f21110d5e86d88b71d98b61bc41e2500a4ef661.js" integrity="sha256-WGQUAGSjZgeQJANVPyERDV6G2Itx2YthvEHiUApO9mE=" crossorigin="anonymous"></script>
+<link rel="alternate" type="application/rss+xml" href="http://example.org/index.xml" title="LUA book" />
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>LUA book</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/01/" class="">01 初步认识LUA</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/01/0101sudo/" class="">01-01 开发素养</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/01/0102alua/" class="">01-02 认识Alua写法</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/02/" class="">02 常用函数</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/03/" class="">03 MLUA教程</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/03/0301when/" class="">03-01 when的用法</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/03/0302defer/" class="">03-02 Defer关键字</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/03/0303luawebviewzidingyi/" class="">03-03 LuaWebView自定义进度条</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/03/0304string/" class="">03-04 字符串</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/03/0305layout/" class="">03-05 界面&amp;布局</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/03/0306system/" class="">03-06 系统调用</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/03/0307caculate/" class="">03-07 各式算法</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/03/0308sent/" class="">03-08 信息&amp;发送</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/03/0309sthing/" class="">03-09 事件</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/03/0310file/" class="">03-10 文件处理</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/03/0311animation/" class="">03-11 动画</a>
+  
+
+        </li>
+      
+    
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/" >
+        Blog
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Introduction</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#导入语">导入语</a>
+      <ul>
+        <li><a href="#贡献本项目">贡献本项目</a></li>
+      </ul>
+    </li>
+    <li><a href="#引用">引用</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="andlua-book">
+  Andlua book
+  <a class="anchor" href="#andlua-book">#</a>
+</h1>
+<h2 id="导入语">
+  导入语
+  <a class="anchor" href="#%e5%af%bc%e5%85%a5%e8%af%ad">#</a>
+</h2>
+<div class="book-columns flex flex-wrap">
+
+  <div class="flex-even markdown-inner">
+    本文档的目的旨在为 Androlua 社区提供支持，也欢迎各位补充本文档
+  </div>
+
+</div>
+
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>本文档签名</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      
+    </div>
+  </label>
+</div>
+
+<h3 id="贡献本项目">
+  贡献本项目
+  <a class="anchor" href="#%e8%b4%a1%e7%8c%ae%e6%9c%ac%e9%a1%b9%e7%9b%ae">#</a>
+</h3>
+<p>本项目由sudoskys使用hugo发布，如果您想补充本文档，请前往<a href="https://github.com/sudoskys/aluabook">sudoskys</a></p>
+<hr>
+
+
+
+  
+  
+
+
+<a  href="https://github.com/sudoskys/aluabook"   target="_blank" rel="noopener"  class="book-btn">
+  Contribute
+</a>
+
+<h2 id="引用">
+  引用
+  <a class="anchor" href="#%e5%bc%95%e7%94%a8">#</a>
+</h2>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>代码版权问题</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      本文档使用的代码来自于经验所知，取材自群内开源与MLUA手册。
+如果有版权问题，请联系 <a href="https://github.com/sudoskys">sudoskys</a>
+    </div>
+  </label>
+</div>
+
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>内容参考详注</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <table>
+<thead>
+<tr>
+<th style="text-align:left">摘取部分</th>
+<th style="text-align:center">URL</th>
+<th style="text-align:right">作者</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">### 常见命名规范</td>
+<td style="text-align:center"><a href="https://zhuanlan.zhihu.com/p/89909623">四种基本的编程命名规范</a></td>
+<td style="text-align:right">f-zyj</td>
+</tr>
+</tbody>
+</table>
+
+    </div>
+  </label>
+</div>
+
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#导入语">导入语</a>
+      <ul>
+        <li><a href="#贡献本项目">贡献本项目</a></li>
+      </ul>
+    </li>
+    <li><a href="#引用">引用</a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

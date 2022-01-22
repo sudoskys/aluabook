@@ -1,0 +1,9 @@
+baseURL = "https://lua.dianas.cyou/"
+
+languageCode = "zh-cn"
+
+title = "LUA book"
+
+theme = "book"
+
+

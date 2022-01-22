@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="素养 #   From sudoskys  对于不少小伙伴来说，Androlua是你们接触的第一个开发工具，那么如何使用优美的lua写出规范的代码，提升自己写代码的气质捏？
+请阅读以下内容。
+ 📜命名规范 #  常见命名规范 #  小驼峰式 第一个单词首字母小写，后面其他单词首字母大写
+例子 #  myAge=18 myName[10] dianaLove=&#34;me&#34; 大驼峰式 每个单词的第一个字母都要大写。
+例子 #  MyAge=3 MyName[10] DianaLove=&#34;me&#34; 下划线法 可以结合其他方法使用
+例子 #  _My_Age=3 _My_Name[10] _Diana_Love=&#34;me&#34; 匈牙利法 早期的规范，由微软的一个匈牙利人发明的。确定变量的类型，系统却又琐碎。
+要求前缀字母用变量类型的缩写，其余部分用变量的英文或英文的缩写，单词第一个字母大写。
+例子 #  --注意类型 iMyAge=3 --int cMyName[10] --char sDiana_Love=&#34;me&#34; --str  命名规范补充 #   匈牙利法中类型有哪些？ ...  a 数组（Array） b 布尔值（Boolean） by 字节（Byte） c 有符号字符（Char） cb 无符号字符（Char Byte，并没有神马人用的） cr 颜色参考值（Color Ref） cx,cy 坐标差（长度 Short Int） dw 双字（Double Word） fn 函数（Function） h Handle（句柄） i 整形（Int） l 长整型（Long Int） lp 长指针（Long Pointer） m_ 类成员（Class Member） n 短整型（Short Int） np 近程指针（Near Pointer） p 指针（Pointer） s 字符串（String） sz 以 Null 做结尾的字符串型（String with Zero End） w 字（Word）     📚真正的学习Lua #   不要习惯于当CV工程师 #   理由很简单，如果你习惯于依赖示例代码，而不去真正研究这门语言本身或你复制的代码的每一行，你就不能扩展，不能提升，不能写出属于自己的项目，不能自己产出什么东西，永远被别人牵着走。">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="01-01 开发素养" />
+<meta property="og:description" content="素养 #   From sudoskys  对于不少小伙伴来说，Androlua是你们接触的第一个开发工具，那么如何使用优美的lua写出规范的代码，提升自己写代码的气质捏？
+请阅读以下内容。
+ 📜命名规范 #  常见命名规范 #  小驼峰式 第一个单词首字母小写，后面其他单词首字母大写
+例子 #  myAge=18 myName[10] dianaLove=&#34;me&#34; 大驼峰式 每个单词的第一个字母都要大写。
+例子 #  MyAge=3 MyName[10] DianaLove=&#34;me&#34; 下划线法 可以结合其他方法使用
+例子 #  _My_Age=3 _My_Name[10] _Diana_Love=&#34;me&#34; 匈牙利法 早期的规范，由微软的一个匈牙利人发明的。确定变量的类型，系统却又琐碎。
+要求前缀字母用变量类型的缩写，其余部分用变量的英文或英文的缩写，单词第一个字母大写。
+例子 #  --注意类型 iMyAge=3 --int cMyName[10] --char sDiana_Love=&#34;me&#34; --str  命名规范补充 #   匈牙利法中类型有哪些？ ...  a 数组（Array） b 布尔值（Boolean） by 字节（Byte） c 有符号字符（Char） cb 无符号字符（Char Byte，并没有神马人用的） cr 颜色参考值（Color Ref） cx,cy 坐标差（长度 Short Int） dw 双字（Double Word） fn 函数（Function） h Handle（句柄） i 整形（Int） l 长整型（Long Int） lp 长指针（Long Pointer） m_ 类成员（Class Member） n 短整型（Short Int） np 近程指针（Near Pointer） p 指针（Pointer） s 字符串（String） sz 以 Null 做结尾的字符串型（String with Zero End） w 字（Word）     📚真正的学习Lua #   不要习惯于当CV工程师 #   理由很简单，如果你习惯于依赖示例代码，而不去真正研究这门语言本身或你复制的代码的每一行，你就不能扩展，不能提升，不能写出属于自己的项目，不能自己产出什么东西，永远被别人牵着走。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/docs/01/0101sudo/" /><meta property="article:section" content="docs" />
+
+
+
+<title>01-01 开发素养 | LUA book</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.82c5dbd23447cee0b4c2aa3ed08ce0961faa40e1fa370eee4f8c9f02e0d46b5f.css" integrity="sha256-gsXb0jRHzuC0wqo&#43;0Izglh&#43;qQOH6Nw7uT4yfAuDUa18=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.5864140064a36607902403553f21110d5e86d88b71d98b61bc41e2500a4ef661.js" integrity="sha256-WGQUAGSjZgeQJANVPyERDV6G2Itx2YthvEHiUApO9mE=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>LUA book</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/01/" class="">01 初步认识LUA</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/01/0101sudo/" class=" active">01-01 开发素养</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/01/0102alua/" class="">01-02 认识Alua写法</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/02/" class="">02 常用函数</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/03/" class="">03 MLUA教程</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/03/0301when/" class="">03-01 when的用法</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/03/0302defer/" class="">03-02 Defer关键字</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/03/0303luawebviewzidingyi/" class="">03-03 LuaWebView自定义进度条</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/03/0304string/" class="">03-04 字符串</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/03/0305layout/" class="">03-05 界面&amp;布局</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/03/0306system/" class="">03-06 系统调用</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/03/0307caculate/" class="">03-07 各式算法</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/03/0308sent/" class="">03-08 信息&amp;发送</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/03/0309sthing/" class="">03-09 事件</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/03/0310file/" class="">03-10 文件处理</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/03/0311animation/" class="">03-11 动画</a>
+  
+
+        </li>
+      
+    
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/" >
+        Blog
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>01-01 开发素养</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#命名规范">📜命名规范</a>
+      <ul>
+        <li><a href="#常见命名规范">常见命名规范</a></li>
+      </ul>
+    </li>
+    <li><a href="#真正的学习lua">📚真正的学习Lua</a></li>
+    <li><a href="#社区交流素质">🌏社区交流素质</a>
+      <ul>
+        <li><a href="#如何提问才能更容易收到大佬的帮助">如何提问才能更容易收到大佬的帮助</a></li>
+      </ul>
+    </li>
+    <li><a href="#开源规范">📦开源规范</a>
+      <ul>
+        <li><a href="#为何需要开源">为何需要开源？</a></li>
+        <li><a href="#什么样的项目开源会遇冷">什么样的项目开源会遇冷</a></li>
+        <li><a href="#开源一个项目需要">开源一个项目需要？</a></li>
+        <li><a href="#怎样开源一个项目">怎样开源一个项目？</a></li>
+        <li><a href="#如何规范开源项目">如何规范开源项目？</a></li>
+        <li><a href="#如何使用开源">如何使用开源</a></li>
+        <li><a href="#开源软件如何盈利">开源软件如何盈利</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="素养">
+  素养
+  <a class="anchor" href="#%e7%b4%a0%e5%85%bb">#</a>
+</h1>
+<hr>
+<blockquote class="book-hint info">
+  <strong>From sudoskys</strong>
+</blockquote>
+
+<blockquote class="book-hint warning">
+  <p>对于不少小伙伴来说，Androlua是你们接触的第一个开发工具，那么如何使用优美的lua写出规范的代码，提升自己写代码的气质捏？</p>
+<p>请阅读以下内容。</p>
+
+</blockquote>
+
+<h2 id="命名规范">
+  📜命名规范
+  <a class="anchor" href="#%e5%91%bd%e5%90%8d%e8%a7%84%e8%8c%83">#</a>
+</h2>
+<h3 id="常见命名规范">
+  常见命名规范
+  <a class="anchor" href="#%e5%b8%b8%e8%a7%81%e5%91%bd%e5%90%8d%e8%a7%84%e8%8c%83">#</a>
+</h3>
+
+
+
+
+<div class="book-tabs"><input type="radio" class="toggle" name="tabs-常见命名规范" id="tabs-常见命名规范-0" checked="checked" />
+  <label for="tabs-常见命名规范-0">小驼峰式</label>
+  <div class="book-tabs-content markdown-inner"><p>第一个单词首字母小写，后面其他单词首字母大写</p>
+<h3 id="例子">
+  例子
+  <a class="anchor" href="#%e4%be%8b%e5%ad%90">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+myAge<span style="color:#f92672">=</span><span style="color:#ae81ff">18</span>
+myName[<span style="color:#ae81ff">10</span>]
+dianaLove<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;me&#34;</span>
+
+</code></pre></div></div><input type="radio" class="toggle" name="tabs-常见命名规范" id="tabs-常见命名规范-1"  />
+  <label for="tabs-常见命名规范-1">大驼峰式</label>
+  <div class="book-tabs-content markdown-inner"><p>每个单词的第一个字母都要大写。</p>
+<h3 id="例子">
+  例子
+  <a class="anchor" href="#%e4%be%8b%e5%ad%90">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">MyAge<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>
+MyName[<span style="color:#ae81ff">10</span>]
+DianaLove<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;me&#34;</span>
+</code></pre></div></div><input type="radio" class="toggle" name="tabs-常见命名规范" id="tabs-常见命名规范-2"  />
+  <label for="tabs-常见命名规范-2">下划线法</label>
+  <div class="book-tabs-content markdown-inner"><p>可以结合其他方法使用</p>
+<h3 id="例子">
+  例子
+  <a class="anchor" href="#%e4%be%8b%e5%ad%90">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+_My_Age<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>
+_My_Name[<span style="color:#ae81ff">10</span>]
+_Diana_Love<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;me&#34;</span>
+
+</code></pre></div></div><input type="radio" class="toggle" name="tabs-常见命名规范" id="tabs-常见命名规范-3"  />
+  <label for="tabs-常见命名规范-3">匈牙利法</label>
+  <div class="book-tabs-content markdown-inner"><p>早期的规范，由微软的一个匈牙利人发明的。确定变量的类型，系统却又琐碎。</p>
+<p>要求前缀字母用变量类型的缩写，其余部分用变量的英文或英文的缩写，单词第一个字母大写。</p>
+<h3 id="例子">
+  例子
+  <a class="anchor" href="#%e4%be%8b%e5%ad%90">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#75715e">--注意类型</span>
+
+iMyAge<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>   <span style="color:#75715e">--int</span>
+cMyName[<span style="color:#ae81ff">10</span>]  <span style="color:#75715e">--char</span>
+sDiana_Love<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;me&#34;</span>  <span style="color:#75715e">--str</span>
+
+</code></pre></div></div></div>
+
+<h4 id="命名规范补充">
+  命名规范补充
+  <a class="anchor" href="#%e5%91%bd%e5%90%8d%e8%a7%84%e8%8c%83%e8%a1%a5%e5%85%85">#</a>
+</h4>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>匈牙利法中类型有哪些？</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">a      数组（Array）
+b      布尔值（Boolean）
+by     字节（Byte）
+c      有符号字符（Char）
+cb     无符号字符（Char Byte，并没有神马人用的）
+cr     颜色参考值（Color Ref）
+cx,cy  坐标差（长度 Short Int）
+dw     双字（Double Word）
+fn     函数（Function）
+h      Handle（句柄）
+i      整形（Int）
+l      长整型（Long Int）
+lp     长指针（Long Pointer）
+m_     类成员（Class Member）
+n      短整型（Short Int）
+np     近程指针（Near Pointer）
+p      指针（Pointer）
+s      字符串（String）
+sz     以 Null 做结尾的字符串型（String with Zero End）
+w      字（Word）
+</code></pre></div>
+    </div>
+  </label>
+</div>
+
+<h2 id="真正的学习lua">
+  📚真正的学习Lua
+  <a class="anchor" href="#%e7%9c%9f%e6%ad%a3%e7%9a%84%e5%ad%a6%e4%b9%a0lua">#</a>
+</h2>
+<hr>
+<blockquote class="book-hint danger">
+  <h4 id="不要习惯于当cv工程师">
+  不要习惯于当CV工程师
+  <a class="anchor" href="#%e4%b8%8d%e8%a6%81%e4%b9%a0%e6%83%af%e4%ba%8e%e5%bd%93cv%e5%b7%a5%e7%a8%8b%e5%b8%88">#</a>
+</h4>
+
+</blockquote>
+
+<p>理由很简单，如果你习惯于依赖示例代码，而不去真正研究这门语言本身或你复制的代码的每一行，你就不能扩展，不能提升，不能写出属于自己的项目，不能自己产出什么东西，永远被别人牵着走。</p>
+<hr>
+<p><blockquote class="book-hint danger">
+  <h4 id="要有一个美的追求">
+  要有一个美的追求
+  <a class="anchor" href="#%e8%a6%81%e6%9c%89%e4%b8%80%e4%b8%aa%e7%be%8e%e7%9a%84%e8%bf%bd%e6%b1%82">#</a>
+</h4>
+
+</blockquote>
+
+有些人写的APP实在是不能入眼的三流APP,比如XX影视什么的。</p>
+<p>人总是追求美的。一个好的独立开发者，</p>
+<p>不仅要会写代码，还要懂<strong>配色</strong>，<strong>设计</strong>，<strong>运营</strong>，<strong>开发素养</strong>。</p>
+<p>如果你现在写以下APP，你有必要去学习以上内容。</p>
+<ul>
+<li>
+<p>五颜六色杀马特APP</p>
+</li>
+<li>
+<p>逻辑奇特，胁迫用户</p>
+</li>
+<li>
+<p>乱开目录，完全不按照绿色规范的流程</p>
+</li>
+<li>
+<p>工程结构和代码逻辑稀烂，难以交流</p>
+</li>
+</ul>
+<hr>
+<blockquote class="book-hint danger">
+  <h4 id="规范开源与提问">
+  规范开源与提问
+  <a class="anchor" href="#%e8%a7%84%e8%8c%83%e5%bc%80%e6%ba%90%e4%b8%8e%e6%8f%90%e9%97%ae">#</a>
+</h4>
+
+</blockquote>
+
+<p>要开源就不要加密源码&hellip;详见下文话题“开源规范”</p>
+<p>提问详见下文&quot;社区交流素质&quot;</p>
+<hr>
+<h2 id="社区交流素质">
+  🌏社区交流素质
+  <a class="anchor" href="#%e7%a4%be%e5%8c%ba%e4%ba%a4%e6%b5%81%e7%b4%a0%e8%b4%a8">#</a>
+</h2>
+<h3 id="如何提问才能更容易收到大佬的帮助">
+  如何提问才能更容易收到大佬的帮助
+  <a class="anchor" href="#%e5%a6%82%e4%bd%95%e6%8f%90%e9%97%ae%e6%89%8d%e8%83%bd%e6%9b%b4%e5%ae%b9%e6%98%93%e6%94%b6%e5%88%b0%e5%a4%a7%e4%bd%ac%e7%9a%84%e5%b8%ae%e5%8a%a9">#</a>
+</h3>
+<p>有些人进群就求助，也不附上截图或者错误信息，描述还不够清楚，每次看到这种小白，大佬也爱莫能助。</p>
+<p><a href="https://zhuanlan.zhihu.com/p/19761517">提问的智慧 👍知乎</a></p>
+<p><a href="https://lug.ustc.edu.cn/wiki/doc/smart-questions/">提问的智慧</a></p>
+<p><a href="https://www.dianbo.org/9238/stone/tiwendezhihui.htm">提问的智慧简化版本</a></p>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>大纲</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <p>你可能曾经试过向大牛提问，但是这些提问往往石沉大海，于是你就纳闷了，这些大牛们平时在网上看都性格好好和蔼可亲的样子，怎么一向他们提问变得那么冷漠了？反差实在是太大了。</p>
+<p>其实，出现这样的情况，往往不是对方耍大牌，而是你提问的方式错了。所以这篇文章让大家了解几个原则，让你更好地提问，并获得高回复率。🎓</p>
+<h3 id="原则一向适当的人提问适当的问题">原则一、向适当的人提问适当的问题。</h3>
+<p>大牛们喜欢艰巨的任务和激发思考的好问题。如果你提的问题在百度知道都可以找到答案，就莫怪他们鄙视你了，你也应该反省一下，你自己为什么那么懒？！这些懒人们在高手眼中就像是蛀虫一样，本来大牛们的时间就不多，与其忽视你的傻问题，不如花时间去回答其他更有意义的问题。</p>
+<h3 id="原则二提问前先搜一搜">原则二、提问前先搜一搜。</h3>
+<p>将你的问题放进搜索引擎过滤一遍，这其实不是什么难事，事实证明，90%的问题都可以用搜索引擎解决了，百度不行，用Google，Google不行用知乎。</p>
+<p>什么？怎么搜索？！</p>
+<p>这里刚好有一篇《十大高明的Google搜索技巧》，拿去用吧。</p>
+<p>什么？链接在哪里？！</p>
+<p>看原则二！</p>
+<h3 id="原则三提问前先试试自己解决">原则三、提问前先试试自己解决。</h3>
+<p>如果你的问题在网络上找不到答案，你也需要自行思考试图解决，解决不了，再向大牛们提问，大牛们喜欢看勤于思考，喜欢自己动手的人，不要以为你可以随便地忽悠大牛，大牛们的经验比你丰富，一眼就可以看得出你对待问题的态度，所以，认真地思考，准备好你的问题。</p>
+<h3 id="原则四准确地描述问题">原则四、准确地描述问题。</h3>
+<p>问题的描述应该包含以下内容：</p>
+<ul>
+<li>
+<ol>
+<li>清晰的细节；</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>问题发生的背景；</li>
+</ol>
+</li>
+<li>
+<ol start="3">
+<li>提问前做过的调查研究及对其的理解；</li>
+</ol>
+</li>
+<li>
+<ol start="4">
+<li>提问前为确定问题而采取的诊断步骤；</li>
+</ol>
+</li>
+</ul>
+<p>注意：千万不要用什么「跪求」，「在线等」，「紧急」等之类哗众取宠的词语来吸引大牛的注意，在大牛们看来，这些问题根本不值得去回答。</p>
+<h3 id="原则五问题解决后向大牛汇报一下结果">原则五、问题解决后向大牛汇报一下结果。</h3>
+<p>别的不说，别人帮你解决了问题，你得向别人说声谢谢吧，这是最基本的礼节。</p>
+<p>如果你厚道的话，也可以将解决问题的过程写下来，让以后有问题的人不要重蹈覆辙。这个举动不仅是在总结经验，而且是在为自己攒人品，大牛们看到你的总结会欣赏你的作为，以后就更加喜欢回答你的问题，说不定你以后还有机会和大牛们吃吃饭呢。</p>
+<p>好吧，就说到这里，感谢Eric S. Raymond，感谢知乎，感谢搜索引擎们。</p>
+<p>如果你能按以上的五个原则提问，这个世界真的会少很多的噪音，也少了很多抱怨，算是为人类造福了，</p>
+<p>最后，祝大家能够提出好问题，并得到高回复率。</p>
+<p>（题图：月色 by 清溪）
+<a href="https://zhuanlan.zhihu.com/p/19779979">https://zhuanlan.zhihu.com/p/19779979</a></p>
+
+    </div>
+  </label>
+</div>
+
+<h2 id="开源规范">
+  📦开源规范
+  <a class="anchor" href="#%e5%bc%80%e6%ba%90%e8%a7%84%e8%8c%83">#</a>
+</h2>
+<h3 id="为何需要开源">
+  为何需要开源？
+  <a class="anchor" href="#%e4%b8%ba%e4%bd%95%e9%9c%80%e8%a6%81%e5%bc%80%e6%ba%90">#</a>
+</h3>
+<ul>
+<li><strong>锻炼编程能力</strong>。</li>
+<li><strong>提高自己的社区知名度</strong>。项目的受欢迎程度让你在开源社区出名！</li>
+<li><strong>锻炼运营能力</strong></li>
+<li><strong>极客精神</strong>。 在IT界，受欢迎开源项目的负责人都很“牛”</li>
+<li><strong>贡献社区</strong>。造东西给大家用，互相回馈。</li>
+</ul>
+<h3 id="什么样的项目开源会遇冷">
+  什么样的项目开源会遇冷
+  <a class="anchor" href="#%e4%bb%80%e4%b9%88%e6%a0%b7%e7%9a%84%e9%a1%b9%e7%9b%ae%e5%bc%80%e6%ba%90%e4%bc%9a%e9%81%87%e5%86%b7">#</a>
+</h3>
+<ul>
+<li>模仿的项目</li>
+<li>没人需要的项目</li>
+<li>重复造的轮子（而且没有特色）</li>
+</ul>
+<h3 id="开源一个项目需要">
+  开源一个项目需要？
+  <a class="anchor" href="#%e5%bc%80%e6%ba%90%e4%b8%80%e4%b8%aa%e9%a1%b9%e7%9b%ae%e9%9c%80%e8%a6%81">#</a>
+</h3>
+<ul>
+<li><strong>源码</strong></li>
+<li><strong>介绍文档&amp;使用手册</strong></li>
+<li><strong>如何助力开发的帮助文档</strong></li>
+<li><strong>允许他人贡献代码</strong></li>
+<li><strong>问题</strong>，公开的issue（不是私聊）</li>
+<li><strong>项目现存问题</strong></li>
+<li><strong>TODO清单和预期计划</strong></li>
+</ul>
+<h3 id="怎样开源一个项目">
+  怎样开源一个项目？
+  <a class="anchor" href="#%e6%80%8e%e6%a0%b7%e5%bc%80%e6%ba%90%e4%b8%80%e4%b8%aa%e9%a1%b9%e7%9b%ae">#</a>
+</h3>
+<blockquote class="book-hint info">
+  <p><strong>From sudoskys</strong></p>
+<p>每个程序员都应该有一个 Github &amp;Gitee 账号</p>
+
+</blockquote>
+
+<p>注册一个 github&amp;gitee 账号去开源，那么<strong>不推荐改名字</strong>，注册账号时请慎重考虑。</p>
+<p><a href="https://gitee.com/">https://gitee.com/</a></p>
+<p><a href="https://github.com/">https://github.com/</a></p>
+<h3 id="如何规范开源项目">
+  如何规范开源项目？
+  <a class="anchor" href="#%e5%a6%82%e4%bd%95%e8%a7%84%e8%8c%83%e5%bc%80%e6%ba%90%e9%a1%b9%e7%9b%ae">#</a>
+</h3>
+<blockquote class="book-hint warning">
+  <h4 id="规范版本号">
+  规范版本号
+  <a class="anchor" href="#%e8%a7%84%e8%8c%83%e7%89%88%e6%9c%ac%e5%8f%b7">#</a>
+</h4>
+<p>版本号定义为 <code>0.0.1</code> 。以后我们每次更新，版本号都不一样。</p>
+<p>版本号分三段，分别为：</p>
+<ul>
+<li>一，重构版本</li>
+<li>二，重大功能改进</li>
+<li>三，小升级或者 bug 修复</li>
+</ul>
+<p>TIPS：<code>0.x.x</code> 可以认为是非正式版本、测试版。
+而 <code>1.x.x</code> 开始，是正式发布的版本。</p>
+
+</blockquote>
+
+<blockquote class="book-hint warning">
+  <h4 id="规范代码">
+  规范代码
+  <a class="anchor" href="#%e8%a7%84%e8%8c%83%e4%bb%a3%e7%a0%81">#</a>
+</h4>
+<p>结构，文件名、变量名、函数名、类名等等，不能随随便便改！</p>
+<p>当你的开源项目被贡献时，作为开源合作者，应该去检查代码合不合理、规范等等，合并后产生什么影响。</p>
+
+</blockquote>
+
+<blockquote class="book-hint warning">
+  <h4 id="通晓开源协议">
+  通晓开源协议
+  <a class="anchor" href="#%e9%80%9a%e6%99%93%e5%bc%80%e6%ba%90%e5%8d%8f%e8%ae%ae">#</a>
+</h4>
+<p>知名度较高的<a href="http://www.newstyleonline.net/post/kai-yuan-gui-fan.html">开源规范</a>分为五种(BSD, Apache, GPL, LGPL, MIT)，它作为行业通用认知，侵权可以诉讼.</p>
+<p><strong>开源协议</strong>详细内容
+<a href="https://zhuanlan.zhihu.com/p/87855729">https://zhuanlan.zhihu.com/p/87855729</a></p>
+<p><strong>开源协议如何选择</strong>
+<a href="http://www.ruanyifeng.com/blog/2011/05/how_to_choose_free_software_licenses.html">http://www.ruanyifeng.com/blog/2011/05/how_to_choose_free_software_licenses.html</a></p>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/201105/free_software_licenses.png" alt="detail" /></p>
+
+</blockquote>
+
+<h3 id="如何使用开源">
+  如何使用开源
+  <a class="anchor" href="#%e5%a6%82%e4%bd%95%e4%bd%bf%e7%94%a8%e5%bc%80%e6%ba%90">#</a>
+</h3>
+<p>详见
+<a href="https://www.zhihu.com/question/336820269">https://www.zhihu.com/question/336820269</a></p>
+<h3 id="开源软件如何盈利">
+  开源软件如何盈利
+  <a class="anchor" href="#%e5%bc%80%e6%ba%90%e8%bd%af%e4%bb%b6%e5%a6%82%e4%bd%95%e7%9b%88%e5%88%a9">#</a>
+</h3>
+<p>详见
+<a href="https://zhuanlan.zhihu.com/p/133525485">https://zhuanlan.zhihu.com/p/133525485</a></p>
+<p>一般是爱发电和打赏，或者售卖服务.</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#命名规范">📜命名规范</a>
+      <ul>
+        <li><a href="#常见命名规范">常见命名规范</a></li>
+      </ul>
+    </li>
+    <li><a href="#真正的学习lua">📚真正的学习Lua</a></li>
+    <li><a href="#社区交流素质">🌏社区交流素质</a>
+      <ul>
+        <li><a href="#如何提问才能更容易收到大佬的帮助">如何提问才能更容易收到大佬的帮助</a></li>
+      </ul>
+    </li>
+    <li><a href="#开源规范">📦开源规范</a>
+      <ul>
+        <li><a href="#为何需要开源">为何需要开源？</a></li>
+        <li><a href="#什么样的项目开源会遇冷">什么样的项目开源会遇冷</a></li>
+        <li><a href="#开源一个项目需要">开源一个项目需要？</a></li>
+        <li><a href="#怎样开源一个项目">怎样开源一个项目？</a></li>
+        <li><a href="#如何规范开源项目">如何规范开源项目？</a></li>
+        <li><a href="#如何使用开源">如何使用开源</a></li>
+        <li><a href="#开源软件如何盈利">开源软件如何盈利</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="字符串 #   From MLUA  字符串保留URL #   string.gkeepUrl=function(str) local strurltab={} for i,v in string.gfind(str,&#34;https?://[-A-Za-z0-9&#43;&amp;@#/%?=~_|!:,.;]&#43;[-A-Za-z0-9&#43;&amp;@#/%=~_|]&#34;) do strurltab[#strurltab&#43;1]=string.sub(str,i,v) end return strurltab end --返回的是table，该方式支持保留多个链接 --调用示例 str=&#34;MLuaForum https://www.mukapp.top/ Lua优化性能小结 https://www.mukapp.top/?thread-19.htm&#34; print(dump(str:gkeepUrl())) local str1=&#34;&#34; for i,v in ipairs(string.gkeepUrl(str)) do str1=str1..v..&#34; &#34; end print(str1) 字符串保留与过滤中文 #   --有中文符号会乱码 string.filterChinese=function(str)return string.gsub(str,&#34;[\u4e00-\u9fa5]&#43;&#34;,&#34;&#34;)end string.keepChinese=function(str)return string.gsub(str,&#34;[^\u4e00-\u9fa5]&#43;&#34;,&#34;&#34;)end --调用示例 str=&#34;MLua手册是一个全新的Androlua&#43;的手册&#34; --过滤中文 print(string.filterChinese(str)) print(str:filterChinese()) --保留中文 print(string.keepChinese(str)) print(str:keepChinese()) Json解析 #   --导入 JSON=import &#34;json&#34; --json字符串 json_str=[==[ [ { &#34;title&#34;: &#34;第一本书&#34;, &#34;bookId&#34;: &#34;book_1&#34; }, { &#34;title&#34;: &#34;第二本书&#34;, &#34;bookId&#34;: &#34;book_2&#34; } ] ]==] --解析json json_o=JSON.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="03-04 字符串" />
+<meta property="og:description" content="字符串 #   From MLUA  字符串保留URL #   string.gkeepUrl=function(str) local strurltab={} for i,v in string.gfind(str,&#34;https?://[-A-Za-z0-9&#43;&amp;@#/%?=~_|!:,.;]&#43;[-A-Za-z0-9&#43;&amp;@#/%=~_|]&#34;) do strurltab[#strurltab&#43;1]=string.sub(str,i,v) end return strurltab end --返回的是table，该方式支持保留多个链接 --调用示例 str=&#34;MLuaForum https://www.mukapp.top/ Lua优化性能小结 https://www.mukapp.top/?thread-19.htm&#34; print(dump(str:gkeepUrl())) local str1=&#34;&#34; for i,v in ipairs(string.gkeepUrl(str)) do str1=str1..v..&#34; &#34; end print(str1) 字符串保留与过滤中文 #   --有中文符号会乱码 string.filterChinese=function(str)return string.gsub(str,&#34;[\u4e00-\u9fa5]&#43;&#34;,&#34;&#34;)end string.keepChinese=function(str)return string.gsub(str,&#34;[^\u4e00-\u9fa5]&#43;&#34;,&#34;&#34;)end --调用示例 str=&#34;MLua手册是一个全新的Androlua&#43;的手册&#34; --过滤中文 print(string.filterChinese(str)) print(str:filterChinese()) --保留中文 print(string.keepChinese(str)) print(str:keepChinese()) Json解析 #   --导入 JSON=import &#34;json&#34; --json字符串 json_str=[==[ [ { &#34;title&#34;: &#34;第一本书&#34;, &#34;bookId&#34;: &#34;book_1&#34; }, { &#34;title&#34;: &#34;第二本书&#34;, &#34;bookId&#34;: &#34;book_2&#34; } ] ]==] --解析json json_o=JSON." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/docs/03/0304string/" /><meta property="article:section" content="docs" />
+
+
+
+<title>03-04 字符串 | LUA book</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.82c5dbd23447cee0b4c2aa3ed08ce0961faa40e1fa370eee4f8c9f02e0d46b5f.css" integrity="sha256-gsXb0jRHzuC0wqo&#43;0Izglh&#43;qQOH6Nw7uT4yfAuDUa18=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.5864140064a36607902403553f21110d5e86d88b71d98b61bc41e2500a4ef661.js" integrity="sha256-WGQUAGSjZgeQJANVPyERDV6G2Itx2YthvEHiUApO9mE=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>LUA book</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/01/" class="">01 初步认识LUA</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/01/0101sudo/" class="">01-01 开发素养</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/01/0102alua/" class="">01-02 认识Alua写法</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/02/" class="">02 常用函数</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/03/" class="">03 MLUA教程</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/03/0301when/" class="">03-01 when的用法</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/03/0302defer/" class="">03-02 Defer关键字</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/03/0303luawebviewzidingyi/" class="">03-03 LuaWebView自定义进度条</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/03/0304string/" class=" active">03-04 字符串</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/03/0305layout/" class="">03-05 界面&amp;布局</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/03/0306system/" class="">03-06 系统调用</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/03/0307caculate/" class="">03-07 各式算法</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/03/0308sent/" class="">03-08 信息&amp;发送</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/03/0309sthing/" class="">03-09 事件</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/03/0310file/" class="">03-10 文件处理</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://example.org/docs/03/0311animation/" class="">03-11 动画</a>
+  
+
+        </li>
+      
+    
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/" >
+        Blog
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>03-04 字符串</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#字符串保留url">字符串保留URL</a></li>
+    <li><a href="#字符串保留与过滤中文">字符串保留与过滤中文</a></li>
+    <li><a href="#json解析">Json解析</a></li>
+    <li><a href="#匹配汉字">匹配汉字</a></li>
+    <li><a href="#判断数组中是否存在某个值">判断数组中是否存在某个值</a></li>
+    <li><a href="#字符串操作">字符串操作</a></li>
+    <li><a href="#剪切板操作">剪切板操作</a></li>
+    <li><a href="#各种事件">各种事件</a></li>
+    <li><a href="#取随机数">取随机数</a></li>
+    <li><a href="#字符串操作-1">字符串操作</a></li>
+    <li><a href="#取字符串中间">取字符串中间</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="字符串">
+  字符串
+  <a class="anchor" href="#%e5%ad%97%e7%ac%a6%e4%b8%b2">#</a>
+</h1>
+<hr>
+<blockquote class="book-hint info">
+  <strong>From MLUA</strong>
+</blockquote>
+
+<h2 id="字符串保留url">
+  字符串保留URL
+  <a class="anchor" href="#%e5%ad%97%e7%ac%a6%e4%b8%b2%e4%bf%9d%e7%95%99url">#</a>
+</h2>
+<hr>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">string.gkeepUrl<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(str)
+
+<span style="color:#66d9ef">local</span> strurltab<span style="color:#f92672">=</span>{}
+
+<span style="color:#66d9ef">for</span> i,v <span style="color:#66d9ef">in</span> string.gfind(str,<span style="color:#e6db74">&#34;https?://[-A-Za-z0-9+&amp;@#/%?=~_|!:,.;]+[-A-Za-z0-9+&amp;@#/%=~_|]&#34;</span>) <span style="color:#66d9ef">do</span>
+
+strurltab[<span style="color:#f92672">#</span>strurltab<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>]<span style="color:#f92672">=</span>string.sub(str,i,v)
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">return</span> strurltab
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#75715e">--返回的是table，该方式支持保留多个链接</span>
+
+<span style="color:#75715e">--调用示例</span>
+
+str<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;MLuaForum https://www.mukapp.top/ Lua优化性能小结 https://www.mukapp.top/?thread-19.htm&#34;</span>
+
+print(dump(str:gkeepUrl()))
+
+<span style="color:#66d9ef">local</span> str1<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>
+
+<span style="color:#66d9ef">for</span> i,v <span style="color:#66d9ef">in</span> ipairs(string.gkeepUrl(str)) <span style="color:#66d9ef">do</span>
+
+str1<span style="color:#f92672">=</span>str1<span style="color:#f92672">..</span>v<span style="color:#f92672">..</span><span style="color:#e6db74">&#34; &#34;</span>
+
+<span style="color:#66d9ef">end</span>
+
+print(str1)
+</code></pre></div><h2 id="字符串保留与过滤中文">
+  字符串保留与过滤中文
+  <a class="anchor" href="#%e5%ad%97%e7%ac%a6%e4%b8%b2%e4%bf%9d%e7%95%99%e4%b8%8e%e8%bf%87%e6%bb%a4%e4%b8%ad%e6%96%87">#</a>
+</h2>
+<hr>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua"><span style="color:#75715e">--有中文符号会乱码</span>
+
+string.filterChinese<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(str)<span style="color:#66d9ef">return</span> string.gsub(str,<span style="color:#e6db74">&#34;[</span><span style="color:#960050;background-color:#1e0010">\</span><span style="color:#e6db74">u4e00-</span><span style="color:#960050;background-color:#1e0010">\</span><span style="color:#e6db74">u9fa5]+&#34;</span>,<span style="color:#e6db74">&#34;&#34;</span>)<span style="color:#66d9ef">end</span>
+
+string.keepChinese<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(str)<span style="color:#66d9ef">return</span> string.gsub(str,<span style="color:#e6db74">&#34;[^</span><span style="color:#960050;background-color:#1e0010">\</span><span style="color:#e6db74">u4e00-</span><span style="color:#960050;background-color:#1e0010">\</span><span style="color:#e6db74">u9fa5]+&#34;</span>,<span style="color:#e6db74">&#34;&#34;</span>)<span style="color:#66d9ef">end</span>
+
+<span style="color:#75715e">--调用示例</span>
+
+str<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;MLua手册是一个全新的Androlua+的手册&#34;</span>
+
+<span style="color:#75715e">--过滤中文</span>
+
+print(string.filterChinese(str))
+
+print(str:filterChinese())
+
+<span style="color:#75715e">--保留中文</span>
+
+print(string.keepChinese(str))
+
+print(str:keepChinese())
+
+</code></pre></div><h2 id="json解析">
+  Json解析
+  <a class="anchor" href="#json%e8%a7%a3%e6%9e%90">#</a>
+</h2>
+<hr>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua"><span style="color:#75715e">--导入</span>
+
+JSON<span style="color:#f92672">=</span>import <span style="color:#e6db74">&#34;json&#34;</span>
+
+<span style="color:#75715e">--json字符串</span>
+
+json_str<span style="color:#f92672">=</span><span style="color:#e6db74">[==[
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">[
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">{
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">&#34;title&#34;: &#34;第一本书&#34;,
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">&#34;bookId&#34;: &#34;book_1&#34;
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">},
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">{
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">&#34;title&#34;: &#34;第二本书&#34;,
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">&#34;bookId&#34;: &#34;book_2&#34;
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">}
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">]
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">]==]</span>
+
+<span style="color:#75715e">--解析json</span>
+
+json_o<span style="color:#f92672">=</span>JSON.decode(json_str)
+
+<span style="color:#75715e">--打印table</span>
+
+print(dump(json_o))
+
+<span style="color:#75715e">--遍历打印table</span>
+
+<span style="color:#66d9ef">for</span> i,v <span style="color:#66d9ef">in</span> ipairs(json_o) <span style="color:#66d9ef">do</span>
+
+print(v.title,v.bookId)
+
+<span style="color:#66d9ef">end</span>
+</code></pre></div><h2 id="匹配汉字">
+  匹配汉字
+  <a class="anchor" href="#%e5%8c%b9%e9%85%8d%e6%b1%89%e5%ad%97">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">filter_spec_chars</span>(s)
+
+<span style="color:#66d9ef">local</span> ss <span style="color:#f92672">=</span> {}
+
+<span style="color:#66d9ef">for</span> k <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, <span style="color:#f92672">#</span>s <span style="color:#66d9ef">do</span>
+
+<span style="color:#66d9ef">local</span> c <span style="color:#f92672">=</span> string.byte(s,k)
+
+<span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> c <span style="color:#66d9ef">then</span> <span style="color:#66d9ef">break</span> <span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">if</span> (c<span style="color:#f92672">&gt;=</span><span style="color:#ae81ff">48</span> <span style="color:#f92672">and</span> c<span style="color:#f92672">&lt;=</span><span style="color:#ae81ff">57</span>) <span style="color:#f92672">or</span> (c<span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">65</span> <span style="color:#f92672">and</span> c<span style="color:#f92672">&lt;=</span><span style="color:#ae81ff">90</span>) <span style="color:#f92672">or</span> (c<span style="color:#f92672">&gt;=</span><span style="color:#ae81ff">97</span> <span style="color:#f92672">and</span> c<span style="color:#f92672">&lt;=</span><span style="color:#ae81ff">122</span>) <span style="color:#66d9ef">then</span>
+
+<span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> string.char(c):find(<span style="color:#e6db74">&#34;%w&#34;</span>) <span style="color:#66d9ef">then</span>
+
+table.insert(ss, string.char(c))
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">elseif</span> c<span style="color:#f92672">&gt;=</span><span style="color:#ae81ff">228</span> <span style="color:#f92672">and</span> c<span style="color:#f92672">&lt;=</span><span style="color:#ae81ff">233</span> <span style="color:#66d9ef">then</span>
+
+<span style="color:#66d9ef">local</span> c1 <span style="color:#f92672">=</span> string.byte(s,k<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)
+
+<span style="color:#66d9ef">local</span> c2 <span style="color:#f92672">=</span> string.byte(s,k<span style="color:#f92672">+</span><span style="color:#ae81ff">2</span>)
+
+<span style="color:#66d9ef">if</span> c1 <span style="color:#f92672">and</span> c2 <span style="color:#66d9ef">then</span>
+
+<span style="color:#66d9ef">local</span> a1,a2,a3,a4 <span style="color:#f92672">=</span> <span style="color:#ae81ff">128</span>,<span style="color:#ae81ff">191</span>,<span style="color:#ae81ff">128</span>,<span style="color:#ae81ff">191</span>
+
+<span style="color:#66d9ef">if</span> c <span style="color:#f92672">==</span> <span style="color:#ae81ff">228</span> <span style="color:#66d9ef">then</span> a1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">184</span>
+
+<span style="color:#66d9ef">elseif</span> c <span style="color:#f92672">==</span> <span style="color:#ae81ff">233</span> <span style="color:#66d9ef">then</span> a2,a4 <span style="color:#f92672">=</span> <span style="color:#ae81ff">190</span>,c1 <span style="color:#f92672">~=</span> <span style="color:#ae81ff">190</span> <span style="color:#f92672">and</span> <span style="color:#ae81ff">191</span> <span style="color:#f92672">or</span> <span style="color:#ae81ff">165</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">if</span> c1<span style="color:#f92672">&gt;=</span>a1 <span style="color:#f92672">and</span> c1<span style="color:#f92672">&lt;=</span>a2 <span style="color:#f92672">and</span> c2<span style="color:#f92672">&gt;=</span>a3 <span style="color:#f92672">and</span> c2<span style="color:#f92672">&lt;=</span>a4 <span style="color:#66d9ef">then</span>
+
+k <span style="color:#f92672">=</span> k <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>
+
+table.insert(ss, string.char(c,c1,c2))
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">return</span> table.concat(ss)
+
+<span style="color:#66d9ef">end</span>
+
+print(filter_spec_chars(<span style="color:#e6db74">&#34;A1B2汉C3D4字E5F6,,,&#34;</span>))
+
+<span style="color:#75715e">--来源网络,加了个if过滤掉英文与数字,使其只捕获中文</span>
+</code></pre></div><h2 id="判断数组中是否存在某个值">
+  判断数组中是否存在某个值
+  <a class="anchor" href="#%e5%88%a4%e6%96%ad%e6%95%b0%e7%bb%84%e4%b8%ad%e6%98%af%e5%90%a6%e5%ad%98%e5%9c%a8%e6%9f%90%e4%b8%aa%e5%80%bc">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">Table_exists</span>(tables,value)
+
+<span style="color:#66d9ef">for</span> index,content <span style="color:#66d9ef">in</span> pairs(tables) <span style="color:#66d9ef">do</span>
+
+<span style="color:#66d9ef">if</span> content:find(value) <span style="color:#66d9ef">then</span>
+
+<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">end</span>
+</code></pre></div><h2 id="字符串操作">
+  字符串操作
+  <a class="anchor" href="#%e5%ad%97%e7%ac%a6%e4%b8%b2%e6%93%8d%e4%bd%9c">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+strings<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;左中右&#34;</span>
+
+<span style="color:#75715e">--取字符串左边</span>
+
+<span style="color:#960050;background-color:#1e0010">左</span><span style="color:#f92672">=</span>strings:match(<span style="color:#e6db74">&#34;(.+)中&#34;</span>)
+
+<span style="color:#75715e">--取字符串中间</span>
+
+<span style="color:#960050;background-color:#1e0010">中</span><span style="color:#f92672">=</span>strings:match(<span style="color:#e6db74">&#34;左(.-)右&#34;</span>)
+
+<span style="color:#75715e">--取字符串右边</span>
+
+<span style="color:#960050;background-color:#1e0010">右</span><span style="color:#f92672">=</span>strings:match(<span style="color:#e6db74">&#34;(.+)右&#34;</span>)
+
+<span style="color:#75715e">--替换</span>
+
+string.gsub(<span style="color:#960050;background-color:#1e0010">原字符串</span>,<span style="color:#960050;background-color:#1e0010">替换的字符串</span>,<span style="color:#960050;background-color:#1e0010">替换成的字符串</span>)
+
+<span style="color:#75715e">--匹配子串位置</span>
+
+<span style="color:#960050;background-color:#1e0010">起始位置</span>,<span style="color:#960050;background-color:#1e0010">结束位置</span><span style="color:#f92672">=</span>string.find(<span style="color:#960050;background-color:#1e0010">字符串</span>,<span style="color:#960050;background-color:#1e0010">子串</span>)
+
+<span style="color:#75715e">--按位置捕获字符串</span>
+
+string.sub(<span style="color:#960050;background-color:#1e0010">字符串</span>,<span style="color:#960050;background-color:#1e0010">子串起始位置</span>,<span style="color:#960050;background-color:#1e0010">子串结束位置</span>)
+</code></pre></div><h2 id="剪切板操作">
+  剪切板操作
+  <a class="anchor" href="#%e5%89%aa%e5%88%87%e6%9d%bf%e6%93%8d%e4%bd%9c">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+import <span style="color:#e6db74">&#34;android.content.Context&#34;</span>
+
+<span style="color:#75715e">--导入类</span>
+
+a<span style="color:#f92672">=</span>activity.getSystemService(Context.CLIPBOARD_SERVICE).getText()
+
+<span style="color:#75715e">--获取剪贴板</span>
+
+activity.getSystemService(Context.CLIPBOARD_SERVICE).setText(edit.Text)
+
+<span style="color:#75715e">--写入剪贴板</span>
+</code></pre></div><h2 id="各种事件">
+  各种事件
+  <a class="anchor" href="#%e5%90%84%e7%a7%8d%e4%ba%8b%e4%bb%b6">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">main</span>(...)
+
+<span style="color:#75715e">--...是newActivity传递过来的参数。</span>
+
+print(<span style="color:#e6db74">&#34;入口函数&#34;</span>,...)
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onCreate</span>()
+
+print(<span style="color:#e6db74">&#34;窗口创建&#34;</span>)
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onStart</span>()
+
+print(<span style="color:#e6db74">&#34;活动开始&#34;</span>)
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onResume</span>()
+
+print(<span style="color:#e6db74">&#34;返回程序&#34;</span>)
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onPause</span>()
+
+print(<span style="color:#e6db74">&#34;活动暂停&#34;</span>)
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onStop</span>()
+
+print(<span style="color:#e6db74">&#34;活动停止&#34;</span>)
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onDestroy</span>()
+
+print(<span style="color:#e6db74">&#34;程序已退出&#34;</span>)
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onResult</span>(name,...)
+
+<span style="color:#75715e">--name：返回的活动名称</span>
+
+<span style="color:#75715e">--...：返回的参数</span>
+
+print(<span style="color:#e6db74">&#34;返回活动&#34;</span>,name,...)
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onCreateOptionsMenu</span>(menu)
+
+<span style="color:#75715e">--menu：选项菜单。</span>
+
+menu.add(<span style="color:#e6db74">&#34;菜单&#34;</span>)
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onOptionsItemSelected</span>(item)
+
+<span style="color:#75715e">--item：选中的菜单项</span>
+
+print(item.Title)
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onConfigurationChanged</span>(config)
+
+<span style="color:#75715e">--config：配置信息</span>
+
+print(<span style="color:#e6db74">&#34;屏幕方向关闭&#34;</span>)
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onKeyDown</span>(keycode,event)
+
+<span style="color:#75715e">--keycode：键值</span>
+
+<span style="color:#75715e">--event：事件</span>
+
+print(<span style="color:#e6db74">&#34;按键按下&#34;</span>,keycode)
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onKeyUp</span>(keycode,event)
+
+<span style="color:#75715e">--keycode：键值</span>
+
+<span style="color:#75715e">--event：事件</span>
+
+print(<span style="color:#e6db74">&#34;按键抬起&#34;</span>,keycode)
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onKeyLongPress</span>(keycode,event)
+
+<span style="color:#75715e">--keycode：键值</span>
+
+<span style="color:#75715e">--event：事件</span>
+
+print(<span style="color:#e6db74">&#34;按键长按&#34;</span>,keycode)
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onTouchEvent</span>(event)
+
+<span style="color:#75715e">--event：事件</span>
+
+print(<span style="color:#e6db74">&#34;触摸事件&#34;</span>,event)
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onKeyDown</span>(c,e)
+
+<span style="color:#66d9ef">if</span> c<span style="color:#f92672">==</span><span style="color:#ae81ff">4</span> <span style="color:#66d9ef">then</span>
+
+<span style="color:#75715e">--返回键事件</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">end</span>
+
+id.onClick<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>()
+
+<span style="color:#75715e">--控件被单击</span>
+
+<span style="color:#66d9ef">end</span>
+
+id.onLongClick<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>()
+
+<span style="color:#75715e">--控件被长按</span>
+
+<span style="color:#66d9ef">end</span>
+
+id.onItemClick<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(p,v,i,s)
+
+<span style="color:#75715e">--列表项目被单击</span>
+
+<span style="color:#960050;background-color:#1e0010">项目</span><span style="color:#f92672">=</span>v.Text
+
+<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>
+
+<span style="color:#66d9ef">end</span>
+
+id.onItemLongClick<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(p,v,i,s)
+
+<span style="color:#75715e">--列表项目被长按</span>
+
+<span style="color:#960050;background-color:#1e0010">项目</span><span style="color:#f92672">=</span>v.Text
+
+<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>
+
+<span style="color:#66d9ef">end</span>
+
+id.onItemLongClick<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(p,v,i,s)
+
+<span style="color:#75715e">--列表项目被长按</span>
+
+<span style="color:#960050;background-color:#1e0010">项目</span><span style="color:#f92672">=</span>v.Text
+
+<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#75715e">--Spinner的项目单击事件</span>
+
+id.onItemSelected<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(l,v,p,i)
+
+<span style="color:#960050;background-color:#1e0010">项目</span><span style="color:#f92672">=</span>v.Text
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#75715e">--ExpandableListView的父项目与子项目单击事件</span>
+
+id.onGroupClick<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(l,v,p,s)
+
+print(v.Text<span style="color:#f92672">..</span><span style="color:#e6db74">&#34;:GroupClick&#34;</span>)
+
+<span style="color:#66d9ef">end</span>
+
+id.onChildClick<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(l,v,g,c)
+
+print(v.Text<span style="color:#f92672">..</span><span style="color:#e6db74">&#34;:ChildClick&#34;</span>)
+
+<span style="color:#66d9ef">end</span>
+</code></pre></div><h2 id="取随机数">
+  取随机数
+  <a class="anchor" href="#%e5%8f%96%e9%9a%8f%e6%9c%ba%e6%95%b0">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+math.random(<span style="color:#960050;background-color:#1e0010">最小值</span>,<span style="color:#960050;background-color:#1e0010">最大值</span>)
+</code></pre></div><h2 id="字符串操作-1">
+  字符串操作
+  <a class="anchor" href="#%e5%ad%97%e7%ac%a6%e4%b8%b2%e6%93%8d%e4%bd%9c-1">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#75715e">--字符串转大写</span>
+
+string.upper(<span style="color:#960050;background-color:#1e0010">字符串</span>)
+
+<span style="color:#75715e">--字符串转小写</span>
+
+string.lower(<span style="color:#960050;background-color:#1e0010">字符串</span>)
+
+<span style="color:#75715e">--字符串替换</span>
+
+string.gsub(<span style="color:#960050;background-color:#1e0010">字符串</span>,<span style="color:#960050;background-color:#1e0010">被替换的字符</span>,<span style="color:#960050;background-color:#1e0010">替换的字符</span>,<span style="color:#960050;background-color:#1e0010">替换次数</span>)
+</code></pre></div><h2 id="取字符串中间">
+  取字符串中间
+  <a class="anchor" href="#%e5%8f%96%e5%ad%97%e7%ac%a6%e4%b8%b2%e4%b8%ad%e9%97%b4">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+string.match(<span style="color:#e6db74">&#34;左测试测试右&#34;</span>,<span style="color:#e6db74">&#34;左(.-)右&#34;</span>)
+</code></pre></div></article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#字符串保留url">字符串保留URL</a></li>
+    <li><a href="#字符串保留与过滤中文">字符串保留与过滤中文</a></li>
+    <li><a href="#json解析">Json解析</a></li>
+    <li><a href="#匹配汉字">匹配汉字</a></li>
+    <li><a href="#判断数组中是否存在某个值">判断数组中是否存在某个值</a></li>
+    <li><a href="#字符串操作">字符串操作</a></li>
+    <li><a href="#剪切板操作">剪切板操作</a></li>
+    <li><a href="#各种事件">各种事件</a></li>
+    <li><a href="#取随机数">取随机数</a></li>
+    <li><a href="#字符串操作-1">字符串操作</a></li>
+    <li><a href="#取字符串中间">取字符串中间</a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
