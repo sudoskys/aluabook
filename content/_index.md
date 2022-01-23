@@ -5,6 +5,8 @@ type: docs
 
 # Andlua book
 
+![counter](https://count.getloli.com/get/@sudoskys-github-aluabook?theme=moebooru)
+
 ## 导入语
 
 {{< columns >}}
