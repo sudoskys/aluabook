@@ -28,6 +28,13 @@ type: docs
 
 本项目由sudoskys使用hugo发布，如果您想补充本文档，请前往[sudoskys](https://github.com/sudoskys/aluabook)
 
+   [贡献教程](https://www.jianshu.com/p/8c69d1021d98)
+    [教程二](https://blog.csdn.net/yzr1216/article/details/81114560)
+    [全面教程](https://www.cnblogs.com/idorax/p/9366035.html)
+
+
+
+
 --------
 
 {{< button href="https://github.com/sudoskys/aluabook" >}}Contribute{{< /button >}}
