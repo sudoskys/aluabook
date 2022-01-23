@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>02 常用函数 on LUA book</title>
+    <title>02 教程 on LUA book</title>
     <link>https://lua.dianas.cyou/docs/02/</link>
-    <description>Recent content in 02 常用函数 on LUA book</description>
+    <description>Recent content in 02 教程 on LUA book</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language><atom:link href="https://lua.dianas.cyou/docs/02/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>02-01 String</title>
+      <link>https://lua.dianas.cyou/docs/02/0201string/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://lua.dianas.cyou/docs/02/0201string/</guid>
+      <description>字符串 #   From 小何  字符串操作 #  转义符 #  \n 换行(LF) ，将当前位置移到下一行开头 \r 回车(CR) ，将当前位置移到本行开头 \t 水平制表(HT) （跳到下一个TAB位置） \\ 代表一个反斜线字符\ \&amp;#39; 代表一个单引号（撇号）字符 \&amp;#34;代表一个双引号字符 \0空字符(NULL) 链接字符串只需要使用 .. #  print(&amp;#34;i&amp;#34;..&amp;#39;love&amp;#39;) 计算字符串长度使用#字符串 #  miao = &amp;#34;https://lua.dianas.cyou/&amp;#34; print(#miao) 正则操作字符串 #  我们使用正则表达式来截取字符串，简单的截取请看示例
+str=&amp;#34;左中右&amp;#34; --取左 左=str:match(&amp;#34;(.+)中&amp;#34;) --取字符串中间 中=str:match(&amp;#34;左(.-)右&amp;#34;) --取字符串右边 右=str:match(&amp;#34;中(.+)&amp;#34;) 常用正则如下  详细内容 ...  常用正则(Lua中需要将\换成%)： 非负整数：^\d+$ 正整数：^[0-9]*[1-9][0-9]*$ 非正整数：^((-\d+)|(0+))$ 负整数：^-[0-9]*[1-9][0-9]*$ 整数：^-?\d+$ 非负浮点数：^\d+(\.\d+)?$ 正浮点数 : ^((0-9)+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*)$ 非正浮点数：^((-\d+\.\d+)?)|(0+(\.0+)?))$ 负浮点数：^(-((正浮点数正则式)))$ 英文字符串：^[A-Za-z]+$ 英文大写串：^[A-Z]+$ 英文小写串：^[a-z]+$ 英文字符数字串：^[A-Za-z0-9]+$ 英数字加下划线串：^\w+$ E-mail地址：^[\w-]+(\.</description>
+    </item>
+    
   </channel>
 </rss>
