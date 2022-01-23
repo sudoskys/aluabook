@@ -1,0 +1,63 @@
+shamrock=
+--布局请写在这里
+{
+  LinearLayout;--线性布局
+  Orientation='vertical';--布局方向
+  layout_width='fill';--布局宽度
+  layout_height='fill';--布局高度
+  background='#ffffff';--布局背景颜色(或者图片路径)
+  gravity='center';
+  {
+    StackView;
+    id='stack';
+    layout_width='300';
+    layout_height='300';
+  };
+};
+activity.setContentView(loadlayout(shamrock))
+
+item={
+  LinearLayout;--线性布局
+  Orientation='vertical';--布局方向
+  layout_width='fill';--布局宽度
+  layout_height='fill';--布局高度
+  background='#00000000';--布局背景颜色(或者图片路径)
+  {
+    CardView;--卡片控件
+    id='card';
+    layout_gravity='center';--重力属性
+    Elevation='0';--阴影属性
+    layout_width='250';--卡片宽度
+    layout_height='250';--卡片高度
+    radius='50';--卡片圆角
+    CardBackgroundColor='#ff7e5cf8';--卡片背景颜色
+    {
+      TextView;--文本控件
+      id='text';
+      layout_width='fill';--文本宽度
+      layout_height='fill';--文本高度
+      Gravity='center';--重力属性
+      textColor='#ffffff';--文本颜色
+      text='ONE';--显示的文本
+      textSize='20sp';--文本大小
+    };
+  };
+};
+--创建项目数组
+color_table={0xff7e5cf8,0xff7ef7f8,0xfff65cf8,0xff7e00f8,0xff135cf8}
+data={}
+--创建适配器
+adp=LuaAdapter(activity,data,item)
+--添加数据
+for n=1,5 do
+  table.insert(data,{
+    text={
+      Text=tostring(n),
+    },
+    card={
+      BackgroundColor=color_table[n],
+    },
+  })
+end
+--设置适配器
+stack.Adapter=adp

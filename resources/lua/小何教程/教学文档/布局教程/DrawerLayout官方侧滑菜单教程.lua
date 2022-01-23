@@ -1,0 +1,71 @@
+--[[
+侧滑布局即可创建侧滑栏的布局
+使用注意事项：
+1.主内容视图一定要񦋽rawerLayout的第一个子视图
+2.主内容视图宽度和高度需򉠟ill
+3.必须显示指定侧滑视图的layout_gravity属性,layout_gravity = "start"时，从左向右滑出菜单,layout_gravity = "end"时，从右向左滑出菜单 
+它没什么属性可说，也就是一父项里面包含三个子项，第一个就是主布局，依次为左侧滑，右侧滑。
+]]
+
+--创建示例布局
+shamrock=
+{
+  DrawerLayout;--侧滑布局
+  {
+    --主布局
+    LinearLayout;--线性布局
+    Orientation='vertical';--布局方向
+    layout_width='fill';--布局宽度
+    layout_height='fill';--布局高度
+    background='#ffffff';--布局背景颜色(或者图片路径)
+    Gravity='center';--设置居中
+    {
+      TextView;--文本控件
+      layout_width='wrap';--文本宽度
+      layout_height='wrap';--文本高度
+      Gravity='center';--重力属性
+      textColor='#000000';--文本颜色
+      text='左右滑试试看';--显示的文本
+      textSize='26sp';--文本大小
+    };
+  };
+  {
+    --左侧滑栏布局
+    LinearLayout;--线性布局
+    Orientation='vertical';--布局方向
+    layout_gravity='start';--重力属性
+    layout_width='fill';--布局宽度
+    layout_height='fill';--布局高度
+    background='#ffffff';--布局背景颜色(或者图片路径)
+    gravity='center';--设置居中
+    {
+      TextView;--文本控件
+      layout_width='wrap';--文本宽度
+      layout_height='wrap';--文本高度
+      Gravity='center';--重力属性
+      textColor='#000000';--文本颜色
+      text='我是左侧滑';--显示的文本
+      textSize='16sp';--文本大小
+    };
+  };
+  {
+    --右侧滑栏布局
+    LinearLayout;--线性布局
+    Orientation='vertical';--布局方向
+    layout_gravity='end';--重力属性
+    layout_width='fill';--布局宽度
+    layout_height='fill';--布局高度
+    background='#ffffff';--布局背景颜色(或者图片路径)
+    gravity='center';--设置居中
+    {
+      TextView;--文本控件
+      layout_width='wrap';--文本宽度
+      layout_height='wrap';--文本高度
+      Gravity='center';--重力属性
+      textColor='#000000';--文本颜色
+      text='我是右侧滑';--显示的文本
+      textSize='16sp';--文本大小
+    };
+  };
+};
+activity.setContentView(loadlayout(shamrock))--将布局添加至窗口

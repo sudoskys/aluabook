@@ -1,0 +1,58 @@
+--[[
+适配器适用于有高度规律的列表，网格等视图。
+想要动态为此类控件添加项目就必须得要依靠适配器
+下面是LuaAdapter(Lua适配器)的用法
+lua适配器可以自定义列表的布局。此适配器能完成大部分需求。
+]]
+--写个布局，里面有个列表控件，设置id为list
+SorrowClover=
+{
+  LinearLayout;--线性布局
+  Orientation='vertical';--布局方向
+  layout_width='fill';--布局宽度
+  layout_height='fill';--布局高度
+  background='#ffffff';--布局背景颜色(或图片路径)
+  {
+    ListView;--列表视图
+    layout_width='fill';--布局宽度
+    layout_height='fill';--布局高度
+    DividerHeight='1';--设置分隔线宽度,0表示无分隔
+    id="list";--设置id
+  };
+};
+activity.setContentView(loadlayout(SorrowClover))--显示布局
+
+--创建自定义项目视图，为卡片视图，我将用适配器为卡片设置颜色。
+item={
+LinearLayout;--线性布局
+Orientation='horizontal';--布局方向
+layout_width='fill';--布局宽度
+layout_height='80dp';--布局高度
+{
+CardView;--卡片控件
+id="card";--设置id
+layout_margin='8dp';--卡片边距
+layout_gravity='center';--子控件在父布局中的对齐方式
+CardElevation='4dp';--卡片阴影
+layout_width='fill';--卡片宽度
+layout_height='fill';--卡片高度
+radius='12dp';--卡片圆角
+CardBackgroundColor='#FFDDA767';--卡片背景颜色
+};
+};
+--创建颜色表和数据表
+color_table={0xffEF9A9A,0xffF44336,0xffEF9A9A,0xff42A5F5,0xff1976D2,0xff0097A7}
+data={}
+--创建适配器，将数据表和自定义视图添加进适配器
+adp=LuaAdapter(activity,data,item)
+--为数据表添加数据
+for n=1,100 do
+  table.insert(data,{
+--这里就是根据id设置布局属性，这里是设置卡片颜色
+    card={
+      CardBackgroundColor=color_table[n%#color_table], --表里用了取余算法，让颜色实现循环。
+    }, 
+  })
+end
+--为list设置适配器
+list.Adapter=adp

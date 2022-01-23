@@ -1,0 +1,68 @@
+shamrock=
+--布局请写在这里
+{
+  LinearLayout;--线性布局
+  Orientation='vertical';--布局方向
+  layout_width='fill';--布局宽度
+  layout_height='fill';--布局高度
+  background='#ffffff';--布局背景颜色(或者图片路径)
+  Gravity='center',
+  {
+    StackView;
+    id='stack',
+    layout_width='90%w',
+    layout_height='800dp',
+  };
+};
+activity.setContentView(loadlayout(shamrock))
+
+item={
+  LinearLayout;--线性布局
+  Orientation='vertical';--布局方向
+  layout_width='fill';--布局宽度
+  layout_height='fill';--布局高度
+  Gravity='center',
+  {
+    CardView;--卡片控件
+    id="card",
+    Elevation='3';--阴影属性
+    layout_width='80%w';--卡片宽度
+    layout_height='700dp';--卡片高度
+    radius='40';--卡片圆角
+    CardBackgroundColor='#ff7e5cf8';--卡片背景颜色
+    {
+      TextView;--文本控件
+      id="text",
+      layout_width='fill';--文本宽度
+      layout_height='fill';--文本高度
+      Gravity='center';--重力属性
+      textColor='#ffffff';--文本颜色
+      text='';--显示的文本
+      textSize='20sp';--文本大小
+    };
+  };
+};
+--创建项目数组
+color_table={0xff7e5cf8,0xfff85cf8,0xff7ef5f8,0xfffe5cf8,0xff005cf8,0xff7e00f8}
+zmb={"ONE","TWO","THREE","FOUR","FIVE","SIX","SEVEN","EIGHT","NINE","TEN"}
+data={}
+--创建适配器
+adp=LuaAdapter(activity,data,item)
+--添加数据
+for n=1,10 do
+  a=math.random(1,6)
+  table.insert(data,{
+    text={
+      Text=zmb[n],
+    },
+    card={
+      BackgroundColor=color_table[a],
+    },
+  })
+end
+--设置适配器
+stack.Adapter=adp
+
+stack.onItemClick=function(l,v,p,i)
+  print(zmb[i])
+end

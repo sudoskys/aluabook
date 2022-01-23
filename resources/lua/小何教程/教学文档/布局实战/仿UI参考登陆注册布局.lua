@@ -1,0 +1,61 @@
+--仿UI参考登陆注册布局
+import 'android.graphics.RectF'
+import 'android.graphics.Paint'
+import 'android.graphics.drawable.shapes.RoundRectShape'
+import 'android.graphics.drawable.ShapeDrawable'
+rrs1=ShapeDrawable(RoundRectShape({75,75,75,75,75,75,75,75},nil,nil))
+rrs1.getPaint().setColor(0xff000000)
+SorrowClover=
+{
+  LinearLayout;--线性布局
+  Orientation='vertical';--布局方向
+  layout_width='fill';--布局宽度
+  layout_height='fill';--布局高
+  BackgroundDrawable=LuaDrawable(function(canvas,paint,draw)
+    canvas.drawColor(0xffffffff)
+    paint.setColor(0xff77AF9C)
+    canvas.drawCircle(200,-75,600,paint)
+    paint.setColor(0xff566270)
+    canvas.drawCircle(800,-10,600,paint)
+  end);
+  Gravity="center";
+  {
+    RippleLayout,--水波纹布局
+    layout_width='wrap';--布局宽度
+    layout_height='wrap';--布局高度
+    RippleColor='#ffffff';--水波纹颜色
+    Circle=true;--长按圆圈
+    {
+      Button;--按钮控件
+      text='注册';--显示的文本
+      textSize='16sp';--文本大小
+      textColor='#ffffff';--文本颜色
+      layout_width='60%w';--按钮宽度
+      layout_height='150';--按钮高度
+      BackgroundDrawable=rrs1;
+    };
+  };
+  {
+    RippleLayout,--水波纹布局
+    layout_marginTop='32dp';--布局外边顶距
+    layout_width='wrap';--布局宽度
+    layout_height='wrap';--布局高度
+    RippleColor='#ffffff';--水波纹颜色
+    Circle=true;--长按圆圈
+    {
+      Button;--按钮控件
+      text='登陆';--显示的文本
+      textSize='16sp';--文本大小
+      textColor='#000000';--文本颜色
+      layout_width='60%w';--按钮宽度
+      layout_height='150';--按钮高度
+      BackgroundDrawable=LuaDrawable(function(canvas,paint,draw)
+        paint.setColor(0xff000000)
+        paint.setStyle(Paint.Style.STROKE)
+        paint.setStrokeWidth(8)
+        canvas.drawRoundRect(RectF(draw.getBounds()),75,75,paint)
+      end);
+    };
+  };
+};
+activity.setContentView(loadlayout(SorrowClover))

@@ -52,6 +52,6 @@ type: docs
 
 | 摘取部分      | URL | 作者     |
 | :---        |    :----:   |          ---: |
-| ### 常见命名规范      |  [四种基本的编程命名规范](https://zhuanlan.zhihu.com/p/89909623)     | f-zyj|
+| 常见命名规范      |  [四种基本的编程命名规范](https://zhuanlan.zhihu.com/p/89909623)     | f-zyj|
 
 {{< /expand >}}

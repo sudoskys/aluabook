@@ -1,0 +1,55 @@
+--[[
+当需要添加的窗体十分多的时候，通过pages挨个添加就显得十分愚蠢。
+这时候就需要适配器，适配器是十分重要的，对于远程，动态更换窗体等都需要适配器。
+适配器的用法如下
+]]
+--先创建一个主布局，为pageview绑定id
+SorrowClover=--创建布局
+{
+  LinearLayout;--线性布局
+  Orientation='vertical';--布局方向
+  layout_width='fill';--布局宽度
+  layout_height='fill';--布局高度
+  Gravity="center",--设置居中
+  {
+    PageView;--滑动窗体
+    id='page';--绑定id
+  };
+};
+activity.setContentView(loadlayout(SorrowClover))--显示布局
+--然后将需要添加的窗体封装成函数
+function 添加窗体(卡片颜色,显示文本)--封装函数
+  bj={
+    LinearLayout;--线性布局
+    Orientation='vertical';--布局方向
+    layout_width='fill';--布局宽度
+    layout_height='fill';--布局高度
+    background='#ffffff';--布局背景颜色(或图片路径)
+    Gravity="center",--设置居中
+    {
+      CardView;--卡片控件
+      layout_margin='5%w';--卡片边距
+      CardElevation='3';--卡片阴影
+      layout_width='fill';--卡片宽度
+      layout_height='fill';--卡片高度
+      radius='20';--卡片圆角
+      CardBackgroundColor=卡片颜色;--卡片背景颜色
+      {
+        TextView;--文本控件
+        layout_width='fill';--文本宽度
+        layout_height='fill';--文本高度
+        Gravity='center';--对齐方式
+        textColor='#ffffff';--文本颜色
+        text=显示文本;--显示的文本
+        textSize='50sp';--文本大小
+      };
+    };
+  };
+  return bj--返回布局
+end
+--最后设置适配器动态添加窗体
+adp=ArrayPageAdapter()--初始化适配器
+page.setAdapter(adp)--设置适配器
+adp.add(loadlayout(添加窗体("#D499B9","ONE")))--动态添加布局
+adp.add(loadlayout(添加窗体("#FDD692","TWO")))
+adp.add(loadlayout(添加窗体("#8FBC94","THREE")))

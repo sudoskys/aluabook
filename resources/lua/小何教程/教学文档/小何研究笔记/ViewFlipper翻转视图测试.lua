@@ -1,0 +1,45 @@
+平移动画=TranslateAnimation(0, activity.Width, 0, 0)
+平移动画.setDuration(1000)
+平移动画.setFillAfter(true)
+平移动񵎲=TranslateAnimation(-activity.Width,0 , 0, 0)
+平移动񵎲.setDuration(1000)
+平移动񵎲.setFillAfter(true)
+shamrock=
+--布局请写在这里
+{
+  LinearLayout;--线性布局
+  Orientation='vertical';--布局方向
+  layout_width='fill';--布局宽度
+  layout_height='fill';--布局高度
+  background='#ffffff';--布局背景颜色(或者图片路径)
+  {
+    ViewFlipper,
+    layout_width="fill",
+    layout_height="fill",
+    id="flipper",
+    inAnimation=平移动画,
+    outAnimation=平移动񵎲,
+    flipInterval="2000",
+    {
+      CardView;--卡片控件
+      layout_gravity='center';--重力属性
+      Elevation='3';--阴影属性
+      layout_width='80%w';--卡片宽度
+      layout_height='500dp';--卡片高度
+      radius='20';--卡片圆角
+      CardBackgroundColor='#ff7e5cf8';--卡片背景颜色
+    };
+    {
+      CardView;--卡片控件
+      layout_gravity='center';--重力属性
+      Elevation='3';--阴影属性
+      layout_width='80%w';--卡片宽度
+      layout_height='500dp';--卡片高度
+      radius='20';--卡片圆角
+      CardBackgroundColor='#ff7ecdf8';--卡片背景颜色
+    };
+  },
+};
+activity.setContentView(loadlayout(shamrock))
+
+flipper.startFlipping()

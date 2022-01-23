@@ -1,0 +1,67 @@
+SorrowClover=
+{
+  FrameLayout;--帧布局
+  layout_width='fill';--布局宽度
+  layout_height='fill';--布局高度
+  background='#A593E0';--布局背景颜色(或图片路径)
+  {
+    LinearLayout;--线性布局
+    Orientation='vertical';--布局方向
+    layout_width='fill';--布局宽度
+    layout_height='fill';--布局高度
+    {
+      CardView;--卡片控件
+      layout_marginTop='50dp';--布局外边顶距
+      layout_marginLeft='-200dp';--布局外边左距
+      layout_gravity='center';--子控件在父布局中的对齐方式
+      CardElevation='8dp';--卡片阴影
+      layout_width='300dp';--卡片宽度
+      layout_height='400dp';--卡片高度
+      radius='12dp';--卡片圆角
+      CardBackgroundColor='#ffffff';--卡片背景颜色
+      Rotation="-45";
+    };
+  };
+  {
+    LinearLayout;--线性布局
+    Orientation='vertical';--布局方向
+    layout_width='fill';--布局宽度
+    layout_height='fill';--布局高度
+    {
+      CardView;--卡片控件
+      layout_marginTop='40dp';--布局外边顶距
+      layout_gravity='center';--子控件在父布局中的对齐方式
+      CardElevation='8dp';--卡片阴影
+      layout_width='300dp';--卡片宽度
+      layout_height='1000dp';--卡片高度
+      radius='12dp';--卡片圆角
+      CardBackgroundColor='#8CD790';--卡片背景颜色
+      Rotation="45";
+    };
+  };
+  {
+    LinearLayout;--线性布局
+    Orientation='vertical';--布局方向
+    layout_width='fill';--布局宽度
+    layout_height='fill';--布局高度
+    padding='16dp';--布局内边距
+    {
+      TextClock;--时间文本
+      layout_width='wrap';--文本宽度
+      layout_height='wrap';--文本高度
+      textColor='#000000';--文本颜色
+      textSize='32sp';--文本大小
+    };
+    {
+      TextView;--文本控件
+      layout_width='wrap';--文本宽度
+      layout_height='wrap';--文本高度
+      Gravity='left';--对齐方式
+      textColor='#000000';--文本颜色
+      text=[==[这是一个帧布局
+瞎拼凑的背景]==];--显示的文本
+      textSize='48sp';--文本大小
+    };
+  };
+};
+activity.setContentView(loadlayout(SorrowClover))

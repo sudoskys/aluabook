@@ -1,0 +1,29 @@
+import'com.yuxuan.widget.*'
+SorrowClover=
+{
+  LinearLayout;--线性布局
+  Orientation='vertical';--布局方向
+  layout_width='fill';--布局宽度
+  layout_height='fill';--布局高度
+  background='#ffffff';--布局背景颜色(或图片路径)
+  Gravity="center",
+  {
+    CardView;--卡片控件
+    CardElevation='10';--卡片阴影
+    layout_width='200dp';--卡片宽度
+    layout_height='200dp';--卡片高度
+    radius='100dp';--卡片圆角
+    CardBackgroundColor='#ffffff';--卡片背景颜色
+    {
+      WaveView;
+      layout_height="fill",
+      layout_width="fill",
+      id="wave",
+    };
+  };
+};
+activity.setContentView(loadlayout(SorrowClover))
+wave.setStartColor(0xffffffff)
+wave.setCloseColor(0xffA593E0)
+wave.setWaveHeight(50)
+wave.setVelocity(3)

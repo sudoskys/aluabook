@@ -1,0 +1,48 @@
+import'com.yuxuan.widget.*'
+SorrowClover=
+{
+  FrameLayout;--帧布局
+  layout_width='fill';--布局宽度
+  layout_height='fill';--布局高度
+  background='#ffffff';--布局背景颜色(或图片路径)
+  {
+    LinearLayout;--线性布局
+    Orientation='vertical';--布局方向
+    layout_width='fill';--布局宽度
+    layout_height='fill';--布局高度
+    {
+      WaveView;
+      layout_width='fill';--布局宽度
+      layout_height='fill';--布局高度
+      id="wave";
+    };
+  };
+  {
+    LinearLayout;--线性布局
+    Orientation='vertical';--布局方向
+    layout_width='fill';--布局宽度
+    layout_height='fill';--布局高度
+    {
+      CardView;--卡片控件
+      layout_margin='-50dp';--卡片边距
+      CardElevation='3';--卡片阴影
+      layout_width='200dp';--卡片宽度
+      layout_height='200dp';--卡片高度
+      radius='100dp';--卡片圆角
+      CardBackgroundColor='#ffffff';--卡片背景颜色
+      {
+        WaveView;
+        id="wave1";
+      };
+    };
+  };
+};
+activity.setContentView(loadlayout(SorrowClover))
+wave.setStartColor(0xffffffff)
+wave.setCloseColor(0xffA593E0)
+wave.setWaveHeight(10)
+wave.setVelocity(10)
+wave1.setStartColor(0xffffffff)
+wave1.setCloseColor(0xffA593E0)
+wave1.setWaveHeight(10)
+wave1.setVelocity(10)

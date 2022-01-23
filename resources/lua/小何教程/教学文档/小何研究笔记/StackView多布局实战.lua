@@ -1,0 +1,150 @@
+shamrock=
+--布局请写在这里
+{
+  LinearLayout;--线性布局
+  Orientation='vertical';--布局方向
+  layout_width='fill';--布局宽度
+  layout_height='fill';--布局高度
+  background='#ffffff';--布局背景颜色(或者图片路径)
+  {
+    LinearLayout;--线性布局
+    Orientation='horizontal';--布局方向
+    layout_width='fill';--布局宽度
+    layout_height='50dp';--布局高度
+    {
+      TextView;--文本控件
+      layout_width='fill';--文本宽度
+      layout_height='fill';--文本高度
+      Gravity='center';--重力属性
+      textColor='#ffffff';--文本颜色
+      text='StackView测试';--显示的文本
+      textSize='20sp';--文本大小
+      background='#ff7e5cf8';
+    };
+  };
+  {
+    ScrollView;--纵向滚动
+    layout_width='fill';--宽
+    layout_height='fill';--高
+    --隐藏竖向滚动滑条
+    VerticalScrollBarEnabled=false;
+    {
+      LinearLayout;--线性布局
+      Orientation='vertical';--布局方向
+      layout_width='fill';--布局宽度
+      layout_height='fill';--布局高度
+      background='#ffffff';--布局背景颜色(或者图片路径)
+      {
+        LinearLayout;--线性布局
+        Orientation='vertical';--布局方向
+        layout_width='fill';--布局宽度
+        layout_height='250dp';--布局高度
+        {
+          StackView;
+          id='第一stack';
+          layout_width='80%w';
+          layout_height='250dp';
+          layout_gravity='center';
+        }
+      };
+      {
+        LinearLayout;--线性布局
+        Orientation='vertical';--布局方向
+        layout_width='fill';--布局宽度
+        layout_height='250dp';--布局高度
+        {
+          StackView;
+          id='第二stack';
+          layout_width='80%w';
+          layout_height='250dp';
+          layout_gravity='center';
+        }
+      };
+    };
+  };
+};
+activity.setContentView(loadlayout(shamrock))
+
+item={
+  LinearLayout;--线性布局
+  Orientation='vertical';--布局方向
+  layout_width='fill';--布局宽度
+  layout_height='fill';--布局高度
+  {
+    CardView;--卡片控件
+    layout_margin='1%w';
+    layout_gravity='center';--重力属性
+    Elevation='3';--阴影属性
+    layout_width='70%w';--卡片宽度
+    layout_height='200dp';--卡片高度
+    radius='20';--卡片圆角
+    CardBackgroundColor='#ff7e5cf8';--卡片背景颜色
+    {
+      TextView;--文本控件
+      id='text';
+      layout_width='fill';--文本宽度
+      layout_height='fill';--文本高度
+      Gravity='center';--重力属性
+      textColor='#ffffff';--文本颜色
+      text='';--显示的文本
+      textSize='20sp';--文本大小
+    };
+  };
+};
+--创建项目数组
+text_table={'不准翻开！','说了不准翻开！','你！怎么不听话！','你是不是喜欢我？？？','翻吧翻吧，没有啦！'}
+data={}
+--创建适配器
+adp=LuaAdapter(activity,data,item)
+--添加数据
+for n=1,5 do
+  table.insert(data,{
+    text={
+      Text=text_table[n],
+    },
+  })
+end
+--设置适配器
+第一stack.Adapter=adp
+
+item={
+  LinearLayout;--线性布局
+  Orientation='vertical';--布局方向
+  layout_width='fill';--布局宽度
+  layout_height='fill';--布局高度
+  {
+    CardView;--卡片控件
+    layout_margin='1%w';
+    layout_gravity='center';--重力属性
+    Elevation='3';--阴影属性
+    layout_width='70%w';--卡片宽度
+    layout_height='200dp';--卡片高度
+    radius='20';--卡片圆角
+    CardBackgroundColor='#ff7e5cf8';--卡片背景颜色
+    {
+      TextView;--文本控件
+      id='text';
+      layout_width='fill';--文本宽度
+      layout_height='fill';--文本高度
+      Gravity='center';--重力属性
+      textColor='#ffffff';--文本颜色
+      text='';--显示的文本
+      textSize='20sp';--文本大小
+    };
+  };
+};
+--创建项目数组
+text_table={'这次不可以了！','你又来！','你！怎么又不听话！','你要气死我？','翻吧翻吧，这次真没有啦！'}
+data={}
+--创建适配器
+adp=LuaAdapter(activity,data,item)
+--添加数据
+for n=1,5 do
+  table.insert(data,{
+    text={
+      Text=text_table[n],
+    },
+  })
+end
+--设置适配器
+第二stack.Adapter=adp

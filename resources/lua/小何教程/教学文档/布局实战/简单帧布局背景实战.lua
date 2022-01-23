@@ -1,0 +1,99 @@
+SorrowClover=
+{
+  FrameLayout;--帧布局
+  layout_width='fill';--布局宽度
+  layout_height='fill';--布局高度
+  {
+    LinearLayout;--线性布局
+    Orientation='vertical';--布局方向
+    layout_width='fill';--布局宽度
+    layout_height='fill';--布局高度
+    {
+      LinearLayout;--线性布局
+      layout_width=activity.Width*2;--布局宽度
+      layout_weight='1';--权重值
+      background='#F17F42';--布局背景颜色(或图片路径)
+      RotationY="30";
+    };
+    {
+      LinearLayout;--线性布局
+      layout_width=activity.Width*2;--布局宽度
+      layout_weight='1';--权重值
+      background='#DE6449';--布局背景颜色(或图片路径)
+      RotationY="30";
+    };
+    {
+      LinearLayout;--线性布局
+      layout_width=activity.Width*2;--布局宽度
+      layout_weight='1';--权重值
+      background='#333333';--布局背景颜色(或图片路径)
+      RotationY="30";
+    };
+  };
+  {
+    LinearLayout;--线性布局
+    Orientation='vertical';--布局方向
+    layout_width='fill';--布局宽度
+    layout_height='fill';--布局高度
+    {
+      LinearLayout;--线性布局
+      Orientation='horizontal';--布局方向
+      layout_width='fill';--布局宽度
+      layout_height='50dp';--布局高度
+      gravity="left|center";
+      paddingLeft='16dp';--布局内边左距
+      {
+        TextView;--文本控件
+        layout_width='wrap';--文本宽度
+        layout_height='wrap';--文本高度
+        textColor='#ffffff';--文本颜色
+        text='Welcome';--显示的文本
+        textSize='32sp';--文本大小
+      };
+    };
+    {
+      LinearLayout;--线性布局
+      Orientation='vertical';--布局方向
+      layout_width='fill';--布局宽度
+      layout_height='fill';--布局高度
+      gravity="center";
+      {
+        TextView;--文本控件
+        layout_width='wrap';--文本宽度
+        layout_height='wrap';--文本高度
+        textColor='#ffffff';--文本颜色
+        text='这是一个帧布局背景实战';--显示的文本
+        textSize='32sp';--文本大小
+      };
+    };
+  };
+  {
+    CardView;--卡片控件
+    id="floatbutton";
+    layout_margin='16dp';--卡片边距
+    layout_gravity='bottom|right';--子控件在父布局中的对齐方式
+    CardElevation='0';--卡片阴影
+    layout_width='60dp';--卡片宽度
+    layout_height='60dp';--卡片高度
+    radius='30dp';--卡片圆角
+    CardBackgroundColor='#F17F42';--卡片背景颜色
+    {
+      TextView;--文本控件
+      layout_width='fill';--文本宽度
+      layout_height='fill';--文本高度
+      Gravity='center';--对齐方式
+      textColor='#ffffff';--文本颜色
+      text='onClick';--显示的文本
+      textSize='18sp';--文本大小
+    };
+  };
+};
+activity.setContentView(loadlayout(SorrowClover))
+
+--设置属性动画
+--对应参数分别是（id，需要改变的属性，{动画开始时需要改变的属性的值，动画结束时需要改变的属性的值}）
+旋转动画 = ObjectAnimator .ofFloat(floatbutton, "rotationY", {0, 180})
+旋转动画.setRepeatCount(-1)--设置动画重复次数，这里-1代表无限
+旋转动画.setRepeatMode(Animation.REVERSE)--循环模式
+旋转动画.setDuration(2000)--动画时间
+旋转动画.start()--动画开始
