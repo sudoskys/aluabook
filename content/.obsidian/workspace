@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "docs/02/0201string.md",
+            "file": "docs/02/0202layout.md",
             "mode": "source",
             "source": false
           }
@@ -21,7 +21,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "docs/03/0301when.md",
+            "file": "docs/02/0201string.md",
             "mode": "source",
             "source": false
           }
@@ -81,7 +81,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "docs/02/0201string.md",
+                "file": "docs/02/0202layout.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -101,11 +101,11 @@
   },
   "active": "5d55494fb6a1488d",
   "lastOpenFiles": [
+    "docs/02/0202layout.md",
     "docs/02/0201string.md",
     "docs/03/0301when.md",
     "posts/creating-a-new-theme.md",
     "docs/02/_index.md",
-    "docs/02/未命名.md",
     "docs/03/0304string.md",
     "docs/03/0303LuaWebViewzidingyi.md",
     "docs/03/_index.md",
