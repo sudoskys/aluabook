@@ -3,19 +3,19 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="常用函数 #  模拟按键 #  function sendKeyCode(keyCode) xpcall(function() Runtime.getRuntime().exec(&#34;input keyevent &#34; .. keyCode) end,function(e) print(e) end) end sendKeyCode(KeyEvent.KEYCODE_VOLUME_DOWN)--音量-   参数 ...  --[[ KEYCODE_0 &#39;0&#39; key. 7 KEYCODE_1 &#39;1&#39; key. 8 KEYCODE_2 &#39;2&#39; key. 9 KEYCODE_3 &#39;3&#39; key. 10 KEYCODE_4 &#39;4&#39; key. 11 KEYCODE_5 &#39;5&#39; key. 12 KEYCODE_6 &#39;6&#39; key. 13 KEYCODE_7 &#39;7&#39; key. 14 KEYCODE_8 &#39;8&#39; key. 15 KEYCODE_9 &#39;9&#39; key. 16 KEYCODE_A &#39;A&#39; key. 29 KEYCODE_B &#39;B&#39; key.">
+<meta name="description" content="From sudoskys 依据各大佬的文档编写     参考资料 作者     小何教程 小何    ">
 <meta name="theme-color" content="#FFFFFF">
-<meta name="color-scheme" content="light dark"><meta property="og:title" content="02 常用函数" />
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="02 教程" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://lua.dianas.cyou/docs/02/" />
 
-<title>02 常用函数 | LUA book</title>
+<title>02 教程 | LUA book</title>
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.82c5dbd23447cee0b4c2aa3ed08ce0961faa40e1fa370eee4f8c9f02e0d46b5f.css" integrity="sha256-gsXb0jRHzuC0wqo&#43;0Izglh&#43;qQOH6Nw7uT4yfAuDUa18=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.cf9a1e1feb5aa01f747bee935172859377dd553bc578e542351568abb1611bdd.js" integrity="sha256-z5oeH&#43;taoB90e&#43;6TUXKFk3fdVTvFeOVCNRVoq7FhG90=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.d0bd59d67e64456607e46994ee1a82ece6bfc7a43f12f9bbd873b6cb89352cca.js" integrity="sha256-0L1Z1n5kRWYH5GmU7hqC7Oa/x6Q/Evm72HO2y4k1LMo=" crossorigin="anonymous"></script>
 <link rel="alternate" type="application/rss+xml" href="https://lua.dianas.cyou/docs/02/index.xml" title="LUA book" />
 <!--
 Made with Book Theme
@@ -112,11 +112,24 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https://lua.dianas.cyou/docs/02/" class=" active">02 常用函数</a>
+    <a href="https://lua.dianas.cyou/docs/02/" class=" active">02 教程</a>
   
 
           
   <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/02/0201string/" class="">02-01 String</a>
+  
+
+        </li>
+      
     
   </ul>
 
@@ -332,7 +345,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <strong>02 常用函数</strong>
+  <strong>02 教程</strong>
 
   <label for="toc-control">
     
@@ -346,12 +359,7 @@ https://github.com/alex-shpak/hugo-book
   <aside class="hidden clearfix">
     
   
-<nav id="TableOfContents">
-  <ul>
-    <li><a href="#模拟按键">模拟按键</a></li>
-    <li><a href="#返回桌面">返回桌面</a></li>
-  </ul>
-</nav>
+<nav id="TableOfContents"></nav>
 
 
 
@@ -362,353 +370,26 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown"><h1 id="常用函数">
-  常用函数
-  <a class="anchor" href="#%e5%b8%b8%e7%94%a8%e5%87%bd%e6%95%b0">#</a>
-</h1>
-<h2 id="模拟按键">
-  模拟按键
-  <a class="anchor" href="#%e6%a8%a1%e6%8b%9f%e6%8c%89%e9%94%ae">#</a>
-</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua"><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">sendKeyCode</span>(keyCode)
-
-xpcall(<span style="color:#66d9ef">function</span>()
-
-Runtime.getRuntime().exec(<span style="color:#e6db74">&#34;input keyevent &#34;</span> <span style="color:#f92672">..</span> keyCode)
-
-<span style="color:#66d9ef">end</span>,<span style="color:#66d9ef">function</span>(e)
-
-print(e)
-
-<span style="color:#66d9ef">end</span>)
-
-<span style="color:#66d9ef">end</span>
-
-sendKeyCode(KeyEvent.KEYCODE_VOLUME_DOWN)<span style="color:#75715e">--音量-</span>
-
-
-</code></pre></div>
-<div class="book-expand">
-  <label>
-    <div class="book-expand-head flex justify-between">
-      <span>参数</span>
-      <span>...</span>
-    </div>
-    <input type="checkbox" class="hidden" />
-    <div class="book-expand-content markdown-inner">
-      <pre tabindex="0"><code>--[[
-
-KEYCODE_0 '0' key. 7
-
-KEYCODE_1 '1' key. 8
-
-KEYCODE_2 '2' key. 9
-
-KEYCODE_3 '3' key. 10
-
-KEYCODE_4 '4' key. 11
-
-KEYCODE_5 '5' key. 12
-
-KEYCODE_6 '6' key. 13
-
-KEYCODE_7 '7' key. 14
-
-KEYCODE_8 '8' key. 15
-
-KEYCODE_9 '9' key. 16
-
-KEYCODE_A 'A' key. 29
-
-KEYCODE_B 'B' key. 30
-
-KEYCODE_C 'C' key. 31
-
-KEYCODE_D 'D' key. 32
-
-KEYCODE_E 'E' key. 33
-
-KEYCODE_F 'F' key. 34
-
-KEYCODE_G 'G' key. 35
-
-KEYCODE_H 'H' key. 36
-
-KEYCODE_I 'I' key. 37
-
-KEYCODE_J 'J' key. 38
-
-KEYCODE_K 'K' key. 39
-
-KEYCODE_L 'L' key. 40
-
-KEYCODE_M 'M' key. 41
-
-KEYCODE_N 'N' key. 42
-
-KEYCODE_O 'O' key. 43
-
-KEYCODE_P 'P' key. 44
-
-KEYCODE_Q 'Q' key. 45
-
-KEYCODE_R 'R' key. 46
-
-KEYCODE_S 'S' key. 47
-
-KEYCODE_T 'T' key. 48
-
-KEYCODE_U 'U' key. 49
-
-KEYCODE_V 'V' key. 50
-
-KEYCODE_W 'W' key. 51
-
-KEYCODE_X 'X' key. 52
-
-KEYCODE_Y 'Y' key. 53
-
-KEYCODE_Z 'Z' key. 54
-
-META_ALT_LEFT_ON This mask is used to check whether the left ALT meta key is pressed. 16
-
-META_ALT_MASK This mask is a combination of META_ALT_ON, META_ALT_LEFT_ON and META_ALT_RIGHT_ON. 50
-
-META_ALT_ON This mask is used to check whether one of the ALT meta keys is pressed. 2
-
-META_ALT_RIGHT_ON This mask is used to check whether the right the ALT meta key is pressed. 32
-
-META_CAPS_LOCK_ON This mask is used to check whether the CAPS LOCK meta key is on. 1048576
-
-META_CTRL_LEFT_ON This mask is used to check whether the left CTRL meta key is pressed. 8192
-
-META_CTRL_MASK This mask is a combination of META_CTRL_ON, META_CTRL_LEFT_ON and META_CTRL_RIGHT_ON. 28672
-
-META_CTRL_ON This mask is used to check whether one of the CTRL meta keys is pressed. 4096
-
-META_CTRL_RIGHT_ON This mask is used to check whether the right CTRL meta key is pressed. 16384
-
-META_FUNCTION_ON This mask is used to check whether the FUNCTION meta key is pressed. 8
-
-META_META_LEFT_ON This mask is used to check whether the left META meta key is pressed. 131072
-
-META_META_MASK This mask is a combination of META_META_ON, META_META_LEFT_ON and META_META_RIGHT_ON. 458752
-
-META_META_ON This mask is used to check whether one of the META meta keys is pressed. 65536
-
-META_META_RIGHT_ON This mask is used to check whether the right META meta key is pressed. 262144
-
-META_NUM_LOCK_ON This mask is used to check whether the NUM LOCK meta key is on. 2097152
-
-META_SCROLL_LOCK_ON This mask is used to check whether the SCROLL LOCK meta key is on. 4194304
-
-META_SHIFT_LEFT_ON This mask is used to check whether the left SHIFT meta key is pressed. 64
-
-META_SHIFT_MASK This mask is a combination of META_SHIFT_ON, META_SHIFT_LEFT_ON and META_SHIFT_RIGHT_ON. 193
-
-META_SHIFT_ON This mask is used to check whether one of the SHIFT meta keys is pressed. 1
-
-META_SHIFT_RIGHT_ON This mask is used to check whether the right SHIFT meta key is pressed. 128
-
-META_SYM_ON This mask is used to check whether the SYM meta key is pressed. 4
-
-KEYCODE_APOSTROPHE ''' key. 75
-
-KEYCODE_AT '@' key. 77
-
-KEYCODE_BACKSLASH '\' key. 73
-
-KEYCODE_COMMA ',' key. 55
-
-KEYCODE_EQUALS '=' key. 70
-
-KEYCODE_GRAVE '`' key. 68
-
-KEYCODE_LEFT_BRACKET '[' key. 71
-
-KEYCODE_MINUS '-' key. 69
-
-KEYCODE_PERIOD '.' key. 56
-
-KEYCODE_PLUS '+' key. 81
-
-KEYCODE_POUND '#' key. 18
-
-KEYCODE_RIGHT_BRACKET ']' key. 72
-
-KEYCODE_SEMICOLON ';' key. 74
-
-KEYCODE_SLASH '/' key. 76
-
-KEYCODE_STAR '*' key. 17
-
-KEYCODE_SPACE Space key. 62
-
-KEYCODE_TAB Tab key. 61
-
-KEYCODE_ENTER Enter key. 66
-
-KEYCODE_ESCAPE Escape key. 111
-
-KEYCODE_CAPS_LOCK Caps Lock key. 115
-
-KEYCODE_CLEAR Clear key. 28
-
-KEYCODE_PAGE_DOWN Page Down key. 93
-
-KEYCODE_PAGE_UP Page Up key. 92
-
-KEYCODE_SCROLL_LOCK Scroll Lock key. 116
-
-KEYCODE_MOVE_END End. 123
-
-KEYCODE_MOVE_HOME Home. 122
-
-KEYCODE_INSERT Insert key. 124
-
-KEYCODE_SHIFT_LEFT Left Shift. 59
-
-KEYCODE_SHIFT_RIGHT Right Shift. 60
-
-KEYCODE_F1 F1 key. 131
-
-KEYCODE_F2 F2 key. 132
-
-KEYCODE_F3 F3 key. 133
-
-KEYCODE_F4 F4 key. 134
-
-KEYCODE_F5 F5 key. 135
-
-KEYCODE_F6 F6 key. 136
-
-KEYCODE_F7 F7 key. 137
-
-KEYCODE_F8 F8 key. 138
-
-KEYCODE_F9 F9 key. 139
-
-KEYCODE_F10 F10 key. 140
-
-KEYCODE_F11 F11 key. 141
-
-KEYCODE_F12 F12 key. 142
-
-KEYCODE_BACK Back key. 4
-
-KEYCODE_CALL Call key. 5
-
-KEYCODE_ENDCALL End Call key. 6
-
-KEYCODE_CAMERA Camera key. 27
-
-KEYCODE_FOCUS Camera Focus key. 80
-
-KEYCODE_VOLUME_UP Volume Up key. 24
-
-KEYCODE_VOLUME_DOWN Volume Down key. 25
-
-KEYCODE_VOLUME_MUTE Volume Mute key. 164
-
-KEYCODE_MENU Menu key. 82
-
-KEYCODE_HOME Home key. 3
-
-KEYCODE_POWER Power key. 26
-
-KEYCODE_SEARCH Search key. 84
-
-KEYCODE_NOTIFICATION Notification key. 83
-
-KEYCODE_NUM Number modifier key. 78
-
-KEYCODE_SYM Symbol modifier key. 63
-
-KEYCODE_SETTINGS Settings key. 176
-
-KEYCODE_DEL Backspace key. Deletes characters before the insertion point, unlike KEYCODE_FORWARD_DEL. 67
-
-KEYCODE_FORWARD_DEL Forward Delete key. Deletes characters ahead of the insertion point, unlike KEYCODE_DEL. 112
-
-KEYCODE_NUMPAD_0 Numeric keypad '0' key. 144
-
-KEYCODE_NUMPAD_1 Numeric keypad '1' key. 145
-
-KEYCODE_NUMPAD_2 Numeric keypad '2' key. 146
-
-KEYCODE_NUMPAD_3 Numeric keypad '3' key. 147
-
-KEYCODE_NUMPAD_4 Numeric keypad '4' key. 148
-
-KEYCODE_NUMPAD_5 Numeric keypad '5' key. 149
-
-KEYCODE_NUMPAD_6 Numeric keypad '6' key. 150
-
-KEYCODE_NUMPAD_7 Numeric keypad '7' key. 151
-
-KEYCODE_NUMPAD_8 Numeric keypad '8' key. 152
-
-KEYCODE_NUMPAD_9 Numeric keypad '9' key. 153
-
-KEYCODE_NUMPAD_ADD Numeric keypad '+' key 157
-
-KEYCODE_NUMPAD_COMMA Numeric keypad ',' key 159
-
-KEYCODE_NUMPAD_DIVIDE Numeric keypad '/' key 154
-
-KEYCODE_NUMPAD_DOT Numeric keypad '.' key 158
-
-KEYCODE_NUMPAD_EQUALS Numeric keypad '=' key. 161
-
-KEYCODE_NUMPAD_LEFT_PAREN Numeric keypad '(' key. 162
-
-KEYCODE_NUMPAD_MULTIPLY Numeric keypad '*' key 155
-
-KEYCODE_NUMPAD_RIGHT_PAREN Numeric keypad ')' key. 163
-
-KEYCODE_NUMPAD_SUBTRACT Numeric keypad '-' key 156
-
-KEYCODE_NUMPAD_ENTER Numeric keypad Enter key. 160
-
-KEYCODE_NUM_LOCK Numeric keypad Num Lock key. 143
-
-KEYCODE_MEDIA_FAST_FORWARD Fast Forward media key. 90
-
-KEYCODE_MEDIA_NEXT Play Next media key. 87
-
-KEYCODE_MEDIA_PAUSE Pause media key. 127
-
-KEYCODE_MEDIA_PLAY Play media key. 126
-
-KEYCODE_MEDIA_PLAY_PAUSE Play/Pause media key. 85
-
-KEYCODE_MEDIA_PREVIOUS Play Previous media key. 88
-
-KEYCODE_MEDIA_RECORD Record media key. 130
-
-KEYCODE_MEDIA_REWIND Rewind media key. 89
-
-KEYCODE_MEDIA_STOP Stop media key. 86
-
-]]
-</code></pre>
-    </div>
-  </label>
-</div>
-
-<h2 id="返回桌面">
-  返回桌面
-  <a class="anchor" href="#%e8%bf%94%e5%9b%9e%e6%a1%8c%e9%9d%a2">#</a>
-</h2>
-<pre tabindex="0"><code>import &quot;android.content.Intent&quot;
-
-home=Intent(Intent.ACTION_MAIN);
-
-home.addCategory(Intent.CATEGORY_HOME);
-
-activity.startActivity(home);
-
-</code></pre></article>
+  <article class="markdown"><blockquote class="book-hint info">
+  <strong>From sudoskys</strong>
+<strong>依据各大佬的文档编写</strong>
+</blockquote>
+
+<table>
+<thead>
+<tr>
+<th style="text-align:left">参考资料</th>
+<th style="text-align:right">作者</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">小何教程</td>
+<td style="text-align:right">小何</td>
+</tr>
+</tbody>
+</table>
+</article>
  
       
 
@@ -747,12 +428,7 @@ activity.startActivity(home);
       <div class="book-toc-content">
         
   
-<nav id="TableOfContents">
-  <ul>
-    <li><a href="#模拟按键">模拟按键</a></li>
-    <li><a href="#返回桌面">返回桌面</a></li>
-  </ul>
-</nav>
+<nav id="TableOfContents"></nav>
 
 
  
