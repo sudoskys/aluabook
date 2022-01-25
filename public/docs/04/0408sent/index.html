@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="判断是否有网络 #  local wl=activity.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE).getActiveNetworkInfo(); if wl== nil then print(&#34;无法连接到服务器&#34;) end 发送邮件 #  import &#34;android.content.Intent&#34; i = Intent(Intent.ACTION_SEND) i.setType(&#34;message/rfc822&#34;) i.putExtra(Intent.EXTRA_EMAIL, {&#34;2113075983@.com&#34;}) i.putExtra(Intent.EXTRA_SUBJECT,&#34;Feedback&#34;) i.putExtra(Intent.EXTRA_TEXT,&#34;Content&#34;) activity.startActivity(Intent.createChooser(i, &#34;Choice&#34;)) 自带Http模块 #  获取内容 get函数 Http.get(url,cookie,charset,header,callback) url 网络请求的链接网址 cookie 使用的cookie，也就是服务器的身份识别信息 charset 内容编码 header 请求头 callback 请求完成后执行的函数 除了url和callback其他参数都不是必须的 回调函数接受四个参数值分别是 code 响应代码，2xx表示成功，4xx表示请求错误，5xx表示服务器错误，-1表示出错 content 内容，如果code是-1，则为出错信息 cookie 服务器返回的用户身份识别信息 header 服务器返回的头信息 向服务器发送数据 post函数 Http.post(url,data,cookie,charset,header,callback) 除了增加了一个data外，其他参数和get完全相同 data 向服务器发送的数据 下载文件 download函数 Http.download(url,path,cookie,header,callback) 参数中没有编码参数，其他同get， path 文件保存路径 需要特别注意一点，只支持同时有127个网络请求，否则会出错 Http其实是对Http.HttpTask的封装，Http.HttpTask使用的更加通用和灵活的形式 参数格式如下 Http.HttpTask( url, String method, cookie, charset, header, callback) 所有参数都是必选，没有则传入nil url 请求的网址 method 请求方法可以是get，post，put，delete等 cookie 身份验证信息 charset 内容编码 header 请求头 callback 回调函数 该函数返回的是一个HttpTask对象， 需要调用execute方法才可以执行， t=Http.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="04-08 信息&amp;发送" />
+<meta property="og:description" content="判断是否有网络 #  local wl=activity.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE).getActiveNetworkInfo(); if wl== nil then print(&#34;无法连接到服务器&#34;) end 发送邮件 #  import &#34;android.content.Intent&#34; i = Intent(Intent.ACTION_SEND) i.setType(&#34;message/rfc822&#34;) i.putExtra(Intent.EXTRA_EMAIL, {&#34;2113075983@.com&#34;}) i.putExtra(Intent.EXTRA_SUBJECT,&#34;Feedback&#34;) i.putExtra(Intent.EXTRA_TEXT,&#34;Content&#34;) activity.startActivity(Intent.createChooser(i, &#34;Choice&#34;)) 自带Http模块 #  获取内容 get函数 Http.get(url,cookie,charset,header,callback) url 网络请求的链接网址 cookie 使用的cookie，也就是服务器的身份识别信息 charset 内容编码 header 请求头 callback 请求完成后执行的函数 除了url和callback其他参数都不是必须的 回调函数接受四个参数值分别是 code 响应代码，2xx表示成功，4xx表示请求错误，5xx表示服务器错误，-1表示出错 content 内容，如果code是-1，则为出错信息 cookie 服务器返回的用户身份识别信息 header 服务器返回的头信息 向服务器发送数据 post函数 Http.post(url,data,cookie,charset,header,callback) 除了增加了一个data外，其他参数和get完全相同 data 向服务器发送的数据 下载文件 download函数 Http.download(url,path,cookie,header,callback) 参数中没有编码参数，其他同get， path 文件保存路径 需要特别注意一点，只支持同时有127个网络请求，否则会出错 Http其实是对Http.HttpTask的封装，Http.HttpTask使用的更加通用和灵活的形式 参数格式如下 Http.HttpTask( url, String method, cookie, charset, header, callback) 所有参数都是必选，没有则传入nil url 请求的网址 method 请求方法可以是get，post，put，delete等 cookie 身份验证信息 charset 内容编码 header 请求头 callback 回调函数 该函数返回的是一个HttpTask对象， 需要调用execute方法才可以执行， t=Http." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://lua.dianas.cyou/docs/04/0408sent/" /><meta property="article:section" content="docs" />
+
+
+
+<title>04-08 信息&amp;发送 | LUA book</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.82c5dbd23447cee0b4c2aa3ed08ce0961faa40e1fa370eee4f8c9f02e0d46b5f.css" integrity="sha256-gsXb0jRHzuC0wqo&#43;0Izglh&#43;qQOH6Nw7uT4yfAuDUa18=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.6d7dd1b236a5f6ea6dee698820867d2f60712920698d86f17647d4049495c976.js" integrity="sha256-bX3Rsjal9upt7mmIIIZ9L2BxKSBpjYbxdkfUBJSVyXY=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>LUA book</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/01/" class="">01-00 初步认识LUA</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/01/0101sudo/" class="">01-01 开发素养</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/01/0102alua/" class="">01-02 认识Alua写法</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/02/" class="">02-00 教程</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/02/0201string/" class="">02-01 String</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/02/0202layout/" class="">02-02 Layout</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/04/" class="">03-00 MLUA教程</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/04/0401when/" class="">04-01 when的用法</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/04/0402defer/" class="">04-02 Defer关键字</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/04/0403luawebviewzidingyi/" class="">04-03 LuaWebView自定义进度条</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/04/0404string/" class="">04-04 字符串</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/04/0405layout/" class="">04-05 界面&amp;布局</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/04/0406system/" class="">04-06 系统调用</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/04/0407caculate/" class="">04-07 各式算法</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/04/0408sent/" class=" active">04-08 信息&amp;发送</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/04/0409sthing/" class="">04-09 事件</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/04/0410file/" class="">04-10 文件处理</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/04/0411animation/" class="">04-11 动画</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/03/" class="">03-00 工程笔记</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/03/0301/" class="">03-01 案例分析01</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/" >
+        Blog
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>04-08 信息&amp;发送</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#判断是否有网络">判断是否有网络</a></li>
+    <li><a href="#发送邮件">发送邮件</a></li>
+    <li><a href="#自带http模块">自带Http模块</a></li>
+    <li><a href="#trafficstats类">TrafficStats类</a></li>
+    <li><a href="#开启关闭wifi">开启关闭WiFi</a></li>
+    <li><a href="#断开网络">断开网络</a></li>
+    <li><a href="#wifi是否打开">WiFi是否打开</a></li>
+    <li><a href="#wifi是否连接">WiFi是否连接</a></li>
+    <li><a href="#数据网络是否连接">数据网络是否连接</a></li>
+    <li><a href="#获取wifi信息">获取WiFi信息</a></li>
+    <li><a href="#获取wifi状态">获取WiFi状态</a></li>
+    <li><a href="#ip地址">IP地址</a></li>
+    <li><a href="#获取dns">获取Dns</a></li>
+    <li><a href="#获取网络名称">获取网络名称</a></li>
+    <li><a href="#获取wifi加密类型">获取WiFi加密类型</a></li>
+    <li><a href="#获取网络信号强度">获取网络信号强度</a></li>
+    <li><a href="#获取ssid是否被隐藏">获取SSID是否被隐藏</a></li>
+    <li><a href="#获取mac地址">获取Mac地址</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h2 id="判断是否有网络">
+  判断是否有网络
+  <a class="anchor" href="#%e5%88%a4%e6%96%ad%e6%98%af%e5%90%a6%e6%9c%89%e7%bd%91%e7%bb%9c">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#66d9ef">local</span> wl<span style="color:#f92672">=</span>activity.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE).getActiveNetworkInfo();
+
+<span style="color:#66d9ef">if</span> wl<span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> <span style="color:#66d9ef">then</span>
+
+print(<span style="color:#e6db74">&#34;无法连接到服务器&#34;</span>)
+
+<span style="color:#66d9ef">end</span>
+</code></pre></div><h2 id="发送邮件">
+  发送邮件
+  <a class="anchor" href="#%e5%8f%91%e9%80%81%e9%82%ae%e4%bb%b6">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+import <span style="color:#e6db74">&#34;android.content.Intent&#34;</span>
+
+i <span style="color:#f92672">=</span> Intent(Intent.ACTION_SEND)
+
+i.setType(<span style="color:#e6db74">&#34;message/rfc822&#34;</span>)
+
+i.putExtra(Intent.EXTRA_EMAIL, {<span style="color:#e6db74">&#34;2113075983@.com&#34;</span>})
+
+i.putExtra(Intent.EXTRA_SUBJECT,<span style="color:#e6db74">&#34;Feedback&#34;</span>)
+
+i.putExtra(Intent.EXTRA_TEXT,<span style="color:#e6db74">&#34;Content&#34;</span>)
+
+activity.startActivity(Intent.createChooser(i, <span style="color:#e6db74">&#34;Choice&#34;</span>))
+</code></pre></div><h2 id="自带http模块">
+  自带Http模块
+  <a class="anchor" href="#%e8%87%aa%e5%b8%a6http%e6%a8%a1%e5%9d%97">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#960050;background-color:#1e0010">获取内容</span> get函数
+
+Http.get(url,cookie,charset,header,callback)
+
+url <span style="color:#960050;background-color:#1e0010">网络请求的链接网址</span>
+
+cookie <span style="color:#960050;background-color:#1e0010">使用的</span>cookie<span style="color:#960050;background-color:#1e0010">，也就是服务器的身份识别信息</span>
+
+charset <span style="color:#960050;background-color:#1e0010">内容编码</span>
+
+header <span style="color:#960050;background-color:#1e0010">请求头</span>
+
+callback <span style="color:#960050;background-color:#1e0010">请求完成后执行的函数</span>
+
+<span style="color:#960050;background-color:#1e0010">除了</span>url和callback其他参数都不是必须的
+
+<span style="color:#960050;background-color:#1e0010">回调函数接受四个参数值分别是</span>
+
+code <span style="color:#960050;background-color:#1e0010">响应代码，</span><span style="color:#ae81ff">2</span>xx表示成功<span style="color:#960050;background-color:#1e0010">，</span><span style="color:#ae81ff">4</span>xx表示请求错误<span style="color:#960050;background-color:#1e0010">，</span><span style="color:#ae81ff">5</span>xx表示服务器错误<span style="color:#960050;background-color:#1e0010">，</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">表示出错</span>
+
+content <span style="color:#960050;background-color:#1e0010">内容，如果</span>code是<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">，则为出错信息</span>
+
+cookie <span style="color:#960050;background-color:#1e0010">服务器返回的用户身份识别信息</span>
+
+header <span style="color:#960050;background-color:#1e0010">服务器返回的头信息</span>
+
+<span style="color:#960050;background-color:#1e0010">向服务器发送数据</span> post函数
+
+Http.post(url,data,cookie,charset,header,callback)
+
+<span style="color:#960050;background-color:#1e0010">除了增加了一个</span>data外<span style="color:#960050;background-color:#1e0010">，其他参数和</span>get完全相同
+
+data <span style="color:#960050;background-color:#1e0010">向服务器发送的数据</span>
+
+<span style="color:#960050;background-color:#1e0010">下载文件</span> download函数
+
+Http.download(url,path,cookie,header,callback)
+
+<span style="color:#960050;background-color:#1e0010">参数中没有编码参数，其他同</span>get<span style="color:#960050;background-color:#1e0010">，</span>
+
+path <span style="color:#960050;background-color:#1e0010">文件保存路径</span>
+
+<span style="color:#960050;background-color:#1e0010">需要特别注意一点，只支持同时有</span><span style="color:#ae81ff">127</span><span style="color:#960050;background-color:#1e0010">个网络请求，否则会出错</span>
+
+Http其实是对Http.HttpTask的封装<span style="color:#960050;background-color:#1e0010">，</span>Http.HttpTask使用的更加通用和灵活的形式
+
+<span style="color:#960050;background-color:#1e0010">参数格式如下</span>
+
+Http.HttpTask( url, String method, cookie, charset, header, callback)
+
+<span style="color:#960050;background-color:#1e0010">所有参数都是必选，没有则传入</span><span style="color:#66d9ef">nil</span>
+
+url <span style="color:#960050;background-color:#1e0010">请求的网址</span>
+
+method <span style="color:#960050;background-color:#1e0010">请求方法可以是</span>get<span style="color:#960050;background-color:#1e0010">，</span>post<span style="color:#960050;background-color:#1e0010">，</span>put<span style="color:#960050;background-color:#1e0010">，</span>delete等
+
+cookie <span style="color:#960050;background-color:#1e0010">身份验证信息</span>
+
+charset <span style="color:#960050;background-color:#1e0010">内容编码</span>
+
+header <span style="color:#960050;background-color:#1e0010">请求头</span>
+
+callback <span style="color:#960050;background-color:#1e0010">回调函数</span>
+
+<span style="color:#960050;background-color:#1e0010">该函数返回的是一个</span>HttpTask对象<span style="color:#960050;background-color:#1e0010">，</span>
+
+<span style="color:#960050;background-color:#1e0010">需要调用</span>execute方法才可以执行<span style="color:#960050;background-color:#1e0010">，</span>
+
+t<span style="color:#f92672">=</span>Http.HttpTask(xxx)
+
+t.execute{data}
+
+<span style="color:#960050;background-color:#1e0010">注意调用的括号是花括号，内容可以是字符串或者</span>byte数组<span style="color:#960050;background-color:#1e0010">，</span>
+
+<span style="color:#960050;background-color:#1e0010">使用这个形式可以自己封装异步上传函数</span>
+</code></pre></div><h2 id="trafficstats类">
+  TrafficStats类
+  <a class="anchor" href="#trafficstats%e7%b1%bb">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+import <span style="color:#e6db74">&#34;android.net.TrafficStats&#34;</span>
+
+getMobileRxBytes() <span style="color:#75715e">--获取通过Mobile连接收到的字节总数，不包含WiFi</span>
+
+getMobileRxPackets() <span style="color:#75715e">--获取Mobile连接收到的数据包总数</span>
+
+getMobileTxBytes() <span style="color:#75715e">--Mobile发送的总字节数</span>
+
+getMobileTxPackets() <span style="color:#75715e">--Mobile发送的总数据包数</span>
+
+getTotalRxBytes() <span style="color:#75715e">--获取总的接受字节数，包含Mobile和WiFi等</span>
+
+getTotalRxPackets() <span style="color:#75715e">--总的接受数据包数，包含Mobile和WiFi等</span>
+
+getTotalTxBytes() <span style="color:#75715e">--总的发送字节数，包含Mobile和WiFi等</span>
+
+getTotalTxPackets() <span style="color:#75715e">--发送的总数据包数，包含Mobile和WiFi等</span>
+
+getUidRxBytes(int uid) <span style="color:#75715e">--获取某个网络UID的接受字节数</span>
+
+getUidTxBytes(int uid) <span style="color:#75715e">--获取某个网络UID的发送字节数</span>
+
+<span style="color:#75715e">--例:TrafficStats.getTotalRxBytes()</span>
+</code></pre></div><h2 id="开启关闭wifi">
+  开启关闭WiFi
+  <a class="anchor" href="#%e5%bc%80%e5%90%af%e5%85%b3%e9%97%adwifi">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+import <span style="color:#e6db74">&#34;android.content.Context&#34;</span>
+
+wifi <span style="color:#f92672">=</span> activity.Context.getSystemService(Context.WIFI_SERVICE)
+
+wifi.setWifiEnabled(<span style="color:#66d9ef">true</span>)<span style="color:#75715e">--关闭则false</span>
+</code></pre></div><h2 id="断开网络">
+  断开网络
+  <a class="anchor" href="#%e6%96%ad%e5%bc%80%e7%bd%91%e7%bb%9c">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+import <span style="color:#e6db74">&#34;android.content.Context&#34;</span>
+
+wifi <span style="color:#f92672">=</span> activity.Context.getSystemService(Context.WIFI_SERVICE)
+
+wifi.disconnect()
+</code></pre></div><h2 id="wifi是否打开">
+  WiFi是否打开
+  <a class="anchor" href="#wifi%e6%98%af%e5%90%a6%e6%89%93%e5%bc%80">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+import <span style="color:#e6db74">&#34;android.content.Context&#34;</span>
+
+wifi <span style="color:#f92672">=</span> activity.Context.getSystemService(Context.WIFI_SERVICE)
+
+wi <span style="color:#f92672">=</span> wifi.isWifiEnabled()
+</code></pre></div><h2 id="wifi是否连接">
+  WiFi是否连接
+  <a class="anchor" href="#wifi%e6%98%af%e5%90%a6%e8%bf%9e%e6%8e%a5">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+connManager <span style="color:#f92672">=</span> activity.getSystemService(Context.CONNECTIVITY_SERVICE)
+
+mWifi <span style="color:#f92672">=</span> connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+
+<span style="color:#66d9ef">if</span> tostring(mWifi):find(<span style="color:#e6db74">&#34;none)&#34;</span>) <span style="color:#66d9ef">then</span>
+
+<span style="color:#75715e">--未连接</span>
+
+<span style="color:#66d9ef">else</span>
+
+<span style="color:#75715e">--连接</span>
+
+<span style="color:#66d9ef">end</span>
+</code></pre></div><h2 id="数据网络是否连接">
+  数据网络是否连接
+  <a class="anchor" href="#%e6%95%b0%e6%8d%ae%e7%bd%91%e7%bb%9c%e6%98%af%e5%90%a6%e8%bf%9e%e6%8e%a5">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+manager <span style="color:#f92672">=</span> activity.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+gprs <span style="color:#f92672">=</span> manager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState();
+
+<span style="color:#66d9ef">if</span> tostring(gprs)<span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;CONNECTED&#34;</span> <span style="color:#66d9ef">then</span>
+
+print<span style="color:#e6db74">&#34;当前数据网络&#34;</span>
+
+<span style="color:#66d9ef">end</span>
+</code></pre></div><h2 id="获取wifi信息">
+  获取WiFi信息
+  <a class="anchor" href="#%e8%8e%b7%e5%8f%96wifi%e4%bf%a1%e6%81%af">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+import <span style="color:#e6db74">&#34;android.content.Context&#34;</span>
+
+wifi <span style="color:#f92672">=</span> activity.Context.getSystemService(Context.WIFI_SERVICE)
+
+wifi.getConfiguredNetworks()
+</code></pre></div><h2 id="获取wifi状态">
+  获取WiFi状态
+  <a class="anchor" href="#%e8%8e%b7%e5%8f%96wifi%e7%8a%b6%e6%80%81">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+import <span style="color:#e6db74">&#34;android.content.Context&#34;</span>
+
+wifi <span style="color:#f92672">=</span> activity.Context.getSystemService(Context.WIFI_SERVICE)
+
+print(wifi.getWifiState())
+</code></pre></div><h2 id="ip地址">
+  IP地址
+  <a class="anchor" href="#ip%e5%9c%b0%e5%9d%80">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#75715e">--查看某网站IP地址</span>
+
+address<span style="color:#f92672">=</span>InetAddress.getByName(<span style="color:#e6db74">&#34;www.10010.com&#34;</span>);
+
+<span style="color:#75715e">--查看本机IP地址</span>
+
+address<span style="color:#f92672">=</span>InetAddress.getLocalHost();
+
+<span style="color:#75715e">--查看IP地址</span>
+
+wifi <span style="color:#f92672">=</span> activity.Context.getSystemService(Context.WIFI_SERVICE).getDhcpInfo()
+
+string.match(tostring(wifi),<span style="color:#e6db74">&#34;ipaddr(.-)gate&#34;</span>)
+</code></pre></div><h2 id="获取dns">
+  获取Dns
+  <a class="anchor" href="#%e8%8e%b7%e5%8f%96dns">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+import <span style="color:#e6db74">&#34;android.content.Context&#34;</span>
+
+<span style="color:#75715e">--获取Dns1</span>
+
+wifi <span style="color:#f92672">=</span> activity.Context.getSystemService(Context.WIFI_SERVICE).getDhcpInfo()
+
+print(string.match(tostring(wifi),<span style="color:#e6db74">&#34;dns1 (.-) dns2&#34;</span>))
+
+<span style="color:#75715e">--获取Dns2</span>
+
+wifi <span style="color:#f92672">=</span> activity.Context.getSystemService(Context.WIFI_SERVICE).getDhcpInfo()
+
+dns2 <span style="color:#f92672">=</span> string.match(tostring(wifi),<span style="color:#e6db74">&#34;dns2 (.-) D&#34;</span>)
+</code></pre></div><h2 id="获取网络名称">
+  获取网络名称
+  <a class="anchor" href="#%e8%8e%b7%e5%8f%96%e7%bd%91%e7%bb%9c%e5%90%8d%e7%a7%b0">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+wifiManager<span style="color:#f92672">=</span>activity.Context.getSystemService(Context.WIFI_SERVICE);
+
+wifiInfo<span style="color:#f92672">=</span>wifiManager.getConnectionInfo();
+
+print(wifiInfo.getSSID())
+</code></pre></div><h2 id="获取wifi加密类型">
+  获取WiFi加密类型
+  <a class="anchor" href="#%e8%8e%b7%e5%8f%96wifi%e5%8a%a0%e5%af%86%e7%b1%bb%e5%9e%8b">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+wifi <span style="color:#f92672">=</span> activity.Context.getSystemService(Context.WIFI_SERVICE).getConfiguredNetworks()
+
+print(string.match(tostring(wifi),<span style="color:#e6db74">[[KeyMgmt: (.-) P]]</span>))
+</code></pre></div><h2 id="获取网络信号强度">
+  获取网络信号强度
+  <a class="anchor" href="#%e8%8e%b7%e5%8f%96%e7%bd%91%e7%bb%9c%e4%bf%a1%e5%8f%b7%e5%bc%ba%e5%ba%a6">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+wifiManager<span style="color:#f92672">=</span>activity.Context.getSystemService(Context.WIFI_SERVICE);
+
+wifiInfo<span style="color:#f92672">=</span>wifiManager.getConnectionInfo();
+
+print(wifiInfo.getRssi())
+</code></pre></div><h2 id="获取ssid是否被隐藏">
+  获取SSID是否被隐藏
+  <a class="anchor" href="#%e8%8e%b7%e5%8f%96ssid%e6%98%af%e5%90%a6%e8%a2%ab%e9%9a%90%e8%97%8f">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+wifiManager<span style="color:#f92672">=</span>activity.Context.getSystemService(Context.WIFI_SERVICE);
+
+wifiInfo<span style="color:#f92672">=</span>wifiManager.getConnectionInfo();
+
+print(wifiInfo.getHiddenSSID())
+</code></pre></div><h2 id="获取mac地址">
+  获取Mac地址
+  <a class="anchor" href="#%e8%8e%b7%e5%8f%96mac%e5%9c%b0%e5%9d%80">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+wifiManager<span style="color:#f92672">=</span>activity.Context.getSystemService(Context.WIFI_SERVICE);
+
+wifiInfo<span style="color:#f92672">=</span>wifiManager.getConnectionInfo();
+
+print( wifiInfo.getMacAddress())
+</code></pre></div></article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#判断是否有网络">判断是否有网络</a></li>
+    <li><a href="#发送邮件">发送邮件</a></li>
+    <li><a href="#自带http模块">自带Http模块</a></li>
+    <li><a href="#trafficstats类">TrafficStats类</a></li>
+    <li><a href="#开启关闭wifi">开启关闭WiFi</a></li>
+    <li><a href="#断开网络">断开网络</a></li>
+    <li><a href="#wifi是否打开">WiFi是否打开</a></li>
+    <li><a href="#wifi是否连接">WiFi是否连接</a></li>
+    <li><a href="#数据网络是否连接">数据网络是否连接</a></li>
+    <li><a href="#获取wifi信息">获取WiFi信息</a></li>
+    <li><a href="#获取wifi状态">获取WiFi状态</a></li>
+    <li><a href="#ip地址">IP地址</a></li>
+    <li><a href="#获取dns">获取Dns</a></li>
+    <li><a href="#获取网络名称">获取网络名称</a></li>
+    <li><a href="#获取wifi加密类型">获取WiFi加密类型</a></li>
+    <li><a href="#获取网络信号强度">获取网络信号强度</a></li>
+    <li><a href="#获取ssid是否被隐藏">获取SSID是否被隐藏</a></li>
+    <li><a href="#获取mac地址">获取Mac地址</a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

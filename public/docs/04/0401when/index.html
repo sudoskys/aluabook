@@ -1,25 +1,33 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
 <head>
-	<meta name="generator" content="Hugo 0.90.1" />
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Andlua book #  导入语 #  本文档的目的旨在为 Androlua 社区提供支持，也欢迎各位补充本文档    本文档签名 ...     贡献本项目 #  本项目由sudoskys使用hugo发布，如果您想补充本文档，请前往sudoskys
-贡献教程 教程二 全面教程
- Contribute  引用 #   代码版权问题 ...  本文档使用的代码来自于经验所知，取材自群内开源与MLUA手册。 如果有版权问题，请联系 sudoskys     内容参考详注 ...     摘取部分 URL 作者     常见命名规范 四种基本的编程命名规范 f-zyj       ">
+<meta name="description" content="When的用法 #   From MLUA  When就相当于简化过的if，对于一些简单的判断使用when会爽不少
+例如下面这个栗子
+--以前判断要这样写 if 5&gt;1 then print(&#34;OK&#34;) end 在androlua&#43;4.3.3更新后可以这样写
+when 5&gt;1 print(&#34;OK&#34;) 以前判断要这样写
+if 1&gt;5 then print(&#34;emmmm&#34;) else print(&#34;OK&#34;) end 在androlua&#43;4.3.3更新后可以这样写
+when 1&gt;5 print(&#34;emmmm&#34;) else print(&#34;OK&#34;) ">
 <meta name="theme-color" content="#FFFFFF">
-<meta name="color-scheme" content="light dark"><meta property="og:title" content="Introduction" />
-<meta property="og:description" content="" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://lua.dianas.cyou/" />
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="04-01 when的用法" />
+<meta property="og:description" content="When的用法 #   From MLUA  When就相当于简化过的if，对于一些简单的判断使用when会爽不少
+例如下面这个栗子
+--以前判断要这样写 if 5&gt;1 then print(&#34;OK&#34;) end 在androlua&#43;4.3.3更新后可以这样写
+when 5&gt;1 print(&#34;OK&#34;) 以前判断要这样写
+if 1&gt;5 then print(&#34;emmmm&#34;) else print(&#34;OK&#34;) end 在androlua&#43;4.3.3更新后可以这样写
+when 1&gt;5 print(&#34;emmmm&#34;) else print(&#34;OK&#34;) " />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://lua.dianas.cyou/docs/04/0401when/" /><meta property="article:section" content="docs" />
 
-<title>Introduction | LUA book</title>
+
+
+<title>04-01 when的用法 | LUA book</title>
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.82c5dbd23447cee0b4c2aa3ed08ce0961faa40e1fa370eee4f8c9f02e0d46b5f.css" integrity="sha256-gsXb0jRHzuC0wqo&#43;0Izglh&#43;qQOH6Nw7uT4yfAuDUa18=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
   <script defer src="/en.search.min.6d7dd1b236a5f6ea6dee698820867d2f60712920698d86f17647d4049495c976.js" integrity="sha256-bX3Rsjal9upt7mmIIIZ9L2BxKSBpjYbxdkfUBJSVyXY=" crossorigin="anonymous"></script>
-<link rel="alternate" type="application/rss+xml" href="https://lua.dianas.cyou/index.xml" title="LUA book" />
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -172,7 +180,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https://lua.dianas.cyou/docs/04/0401when/" class="">04-01 when的用法</a>
+    <a href="https://lua.dianas.cyou/docs/04/0401when/" class=" active">04-01 when的用法</a>
   
 
         </li>
@@ -392,7 +400,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <strong>Introduction</strong>
+  <strong>04-01 when的用法</strong>
 
   <label for="toc-control">
     
@@ -406,16 +414,7 @@ https://github.com/alex-shpak/hugo-book
   <aside class="hidden clearfix">
     
   
-<nav id="TableOfContents">
-  <ul>
-    <li><a href="#导入语">导入语</a>
-      <ul>
-        <li><a href="#贡献本项目">贡献本项目</a></li>
-      </ul>
-    </li>
-    <li><a href="#引用">引用</a></li>
-  </ul>
-</nav>
+<nav id="TableOfContents"></nav>
 
 
 
@@ -426,107 +425,39 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown"><h1 id="andlua-book">
-  Andlua book
-  <a class="anchor" href="#andlua-book">#</a>
+  <article class="markdown"><h1 id="when的用法">
+  When的用法
+  <a class="anchor" href="#when%e7%9a%84%e7%94%a8%e6%b3%95">#</a>
 </h1>
-<p><img src="https://count.getloli.com/get/@sudoskys-github-aluabook?theme=moebooru" alt="counter" /></p>
-<h2 id="导入语">
-  导入语
-  <a class="anchor" href="#%e5%af%bc%e5%85%a5%e8%af%ad">#</a>
-</h2>
-<div class="book-columns flex flex-wrap">
-
-  <div class="flex-even markdown-inner">
-    本文档的目的旨在为 Androlua 社区提供支持，也欢迎各位补充本文档
-  </div>
-
-</div>
-
-
-<div class="book-expand">
-  <label>
-    <div class="book-expand-head flex justify-between">
-      <span>本文档签名</span>
-      <span>...</span>
-    </div>
-    <input type="checkbox" class="hidden" />
-    <div class="book-expand-content markdown-inner">
-      
-    </div>
-  </label>
-</div>
-
-<h3 id="贡献本项目">
-  贡献本项目
-  <a class="anchor" href="#%e8%b4%a1%e7%8c%ae%e6%9c%ac%e9%a1%b9%e7%9b%ae">#</a>
-</h3>
-<p>本项目由sudoskys使用hugo发布，如果您想补充本文档，请前往<a href="https://github.com/sudoskys/aluabook">sudoskys</a></p>
-<p><a href="https://www.jianshu.com/p/8c69d1021d98">贡献教程</a>
-<a href="https://blog.csdn.net/yzr1216/article/details/81114560">教程二</a>
-<a href="https://www.cnblogs.com/idorax/p/9366035.html">全面教程</a></p>
 <hr>
+<blockquote class="book-hint info">
+  <strong>From MLUA</strong>
+</blockquote>
 
+<p>When就相当于简化过的if，对于一些简单的判断使用when会爽不少</p>
+<p>例如下面这个栗子</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua"><span style="color:#75715e">--以前判断要这样写</span>
 
+<span style="color:#66d9ef">if</span> <span style="color:#ae81ff">5</span><span style="color:#f92672">&gt;</span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">then</span>
 
-  
-  
+print(<span style="color:#e6db74">&#34;OK&#34;</span>)
 
+<span style="color:#66d9ef">end</span>
+</code></pre></div><p>在androlua+4.3.3更新后可以这样写</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">when <span style="color:#ae81ff">5</span><span style="color:#f92672">&gt;</span><span style="color:#ae81ff">1</span> print(<span style="color:#e6db74">&#34;OK&#34;</span>)
+</code></pre></div><p>以前判断要这样写</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua"><span style="color:#66d9ef">if</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">&gt;</span><span style="color:#ae81ff">5</span> <span style="color:#66d9ef">then</span>
 
-<a  href="https://github.com/sudoskys/aluabook"   target="_blank" rel="noopener"  class="book-btn">
-  Contribute
-</a>
+print(<span style="color:#e6db74">&#34;emmmm&#34;</span>)
 
-<h2 id="引用">
-  引用
-  <a class="anchor" href="#%e5%bc%95%e7%94%a8">#</a>
-</h2>
+<span style="color:#66d9ef">else</span>
 
-<div class="book-expand">
-  <label>
-    <div class="book-expand-head flex justify-between">
-      <span>代码版权问题</span>
-      <span>...</span>
-    </div>
-    <input type="checkbox" class="hidden" />
-    <div class="book-expand-content markdown-inner">
-      本文档使用的代码来自于经验所知，取材自群内开源与MLUA手册。
-如果有版权问题，请联系 <a href="https://github.com/sudoskys">sudoskys</a>
-    </div>
-  </label>
-</div>
+print(<span style="color:#e6db74">&#34;OK&#34;</span>)
 
-
-<div class="book-expand">
-  <label>
-    <div class="book-expand-head flex justify-between">
-      <span>内容参考详注</span>
-      <span>...</span>
-    </div>
-    <input type="checkbox" class="hidden" />
-    <div class="book-expand-content markdown-inner">
-      <table>
-<thead>
-<tr>
-<th style="text-align:left">摘取部分</th>
-<th style="text-align:center">URL</th>
-<th style="text-align:right">作者</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">常见命名规范</td>
-<td style="text-align:center"><a href="https://zhuanlan.zhihu.com/p/89909623">四种基本的编程命名规范</a></td>
-<td style="text-align:right">f-zyj</td>
-</tr>
-</tbody>
-</table>
-
-    </div>
-  </label>
-</div>
-
-</article>
+<span style="color:#66d9ef">end</span>
+</code></pre></div><p>在androlua+4.3.3更新后可以这样写</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">when <span style="color:#ae81ff">1</span><span style="color:#f92672">&gt;</span><span style="color:#ae81ff">5</span> print(<span style="color:#e6db74">&#34;emmmm&#34;</span>) <span style="color:#66d9ef">else</span> print(<span style="color:#e6db74">&#34;OK&#34;</span>)
+</code></pre></div></article>
  
       
 
@@ -565,16 +496,7 @@ https://github.com/alex-shpak/hugo-book
       <div class="book-toc-content">
         
   
-<nav id="TableOfContents">
-  <ul>
-    <li><a href="#导入语">导入语</a>
-      <ul>
-        <li><a href="#贡献本项目">贡献本项目</a></li>
-      </ul>
-    </li>
-    <li><a href="#引用">引用</a></li>
-  </ul>
-</nav>
+<nav id="TableOfContents"></nav>
 
 
  

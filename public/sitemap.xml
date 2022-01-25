@@ -10,41 +10,44 @@
   </url><url>
     <loc>https://lua.dianas.cyou/docs/02/0202layout/</loc>
   </url><url>
-    <loc>https://lua.dianas.cyou/docs/05/</loc>
+    <loc>https://lua.dianas.cyou/docs/04/</loc>
   </url><url>
     <loc>https://lua.dianas.cyou/docs/03/</loc>
   </url><url>
-    <loc>https://lua.dianas.cyou/docs/05/0301when/</loc>
-  </url><url>
     <loc>https://lua.dianas.cyou/docs/03/0301/</loc>
   </url><url>
-    <loc>https://lua.dianas.cyou/docs/05/0302defer/</loc>
+    <loc>https://lua.dianas.cyou/docs/04/0401when/</loc>
   </url><url>
-    <loc>https://lua.dianas.cyou/docs/05/0303luawebviewzidingyi/</loc>
+    <loc>https://lua.dianas.cyou/docs/04/0402defer/</loc>
   </url><url>
-    <loc>https://lua.dianas.cyou/docs/05/0304string/</loc>
+    <loc>https://lua.dianas.cyou/docs/04/0403luawebviewzidingyi/</loc>
   </url><url>
-    <loc>https://lua.dianas.cyou/docs/05/0305layout/</loc>
+    <loc>https://lua.dianas.cyou/docs/04/0404string/</loc>
   </url><url>
-    <loc>https://lua.dianas.cyou/docs/05/0306system/</loc>
+    <loc>https://lua.dianas.cyou/docs/04/0405layout/</loc>
   </url><url>
-    <loc>https://lua.dianas.cyou/docs/05/0307caculate/</loc>
+    <loc>https://lua.dianas.cyou/docs/04/0406system/</loc>
   </url><url>
-    <loc>https://lua.dianas.cyou/docs/05/0308sent/</loc>
+    <loc>https://lua.dianas.cyou/docs/04/0407caculate/</loc>
   </url><url>
-    <loc>https://lua.dianas.cyou/docs/05/0309sthing/</loc>
+    <loc>https://lua.dianas.cyou/docs/04/0408sent/</loc>
   </url><url>
-    <loc>https://lua.dianas.cyou/docs/05/0310file/</loc>
+    <loc>https://lua.dianas.cyou/docs/04/0409sthing/</loc>
+  </url><url>
+    <loc>https://lua.dianas.cyou/docs/04/0410file/</loc>
   </url><url>
     <loc>https://lua.dianas.cyou/docs/</loc>
   </url><url>
-    <loc>https://lua.dianas.cyou/docs/05/0311animation/</loc>
+    <loc>https://lua.dianas.cyou/docs/04/0411animation/</loc>
   </url><url>
     <loc>https://lua.dianas.cyou/docs/01/0101sudo/</loc>
   </url><url>
     <loc>https://lua.dianas.cyou/docs/01/0102alua/</loc>
   </url><url>
-    <loc>https://lua.dianas.cyou/posts/creating-a-new-theme/</loc>
+    <loc>https://lua.dianas.cyou/posts/01new/</loc>
+    <lastmod>2014-09-28T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://lua.dianas.cyou/posts/02res/</loc>
     <lastmod>2014-09-28T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://lua.dianas.cyou/posts/</loc>
