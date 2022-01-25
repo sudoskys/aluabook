@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="LuaWebView #   From MLUA  自定义进度条 #   需要web.dex，稍微有点麻烦，详见视频教程
+删除进度条
+web.removeView(web.getChildAt(0)) 导包
+import &#34;com.lua.*&#34; 进度改变事件
+web.setWebChromeClient(LuaWebChrome(LuaWebChrome.IWebChrine{ onProgressChanged=function(view, newProgress) --事件 end, LuaWebView设置UA #   import &#34;android.webkit.WebSettings&#34; local webSettings = LuaWebViewID.getSettings(); local newUserAgent = &#34;UA字符串&#34;; webSettings.setUserAgentString(newUserAgent); 获取与设置cookie #   import &#34;android.webkit.CookieSyncManager&#34; import &#34;android.webkit.CookieManager&#34; function 设置Cookie(context,url,content) CookieSyncManager.createInstance(context) local cookieManager = CookieManager.getInstance() cookieManager.setAcceptCookie(true) cookieManager.removeSessionCookie() cookieManager.removeAllCookie() cookieManager.setCookie(url, content) CookieSyncManager.getInstance().sync() end function 获取Cookie(url) local cookieManager = CookieManager.getInstance(); return cookieManager.getCookie(url); end --示例 --获取https://www.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="03-03 LuaWebView自定义进度条" />
+<meta property="og:description" content="LuaWebView #   From MLUA  自定义进度条 #   需要web.dex，稍微有点麻烦，详见视频教程
+删除进度条
+web.removeView(web.getChildAt(0)) 导包
+import &#34;com.lua.*&#34; 进度改变事件
+web.setWebChromeClient(LuaWebChrome(LuaWebChrome.IWebChrine{ onProgressChanged=function(view, newProgress) --事件 end, LuaWebView设置UA #   import &#34;android.webkit.WebSettings&#34; local webSettings = LuaWebViewID.getSettings(); local newUserAgent = &#34;UA字符串&#34;; webSettings.setUserAgentString(newUserAgent); 获取与设置cookie #   import &#34;android.webkit.CookieSyncManager&#34; import &#34;android.webkit.CookieManager&#34; function 设置Cookie(context,url,content) CookieSyncManager.createInstance(context) local cookieManager = CookieManager.getInstance() cookieManager.setAcceptCookie(true) cookieManager.removeSessionCookie() cookieManager.removeAllCookie() cookieManager.setCookie(url, content) CookieSyncManager.getInstance().sync() end function 获取Cookie(url) local cookieManager = CookieManager.getInstance(); return cookieManager.getCookie(url); end --示例 --获取https://www." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://lua.dianas.cyou/docs/05/0303luawebviewzidingyi/" /><meta property="article:section" content="docs" />
+
+
+
+<title>03-03 LuaWebView自定义进度条 | LUA book</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.82c5dbd23447cee0b4c2aa3ed08ce0961faa40e1fa370eee4f8c9f02e0d46b5f.css" integrity="sha256-gsXb0jRHzuC0wqo&#43;0Izglh&#43;qQOH6Nw7uT4yfAuDUa18=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.aa2d4ffba4161d47711f7fcde8168f00dd821939854c5cff08b19dd3af582b61.js" integrity="sha256-qi1P&#43;6QWHUdxH3/N6BaPAN2CGTmFTFz/CLGd069YK2E=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>LUA book</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/01/" class="">01-00 初步认识LUA</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/01/0101sudo/" class="">01-01 开发素养</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/01/0102alua/" class="">01-02 认识Alua写法</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/02/" class="">02-00 教程</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/02/0201string/" class="">02-01 String</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/02/0202layout/" class="">02-02 Layout</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/05/" class="">03-00 MLUA教程</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/05/0301when/" class="">03-01 when的用法</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/05/0302defer/" class="">03-02 Defer关键字</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/05/0303luawebviewzidingyi/" class=" active">03-03 LuaWebView自定义进度条</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/05/0304string/" class="">03-04 字符串</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/05/0305layout/" class="">03-05 界面&amp;布局</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/05/0306system/" class="">03-06 系统调用</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/05/0307caculate/" class="">03-07 各式算法</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/05/0308sent/" class="">03-08 信息&amp;发送</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/05/0309sthing/" class="">03-09 事件</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/05/0310file/" class="">03-10 文件处理</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/05/0311animation/" class="">03-11 动画</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/03/" class="">03-00 工程笔记</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/03/0301/" class="">03-01 案例分析01</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/" >
+        Blog
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>03-03 LuaWebView自定义进度条</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#自定义进度条">自定义进度条</a></li>
+    <li><a href="#luawebview设置ua">LuaWebView设置UA</a></li>
+    <li><a href="#获取与设置cookie">获取与设置cookie</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="luawebview">
+  LuaWebView
+  <a class="anchor" href="#luawebview">#</a>
+</h1>
+<hr>
+<blockquote class="book-hint info">
+  <strong>From MLUA</strong>
+</blockquote>
+
+<h2 id="自定义进度条">
+  自定义进度条
+  <a class="anchor" href="#%e8%87%aa%e5%ae%9a%e4%b9%89%e8%bf%9b%e5%ba%a6%e6%9d%a1">#</a>
+</h2>
+<hr>
+<p>需要web.dex，稍微有点麻烦，详见<a href="https://www.bilibili.com/blackboard/html5mobileplayer.html?cid=105994341&amp;aid=60913765&amp;hq=true&amp;high_quality=true">视频教程</a></p>
+<p>删除进度条</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">web.removeView(web.getChildAt(<span style="color:#ae81ff">0</span>))
+</code></pre></div><p>导包</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">import <span style="color:#e6db74">&#34;com.lua.*&#34;</span>
+</code></pre></div><p>进度改变事件</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">web.setWebChromeClient(LuaWebChrome(LuaWebChrome.IWebChrine{
+
+onProgressChanged<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(view, newProgress)
+
+<span style="color:#75715e">--事件</span>
+
+<span style="color:#66d9ef">end</span>,
+
+</code></pre></div><h2 id="luawebview设置ua">
+  LuaWebView设置UA
+  <a class="anchor" href="#luawebview%e8%ae%be%e7%bd%aeua">#</a>
+</h2>
+<hr>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">import <span style="color:#e6db74">&#34;android.webkit.WebSettings&#34;</span>
+
+<span style="color:#66d9ef">local</span> webSettings <span style="color:#f92672">=</span> LuaWebViewID.getSettings();
+
+<span style="color:#66d9ef">local</span> newUserAgent <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;UA字符串&#34;</span>;
+
+webSettings.setUserAgentString(newUserAgent);
+
+</code></pre></div><h2 id="获取与设置cookie">
+  获取与设置cookie
+  <a class="anchor" href="#%e8%8e%b7%e5%8f%96%e4%b8%8e%e8%ae%be%e7%bd%aecookie">#</a>
+</h2>
+<hr>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+import <span style="color:#e6db74">&#34;android.webkit.CookieSyncManager&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.webkit.CookieManager&#34;</span>
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">设置Cookie</span>(context,url,content)
+
+CookieSyncManager.createInstance(context)
+
+<span style="color:#66d9ef">local</span> cookieManager <span style="color:#f92672">=</span> CookieManager.getInstance()
+
+cookieManager.setAcceptCookie(<span style="color:#66d9ef">true</span>)
+
+cookieManager.removeSessionCookie()
+
+cookieManager.removeAllCookie()
+
+cookieManager.setCookie(url, content)
+
+CookieSyncManager.getInstance().sync()
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">获取Cookie</span>(url)
+
+<span style="color:#66d9ef">local</span> cookieManager <span style="color:#f92672">=</span> CookieManager.getInstance();
+
+<span style="color:#66d9ef">return</span> cookieManager.getCookie(url);
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#75715e">--示例</span>
+
+<span style="color:#75715e">--获取https://www.baidu.com的cookie并打印</span>
+
+print(<span style="color:#960050;background-color:#1e0010">获取</span>Cookie(<span style="color:#e6db74">&#34;https://www.baidu.com&#34;</span>))
+
+<span style="color:#75715e">--设置https://www.baidu.com的cookie为This is cookie</span>
+
+<span style="color:#960050;background-color:#1e0010">设置</span>Cookie(activity,<span style="color:#e6db74">&#34;https://www.baidu.com&#34;</span>,<span style="color:#e6db74">&#34;This is cookie&#34;</span>)
+
+<span style="color:#75715e">--获取https://www.baidu.com的cookie并打印</span>
+
+print(<span style="color:#960050;background-color:#1e0010">获取</span>Cookie(<span style="color:#e6db74">&#34;https://www.baidu.com&#34;</span>))
+
+</code></pre></div></article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#自定义进度条">自定义进度条</a></li>
+    <li><a href="#luawebview设置ua">LuaWebView设置UA</a></li>
+    <li><a href="#获取与设置cookie">获取与设置cookie</a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

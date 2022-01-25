@@ -1,31 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Introduction on LUA book</title>
-    <link>https://lua.dianas.cyou/</link>
-    <description>Recent content in Introduction on LUA book</description>
+    <title>03-00 MLUA教程 on LUA book</title>
+    <link>https://lua.dianas.cyou/docs/05/</link>
+    <description>Recent content in 03-00 MLUA教程 on LUA book</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <lastBuildDate>Sun, 28 Sep 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://lua.dianas.cyou/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>02-01 String</title>
-      <link>https://lua.dianas.cyou/docs/02/0201string/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://lua.dianas.cyou/docs/02/0201string/</guid>
-      <description>字符串 #   From 小何  字符串操作 #  转义符 #  \n 换行(LF) ，将当前位置移到下一行开头 \r 回车(CR) ，将当前位置移到本行开头 \t 水平制表(HT) （跳到下一个TAB位置） \\ 代表一个反斜线字符\ \&amp;#39; 代表一个单引号（撇号）字符 \&amp;#34;代表一个双引号字符 \0空字符(NULL) 链接字符串只需要使用 .. #  print(&amp;#34;i&amp;#34;..&amp;#39;love&amp;#39;) 计算字符串长度使用#字符串 #  miao = &amp;#34;https://lua.dianas.cyou/&amp;#34; print(#miao) 正则操作字符串 #  我们使用正则表达式来截取字符串，简单的截取请看示例
-str=&amp;#34;左中右&amp;#34; --取左 左=str:match(&amp;#34;(.+)中&amp;#34;) --取字符串中间 中=str:match(&amp;#34;左(.-)右&amp;#34;) --取字符串右边 右=str:match(&amp;#34;中(.+)&amp;#34;) 常用正则如下  详细内容 ...  常用正则(Lua中需要将\换成%)： 非负整数：^\d+$ 正整数：^[0-9]*[1-9][0-9]*$ 非正整数：^((-\d+)|(0+))$ 负整数：^-[0-9]*[1-9][0-9]*$ 整数：^-?\d+$ 非负浮点数：^\d+(\.\d+)?$ 正浮点数 : ^((0-9)+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*)$ 非正浮点数：^((-\d+\.\d+)?)|(0+(\.0+)?))$ 负浮点数：^(-((正浮点数正则式)))$ 英文字符串：^[A-Za-z]+$ 英文大写串：^[A-Z]+$ 英文小写串：^[a-z]+$ 英文字符数字串：^[A-Za-z0-9]+$ 英数字加下划线串：^\w+$ E-mail地址：^[\w-]+(\.</description>
-    </item>
-    
-    <item>
-      <title>02-02 Layout</title>
-      <link>https://lua.dianas.cyou/docs/02/0202layout/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://lua.dianas.cyou/docs/02/0202layout/</guid>
-      <description>布局 #  未完持续</description>
-    </item>
-    
+    <language>zh-cn</language><atom:link href="https://lua.dianas.cyou/docs/05/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>03-01 when的用法</title>
       <link>https://lua.dianas.cyou/docs/05/0301when/</link>
@@ -38,15 +18,6 @@ str=&amp;#34;左中右&amp;#34; --取左 左=str:match(&amp;#34;(.+)中&amp;#34;
 when 5&amp;gt;1 print(&amp;#34;OK&amp;#34;) 以前判断要这样写
 if 1&amp;gt;5 then print(&amp;#34;emmmm&amp;#34;) else print(&amp;#34;OK&amp;#34;) end 在androlua+4.3.3更新后可以这样写
 when 1&amp;gt;5 print(&amp;#34;emmmm&amp;#34;) else print(&amp;#34;OK&amp;#34;) </description>
-    </item>
-    
-    <item>
-      <title>03-01 案例分析01</title>
-      <link>https://lua.dianas.cyou/docs/03/0301/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://lua.dianas.cyou/docs/03/0301/</guid>
-      <description>From sudoskys  BiliFanViewer #  工程源码与在线浏览请见章首页(0节)  工程结构 #  . ├── BiliFanViewer.zip //源代码打包 ├── capsule //字符资源库 │ ├── layout //布局库 │ │ ├── item.aly │ │ └── now.aly │ └── value //变量库 │ ├── color.lua │ └── str.lua ├── core //核心函数库 │ ├── cores.lua │ ├── hotup.lua │ ├── rule.lua │ ├── rule.lua.bak │ └── runs.lua ├── icon.png ├── init.lua // ├── layout.aly //布局文件 ├── libs //包的目录 │ └── android-support-v4.</description>
     </item>
     
     <item>
@@ -144,42 +115,6 @@ web.setWebChromeClient(LuaWebChrome(LuaWebChrome.IWebChrine{ onProgressChanged=f
       
       <guid>https://lua.dianas.cyou/docs/05/0311animation/</guid>
       <description>控件旋转 #  --Z轴上的旋转角度 View.getRotation() --X轴上的旋转角度 View.getRotationX() --Y轴上的旋转角度 View.getRotationY() --设置Z轴上的旋转角度 View.setRotation(r) --设置X轴上的旋转角度 View.setRotationX(r) --设置Y轴上的旋转角度 View.setRotationY(r) --设置旋转中心点的X坐标 View.setPivotX(p) --设置旋转中心点的Y坐标 View.setPivotX(p) --设置摄像机的与旋转目标在Z轴上距离 View.setCameraDistance(d) 动画结束回调 #  --导入包 import &amp;#34;android.view.animation.*&amp;#34; import &amp;#34;android.view.animation.Animation$AnimationListener&amp;#34; --控件动画 控件.startAnimation(AlphaAnimation(1,0).setDuration(400).setFillAfter(true).setAnimationListener(AnimationListener{ onAnimationEnd=function() print&amp;#34;动画结束&amp;#34;) end})) 安卓跳转动画 #  android.R.anim.accelerate_decelerate_interpolator android.R.anim.accelerate_interpolator android.R.anim.anticipate_interpolator android.R.anim.anticipate_overshoot_interpolator android.R.anim.bounce_interpolator android.R.anim.cycle_interpolator android.R.anim.decelerate_interpolatoandroid.R.anim.r android.R.anim.fade_in android.R.anim.fade_out android.R.anim.linear_interpolator android.R.anim.overshoot_interpolator android.R.anim.slide_in_left android.R.anim.slide_out_right Animation(动画) #  --动画主要包括以下几种 Alpha:渐变透明度动画效果 Scale:渐变尺寸伸缩动画效果 Translate:画面转换位置移动动画效果 Rotate:画面转换位置移动动画效果 --共有的属性有 Duration --属性为动画持续时间 时间以毫秒为单位 fillAfter --当设置为true,该动画转化在动画结束后被应用 fillBefore --当设置为true,该动画转化在动画开始前被应用 repeatCount--动画的重复次数 repeatMode --定义重复的行为 startOffset --动画之间的时间间隔，从上次动画停多少时间开始执行下个动画 id.</description>
-    </item>
-    
-    <item>
-      <title>01-01 开发素养</title>
-      <link>https://lua.dianas.cyou/docs/01/0101sudo/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://lua.dianas.cyou/docs/01/0101sudo/</guid>
-      <description>素养 #   From sudoskys  对于不少小伙伴来说，Androlua是你们接触的第一个开发工具，那么如何使用优美的lua写出规范的代码，提升自己写代码的气质捏？
-请阅读以下内容。
- 📜命名规范 #  常见命名规范 #  小驼峰式 第一个单词首字母小写，后面其他单词首字母大写
-例子 #  myAge=18 myName[10] dianaLove=&amp;#34;me&amp;#34; 大驼峰式 每个单词的第一个字母都要大写。
-例子 #  MyAge=3 MyName[10] DianaLove=&amp;#34;me&amp;#34; 下划线法 可以结合其他方法使用
-例子 #  _My_Age=3 _My_Name[10] _Diana_Love=&amp;#34;me&amp;#34; 匈牙利法 早期的规范，由微软的一个匈牙利人发明的。确定变量的类型，系统却又琐碎。
-要求前缀字母用变量类型的缩写，其余部分用变量的英文或英文的缩写，单词第一个字母大写。
-例子 #  --注意类型 iMyAge=3 --int cMyName[10] --char sDiana_Love=&amp;#34;me&amp;#34; --str  命名规范补充 #   匈牙利法中类型有哪些？ ...  a 数组（Array） b 布尔值（Boolean） by 字节（Byte） c 有符号字符（Char） cb 无符号字符（Char Byte，并没有神马人用的） cr 颜色参考值（Color Ref） cx,cy 坐标差（长度 Short Int） dw 双字（Double Word） fn 函数（Function） h Handle（句柄） i 整形（Int） l 长整型（Long Int） lp 长指针（Long Pointer） m_ 类成员（Class Member） n 短整型（Short Int） np 近程指针（Near Pointer） p 指针（Pointer） s 字符串（String） sz 以 Null 做结尾的字符串型（String with Zero End） w 字（Word）     📚真正的学习Lua #   不要习惯于当CV工程师 #   理由很简单，如果你习惯于依赖示例代码，而不去真正研究这门语言本身或你复制的代码的每一行，你就不能扩展，不能提升，不能写出属于自己的项目，不能自己产出什么东西，永远被别人牵着走。</description>
-    </item>
-    
-    <item>
-      <title>01-02 认识Alua写法</title>
-      <link>https://lua.dianas.cyou/docs/01/0102alua/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://lua.dianas.cyou/docs/01/0102alua/</guid>
-      <description>打印 #  print&amp;#34;Hello World！&amp;#34; print(&amp;#34;Hello World&amp;#34;) 注释 #  单行注释 -- 多行注释 --[[]] 字符串 #  a=&amp;#34;String&amp;#34; a=[[String]] a=[===[String]===] 赋值 #  a=&amp;#34;Hello World&amp;#34; --lua支持多重赋值 a,b=&amp;#34;String a&amp;#34;,&amp;#34;String b&amp;#34; --交换值 a,b=&amp;#34;String a&amp;#34;,&amp;#34;String b&amp;#34; a,b=b,a For循环 #  --给定条件进行循环 --输出从1到10 for i=1,10 do print(i) end --输出从10到1 for i=10,1,-1 do print(i) end --打印数组a中所有的值 a={&amp;#34;a&amp;#34;,&amp;#34;b&amp;#34;,&amp;#34;c&amp;#34;,&amp;#34;d&amp;#34;} for index,content in pairs(a) do print(content) end While循环 #  --只要条件为真便会一直循环下去 --输出1到10 a=0 while a~=10 do a=a+1 print(a) end --输出10到1 a=11 while a~=1 do a=a-1 print(a) end --打印数组a中的所有值 shuzu={&amp;#34;a&amp;#34;,&amp;#34;b&amp;#34;,&amp;#34;c&amp;#34;,&amp;#34;d&amp;#34;} a=0 while a~=#shuzu do a=a+1 print(shuzu[a]) end if(判断语句) #  --判断值是否为真 a=true if a then print(&amp;#34;真&amp;#34;) else print(&amp;#34;假&amp;#34;) end --比较值是否相同 a=true b=false if a==b then print(&amp;#34;真&amp;#34;) else print(&amp;#34;假&amp;#34;) end function(函数) #  函数有两个用途 1.</description>
-    </item>
-    
-    <item>
-      <title>文档语法</title>
-      <link>https://lua.dianas.cyou/posts/creating-a-new-theme/</link>
-      <pubDate>Sun, 28 Sep 2014 00:00:00 +0000</pubDate>
-      
-      <guid>https://lua.dianas.cyou/posts/creating-a-new-theme/</guid>
-      <description>文档语法 #   Markdown content
-info|warning|danger
-  MacOS MacOS Content #  Linux Linux Content #  Windows Windows Content #     问题 ...  本文档使用的代码来自于     Contribute   导航 0012121000   #  欢迎各位补充本文档   文档格式 #  This tutorial will show you how to create a simple theme in Hugo. I assume that you are familiar with HTML, the bash command line, and that you are comfortable using Markdown to format content.</description>
     </item>
     
   </channel>
