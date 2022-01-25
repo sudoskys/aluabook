@@ -9,7 +9,11 @@
         "state": {
           "type": "markdown",
           "state": {
+<<<<<<< HEAD
             "file": "docs/03/0301.md",
+=======
+            "file": "docs/03/_index.md",
+>>>>>>> 7a3bd0b (upload)
             "mode": "source",
             "source": false
           }
@@ -19,12 +23,17 @@
         "id": "eacb19f0522c6b73",
         "type": "leaf",
         "state": {
+<<<<<<< HEAD
           "type": "markdown",
           "state": {
             "file": "docs/03/_index.md",
             "mode": "source",
             "source": false
           }
+=======
+          "type": "empty",
+          "state": {}
+>>>>>>> 7a3bd0b (upload)
         }
       }
     ],
@@ -81,7 +90,11 @@
             "state": {
               "type": "backlink",
               "state": {
+<<<<<<< HEAD
                 "file": "docs/03/0301.md",
+=======
+                "file": "docs/03/_index.md",
+>>>>>>> 7a3bd0b (upload)
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -101,6 +114,7 @@
   },
   "active": "5d55494fb6a1488d",
   "lastOpenFiles": [
+<<<<<<< HEAD
     "docs/03/0301.md",
     "docs/03/_index.md",
     "docs/02/0201string.md",
@@ -111,5 +125,17 @@
     "docs/05/_index.md",
     "docs/01/_index.md",
     "_index.md"
+=======
+    "docs/03/_index.md",
+    "docs/02/_index.md",
+    "posts/02RES.md",
+    "posts/01NEW.md",
+    "posts/_index.md",
+    "docs/_index.md",
+    "docs/04/0401when.md",
+    "docs/04/0411Animation.md",
+    "docs/04/0410file.md",
+    "docs/04/0409sthing.md"
+>>>>>>> 7a3bd0b (upload)
   ]
 }
