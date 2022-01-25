@@ -1,0 +1,3249 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="布局 #   From MLUA  布局基础 #   获取ListView垂直坐标 #  function getScrollY() c = ls.getChildAt(0); local firstVisiblePosition = ls.getFirstVisiblePosition(); local top = c.getTop(); return -top &#43; firstVisiblePosition * c.getHeight() ; end 设置控件图片 #  --设置的图片也可以输入路径 ID.setImageBitmap(loadbitmap(&#34;图片.png&#34;)) 获取控件宽高 #  --导入包 import &#34;android.content.Context&#34; function getwh(view) view.measure(View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED),View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED)); height =view.getMeasuredHeight(); width =view.getMeasuredWidth(); return width,height end print(getwh(控件ID)) 隐藏滚动条 #  --横向 horizontalScrollBarEnabled=false; --竖向 VerticalScrollBarEnabled=false; 禁用编辑框 #  --代码中设置 editText.setFocusable(false); --布局表中设置 Focusable=false; 标题栏返回按钮 #  activity.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="03-05 界面&amp;布局" />
+<meta property="og:description" content="布局 #   From MLUA  布局基础 #   获取ListView垂直坐标 #  function getScrollY() c = ls.getChildAt(0); local firstVisiblePosition = ls.getFirstVisiblePosition(); local top = c.getTop(); return -top &#43; firstVisiblePosition * c.getHeight() ; end 设置控件图片 #  --设置的图片也可以输入路径 ID.setImageBitmap(loadbitmap(&#34;图片.png&#34;)) 获取控件宽高 #  --导入包 import &#34;android.content.Context&#34; function getwh(view) view.measure(View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED),View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED)); height =view.getMeasuredHeight(); width =view.getMeasuredWidth(); return width,height end print(getwh(控件ID)) 隐藏滚动条 #  --横向 horizontalScrollBarEnabled=false; --竖向 VerticalScrollBarEnabled=false; 禁用编辑框 #  --代码中设置 editText.setFocusable(false); --布局表中设置 Focusable=false; 标题栏返回按钮 #  activity." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://lua.dianas.cyou/docs/05/0305layout/" /><meta property="article:section" content="docs" />
+
+
+
+<title>03-05 界面&amp;布局 | LUA book</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.82c5dbd23447cee0b4c2aa3ed08ce0961faa40e1fa370eee4f8c9f02e0d46b5f.css" integrity="sha256-gsXb0jRHzuC0wqo&#43;0Izglh&#43;qQOH6Nw7uT4yfAuDUa18=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.373325582531ec679f42f0a5df1396215156a0cf2124262a48b4ae3559158cd5.js" integrity="sha256-NzMlWCUx7GefQvCl3xOWIVFWoM8hJCYqSLSuNVkVjNU=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>LUA book</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/01/" class="">01-00 初步认识LUA</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/01/0101sudo/" class="">01-01 开发素养</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/01/0102alua/" class="">01-02 认识Alua写法</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/02/" class="">02-00 教程</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/02/0201string/" class="">02-01 String</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/02/0202layout/" class="">02-02 Layout</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/05/" class="">03-00 MLUA教程</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/05/0301when/" class="">03-01 when的用法</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/05/0302defer/" class="">03-02 Defer关键字</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/05/0303luawebviewzidingyi/" class="">03-03 LuaWebView自定义进度条</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/05/0304string/" class="">03-04 字符串</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/05/0305layout/" class=" active">03-05 界面&amp;布局</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/05/0306system/" class="">03-06 系统调用</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/05/0307caculate/" class="">03-07 各式算法</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/05/0308sent/" class="">03-08 信息&amp;发送</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/05/0309sthing/" class="">03-09 事件</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/05/0310file/" class="">03-10 文件处理</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/05/0311animation/" class="">03-11 动画</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/03/" class="">03-00 工程笔记</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/03/0301/" class="">03-01 案例分析01</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/" >
+        Blog
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>03-05 界面&amp;布局</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#布局基础">布局基础</a></li>
+    <li><a href="#获取listview垂直坐标">获取ListView垂直坐标</a></li>
+    <li><a href="#设置控件图片">设置控件图片</a></li>
+    <li><a href="#获取控件宽高">获取控件宽高</a></li>
+    <li><a href="#隐藏滚动条">隐藏滚动条</a></li>
+    <li><a href="#禁用编辑框">禁用编辑框</a></li>
+    <li><a href="#标题栏返回按钮">标题栏返回按钮</a></li>
+    <li><a href="#列表长按事件">列表长按事件</a></li>
+    <li><a href="#列表点击事件">列表点击事件</a></li>
+    <li><a href="#隐藏标题栏">隐藏标题栏</a></li>
+    <li><a href="#设置控件大小">设置控件大小</a></li>
+    <li><a href="#载入窗口传参">载入窗口传参</a></li>
+    <li><a href="#edittext只能输数字">EditText只能输数字</a></li>
+    <li><a href="#窗口全屏">窗口全屏</a></li>
+    <li><a href="#关闭当前窗口">关闭当前窗口</a></li>
+    <li><a href="#textview文本可选择复制">TextView文本可选择复制</a></li>
+    <li><a href="#edittext文本被改变事件">EditText文本被改变事件</a></li>
+    <li><a href="#标题栏菜单按钮">标题栏菜单按钮</a></li>
+    <li><a href="#标题栏actionbar">标题栏(ActionBar)</a></li>
+    <li><a href="#五大布局">五大布局</a></li>
+    <li><a href="#widget普通控件">Widget(普通控件)</a></li>
+    <li><a href="#check-view检查控件">Check View(检查控件)</a></li>
+    <li><a href="#seekbar拖动条">SeekBar(拖动条)</a></li>
+    <li><a href="#progressbar进度条">ProgressBar(进度条)</a></li>
+    <li><a href="#adapter-view适配器控件">Adapter View(适配器控件)</a></li>
+    <li><a href="#luawebview浏览器控件">LuaWebView(浏览器控件)</a></li>
+    <li><a href="#autocompletetextview自动补全文本框">AutoCompleteTextView(自动补全文本框)</a></li>
+    <li><a href="#timepicker时间选择器">TimePicker(时间选择器)</a></li>
+    <li><a href="#datepicker日期选择器">DatePicker(日期选择器)</a></li>
+    <li><a href="#nemberpicker数值选择器">NemberPicker(数值选择器)</a></li>
+    <li><a href="#alertdialog对话框">AlertDialog(对话框)</a></li>
+    <li><a href="#progressdialog进度对话框">ProgressDialog(进度对话框)</a></li>
+    <li><a href="#inputmethodmanager输入法管理器">InputMethodManager(输入法管理器)</a></li>
+    <li><a href="#popmenu弹出式菜单">PopMenu(弹出式菜单)</a></li>
+    <li><a href="#popwindow弹出式窗口">PopWindow(弹出式窗口)</a></li>
+    <li><a href="#toast提示">Toast(提示)</a></li>
+    <li><a href="#控件常用属性">控件常用属性</a></li>
+    <li><a href="#关于侧滑">关于侧滑</a></li>
+    <li><a href="#关于输入法影响布局的问题">关于输入法影响布局的问题</a></li>
+    <li><a href="#布局效果实现">布局效果实现</a></li>
+    <li><a href="#textview设置字体样式">TextView设置字体样式</a></li>
+    <li><a href="#布局设置点击效果">布局设置点击效果</a></li>
+    <li><a href="#图片着色">图片着色</a></li>
+    <li><a href="#沉浸状态栏">沉浸状态栏</a></li>
+    <li><a href="#drawable着色">Drawable着色</a></li>
+    <li><a href="#设置textview字体风格">设置TextView字体风格</a></li>
+    <li><a href="#修改对话框按钮颜色">修改对话框按钮颜色</a></li>
+    <li><a href="#控件颜色修改">控件颜色修改</a></li>
+    <li><a href="#控件圆角">控件圆角</a></li>
+    <li><a href="#控件背景渐变动画">控件背景渐变动画</a>
+      <ul>
+        <li><a href="#dppxsp之间的转换">dp、px、sp之间的转换</a></li>
+        <li><a href="#设置activity背景颜色">设置activity背景颜色</a></li>
+        <li><a href="#控件点击波纹背景">控件点击波纹背景</a></li>
+        <li><a href="#mlua手册底栏贝塞尔曲线">MLua手册底栏贝塞尔曲线</a></li>
+        <li><a href="#带颜色的字体">带颜色的字体</a></li>
+        <li><a href="#适配异形屏的全屏">适配异形屏的全屏</a></li>
+      </ul>
+    </li>
+    <li><a href="#图片处理">图片处理</a>
+      <ul>
+        <li><a href="#高斯模糊">高斯模糊</a></li>
+        <li><a href="#圆形图片">圆形图片</a></li>
+        <li><a href="#获取控件图片">获取控件图片</a></li>
+      </ul>
+    </li>
+    <li><a href="#图片圆角">图片圆角</a></li>
+    <li><a href="#缩放图片">缩放图片</a></li>
+    <li><a href="#自定义布局对话框">自定义布局对话框</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="布局">
+  布局
+  <a class="anchor" href="#%e5%b8%83%e5%b1%80">#</a>
+</h1>
+<hr>
+<blockquote class="book-hint info">
+  <strong>From MLUA</strong>
+</blockquote>
+
+<h2 id="布局基础">
+  布局基础
+  <a class="anchor" href="#%e5%b8%83%e5%b1%80%e5%9f%ba%e7%a1%80">#</a>
+</h2>
+<hr>
+<h2 id="获取listview垂直坐标">
+  获取ListView垂直坐标
+  <a class="anchor" href="#%e8%8e%b7%e5%8f%96listview%e5%9e%82%e7%9b%b4%e5%9d%90%e6%a0%87">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getScrollY</span>()
+
+c <span style="color:#f92672">=</span> ls.getChildAt(<span style="color:#ae81ff">0</span>);
+
+<span style="color:#66d9ef">local</span> firstVisiblePosition <span style="color:#f92672">=</span> ls.getFirstVisiblePosition();
+
+<span style="color:#66d9ef">local</span> top <span style="color:#f92672">=</span> c.getTop();
+
+<span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span>top <span style="color:#f92672">+</span> firstVisiblePosition <span style="color:#f92672">*</span> c.getHeight() ;
+
+<span style="color:#66d9ef">end</span>
+</code></pre></div><h2 id="设置控件图片">
+  设置控件图片
+  <a class="anchor" href="#%e8%ae%be%e7%bd%ae%e6%8e%a7%e4%bb%b6%e5%9b%be%e7%89%87">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#75715e">--设置的图片也可以输入路径</span>
+
+ID.setImageBitmap(loadbitmap(<span style="color:#e6db74">&#34;图片.png&#34;</span>))
+</code></pre></div><h2 id="获取控件宽高">
+  获取控件宽高
+  <a class="anchor" href="#%e8%8e%b7%e5%8f%96%e6%8e%a7%e4%bb%b6%e5%ae%bd%e9%ab%98">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#75715e">--导入包</span>
+
+import <span style="color:#e6db74">&#34;android.content.Context&#34;</span>
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getwh</span>(view)
+
+view.measure(View.MeasureSpec.makeMeasureSpec(<span style="color:#ae81ff">0</span>,View.MeasureSpec.UNSPECIFIED),View.MeasureSpec.makeMeasureSpec(<span style="color:#ae81ff">0</span>,View.MeasureSpec.UNSPECIFIED));
+
+height <span style="color:#f92672">=</span>view.getMeasuredHeight();
+
+width <span style="color:#f92672">=</span>view.getMeasuredWidth();
+
+<span style="color:#66d9ef">return</span> width,height
+
+<span style="color:#66d9ef">end</span>
+
+print(getwh(<span style="color:#960050;background-color:#1e0010">控件</span>ID))
+</code></pre></div><h2 id="隐藏滚动条">
+  隐藏滚动条
+  <a class="anchor" href="#%e9%9a%90%e8%97%8f%e6%bb%9a%e5%8a%a8%e6%9d%a1">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#75715e">--横向</span>
+
+horizontalScrollBarEnabled<span style="color:#f92672">=</span><span style="color:#66d9ef">false</span>;
+
+<span style="color:#75715e">--竖向</span>
+
+VerticalScrollBarEnabled<span style="color:#f92672">=</span><span style="color:#66d9ef">false</span>;
+</code></pre></div><h2 id="禁用编辑框">
+  禁用编辑框
+  <a class="anchor" href="#%e7%a6%81%e7%94%a8%e7%bc%96%e8%be%91%e6%a1%86">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#75715e">--代码中设置</span>
+
+editText.setFocusable(<span style="color:#66d9ef">false</span>);
+
+<span style="color:#75715e">--布局表中设置</span>
+
+Focusable<span style="color:#f92672">=</span><span style="color:#66d9ef">false</span>;
+</code></pre></div><h2 id="标题栏返回按钮">
+  标题栏返回按钮
+  <a class="anchor" href="#%e6%a0%87%e9%a2%98%e6%a0%8f%e8%bf%94%e5%9b%9e%e6%8c%89%e9%92%ae">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+activity.getActionBar().setDisplayHomeAsUpEnabled(<span style="color:#66d9ef">true</span>)
+</code></pre></div><h2 id="列表长按事件">
+  列表长按事件
+  <a class="anchor" href="#%e5%88%97%e8%a1%a8%e9%95%bf%e6%8c%89%e4%ba%8b%e4%bb%b6">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+ID.setOnItemLongClickListener(AdapterView.OnItemLongClickListener{
+
+onItemLongClick<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(parent, v, pos,id)
+
+<span style="color:#75715e">--事件</span>
+
+<span style="color:#66d9ef">end</span>
+
+})
+</code></pre></div><h2 id="列表点击事件">
+  列表点击事件
+  <a class="anchor" href="#%e5%88%97%e8%a1%a8%e7%82%b9%e5%87%bb%e4%ba%8b%e4%bb%b6">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+ID.setOnItemClickListener(AdapterView.OnItemClickListener{
+
+onItemClick<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(parent, v, pos,id)
+
+<span style="color:#75715e">--事件</span>
+
+<span style="color:#66d9ef">end</span>
+
+})
+</code></pre></div><h2 id="隐藏标题栏">
+  隐藏标题栏
+  <a class="anchor" href="#%e9%9a%90%e8%97%8f%e6%a0%87%e9%a2%98%e6%a0%8f">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+activity.ActionBar.hide()
+</code></pre></div><h2 id="设置控件大小">
+  设置控件大小
+  <a class="anchor" href="#%e8%ae%be%e7%bd%ae%e6%8e%a7%e4%bb%b6%e5%a4%a7%e5%b0%8f">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#75715e">--设置宽度</span>
+
+linearParams <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">控件</span>ID.getLayoutParams()
+
+linearParams.width <span style="color:#f92672">=</span><span style="color:#960050;background-color:#1e0010">宽度</span>
+
+<span style="color:#960050;background-color:#1e0010">控件</span>ID.setLayoutParams(linearParams)
+
+<span style="color:#75715e">--同理设置高度</span>
+
+linearParams <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">控件</span>ID.getLayoutParams()
+
+linearParams.height <span style="color:#f92672">=</span><span style="color:#960050;background-color:#1e0010">高度</span>
+
+<span style="color:#960050;background-color:#1e0010">控件</span>ID.setLayoutParams(linearParams)
+</code></pre></div><h2 id="载入窗口传参">
+  载入窗口传参
+  <a class="anchor" href="#%e8%bd%bd%e5%85%a5%e7%aa%97%e5%8f%a3%e4%bc%a0%e5%8f%82">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+activity.newActivity(<span style="color:#e6db74">&#34;窗口名&#34;</span>,{<span style="color:#960050;background-color:#1e0010">参数</span>})
+
+<span style="color:#75715e">--渐变动画效果的，中间是安卓跳转动画代码</span>
+
+activity.newActivity(<span style="color:#e6db74">&#34;窗口名&#34;</span>,android.R.anim.fade_in,android.R.anim.fade_out,{<span style="color:#960050;background-color:#1e0010">参数</span>})
+</code></pre></div><h2 id="edittext只能输数字">
+  EditText只能输数字
+  <a class="anchor" href="#edittext%e5%8f%aa%e8%83%bd%e8%be%93%e6%95%b0%e5%ad%97">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+import <span style="color:#e6db74">&#34;android.text.InputType&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.text.method.DigitsKeyListener&#34;</span>
+
+<span style="color:#960050;background-color:#1e0010">控件</span>ID.setInputType(InputType.TYPE_CLASS_NUMBER)
+
+<span style="color:#960050;background-color:#1e0010">控件</span>ID.setKeyListener(DigitsKeyListener.getInstance(<span style="color:#e6db74">&#34;0123456789&#34;</span>))
+</code></pre></div><h2 id="窗口全屏">
+  窗口全屏
+  <a class="anchor" href="#%e7%aa%97%e5%8f%a3%e5%85%a8%e5%b1%8f">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+</code></pre></div><h2 id="关闭当前窗口">
+  关闭当前窗口
+  <a class="anchor" href="#%e5%85%b3%e9%97%ad%e5%bd%93%e5%89%8d%e7%aa%97%e5%8f%a3">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+activity.finish()
+</code></pre></div><h2 id="textview文本可选择复制">
+  TextView文本可选择复制
+  <a class="anchor" href="#textview%e6%96%87%e6%9c%ac%e5%8f%af%e9%80%89%e6%8b%a9%e5%a4%8d%e5%88%b6">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#75715e">--代码中设置</span>
+
+t.TextIsSelectable<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>
+
+<span style="color:#75715e">--布局表中设置</span>
+
+textIsSelectable<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>
+</code></pre></div><h2 id="edittext文本被改变事件">
+  EditText文本被改变事件
+  <a class="anchor" href="#edittext%e6%96%87%e6%9c%ac%e8%a2%ab%e6%94%b9%e5%8f%98%e4%ba%8b%e4%bb%b6">#</a>
+</h2>
+<pre tabindex="0"><code>
+控件ID.addTextChangedListener{
+
+onTextChanged=function(s)
+
+--事件
+
+end
+
+}
+</code></pre><h2 id="标题栏菜单按钮">
+  标题栏菜单按钮
+  <a class="anchor" href="#%e6%a0%87%e9%a2%98%e6%a0%8f%e8%8f%9c%e5%8d%95%e6%8c%89%e9%92%ae">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+tittle<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#34;分享&#34;</span>,<span style="color:#e6db74">&#34;帮助&#34;</span>,<span style="color:#e6db74">&#34;皮肤&#34;</span>,<span style="color:#e6db74">&#34;退出&#34;</span>}
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onCreateOptionsMenu</span>(menu)
+
+<span style="color:#66d9ef">for</span> k,v <span style="color:#66d9ef">in</span> ipairs(tittle) <span style="color:#66d9ef">do</span>
+
+<span style="color:#66d9ef">if</span> tittle[v] <span style="color:#66d9ef">then</span>
+
+<span style="color:#66d9ef">local</span> m<span style="color:#f92672">=</span>menu.addSubMenu(v)
+
+<span style="color:#66d9ef">for</span> k,v <span style="color:#66d9ef">in</span> ipairs(tittle[v]) <span style="color:#66d9ef">do</span>
+
+m.add(v)
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">else</span>
+
+<span style="color:#66d9ef">local</span> m<span style="color:#f92672">=</span>menu.add(v)
+
+m.setShowAsActionFlags(<span style="color:#ae81ff">1</span>)
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onMenuItemSelected</span>(id,tittle)
+
+<span style="color:#66d9ef">if</span> y[tittle.getTitle()] <span style="color:#66d9ef">then</span>
+
+y[tittle.getTitle()]()
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">end</span>
+
+y<span style="color:#f92672">=</span>{}
+
+y[<span style="color:#e6db74">&#34;帮助&#34;</span>]<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>()
+
+<span style="color:#75715e">--事件</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#75715e">--菜单</span>
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onCreateOptionsMenu</span>(menu)
+
+menu.add(<span style="color:#e6db74">&#34;打开&#34;</span>).onMenuItemClick<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(a)
+
+<span style="color:#66d9ef">end</span>
+
+menu.add(<span style="color:#e6db74">&#34;新建&#34;</span>).onMenuItemClick<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(a)
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">end</span>
+</code></pre></div><h2 id="标题栏actionbar">
+  标题栏(ActionBar)
+  <a class="anchor" href="#%e6%a0%87%e9%a2%98%e6%a0%8factionbar">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#75715e">--部分常用API</span>
+
+show:<span style="color:#960050;background-color:#1e0010">显示</span>
+
+hide:<span style="color:#960050;background-color:#1e0010">隐藏</span>
+
+Elevation:<span style="color:#960050;background-color:#1e0010">设置阴影</span>
+
+BgroundDrawable:<span style="color:#960050;background-color:#1e0010">设置背景</span>
+
+DisplayHomeAsUpEnabled(boolean):<span style="color:#960050;background-color:#1e0010">设置是否显示返回图标</span>
+
+<span style="color:#75715e">--设置标题</span>
+
+activity.ActionBar.setTitle(<span style="color:#e6db74">&#39;大标题&#39;</span>)
+
+activity.ActionBar.setSubTitle(<span style="color:#e6db74">&#34;小标题&#34;</span>)
+
+<span style="color:#75715e">--设置ActionBar背景颜色</span>
+
+import <span style="color:#e6db74">&#34;android.graphics.drawable.ColorDrawable&#34;</span>
+
+activity.ActionBar.setBackgroundDrawable(ColorDrawable(Color))
+
+<span style="color:#75715e">--自定义ActionBar标题颜色</span>
+
+import <span style="color:#e6db74">&#34;android.text.SpannableString&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.text.style.ForegroundColorSpan&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.text.Spannable&#34;</span>
+
+sp <span style="color:#f92672">=</span> SpannableString(<span style="color:#e6db74">&#34;标题&#34;</span>)
+
+sp.setSpan(ForegroundColorSpan(<span style="color:#ae81ff">0xff1DA6DD</span>),<span style="color:#ae81ff">0</span>,<span style="color:#f92672">#</span>sp,Spannable.SPAN_EXCLUSIVE_INCLUSIVE)
+
+activity.ActionBar.setTitle(sp)
+
+<span style="color:#75715e">--自定义ActionBar布局</span>
+
+DisplayShowCustomEnabled(<span style="color:#66d9ef">true</span>)
+
+CustomView(loadlayout(layout))
+
+<span style="color:#75715e">--ActionBar返回按钮</span>
+
+activity.ActionBar.setDisplayHomeAsUpEnabled(<span style="color:#66d9ef">true</span>)
+
+<span style="color:#75715e">--自定义返回按钮图标</span>
+
+activity.ActionBar.setHomeAsUpIndicator(drawable)
+
+<span style="color:#75715e">--菜单</span>
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onCreateOptionsMenu</span>(menu)
+
+menu.add(<span style="color:#e6db74">&#34;菜单1&#34;</span>)
+
+menu.add(<span style="color:#e6db74">&#34;菜单2&#34;</span>)
+
+menu.add(<span style="color:#e6db74">&#34;菜单3&#34;</span>)
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onOptionsItemSelected</span>(item)
+
+print(<span style="color:#e6db74">&#34;你选择了:&#34;</span><span style="color:#f92672">..</span>item.Title)
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#75715e">--Tab导航使用</span>
+
+import <span style="color:#e6db74">&#34;android.app.ActionBar$TabListener&#34;</span>
+
+actionBar<span style="color:#f92672">=</span>activity.ActionBar
+
+actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
+tab <span style="color:#f92672">=</span> actionBar.newTab().setText(<span style="color:#e6db74">&#34;Tab1&#34;</span>).setTabListener(TabListener({
+
+onTabSelected<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>()
+
+print<span style="color:#e6db74">&#34;Tab1&#34;</span>
+
+<span style="color:#66d9ef">end</span>}))
+
+tab2<span style="color:#f92672">=</span>actionBar.newTab().setText(<span style="color:#e6db74">&#34;Tab2&#34;</span>).setTabListener(TabListener({
+
+onTabSelected<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>()
+
+print<span style="color:#e6db74">&#34;Tab2&#34;</span>
+
+<span style="color:#66d9ef">end</span>}))
+
+actionBar.addTab(tab)
+
+actionBar.addTab(tab2)
+</code></pre></div><h2 id="五大布局">
+  五大布局
+  <a class="anchor" href="#%e4%ba%94%e5%a4%a7%e5%b8%83%e5%b1%80">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#75715e">--Android中常用的5大布局方式有以下几种：</span>
+
+<span style="color:#75715e">--线性布局（LinearLayout）：按照垂直或者水平方向布局的组件。</span>
+
+<span style="color:#75715e">--帧布局（FrameLayout）：组件从屏幕左上方布局组件。</span>
+
+<span style="color:#75715e">--表格布局（TableLayout）：按照行列方式布局组件。</span>
+
+<span style="color:#75715e">--相对布局（RelativeLayout）：相对其它组件的布局方式。</span>
+
+<span style="color:#75715e">--绝对布局（AbsoluteLayout）：按照绝对坐标来布局组件。</span>
+
+<span style="color:#ae81ff">1.</span><span style="color:#960050;background-color:#1e0010">线性布局</span>(LinearLayout)
+
+<span style="color:#960050;background-color:#1e0010">线性布局是</span>Android开发中最常见的一种布局方式<span style="color:#960050;background-color:#1e0010">，它是按照垂直或者水平方向来布局，通过</span>orientation属性可以设置线性布局的方向<span style="color:#960050;background-color:#1e0010">。属性值有垂直（</span>vertical<span style="color:#960050;background-color:#1e0010">）和水平（</span>horizontal<span style="color:#960050;background-color:#1e0010">）两种。</span>
+
+<span style="color:#960050;background-color:#1e0010">常用的属性：</span>
+
+orientation<span style="color:#960050;background-color:#1e0010">：可以设置布局的方向</span>
+
+gravity:<span style="color:#960050;background-color:#1e0010">用来控制组件的对齐方式</span>
+
+layout_weight控制各个控件在布局中的相对大小,layout_weight的属性是一个非负整数值<span style="color:#960050;background-color:#1e0010">。</span>
+
+<span style="color:#960050;background-color:#1e0010">线性布局会根据该控件</span>layout_weight值与其所处布局中所有控件layout_weight值之和的比值为该控件分配占用的区域
+
+<span style="color:#75715e">--[[例如，在水平布局的LinearLayout中有两个Button，这两个Button的layout_weight属性值都为1,那么这两个按钮都会被拉伸到整个屏幕宽度的一半。如果layout_weight指为0，控件会按原大小显示，不会被拉伸.
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">对于其余layout_weight属性值大于0的控件，系统将会减去layout_weight属性值为0的控件的宽度或者高度,再用剩余的宽度或高度按相应的比例来分配每一个控件显示的宽度或高度]]</span>
+
+<span style="color:#ae81ff">2.</span><span style="color:#960050;background-color:#1e0010">帧布局</span>(FrameLayout)
+
+<span style="color:#960050;background-color:#1e0010">帧布局是从屏幕的左上角（</span><span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">）坐标开始布局，多个组件层叠排列，第一个添加的组件放到最底层，最后添加到框架中的视图显示在最上面。上一层的会覆盖下一层的控件。</span>
+
+<span style="color:#ae81ff">3.</span><span style="color:#960050;background-color:#1e0010">表格布局（</span>TableLayout<span style="color:#960050;background-color:#1e0010">）</span>
+
+<span style="color:#960050;background-color:#1e0010">表格布局是一个</span>ViewGroup以表格显示它的子视图<span style="color:#960050;background-color:#1e0010">（</span>view<span style="color:#960050;background-color:#1e0010">）元素，即行和列标识一个视图的位置。</span>
+
+<span style="color:#960050;background-color:#1e0010">表格布局常用的属性如下：</span>
+
+collapseColumns<span style="color:#960050;background-color:#1e0010">：隐藏指定的列</span>
+
+shrinkColumns<span style="color:#960050;background-color:#1e0010">：收缩指定的列以适合屏幕，不会挤出屏幕</span>
+
+stretchColumns<span style="color:#960050;background-color:#1e0010">：尽量把指定的列填充空白部分</span>
+
+layout_column:<span style="color:#960050;background-color:#1e0010">控件放在指定的列</span>
+
+layout_span:<span style="color:#960050;background-color:#1e0010">该控件所跨越的列数</span>
+
+<span style="color:#ae81ff">4.</span><span style="color:#960050;background-color:#1e0010">相对布局（</span>RelativeLayout<span style="color:#960050;background-color:#1e0010">）</span>
+
+<span style="color:#960050;background-color:#1e0010">相对布局是按照组件之间的相对位置来布局，比如在某个组件的左边，右边，上面和下面等。</span>
+
+<span style="color:#ae81ff">5.</span><span style="color:#960050;background-color:#1e0010">绝对布局</span>(AbsoluteLayout)
+
+<span style="color:#960050;background-color:#1e0010">采用坐标轴的方式定位组件，左上角是（</span><span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">）点，往右</span>x轴递增<span style="color:#960050;background-color:#1e0010">，往下</span>Y轴递增,<span style="color:#960050;background-color:#1e0010">组件定位属性为</span>layout_x <span style="color:#960050;background-color:#1e0010">和</span>layout_y来确定坐标<span style="color:#960050;background-color:#1e0010">。</span>
+</code></pre></div><h2 id="widget普通控件">
+  Widget(普通控件)
+  <a class="anchor" href="#widget%e6%99%ae%e9%80%9a%e6%8e%a7%e4%bb%b6">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#75715e">--Button(按钮控件)、TextView(文本控件)、EditText(编辑框控件)</span>
+
+<span style="color:#960050;background-color:#1e0010">常用</span>API:
+
+id.setText(<span style="color:#e6db74">&#34;文本&#34;</span>)<span style="color:#75715e">--设置控件文本</span>
+
+id.getText()<span style="color:#75715e">--获取控件文本</span>
+
+id.setWidth(<span style="color:#ae81ff">300</span>)<span style="color:#75715e">--设置控件宽度</span>
+
+id.setHeight(<span style="color:#ae81ff">300</span>)<span style="color:#75715e">--设置控件高度</span>
+
+<span style="color:#75715e">--点击事件</span>
+
+id.onClick<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>()
+
+print<span style="color:#e6db74">&#34;你触发了点击事件&#34;</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#75715e">--长按事件</span>
+
+id.onLongClick<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>()
+
+print<span style="color:#e6db74">&#34;你触发了长按事件&#34;</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#75715e">--图片控件(ImageView与ImageButton)</span>
+
+<span style="color:#75715e">--设置图片</span>
+
+<span style="color:#75715e">--布局表中用src属性就可以，如:src=图片路径,</span>
+
+<span style="color:#75715e">--动态设置</span>
+
+id.setImageBitmap(loadbitmap(<span style="color:#960050;background-color:#1e0010">图片路径</span>))
+
+<span style="color:#75715e">--设置Drawable对象</span>
+
+import <span style="color:#e6db74">&#34;android.graphics.drawable.BitmapDrawable&#34;</span>
+
+id.setImageDrawable(BitmapDrawable(loadbitmap(<span style="color:#960050;background-color:#1e0010">图片路径</span>)))
+
+<span style="color:#75715e">--缩放，scaleType</span>
+
+<span style="color:#75715e">--字段</span>
+
+CENTER<span style="color:#960050;background-color:#1e0010">�</span> <span style="color:#75715e">--按原来size居中显示，长/宽超过View的长/宽，截取图片的居中部分显示�</span>
+
+CENTER_CROP <span style="color:#75715e">--按比例扩大图片的size居中显示，使图片长(宽)等于或大于View的长(宽)�</span>
+
+CENTER_INSIDE <span style="color:#75715e">--完整居中显示，按比例缩小使图片长/宽等于或小于View的长/宽�</span>
+
+FIT_CENTER <span style="color:#75715e">--按比例扩大/缩小到View的宽度，居中显示�</span>
+
+FIT_END <span style="color:#75715e">--按比例扩大/缩小到View的宽度，显示在View的下部分位置�</span>
+
+FIT_START <span style="color:#75715e">--按比例扩大/缩小到View的宽度，显示在View的上部分位置�</span>
+
+FIT_XY <span style="color:#75715e">--不按比例扩大/缩小到View的大小显示�</span>
+
+MATRIX <span style="color:#75715e">--用矩阵来绘制，动态缩小放大图片来显示。�</span>
+
+<span style="color:#75715e">--点击与长按事件同上</span>
+</code></pre></div><h2 id="check-view检查控件">
+  Check View(检查控件)
+  <a class="anchor" href="#check-view%e6%a3%80%e6%9f%a5%e6%8e%a7%e4%bb%b6">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#75715e">--CheckBox(复选框),Switch(开关控件),ToggleButton(切换按钮)</span>
+
+<span style="color:#75715e">--直接判断是否选中然后执行相应事件即可</span>
+
+<span style="color:#75715e">--判断API</span>
+
+check.isChecked()<span style="color:#75715e">--返回是否勾选、布尔值</span>
+
+check.isSelected()<span style="color:#75715e">--返回是否选中、布尔值</span>
+
+<span style="color:#75715e">--RadioButton(单选按钮)与RadioGroup</span>
+
+<span style="color:#75715e">--将RadioButton的父布局设定为RadioGroup然后绑定下面的监听即可</span>
+
+rp.setOnCheckedChangeListener{
+
+onCheckedChanged<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(g,c)
+
+l<span style="color:#f92672">=</span>g.findViewById(c)
+
+print(l.Text)
+
+<span style="color:#66d9ef">end</span>}
+</code></pre></div><h2 id="seekbar拖动条">
+  SeekBar(拖动条)
+  <a class="anchor" href="#seekbar%e6%8b%96%e5%8a%a8%e6%9d%a1">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#75715e">--绑定监听</span>
+
+seekbar.setOnSeekBarChangeListener{
+
+onStartTrackingTouch<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>()
+
+<span style="color:#75715e">--开始拖动</span>
+
+<span style="color:#66d9ef">end</span>,
+
+onStopTrackingTouch<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>()
+
+<span style="color:#75715e">--停止拖动</span>
+
+<span style="color:#66d9ef">end</span>,
+
+onProgressChanged<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>()
+
+<span style="color:#75715e">--状态改变</span>
+
+<span style="color:#66d9ef">end</span>}
+
+<span style="color:#75715e">--部分API</span>
+
+Progress<span style="color:#75715e">--当前进度</span>
+
+Max<span style="color:#75715e">--最大进度</span>
+</code></pre></div><h2 id="progressbar进度条">
+  ProgressBar(进度条)
+  <a class="anchor" href="#progressbar%e8%bf%9b%e5%ba%a6%e6%9d%a1">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#75715e">--超大号圆形风格</span>
+
+style<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;?android:attr/progressBarStyleLarge&#34;</span>
+
+<span style="color:#75715e">--小号风格</span>
+
+style<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;?android:attr/progressBarStyleSmall&#34;</span>
+
+<span style="color:#75715e">--标题型风格</span>
+
+style<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;?android:attr/progressBarStyleSmallTitle&#34;</span>
+
+<span style="color:#75715e">--长形进度条</span>
+
+style<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;?android:attr/progressBarStyleHorizontal&#34;</span>
+
+<span style="color:#75715e">--部分API</span>
+
+max <span style="color:#75715e">--最大进度值</span>
+
+progress <span style="color:#75715e">--设置进度值</span>
+
+secondaryProgress<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;70&#34;</span> <span style="color:#75715e">--初始化的底层第二个进度值</span>
+
+id.incrementProgressBy(<span style="color:#ae81ff">5</span>)
+
+<span style="color:#75715e">--ProgressBar进度值增加5</span>
+
+id.incrementProgressBy(<span style="color:#f92672">-</span><span style="color:#ae81ff">5</span>)
+
+<span style="color:#75715e">--ProgressBar进度值减少5</span>
+
+id.incrementSecondaryProgressBy(<span style="color:#ae81ff">5</span>)
+
+<span style="color:#75715e">--ProgressBar背后的第二个进度条 进度值增加5</span>
+
+id.incrementSecondaryProgressBy(<span style="color:#f92672">-</span><span style="color:#ae81ff">5</span>)
+
+<span style="color:#75715e">--ProgressBar背后的第二个进度条 进度值减少5</span>
+</code></pre></div><h2 id="adapter-view适配器控件">
+  Adapter View(适配器控件)
+  <a class="anchor" href="#adapter-view%e9%80%82%e9%85%8d%e5%99%a8%e6%8e%a7%e4%bb%b6">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#75715e">--适配器控件主要包括(ListView,GridView,Spinner,ExpandableList等)</span>
+
+<span style="color:#75715e">--想要动态为此类控件添加项目就必须得要依靠适配器！</span>
+
+<span style="color:#75715e">--适配器使用</span>
+
+<span style="color:#75715e">--AarrayAdapter(简单适配器)</span>
+
+<span style="color:#75715e">--创建项目数组</span>
+
+<span style="color:#960050;background-color:#1e0010">数据</span><span style="color:#f92672">=</span>{}
+
+<span style="color:#75715e">--添加项目数组</span>
+
+<span style="color:#66d9ef">for</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">100</span> <span style="color:#66d9ef">do</span>
+
+table.insert(<span style="color:#960050;background-color:#1e0010">数据</span>,tostring(i))
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#75715e">--创建适配器</span>
+
+array_adp<span style="color:#f92672">=</span>ArrayAdapter(activity,android.R.layout.simple_list_item_1,String(<span style="color:#960050;background-color:#1e0010">数据</span>))
+
+<span style="color:#75715e">--设置适配器</span>
+
+lv.setAdapter(array_adp)
+
+<span style="color:#75715e">--LuaAdapter(Lua适配器)</span>
+
+<span style="color:#75715e">--创建自定义项目视图</span>
+
+item<span style="color:#f92672">=</span>{
+
+LinearLayout,
+
+orientation<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;vertical&#34;</span>,
+
+layout_width<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;fill&#34;</span>,
+
+{
+
+TextView,
+
+id<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text&#34;</span>,
+
+layout_margin<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;15dp&#34;</span>,
+
+layout_width<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;fill&#34;</span>
+
+},
+
+}
+
+<span style="color:#75715e">--创建项目数组</span>
+
+data<span style="color:#f92672">=</span>{}
+
+<span style="color:#75715e">--创建适配器</span>
+
+adp<span style="color:#f92672">=</span>LuaAdapter(activity,data,item)
+
+<span style="color:#75715e">--添加数据</span>
+
+<span style="color:#66d9ef">for</span> n<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">100</span> <span style="color:#66d9ef">do</span>
+
+table.insert(data,{
+
+text<span style="color:#f92672">=</span>{
+
+Text<span style="color:#f92672">=</span>tostring(n),
+
+},
+
+})
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#75715e">--设置适配器</span>
+
+lv.Adapter<span style="color:#f92672">=</span>adp
+
+<span style="color:#75715e">--以上的适配器ListView、Spinner与GridView等控件通用</span>
+
+<span style="color:#75715e">--那么ExpandableListView(折叠列表)怎么办呢？</span>
+
+<span style="color:#75715e">--别怕，安卓系统还提供了一个ArrayExpandableListAdapter来给我们使用，可以简单的适配ExpandableListView，下面给出实例</span>
+
+ns<span style="color:#f92672">=</span>{
+
+<span style="color:#e6db74">&#34;Widget&#34;</span>,<span style="color:#e6db74">&#34;Check view&#34;</span>,<span style="color:#e6db74">&#34;Adapter view&#34;</span>,<span style="color:#e6db74">&#34;Advanced Widget&#34;</span>,<span style="color:#e6db74">&#34;Layout&#34;</span>,<span style="color:#e6db74">&#34;Advanced Layout&#34;</span>,
+
+}
+
+wds<span style="color:#f92672">=</span>{
+
+{<span style="color:#e6db74">&#34;Button&#34;</span>,<span style="color:#e6db74">&#34;EditText&#34;</span>,<span style="color:#e6db74">&#34;TextView&#34;</span>,
+
+<span style="color:#e6db74">&#34;ImageButton&#34;</span>,<span style="color:#e6db74">&#34;ImageView&#34;</span>},
+
+{<span style="color:#e6db74">&#34;CheckBox&#34;</span>,<span style="color:#e6db74">&#34;RadioButton&#34;</span>,<span style="color:#e6db74">&#34;ToggleButton&#34;</span>,<span style="color:#e6db74">&#34;Switch&#34;</span>},
+
+{<span style="color:#e6db74">&#34;ListView&#34;</span>,<span style="color:#e6db74">&#34;ExpandableListView&#34;</span>,<span style="color:#e6db74">&#34;Spinner&#34;</span>},
+
+{<span style="color:#e6db74">&#34;SeekBar&#34;</span>,<span style="color:#e6db74">&#34;ProgressBar&#34;</span>,<span style="color:#e6db74">&#34;RatingBar&#34;</span>,
+
+<span style="color:#e6db74">&#34;DatePicker&#34;</span>,<span style="color:#e6db74">&#34;TimePicker&#34;</span>,<span style="color:#e6db74">&#34;NumberPicker&#34;</span>},
+
+{<span style="color:#e6db74">&#34;LinearLayout&#34;</span>,<span style="color:#e6db74">&#34;AbsoluteLayout&#34;</span>,<span style="color:#e6db74">&#34;FrameLayout&#34;</span>},
+
+{<span style="color:#e6db74">&#34;RadioGroup&#34;</span>,<span style="color:#e6db74">&#34;GridLayout&#34;</span>,
+
+<span style="color:#e6db74">&#34;ScrollView&#34;</span>,<span style="color:#e6db74">&#34;HorizontalScrollView&#34;</span>},
+
+}
+
+mAdapter<span style="color:#f92672">=</span>ArrayExpandableListAdapter(activity)
+
+<span style="color:#66d9ef">for</span> k,v <span style="color:#66d9ef">in</span> ipairs(ns) <span style="color:#66d9ef">do</span>
+
+mAdapter.add(v,wds[k])
+
+<span style="color:#66d9ef">end</span>
+
+el.setAdapter(mAdapter)
+
+<span style="color:#75715e">--这样就实现ExpandableListView项目的适配了</span>
+
+<span style="color:#75715e">--当然AdapterView的事件响应也是与普通控件不同的。</span>
+
+<span style="color:#75715e">--ListView与GridView的单击与长按事件</span>
+
+<span style="color:#75715e">--项目被单击</span>
+
+id.onItemClick<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(l,v,p,i)
+
+print(v.Text)
+
+<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#75715e">--项目被长按</span>
+
+id.onItemLongClick<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(l,v,p,i)
+
+print(v.Text)
+
+<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#75715e">--Spinner的项目单击事件</span>
+
+id.onItemSelected<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(l,v,p,i)
+
+print(v.Text)
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#75715e">--ExpandableListView的父项目与子项目单击事件</span>
+
+id.onGroupClick<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(l,v,p,s)
+
+print(v.Text<span style="color:#f92672">..</span><span style="color:#e6db74">&#34;:GroupClick&#34;</span>)
+
+<span style="color:#66d9ef">end</span>
+
+id.onChildClick<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(l,v,g,c)
+
+print(v.Text<span style="color:#f92672">..</span><span style="color:#e6db74">&#34;:ChildClick&#34;</span>)
+
+<span style="color:#66d9ef">end</span>
+</code></pre></div><h2 id="luawebview浏览器控件">
+  LuaWebView(浏览器控件)
+  <a class="anchor" href="#luawebview%e6%b5%8f%e8%a7%88%e5%99%a8%e6%8e%a7%e4%bb%b6">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#75715e">--常用API</span>
+
+id.loadUrl(<span style="color:#e6db74">&#34;http://www.androlua.cn&#34;</span>)<span style="color:#75715e">--加载网页</span>
+
+id.loadUrl(<span style="color:#e6db74">&#34;file:///storage/sdcard0/index.html&#34;</span>)<span style="color:#75715e">--加载本地文件</span>
+
+id.getTitle()<span style="color:#75715e">--获取网页标题</span>
+
+id.getUrl()<span style="color:#75715e">--获取当前Url</span>
+
+id.requestFocusFromTouch()<span style="color:#75715e">--设置支持获取手势焦点</span>
+
+id.getSettings().setJavaScriptEnabled(<span style="color:#66d9ef">true</span>)<span style="color:#75715e">--设置支持JS</span>
+
+id.setPluginsEnabled(<span style="color:#66d9ef">true</span>)<span style="color:#75715e">--支持插件</span>
+
+id.setUseWideViewPort(<span style="color:#66d9ef">false</span>)<span style="color:#75715e">--调整图片自适应</span>
+
+id.getSettings().setSupportZoom(<span style="color:#66d9ef">true</span>)<span style="color:#75715e">--支持缩放</span>
+
+id.getSettings().setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN)<span style="color:#75715e">--支持重新布局</span>
+
+id.supportMultipleWindows()<span style="color:#75715e">--设置多窗口</span>
+
+id.stopLoading()<span style="color:#75715e">--停止加载网页</span>
+
+<span style="color:#75715e">--状态监听</span>
+
+id.setWebViewClient{
+
+shouldOverrideUrlLoading<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(view,url)
+
+<span style="color:#75715e">--Url即将跳转</span>
+
+<span style="color:#66d9ef">end</span>,
+
+onPageStarted<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(view,url,favicon)
+
+<span style="color:#75715e">--网页加载</span>
+
+<span style="color:#66d9ef">end</span>,
+
+onPageFinished<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(view,url)
+
+<span style="color:#75715e">--网页加载完成</span>
+
+<span style="color:#66d9ef">end</span>}
+</code></pre></div><h2 id="autocompletetextview自动补全文本框">
+  AutoCompleteTextView(自动补全文本框)
+  <a class="anchor" href="#autocompletetextview%e8%87%aa%e5%8a%a8%e8%a1%a5%e5%85%a8%e6%96%87%e6%9c%ac%e6%a1%86">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#75715e">--适配数据</span>
+
+arr<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#34;Rain&#34;</span>,<span style="color:#e6db74">&#34;Rain1&#34;</span>,<span style="color:#e6db74">&#34;Rain2&#34;</span>};
+
+arrayAdapter<span style="color:#f92672">=</span>LuaArrayAdapter(activity,{TextView,padding<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;10dp&#34;</span>,textSize<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;18sp&#34;</span>,layout_width<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;fill&#34;</span>,textColor<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#ff000000&#34;</span>}, String(arr))
+
+actw.setAdapter(arrayAdapter)
+
+Threshold<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span><span style="color:#75715e">--设置输入几个字符后才能出现提示</span>
+</code></pre></div><h2 id="timepicker时间选择器">
+  TimePicker(时间选择器)
+  <a class="anchor" href="#timepicker%e6%97%b6%e9%97%b4%e9%80%89%e6%8b%a9%e5%99%a8">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#75715e">--时间改变监听器</span>
+
+import <span style="color:#e6db74">&#34;android.widget.TimePicker$OnTimeChangedListener&#34;</span>
+
+id.setOnTimeChangedListener{
+
+onTimeChanged<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(view,<span style="color:#960050;background-color:#1e0010">时</span>,<span style="color:#960050;background-color:#1e0010">分</span>)
+
+print(<span style="color:#960050;background-color:#1e0010">时</span>,<span style="color:#960050;background-color:#1e0010">分</span>)
+
+<span style="color:#66d9ef">end</span>}
+
+<span style="color:#75715e">--部分API</span>
+
+<span style="color:#960050;background-color:#1e0010">时</span><span style="color:#f92672">=</span>id.getCurrentHour()<span style="color:#75715e">--获取小时</span>
+
+<span style="color:#960050;background-color:#1e0010">分</span><span style="color:#f92672">=</span>id.getCurrentMinute()<span style="color:#75715e">--获取分钟</span>
+
+id.setIs24HourView(Boolean(<span style="color:#66d9ef">true</span>))<span style="color:#75715e">--设置24小时制</span>
+</code></pre></div><h2 id="datepicker日期选择器">
+  DatePicker(日期选择器)
+  <a class="anchor" href="#datepicker%e6%97%a5%e6%9c%9f%e9%80%89%e6%8b%a9%e5%99%a8">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+id<span style="color:#f92672">=</span>dp
+
+<span style="color:#960050;background-color:#1e0010">日</span><span style="color:#f92672">=</span>id.getDayOfMonth()<span style="color:#75715e">--获取选择的天数</span>
+
+<span style="color:#960050;background-color:#1e0010">月</span><span style="color:#f92672">=</span>id.getMonth ()<span style="color:#75715e">--获取选择的月份</span>
+
+<span style="color:#960050;background-color:#1e0010">年</span><span style="color:#f92672">=</span>id.getYear()<span style="color:#75715e">--获取选择的年份</span>
+
+id.updateDate(<span style="color:#ae81ff">2016</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>)<span style="color:#75715e">--更新日期</span>
+
+print(<span style="color:#960050;background-color:#1e0010">年</span>,<span style="color:#960050;background-color:#1e0010">月</span>,<span style="color:#960050;background-color:#1e0010">日</span>)
+</code></pre></div><h2 id="nemberpicker数值选择器">
+  NemberPicker(数值选择器)
+  <a class="anchor" href="#nemberpicker%e6%95%b0%e5%80%bc%e9%80%89%e6%8b%a9%e5%99%a8">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+setMinValue(<span style="color:#ae81ff">0</span>)<span style="color:#75715e">--设置最小值</span>
+
+setMaxValue(<span style="color:#ae81ff">100</span>)<span style="color:#75715e">--设置最大值</span>
+
+setValue(<span style="color:#ae81ff">50</span>)<span style="color:#75715e">--设置当前值</span>
+
+getValue()<span style="color:#75715e">--获取选择的值</span>
+
+OnValueChangedListener<span style="color:#75715e">--数值改变监听器</span>
+</code></pre></div><h2 id="alertdialog对话框">
+  AlertDialog(对话框)
+  <a class="anchor" href="#alertdialog%e5%af%b9%e8%af%9d%e6%a1%86">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#75715e">--常用API</span>
+
+.setTitle(<span style="color:#e6db74">&#34;标题&#34;</span>)<span style="color:#75715e">--设置标题</span>
+
+.setMessage(<span style="color:#e6db74">&#34;设置消息&#34;</span>)<span style="color:#75715e">--设置消息</span>
+
+.setView(loadlayout(layout))<span style="color:#75715e">--设置自定义视图</span>
+
+.setPositiveButton(<span style="color:#e6db74">&#34;积极&#34;</span>,{onClick<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>() <span style="color:#66d9ef">end</span>})<span style="color:#75715e">--设置积极按钮</span>
+
+.setNeutralButton(<span style="color:#e6db74">&#34;中立&#34;</span>,<span style="color:#66d9ef">nil</span>)<span style="color:#75715e">--设置中立按钮</span>
+
+.setNegativeButton(<span style="color:#e6db74">&#34;否认&#34;</span>,<span style="color:#66d9ef">nil</span>)<span style="color:#75715e">--设置否认按钮</span>
+
+<span style="color:#75715e">--普通对话框</span>
+
+AlertDialog.Builder(this)
+
+.setTitle(<span style="color:#e6db74">&#34;标题&#34;</span>)
+
+.setMessage(<span style="color:#e6db74">&#34;消息&#34;</span>)
+
+.setPositiveButton(<span style="color:#e6db74">&#34;积极&#34;</span>,{onClick<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(v) print<span style="color:#e6db74">&#34;点击了积极按钮&#34;</span><span style="color:#66d9ef">end</span>})
+
+.setNeutralButton(<span style="color:#e6db74">&#34;中立&#34;</span>,<span style="color:#66d9ef">nil</span>)
+
+.setNegativeButton(<span style="color:#e6db74">&#34;否认&#34;</span>,<span style="color:#66d9ef">nil</span>)
+
+.show()
+
+<span style="color:#75715e">--输入对话框</span>
+
+InputLayout<span style="color:#f92672">=</span>{
+
+LinearLayout;
+
+orientation<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;vertical&#34;</span>;
+
+Focusable<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>,
+
+FocusableInTouchMode<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>,
+
+{
+
+TextView;
+
+id<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Prompt&#34;</span>,
+
+textSize<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;15sp&#34;</span>,
+
+layout_marginTop<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;10dp&#34;</span>;
+
+layout_marginLeft<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;3dp&#34;</span>,
+
+layout_width<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;80%w&#34;</span>;
+
+layout_gravity<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;center&#34;</span>,
+
+text<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;输入:&#34;</span>;
+
+};
+
+{
+
+EditText;
+
+hint<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;输入&#34;</span>;
+
+layout_marginTop<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;5dp&#34;</span>;
+
+layout_width<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;80%w&#34;</span>;
+
+layout_gravity<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;center&#34;</span>,
+
+id<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;edit&#34;</span>;
+
+};
+
+};
+
+AlertDialog.Builder(this)
+
+.setTitle(<span style="color:#e6db74">&#34;标题&#34;</span>)
+
+.setView(loadlayout(InputLayout))
+
+.setPositiveButton(<span style="color:#e6db74">&#34;确定&#34;</span>,{onClick<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(v) print(edit.Text)<span style="color:#66d9ef">end</span>})
+
+.setNegativeButton(<span style="color:#e6db74">&#34;取消&#34;</span>,<span style="color:#66d9ef">nil</span>)
+
+.show()
+
+import <span style="color:#e6db74">&#34;android.view.View$OnFocusChangeListener&#34;</span>
+
+edit.setOnFocusChangeListener(OnFocusChangeListener{
+
+onFocusChange<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(v,hasFocus)
+
+<span style="color:#66d9ef">if</span> hasFocus <span style="color:#66d9ef">then</span>
+
+Prompt.setTextColor(<span style="color:#ae81ff">0xFD009688</span>)
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">end</span>})
+
+<span style="color:#75715e">--下载文件对话框</span>
+
+Download_layout<span style="color:#f92672">=</span>{
+
+LinearLayout;
+
+orientation<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;vertical&#34;</span>;
+
+id<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Download_father_layout&#34;</span>,
+
+{
+
+TextView;
+
+id<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;linkhint&#34;</span>,
+
+layout_marginTop<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;10dp&#34;</span>;
+
+text<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;下载链接&#34;</span>,
+
+layout_width<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;80%w&#34;</span>;
+
+textColor<span style="color:#f92672">=</span>WidgetColors,
+
+layout_gravity<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;center&#34;</span>;
+
+};
+
+{
+
+EditText;
+
+id<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;linkedit&#34;</span>,
+
+layout_width<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;80%w&#34;</span>;
+
+layout_gravity<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;center&#34;</span>;
+
+};
+
+{
+
+TextView;
+
+id<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;pathhint&#34;</span>,
+
+text<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;下载路径&#34;</span>,
+
+layout_width<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;80%w&#34;</span>;
+
+textColor<span style="color:#f92672">=</span>WidgetColors,
+
+layout_marginTop<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;10dp&#34;</span>;
+
+layout_gravity<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;center&#34;</span>;
+
+};
+
+{
+
+EditText;
+
+id<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;pathedit&#34;</span>,
+
+layout_width<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;80%w&#34;</span>;
+
+layout_gravity<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;center&#34;</span>;
+
+};
+
+};
+
+AlertDialog.Builder(this)
+
+.setTitle(<span style="color:#e6db74">&#34;下载文件&#34;</span>)
+
+.setView(loadlayout(Download_layout))
+
+.setPositiveButton(<span style="color:#e6db74">&#34;下载&#34;</span>,{onClick<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(v)
+
+<span style="color:#66d9ef">end</span>})
+
+.setNegativeButton(<span style="color:#e6db74">&#34;取消&#34;</span>,<span style="color:#66d9ef">nil</span>)
+
+.show()
+
+<span style="color:#75715e">--列表对话框</span>
+
+items<span style="color:#f92672">=</span>{}
+
+<span style="color:#66d9ef">for</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">5</span> <span style="color:#66d9ef">do</span>
+
+table.insert(items,<span style="color:#e6db74">&#34;项目&#34;</span><span style="color:#f92672">..</span>tostring(i))
+
+<span style="color:#66d9ef">end</span>
+
+AlertDialog.Builder(this)
+
+.setTitle(<span style="color:#e6db74">&#34;列表对话框&#34;</span>)
+
+.setItems(items,{onClick<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(l,v) print(items[v<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>])<span style="color:#66d9ef">end</span>})
+
+.show()
+
+<span style="color:#75715e">--单选对话框</span>
+
+<span style="color:#960050;background-color:#1e0010">单选列表</span><span style="color:#f92672">=</span>{}
+
+<span style="color:#66d9ef">for</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">5</span> <span style="color:#66d9ef">do</span>
+
+table.insert(<span style="color:#960050;background-color:#1e0010">单选列表</span>,<span style="color:#e6db74">&#34;单选项目&#34;</span><span style="color:#f92672">..</span>tostring(i))
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">local</span> <span style="color:#960050;background-color:#1e0010">单选对话框</span><span style="color:#f92672">=</span>AlertDialog.Builder(this)
+
+.setTitle(<span style="color:#e6db74">&#34;列表对话框&#34;</span>)
+
+.setSingleChoiceItems(<span style="color:#960050;background-color:#1e0010">单选列表</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,{onClick<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(v,p)print(<span style="color:#960050;background-color:#1e0010">单选列表</span>[p<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>])<span style="color:#66d9ef">end</span>})
+
+<span style="color:#960050;background-color:#1e0010">单选对话框</span>.show();
+
+<span style="color:#75715e">--多选对话框</span>
+
+items<span style="color:#f92672">=</span>{}
+
+<span style="color:#66d9ef">for</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">5</span> <span style="color:#66d9ef">do</span>
+
+table.insert(items,<span style="color:#e6db74">&#34;多选项目&#34;</span><span style="color:#f92672">..</span>tostring(i))
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#960050;background-color:#1e0010">多选对话框</span><span style="color:#f92672">=</span>AlertDialog.Builder(this)
+
+.setTitle(<span style="color:#e6db74">&#34;多选框&#34;</span>)
+
+.setMultiChoiceItems(items, <span style="color:#66d9ef">nil</span>,{ onClick<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(v,p)print(items[p<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>])<span style="color:#66d9ef">end</span>})
+
+<span style="color:#960050;background-color:#1e0010">多选对话框</span>.show();
+</code></pre></div><h2 id="progressdialog进度对话框">
+  ProgressDialog(进度对话框)
+  <a class="anchor" href="#progressdialog%e8%bf%9b%e5%ba%a6%e5%af%b9%e8%af%9d%e6%a1%86">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#75715e">--ProgressDialog__进度条对话框</span>
+
+dialog <span style="color:#f92672">=</span> ProgressDialog.show(this, <span style="color:#e6db74">&#34;提示&#34;</span>, <span style="color:#e6db74">&#34;正在登陆中&#34;</span>).hide()
+
+<span style="color:#75715e">--最简单便捷的方式</span>
+
+dialog2 <span style="color:#f92672">=</span> ProgressDialog.show(this, <span style="color:#e6db74">&#34;提示&#34;</span>, <span style="color:#e6db74">&#34;正在登陆中&#34;</span>, <span style="color:#66d9ef">false</span>).hide()
+
+<span style="color:#75715e">--最后一个boolean设置是否是不明确的状态</span>
+
+dialog3 <span style="color:#f92672">=</span> ProgressDialog.show(this, <span style="color:#e6db74">&#34;提示&#34;</span>, <span style="color:#e6db74">&#34;正在登陆中&#34;</span>,<span style="color:#66d9ef">false</span>, <span style="color:#66d9ef">true</span>).hide()
+
+<span style="color:#75715e">--最后一个boolean设置可以不可以点击取消</span>
+
+dialog4 <span style="color:#f92672">=</span> ProgressDialog.show(this, <span style="color:#e6db74">&#34;提示&#34;</span>, <span style="color:#e6db74">&#34;正在登陆中&#34;</span>,<span style="color:#66d9ef">false</span>, <span style="color:#66d9ef">true</span>, DialogInterface.OnCancelListener{
+
+onCancel<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>()
+
+print(<span style="color:#e6db74">&#34;对话框取消&#34;</span>)
+
+<span style="color:#66d9ef">end</span>
+
+}).hide()
+
+<span style="color:#75715e">--最后一个参数监听对话框取消，并执行事件</span>
+
+<span style="color:#75715e">--圆形旋转样式</span>
+
+dialog5<span style="color:#f92672">=</span> ProgressDialog(this)
+
+dialog5.setProgressStyle(ProgressDialog.STYLE_SPINNER)
+
+dialog5.setTitle(<span style="color:#e6db74">&#34;Loading...&#34;</span>)
+
+<span style="color:#75715e">--设置进度条的形式为圆形转动的进度条</span>
+
+dialog5.setMessage(<span style="color:#e6db74">&#34;ProgressDialog&#34;</span>)
+
+dialog5.setCancelable(<span style="color:#66d9ef">true</span>)<span style="color:#75715e">--设置是否可以通过点击Back键取消</span>
+
+dialog5.setCanceledOnTouchOutside(<span style="color:#66d9ef">false</span>)<span style="color:#75715e">--设置在点击Dialog外是否取消Dialog进度条</span>
+
+dialog5.setOnCancelListener{
+
+onCancel<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(l)
+
+print(<span style="color:#e6db74">&#34;取消Dialog5&#34;</span>)
+
+<span style="color:#66d9ef">end</span>}
+
+<span style="color:#75715e">--取消对话框监听事件</span>
+
+dialog5.show().hide()
+
+<span style="color:#75715e">--水平样式</span>
+
+dialog6<span style="color:#f92672">=</span> ProgressDialog(this)
+
+dialog6.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+
+<span style="color:#75715e">--设置进度条的形式为水平进度条</span>
+
+dialog6.setTitle(<span style="color:#e6db74">&#34;ProgressDialog_HORIZONTAL&#34;</span>)
+
+dialog6.setCancelable(<span style="color:#66d9ef">true</span>)<span style="color:#75715e">--设置是否可以通过点击Back键取消</span>
+
+dialog6.setCanceledOnTouchOutside(<span style="color:#66d9ef">false</span>)<span style="color:#75715e">--设置在点击Dialog外是否取消Dialog进度条</span>
+
+dialog6.setOnCancelListener{
+
+onCancel<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(l)
+
+print(<span style="color:#e6db74">&#34;取消Dialog6&#34;</span>)
+
+<span style="color:#66d9ef">end</span>}
+
+<span style="color:#75715e">--取消对话框监听事件</span>
+
+dialog6.setMax(<span style="color:#ae81ff">100</span>)
+
+<span style="color:#75715e">--设置最大进度值</span>
+
+dialog6.show().hide()
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">增加</span>(i)
+
+dialog6.incrementProgressBy(<span style="color:#ae81ff">10</span>)
+
+dialog6.incrementSecondaryProgressBy(<span style="color:#ae81ff">10</span>)
+
+<span style="color:#66d9ef">if</span> i<span style="color:#f92672">==</span><span style="color:#e6db74">&#34;10&#34;</span> <span style="color:#66d9ef">then</span>
+
+dialog6.dismiss()
+
+print(<span style="color:#e6db74">&#34;加载完成&#34;</span>)
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#75715e">--当进度走完时销毁对话框</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">加载</span>()
+
+require <span style="color:#e6db74">&#34;import&#34;</span>
+
+<span style="color:#66d9ef">for</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">10</span> <span style="color:#66d9ef">do</span>
+
+Thread.sleep(<span style="color:#ae81ff">300</span>)
+
+call(<span style="color:#e6db74">&#34;增加&#34;</span>,tostring(i))
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#75715e">--thread(加载)</span>
+</code></pre></div><h2 id="inputmethodmanager输入法管理器">
+  InputMethodManager(输入法管理器)
+  <a class="anchor" href="#inputmethodmanager%e8%be%93%e5%85%a5%e6%b3%95%e7%ae%a1%e7%90%86%e5%99%a8">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#960050;background-color:#1e0010">在</span>Android的开发中<span style="color:#960050;background-color:#1e0010">，有时候会遇到软键盘弹出时挡住输入框的情况。</span>
+
+<span style="color:#960050;background-color:#1e0010">这时候可以设置下软键盘的模式就可以了。</span>
+
+activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE<span style="color:#f92672">|</span>WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN)
+
+<span style="color:#960050;background-color:#1e0010">有时候需要软键盘不要把我们的布局整体推上去，这时候可以这样：</span>
+
+activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
+
+<span style="color:#960050;background-color:#1e0010">模式常量：</span>
+
+<span style="color:#960050;background-color:#1e0010">软输入区域是否可见。</span>
+
+SOFT_INPUT_MASK_STATE <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x0f</span>
+
+<span style="color:#960050;background-color:#1e0010">未指定状态。</span>
+
+SOFT_INPUT_STATE_UNSPECIFIED <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+
+<span style="color:#960050;background-color:#1e0010">不要修改软输入法区域的状态</span>
+
+SOFT_INPUT_STATE_UNCHANGED <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+
+<span style="color:#960050;background-color:#1e0010">隐藏输入法区域（当用户进入窗口时</span>
+
+SOFT_INPUT_STATE_HIDDEN <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
+
+<span style="color:#960050;background-color:#1e0010">当窗口获得焦点时，隐藏输入法区域</span>
+
+SOFT_INPUT_STATE_ALWAYS_HIDDEN <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>
+
+<span style="color:#960050;background-color:#1e0010">显示输入法区域（当用户进入窗口时）</span>
+
+SOFT_INPUT_STATE_VISIBLE <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>
+
+<span style="color:#960050;background-color:#1e0010">当窗口获得焦点时，显示输入法区域</span>
+
+SOFT_INPUT_STATE_ALWAYS_VISIBLE <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>
+
+<span style="color:#960050;background-color:#1e0010">窗口应当主动调整，以适应软输入窗口。</span>
+
+SOFT_INPUT_MASK_ADJUST <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+
+<span style="color:#960050;background-color:#1e0010">窗口应当主动调整，以适应软输入窗口。</span>
+
+SOFT_INPUT_MASK_ADJUST <span style="color:#f92672">=</span> <span style="color:#ae81ff">0xf0</span>
+
+<span style="color:#960050;background-color:#1e0010">未指定状态，系统将根据窗口内容尝试选择一个输入法样式。</span>
+
+SOFT_INPUT_ADJUST_UNSPECIFIED <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x00</span>
+
+<span style="color:#960050;background-color:#1e0010">当输入法显示时，允许窗口重新计算尺寸，使内容不被输入法所覆盖。</span>
+
+<span style="color:#960050;background-color:#1e0010">不可与</span>SOFT_INPUT_ADJUSP_PAN混合使用<span style="color:#960050;background-color:#1e0010">；如果两个都没有设置，系统将根据窗口内容自动设置一个选项。</span>
+
+SOFT_INPUT_ADJUST_RESIZE <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x10</span>
+
+<span style="color:#960050;background-color:#1e0010">输入法显示时平移窗口。它不需要处理尺寸变化，框架能够移动窗口以确保输入焦点可见。</span>
+
+<span style="color:#960050;background-color:#1e0010">不可与</span>SOFT_INPUT_ADJUST_RESIZE混合使用<span style="color:#960050;background-color:#1e0010">；如果两个都没有设置，系统将根据窗口内容自动设置一个选项。</span>
+
+SOFT_INPUT_ADJUST_PAN <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x20</span>
+
+<span style="color:#960050;background-color:#1e0010">当用户转至此窗口时，由系统自动设置，所以你不要设置它。</span>
+
+<span style="color:#960050;background-color:#1e0010">当窗口显示之后该标志自动清除。</span>
+
+SOFT_INPUT_IS_FORWARD_NAVIGATION <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x100</span>
+
+<span style="color:#960050;background-color:#1e0010">其它</span>Api参考:
+
+import <span style="color:#e6db74">&#34;android.view.inputmethod.InputMethodManager&#34;</span>
+
+<span style="color:#960050;background-color:#1e0010">调用显示系统默认的输入法</span>
+
+imm <span style="color:#f92672">=</span> activity.getSystemService(Context.INPUT_METHOD_SERVICE)
+
+imm.showSoftInput(m_receiverView(<span style="color:#960050;background-color:#1e0010">接受软键盘输入的视图</span>(View)),InputMethodManager.SHOW_FORCED(<span style="color:#960050;background-color:#1e0010">提供当前操作的标记，</span>SHOW_FORCED表示强制显示))
+
+<span style="color:#960050;background-color:#1e0010">如果输入法关闭则打开，如果输入法打开则关闭</span>
+
+imm <span style="color:#f92672">=</span> activity.getSystemService(Context.INPUT_METHOD_SERVICE)
+
+imm.toggleSoftInput(<span style="color:#ae81ff">0</span>,InputMethodManager.HIDE_NOT_ALWAYS)
+
+<span style="color:#960050;background-color:#1e0010">获取软键盘是否打开</span>
+
+imm <span style="color:#f92672">=</span> activity.getSystemService(Context.INPUT_METHOD_SERVICE)
+
+isOpen<span style="color:#f92672">=</span>imm.isActive()
+
+<span style="color:#75715e">--返回一个布尔值</span>
+
+<span style="color:#960050;background-color:#1e0010">隐藏软键盘</span>
+
+activity.getSystemService(INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(WidgetSearchActivity.this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS)
+
+<span style="color:#960050;background-color:#1e0010">显示软键盘</span>
+
+activity.getSystemService(INPUT_METHOD_SERVICE)).showSoftInput(<span style="color:#960050;background-color:#1e0010">控件</span>ID, <span style="color:#ae81ff">0</span>)
+</code></pre></div><h2 id="popmenu弹出式菜单">
+  PopMenu(弹出式菜单)
+  <a class="anchor" href="#popmenu%e5%bc%b9%e5%87%ba%e5%bc%8f%e8%8f%9c%e5%8d%95">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+pop<span style="color:#f92672">=</span>PopupMenu(activity,view)
+
+menu<span style="color:#f92672">=</span>pop.Menu
+
+menu.add(<span style="color:#e6db74">&#34;项目1&#34;</span>).onMenuItemClick<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(a)
+
+<span style="color:#66d9ef">end</span>
+
+menu.add(<span style="color:#e6db74">&#34;项目2&#34;</span>).onMenuItemClick<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(a)
+
+<span style="color:#66d9ef">end</span>
+
+pop.show()<span style="color:#75715e">--显示</span>
+</code></pre></div><h2 id="popwindow弹出式窗口">
+  PopWindow(弹出式窗口)
+  <a class="anchor" href="#popwindow%e5%bc%b9%e5%87%ba%e5%bc%8f%e7%aa%97%e5%8f%a3">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+pop<span style="color:#f92672">=</span>PopWindow(activity)<span style="color:#75715e">--创建PopWindow</span>
+
+pop.setContentView(loadlayout(<span style="color:#960050;background-color:#1e0010">布局</span>))<span style="color:#75715e">--设置布局</span>
+
+pop.setWidth(activity.Width<span style="color:#f92672">*</span><span style="color:#ae81ff">0.3</span>)<span style="color:#75715e">--设置宽度</span>
+
+pop.setHeight(activity.Width<span style="color:#f92672">*</span><span style="color:#ae81ff">0.3</span>)<span style="color:#75715e">--设置高度</span>
+
+pop.setFocusable(<span style="color:#66d9ef">true</span>)<span style="color:#75715e">--设置可获得焦点</span>
+
+window.setTouchable(<span style="color:#66d9ef">true</span>)<span style="color:#75715e">--设置可触摸</span>
+
+<span style="color:#75715e">--设置点击外部区域是否可以消失</span>
+
+pop.setOutsideTouchable(<span style="color:#66d9ef">false</span>)
+
+<span style="color:#75715e">--显示</span>
+
+pop.showAtLocation(view,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>)
+</code></pre></div><h2 id="toast提示">
+  Toast(提示)
+  <a class="anchor" href="#toast%e6%8f%90%e7%a4%ba">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#75715e">--默认Toast</span>
+
+Toast.makeText(activity, <span style="color:#e6db74">&#34;Toast&#34;</span>,Toast.LENGTH_SHORT).show()
+
+<span style="color:#75715e">--自定义位置Toast</span>
+
+Toast.makeText(activity,<span style="color:#e6db74">&#34;自定义位置Toast&#34;</span>, Toast.LENGTH_LONG).setGravity(Gravity.CENTER, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>).show()
+
+<span style="color:#75715e">--带图片Toast</span>
+
+<span style="color:#960050;background-color:#1e0010">图片</span><span style="color:#f92672">=</span>loadbitmap(<span style="color:#e6db74">&#34;/sdcard/a.png&#34;</span>)
+
+toast <span style="color:#f92672">=</span> Toast.makeText(activity,<span style="color:#e6db74">&#34;带图片的Toast&#34;</span>, Toast.LENGTH_LONG)
+
+toastView <span style="color:#f92672">=</span> toast.getView()
+
+imageCodeProject <span style="color:#f92672">=</span> ImageView(activity)
+
+imageCodeProject.setImageBitmap(<span style="color:#960050;background-color:#1e0010">图片</span>)
+
+toastView.addView(imageCodeProject, <span style="color:#ae81ff">0</span>)
+
+toast.show()
+
+<span style="color:#75715e">--自定义布局Toast</span>
+
+<span style="color:#960050;background-color:#1e0010">布局</span><span style="color:#f92672">=</span>loadlayout(layout)
+
+<span style="color:#66d9ef">local</span> toast<span style="color:#f92672">=</span>Toast.makeText(activity,<span style="color:#e6db74">&#34;提示&#34;</span>,Toast.LENGTH_SHORT).setView(<span style="color:#960050;background-color:#1e0010">布局</span>).show()
+</code></pre></div><h2 id="控件常用属性">
+  控件常用属性
+  <a class="anchor" href="#%e6%8e%a7%e4%bb%b6%e5%b8%b8%e7%94%a8%e5%b1%9e%e6%80%a7">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#75715e">--EditText(输入框)</span>
+
+singleLine<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span><span style="color:#75715e">--设置单行输入</span>
+
+Error<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;错误的输入&#34;</span><span style="color:#75715e">--设置用户输入了错误的信息时的提醒</span>
+
+MaxLines<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span><span style="color:#75715e">--设置最大输入行数</span>
+
+MaxEms<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span><span style="color:#75715e">--设置每行最大宽度为五个字符的宽度</span>
+
+InputType<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;number&#34;</span><span style="color:#75715e">--设置只可输入数字</span>
+
+Hint<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;请输入&#34;</span><span style="color:#75715e">--设置编辑框为空时的提示文字</span>
+
+<span style="color:#75715e">--ImageView(图片视图)</span>
+
+src<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;a.png&#34;</span><span style="color:#75715e">--设置控件图片资源</span>
+
+scaleType<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;fitXY&#34;</span><span style="color:#75715e">--设置图片缩放显示</span>
+
+ColorFilter<span style="color:#f92672">=</span>Color.BLUE<span style="color:#75715e">--设置图片着色</span>
+
+<span style="color:#75715e">--ListView(列表视图)</span>
+
+Items<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#34;item1&#34;</span>,<span style="color:#e6db74">&#34;item2&#34;</span>,<span style="color:#e6db74">&#34;item3&#34;</span>}<span style="color:#75715e">--设置列表项目,但只能在布局表设置,动态添加项目请看Adapter View详解。</span>
+
+DividerHeight<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span><span style="color:#75715e">--设置无隔断线</span>
+
+fastScrollEnabled<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span><span style="color:#75715e">--设置是否显示快速滑块</span>
+
+layout_marginBottom<span style="color:#75715e">--离某元素底边缘的距离</span>
+
+layout_marginLeft<span style="color:#75715e">--离某元素左边缘的距离</span>
+
+layout_marginRight<span style="color:#75715e">--离某元素右边缘的距离</span>
+
+layout_marginTop<span style="color:#75715e">--离某元素上边缘的距离</span>
+
+gravity<span style="color:#75715e">--属性是对该view 内容的限定．比如一个button 上面的text. 你可以设置该text 在view的靠左，靠右等位置．以button为例，gravity=&#34;right&#34;则button上面的文字靠右</span>
+
+layout_gravity<span style="color:#75715e">--是用来设置该view相对与起父view 的位置．比如一个button 在linearlayout里，你想把该button放在靠左、靠右等位置就可以通过该属性设置．以button为例，layout_gravity=&#34;right&#34;则button靠右</span>
+
+scaleType
+
+<span style="color:#75715e">--[[是控制图片如何resized/moved来匹对ImageView的size。ImageView.ScaleType / scaleType值的意义区别：
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">CENTER /center 按图片的原来size居中显示，当图片长/宽超过View的长/宽，则截取图片的居中部分显示
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">CENTER_CROP / centerCrop 按比例扩大图片的size居中显示，使得图片长(宽)等于或大于View的长(宽)
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">CENTER_INSIDE / centerInside 将图片的内容完整居中显示，通过按比例缩小或原来的size使得图片长/宽等于或小于View的长/宽
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">FIT_CENTER / fitCenter 把图片按比例扩大/缩小到View的宽度，居中显示
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">FIT_END / fitEnd 把图片按比例扩大/缩小到View的宽度，显示在View的下部分位置
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">FIT_START / fitStart 把图片按比例扩大/缩小到View的宽度，显示在View的上部分位置
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">FIT_XY / fitXY 把图片不按比例扩大/缩小到View的大小显示
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">MATRIX / matrix 用矩阵来绘制，动态缩小放大图片来显示。
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">]]</span>
+
+id<span style="color:#75715e">--为控件指定相应的ID</span>
+
+text<span style="color:#75715e">--指定控件当中显示的文字</span>
+
+textSize<span style="color:#75715e">--指定控件当中字体的大小</span>
+
+background<span style="color:#75715e">--指定该控件所使用的背景色</span>
+
+width<span style="color:#75715e">--指定控件的宽度</span>
+
+height<span style="color:#75715e">--指定控件的高度</span>
+
+layout_width<span style="color:#75715e">--指定Container组件的宽度</span>
+
+layout_height<span style="color:#75715e">--指定Container组件的高度</span>
+
+layout_weight<span style="color:#75715e">--View中很重要的属性，按比例划分空间</span>
+
+padding<span style="color:#75715e">--指定控件的内边距，也就是说控件当中的内容</span>
+
+sigleLine<span style="color:#75715e">--如果设置为真的话，则控件的内容在同一行中进行显示</span>
+</code></pre></div><h2 id="关于侧滑">
+  关于侧滑
+  <a class="anchor" href="#%e5%85%b3%e4%ba%8e%e4%be%a7%e6%bb%91">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#75715e">--侧滑布局是 DrawerLayout;</span>
+
+<span style="color:#75715e">--关闭侧滑</span>
+
+ID.closeDrawer(<span style="color:#ae81ff">3</span>)
+
+<span style="color:#75715e">--打开侧滑</span>
+
+ID.openDrawer(<span style="color:#ae81ff">3</span>)
+</code></pre></div><h2 id="关于输入法影响布局的问题">
+  关于输入法影响布局的问题
+  <a class="anchor" href="#%e5%85%b3%e4%ba%8e%e8%be%93%e5%85%a5%e6%b3%95%e5%bd%b1%e5%93%8d%e5%b8%83%e5%b1%80%e7%9a%84%e9%97%ae%e9%a2%98">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#75715e">--使弹出的输入法不影响布局</span>
+
+activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+
+<span style="color:#75715e">--使弹出的输入法影响布局</span>
+
+activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+</code></pre></div><h2 id="布局效果实现">
+  布局效果实现
+  <a class="anchor" href="#%e5%b8%83%e5%b1%80%e6%95%88%e6%9e%9c%e5%ae%9e%e7%8e%b0">#</a>
+</h2>
+<hr>
+<h2 id="textview设置字体样式">
+  TextView设置字体样式
+  <a class="anchor" href="#textview%e8%ae%be%e7%bd%ae%e5%ad%97%e4%bd%93%e6%a0%b7%e5%bc%8f">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#75715e">--首先要导入包</span>
+
+import <span style="color:#e6db74">&#34;android.graphics.*&#34;</span>
+
+<span style="color:#75715e">--设置中划线</span>
+
+<span style="color:#960050;background-color:#1e0010">控件</span>id.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG)
+
+<span style="color:#75715e">--下划线</span>
+
+<span style="color:#960050;background-color:#1e0010">控件</span>id.getPaint().setFlags(Paint. UNDERLINE_TEXT_FLAG )
+
+<span style="color:#75715e">--加粗</span>
+
+<span style="color:#960050;background-color:#1e0010">控件</span>id.getPaint().setFakeBoldText(<span style="color:#66d9ef">true</span>)
+
+<span style="color:#75715e">--斜体</span>
+
+<span style="color:#960050;background-color:#1e0010">控件</span>id.getPaint().setTextSkewX(<span style="color:#ae81ff">0.2</span>)
+
+<span style="color:#75715e">--设置TypeFace</span>
+
+import <span style="color:#e6db74">&#34;android.graphics.Typeface&#34;</span>
+
+id.getPaint().setTypeface(<span style="color:#960050;background-color:#1e0010">字体</span>)
+
+<span style="color:#75715e">--字体可以为以下</span>
+
+Typeface.DEFAULT <span style="color:#75715e">--默认字体</span>
+
+Typeface.DEFAULT_BOLD <span style="color:#75715e">--加粗字体</span>
+
+Typeface.MONOSPACE <span style="color:#75715e">--monospace字体</span>
+
+Typeface.SANS_SERIF <span style="color:#75715e">--sans字体</span>
+
+Typeface.SERIF <span style="color:#75715e">--serif字体</span>
+</code></pre></div><h2 id="布局设置点击效果">
+  布局设置点击效果
+  <a class="anchor" href="#%e5%b8%83%e5%b1%80%e8%ae%be%e7%bd%ae%e7%82%b9%e5%87%bb%e6%95%88%e6%9e%9c">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#75715e">--5.0或以上可以实现点击水波纹效果</span>
+
+<span style="color:#75715e">--在布局加入：</span>
+
+style<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;?android:attr/buttonBarButtonStyle&#34;</span>;
+</code></pre></div><h2 id="图片着色">
+  图片着色
+  <a class="anchor" href="#%e5%9b%be%e7%89%87%e7%9d%80%e8%89%b2">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#75715e">--代码中设置</span>
+
+ID.setColorFilter(<span style="color:#ae81ff">0xffff0000</span>)
+
+<span style="color:#75715e">--布局表中设置</span>
+
+ColorFilter<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#ffff0000&#34;</span><span style="color:#960050;background-color:#1e0010">；</span>
+</code></pre></div><h2 id="沉浸状态栏">
+  沉浸状态栏
+  <a class="anchor" href="#%e6%b2%89%e6%b5%b8%e7%8a%b6%e6%80%81%e6%a0%8f">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#75715e">--这个需要系统SDK21以上才能用</span>
+
+<span style="color:#66d9ef">if</span> Build.VERSION.SDK_INT <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">21</span> <span style="color:#66d9ef">then</span>
+
+activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS).setStatusBarColor(<span style="color:#ae81ff">0xff4285f4</span>);
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#75715e">--这个需要系统SDK19以上才能用</span>
+
+<span style="color:#66d9ef">if</span> Build.VERSION.SDK_INT <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">19</span> <span style="color:#66d9ef">then</span>
+
+activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+<span style="color:#66d9ef">end</span>
+</code></pre></div><h2 id="drawable着色">
+  Drawable着色
+  <a class="anchor" href="#drawable%e7%9d%80%e8%89%b2">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">ToColor</span>(path,color)
+
+<span style="color:#66d9ef">local</span> aa<span style="color:#f92672">=</span>BitmapDrawable(loadbitmap(tostring(path)))
+
+aa.setColorFilter(PorterDuffColorFilter(color,PorterDuff.Mode.SRC_ATOP))
+
+<span style="color:#66d9ef">return</span> aa
+
+<span style="color:#66d9ef">end</span>
+</code></pre></div><h2 id="设置textview字体风格">
+  设置TextView字体风格
+  <a class="anchor" href="#%e8%ae%be%e7%bd%aetextview%e5%ad%97%e4%bd%93%e9%a3%8e%e6%a0%bc">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+import <span style="color:#e6db74">&#34;android.graphics.Paint&#34;</span>
+
+<span style="color:#75715e">--设置中划线</span>
+
+id.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG)
+
+<span style="color:#75715e">--设置下划线</span>
+
+id.getPaint().setFlags(Paint. UNDERLINE_TEXT_FLAG )
+
+<span style="color:#75715e">--设置加粗</span>
+
+id.getPaint().setFakeBoldText(<span style="color:#66d9ef">true</span>)
+
+<span style="color:#75715e">--设置斜体</span>
+
+id.getPaint().setTextSkewX(<span style="color:#ae81ff">0.2</span>)
+
+<span style="color:#75715e">--设置TypeFace</span>
+
+import <span style="color:#e6db74">&#34;android.graphics.Typeface&#34;</span>
+
+id.getPaint().setTypeface()
+
+<span style="color:#75715e">--参数列表</span>
+
+Typeface.DEFAULT <span style="color:#960050;background-color:#1e0010">默认字体</span>
+
+Typeface.DEFAULT_BOLD <span style="color:#960050;background-color:#1e0010">加粗字体</span>
+
+Typeface.MONOSPACE monospace字体
+
+Typeface.SANS_SERIF sans字体
+
+Typeface.SERIF serif字体
+</code></pre></div><h2 id="修改对话框按钮颜色">
+  修改对话框按钮颜色
+  <a class="anchor" href="#%e4%bf%ae%e6%94%b9%e5%af%b9%e8%af%9d%e6%a1%86%e6%8c%89%e9%92%ae%e9%a2%9c%e8%89%b2">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">DialogButtonFilter</span>(dialog,button,WidgetColor)
+
+<span style="color:#66d9ef">if</span> Build.VERSION.SDK_INT <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">21</span> <span style="color:#66d9ef">then</span>
+
+import <span style="color:#e6db74">&#34;android.graphics.PorterDuffColorFilter&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.graphics.PorterDuff&#34;</span>
+
+<span style="color:#66d9ef">if</span> button<span style="color:#f92672">==</span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">then</span>
+
+dialog.getButton(dialog.BUTTON_POSITIVE).setTextColor(WidgetColor)
+
+<span style="color:#66d9ef">elseif</span> button<span style="color:#f92672">==</span><span style="color:#ae81ff">2</span> <span style="color:#66d9ef">then</span>
+
+dialog.getButton(dialog.BUTTON_NEGATIVE).setTextColor(WidgetColor)
+
+<span style="color:#66d9ef">elseif</span> button<span style="color:#f92672">==</span><span style="color:#ae81ff">3</span> <span style="color:#66d9ef">then</span>
+
+dialog.getButton(dialog.BUTTON_NEUTRAL).setTextColor(WidgetColor)
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#75715e">--第一个参数为对话框的变量</span>
+
+<span style="color:#75715e">--第二个参数为1时，则修改POSITIVE按钮颜色,为二则修改NEGATIVE按钮颜色,为三则修改NEUTRAL按钮颜色</span>
+
+<span style="color:#75715e">--第三个参数为要修改成的颜色</span>
+</code></pre></div><h2 id="控件颜色修改">
+  控件颜色修改
+  <a class="anchor" href="#%e6%8e%a7%e4%bb%b6%e9%a2%9c%e8%89%b2%e4%bf%ae%e6%94%b9">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+import <span style="color:#e6db74">&#34;android.graphics.PorterDuffColorFilter&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.graphics.PorterDuff&#34;</span>
+
+<span style="color:#75715e">--修改按钮颜色</span>
+
+button.getBackground().setColorFilter(PorterDuffColorFilter(<span style="color:#ae81ff">0xFFFB7299</span>,PorterDuff.Mode.SRC_ATOP))
+
+<span style="color:#75715e">--修改编辑框颜色</span>
+
+edittext.getBackground().setColorFilter(PorterDuffColorFilter(<span style="color:#ae81ff">0xFFFB7299</span>,PorterDuff.Mode.SRC_ATOP));
+
+<span style="color:#75715e">--修改Switch颜色</span>
+
+switch.ThumbDrawable.setColorFilter(PorterDuffColorFilter(<span style="color:#ae81ff">0xFFFB7299</span>,PorterDuff.Mode.SRC_ATOP));
+
+switch.TrackDrawable.setColorFilter(PorterDuffColorFilter(<span style="color:#ae81ff">0xFFFB7299</span>,PorterDuff.Mode.SRC_ATOP))
+
+<span style="color:#75715e">--修改ProgressBar颜色</span>
+
+progressbar.IndeterminateDrawable.setColorFilter(PorterDuffColorFilter(<span style="color:#ae81ff">0xFFFB7299</span>,PorterDuff.Mode.SRC_ATOP))
+
+<span style="color:#75715e">--修改SeekBar滑条颜色</span>
+
+seekbar.ProgressDrawable.setColorFilter(PorterDuffColorFilter(<span style="color:#ae81ff">0xFFFB7299</span>,PorterDuff.Mode.SRC_ATOP))
+
+<span style="color:#75715e">--修改SeekBar滑块颜色</span>
+
+seekbar.Thumb.setColorFilter(PorterDuffColorFilter(<span style="color:#ae81ff">0xFFFB7299</span>,PorterDuff.Mode.SRC_ATOP))
+</code></pre></div><h2 id="控件圆角">
+  控件圆角
+  <a class="anchor" href="#%e6%8e%a7%e4%bb%b6%e5%9c%86%e8%a7%92">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">CircleButton</span>(view,InsideColor,radiu)
+
+import <span style="color:#e6db74">&#34;android.graphics.drawable.GradientDrawable&#34;</span>
+
+drawable <span style="color:#f92672">=</span> GradientDrawable()
+
+drawable.setShape(GradientDrawable.RECTANGLE)
+
+drawable.setColor(InsideColor)
+
+drawable.setCornerRadii({radiu,radiu,radiu,radiu,radiu,radiu,radiu,radiu});
+
+view.setBackgroundDrawable(drawable)
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#960050;background-color:#1e0010">角度</span><span style="color:#f92672">=</span><span style="color:#ae81ff">50</span>
+
+<span style="color:#960050;background-color:#1e0010">控件</span>id<span style="color:#f92672">=</span>ed
+
+<span style="color:#960050;background-color:#1e0010">控件颜色</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0xFF09639C</span>
+
+CircleButton(<span style="color:#960050;background-color:#1e0010">控件</span>id,<span style="color:#960050;background-color:#1e0010">控件颜色</span>,<span style="color:#960050;background-color:#1e0010">角度</span>)
+</code></pre></div><h2 id="控件背景渐变动画">
+  控件背景渐变动画
+  <a class="anchor" href="#%e6%8e%a7%e4%bb%b6%e8%83%8c%e6%99%af%e6%b8%90%e5%8f%98%e5%8a%a8%e7%94%bb">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+view<span style="color:#f92672">=</span><span style="color:#960050;background-color:#1e0010">控件</span>id
+
+color1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0xffFF8080</span>;
+
+color2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0xff8080FF</span>;
+
+color3 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0xff80ffff</span>;
+
+color4 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0xff80ff80</span>;
+
+import <span style="color:#e6db74">&#34;android.animation.ObjectAnimator&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.animation.ArgbEvaluator&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.animation.ValueAnimator&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.graphics.Color&#34;</span>
+
+colorAnim <span style="color:#f92672">=</span> ObjectAnimator.ofInt(view,<span style="color:#e6db74">&#34;backgroundColor&#34;</span>,{color1, color2, color3,color4})
+
+colorAnim.setDuration(<span style="color:#ae81ff">3000</span>)
+
+colorAnim.setEvaluator(ArgbEvaluator())
+
+colorAnim.setRepeatCount(ValueAnimator.INFINITE)
+
+colorAnim.setRepeatMode(ValueAnimator.REVERSE)
+
+colorAnim.start()
+</code></pre></div><h3 id="dppxsp之间的转换">
+  dp、px、sp之间的转换
+  <a class="anchor" href="#dppxsp%e4%b9%8b%e9%97%b4%e7%9a%84%e8%bd%ac%e6%8d%a2">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">dp2px</span>(dpValue)
+
+<span style="color:#66d9ef">local</span> scale <span style="color:#f92672">=</span> activity.getResources().getDisplayMetrics().scaledDensity
+
+<span style="color:#66d9ef">return</span> dpValue <span style="color:#f92672">*</span> scale <span style="color:#f92672">+</span> <span style="color:#ae81ff">0.5</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">px2dp</span>(pxValue)
+
+<span style="color:#66d9ef">local</span> scale <span style="color:#f92672">=</span> activity.getResources().getDisplayMetrics().scaledDensity
+
+<span style="color:#66d9ef">return</span> pxValue <span style="color:#f92672">/</span> scale <span style="color:#f92672">+</span> <span style="color:#ae81ff">0.5</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">px2sp</span>(pxValue)
+
+<span style="color:#66d9ef">local</span> scale <span style="color:#f92672">=</span> activity.getResources().getDisplayMetrics().scaledDensity;
+
+<span style="color:#66d9ef">return</span> pxValue <span style="color:#f92672">/</span> scale <span style="color:#f92672">+</span> <span style="color:#ae81ff">0.5</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">sp2px</span>(spValue)
+
+<span style="color:#66d9ef">local</span> scale <span style="color:#f92672">=</span> activity.getResources().getDisplayMetrics().scaledDensity
+
+<span style="color:#66d9ef">return</span> spValue <span style="color:#f92672">*</span> scale <span style="color:#f92672">+</span> <span style="color:#ae81ff">0.5</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#75715e">--调用例子</span>
+
+print(dp2px(<span style="color:#ae81ff">64</span>))
+
+</code></pre></div><h3 id="设置activity背景颜色">
+  设置activity背景颜色
+  <a class="anchor" href="#%e8%ae%be%e7%bd%aeactivity%e8%83%8c%e6%99%af%e9%a2%9c%e8%89%b2">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">activity背景颜色</span>(color)
+
+_window <span style="color:#f92672">=</span> activity.getWindow();
+
+_window.setBackgroundDrawable(ColorDrawable(color));
+
+_wlp <span style="color:#f92672">=</span> _window.getAttributes();
+
+_wlp.gravity <span style="color:#f92672">=</span> Gravity.BOTTOM;
+
+_wlp.width <span style="color:#f92672">=</span> WindowManager.LayoutParams.MATCH_PARENT;
+
+_wlp.height <span style="color:#f92672">=</span> WindowManager.LayoutParams.MATCH_PARENT;<span style="color:#75715e">--WRAP_CONTENT</span>
+
+_window.setAttributes(_wlp);
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#75715e">--该函数需设置布局后使用</span>
+
+<span style="color:#75715e">--调用例子</span>
+
+activity.setContentView(LinearLayout(activity))
+
+activity背景颜色(<span style="color:#ae81ff">0xff424242</span>)
+</code></pre></div><h3 id="控件点击波纹背景">
+  控件点击波纹背景
+  <a class="anchor" href="#%e6%8e%a7%e4%bb%b6%e7%82%b9%e5%87%bb%e6%b3%a2%e7%ba%b9%e8%83%8c%e6%99%af">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">import <span style="color:#e6db74">&#34;android.content.res.ColorStateList&#34;</span>
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">波纹</span>(id,lx,color)
+
+xpcall(<span style="color:#66d9ef">function</span>()
+
+ripple <span style="color:#f92672">=</span> activity.obtainStyledAttributes({android.R.attr.selectableItemBackgroundBorderless}).getResourceId(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>)
+
+ripples <span style="color:#f92672">=</span> activity.obtainStyledAttributes({android.R.attr.selectableItemBackground}).getResourceId(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>)
+
+<span style="color:#66d9ef">for</span> index,content <span style="color:#66d9ef">in</span> ipairs(id) <span style="color:#66d9ef">do</span>
+
+<span style="color:#66d9ef">if</span> lx<span style="color:#f92672">==</span><span style="color:#e6db74">&#34;圆&#34;</span> <span style="color:#66d9ef">then</span>
+
+content.setBackgroundDrawable(activity.Resources.getDrawable(ripple).setColor(ColorStateList(int[<span style="color:#ae81ff">0</span>].class{int{}},int{color})))
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">if</span> lx<span style="color:#f92672">==</span><span style="color:#e6db74">&#34;方&#34;</span> <span style="color:#66d9ef">then</span>
+
+content.setBackgroundDrawable(activity.Resources.getDrawable(ripples).setColor(ColorStateList(int[<span style="color:#ae81ff">0</span>].class{int{}},int{color})))
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">end</span>,<span style="color:#66d9ef">function</span>(e)<span style="color:#66d9ef">end</span>)
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#75715e">--[[
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">波纹(id,lx,color)
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">id：控件id,table
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">lx：波纹类型,圆或方,string
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">color 波纹颜色,number
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">安卓5及以上可用。
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">该代码需要MD主题。
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">]]</span>
+
+<span style="color:#75715e">--调用例子</span>
+
+layout<span style="color:#f92672">=</span>{
+
+LinearLayout;
+
+onClick<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>()print(<span style="color:#e6db74">&#34;MLua手册&#34;</span>)<span style="color:#66d9ef">end</span>;
+
+layout_width<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;-1&#34;</span>;
+
+layout_height<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;-1&#34;</span>;
+
+id<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;lay&#34;</span>;
+
+}
+
+activity.setContentView(loadlayout(layout))
+
+activity.setTheme(android.R.style.Theme_DeviceDefault_Light)
+
+<span style="color:#960050;background-color:#1e0010">波纹</span>({lay},<span style="color:#e6db74">&#34;圆&#34;</span>,<span style="color:#ae81ff">0x21000000</span>)
+
+</code></pre></div><h3 id="mlua手册底栏贝塞尔曲线">
+  MLua手册底栏贝塞尔曲线
+  <a class="anchor" href="#mlua%e6%89%8b%e5%86%8c%e5%ba%95%e6%a0%8f%e8%b4%9d%e5%a1%9e%e5%b0%94%e6%9b%b2%e7%ba%bf">#</a>
+</h3>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>代码详情</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+import <span style="color:#e6db74">&#34;com.androlua.LuaDrawable&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.graphics.Path&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.graphics.Paint&#34;</span>
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">dp2px</span>(dpValue)
+
+<span style="color:#66d9ef">local</span> scale <span style="color:#f92672">=</span> activity.getResources().getDisplayMetrics().scaledDensity
+
+<span style="color:#66d9ef">return</span> dpValue <span style="color:#f92672">*</span> scale <span style="color:#f92672">+</span> <span style="color:#ae81ff">0.5</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">px2dp</span>(pxValue)
+
+<span style="color:#66d9ef">local</span> scale <span style="color:#f92672">=</span> activity.getResources().getDisplayMetrics().scaledDensity
+
+<span style="color:#66d9ef">return</span> pxValue <span style="color:#f92672">/</span> scale <span style="color:#f92672">+</span> <span style="color:#ae81ff">0.5</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">px2sp</span>(pxValue)
+
+<span style="color:#66d9ef">local</span> scale <span style="color:#f92672">=</span> activity.getResources().getDisplayMetrics().scaledDensity;
+
+<span style="color:#66d9ef">return</span> pxValue <span style="color:#f92672">/</span> scale <span style="color:#f92672">+</span> <span style="color:#ae81ff">0.5</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">sp2px</span>(spValue)
+
+<span style="color:#66d9ef">local</span> scale <span style="color:#f92672">=</span> activity.getResources().getDisplayMetrics().scaledDensity
+
+<span style="color:#66d9ef">return</span> spValue <span style="color:#f92672">*</span> scale <span style="color:#f92672">+</span> <span style="color:#ae81ff">0.5</span>
+
+<span style="color:#66d9ef">end</span>
+
+layout<span style="color:#f92672">=</span>{
+
+RelativeLayout;
+
+layout_width<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;-1&#34;</span>;
+
+background<span style="color:#f92672">=</span>backgroundc;
+
+layout_height<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;-1&#34;</span>;
+
+{
+
+RelativeLayout,
+
+layout_width<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;-1&#34;</span>,
+
+layout_height<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;-1&#34;</span>,
+
+id<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;llb&#34;</span>,
+
+gravity<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;bottom&#34;</span>;
+
+{
+
+RelativeLayout,
+
+layout_width<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;fill&#34;</span>,
+
+layout_height<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;56dp&#34;</span>,
+
+clickable<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;true&#34;</span>,
+
+id<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;ll&#34;</span>,
+
+{
+
+LinearLayout;
+
+layout_width<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;-1&#34;</span>;
+
+layout_height<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;-1&#34;</span>;
+
+gravity<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;left|center&#34;</span>;
+
+paddingLeft<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;8dp&#34;</span>;
+
+paddingRight<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;8dp&#34;</span>;
+
+{
+
+LinearLayout;
+
+layout_height<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;-1&#34;</span>;
+
+layout_width<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;-2&#34;</span>;
+
+layout_weight<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;1&#34;</span>;
+
+};
+
+{
+
+TextView;
+
+layout_height<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;-1&#34;</span>;
+
+layout_width<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;56dp&#34;</span>;
+
+layout_marginRight<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;20dp&#34;</span>;
+
+layout_marginLeft<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;8dp&#34;</span>;
+
+<span style="color:#75715e">--background=grayc;</span>
+
+};
+
+};
+
+};
+
+},
+
+{
+
+LinearLayout;
+
+layout_width<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;-1&#34;</span>;
+
+layout_height<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;-1&#34;</span>;
+
+orientation<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;vertical&#34;</span>;
+
+gravity<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;right|bottom&#34;</span>;
+
+{
+
+CardView;
+
+layout_width<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;56dp&#34;</span>,
+
+layout_height<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;56dp&#34;</span>,
+
+radius<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;28dp&#34;</span>;
+
+layout_margin<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;28dp&#34;</span>;
+
+CardBackgroundColor<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;0xffffffff&#34;</span>;
+
+elevation<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;6dp&#34;</span>;
+
+alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>;
+
+};
+
+};
+
+}
+
+activity.setContentView(loadlayout(layout))
+
+myLuaDrawable<span style="color:#f92672">=</span>LuaDrawable(<span style="color:#66d9ef">function</span>(mCanvas,mPaint,mDrawable)
+
+mPaint.setColor(<span style="color:#ae81ff">0xffffffff</span>)
+
+mPaint.setAntiAlias(<span style="color:#66d9ef">true</span>)
+
+mPaint.setStrokeWidth(<span style="color:#ae81ff">20</span>)
+
+mPaint.setStyle(Paint.Style.FILL)
+
+mPaint.setStrokeCap(Paint.Cap.ROUND)
+
+w<span style="color:#f92672">=</span>mDrawable.getBounds().right
+
+h<span style="color:#f92672">=</span>mDrawable.getBounds().bottom
+
+mPath<span style="color:#f92672">=</span>Path()
+
+mPath.moveTo(w, h);
+
+mPath.lineTo(<span style="color:#ae81ff">0</span>, h);
+
+mPath.lineTo(<span style="color:#ae81ff">0</span>, h<span style="color:#f92672">-</span>dp2px(<span style="color:#ae81ff">56</span>));
+
+mPath.lineTo(w<span style="color:#f92672">-</span>dp2px(<span style="color:#ae81ff">56</span><span style="color:#f92672">+</span><span style="color:#ae81ff">16</span><span style="color:#f92672">+</span><span style="color:#ae81ff">16</span><span style="color:#f92672">+</span><span style="color:#ae81ff">8</span>), h<span style="color:#f92672">-</span>dp2px(<span style="color:#ae81ff">56</span>));
+
+mPath.rQuadTo(dp2px(<span style="color:#ae81ff">8</span>), dp2px(<span style="color:#ae81ff">0</span>),dp2px(<span style="color:#ae81ff">8</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>), dp2px(<span style="color:#ae81ff">8</span>))
+
+mPath.rCubicTo(dp2px(<span style="color:#ae81ff">8</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>), dp2px(<span style="color:#ae81ff">28</span><span style="color:#f92672">+</span><span style="color:#ae81ff">4</span>),dp2px(<span style="color:#ae81ff">56</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>), dp2px(<span style="color:#ae81ff">28</span><span style="color:#f92672">+</span><span style="color:#ae81ff">4</span>),dp2px(<span style="color:#ae81ff">56</span><span style="color:#f92672">+</span><span style="color:#ae81ff">8</span><span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>), dp2px(<span style="color:#ae81ff">0</span>))
+
+mPath.rQuadTo(dp2px(<span style="color:#ae81ff">1</span>), dp2px(<span style="color:#f92672">-</span><span style="color:#ae81ff">8</span>),dp2px(<span style="color:#ae81ff">8</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>), dp2px(<span style="color:#f92672">-</span><span style="color:#ae81ff">8</span>))
+
+mPath.rLineTo(w, <span style="color:#ae81ff">0</span>);
+
+mCanvas.drawColor(<span style="color:#ae81ff">0x00000000</span>)
+
+mCanvas.drawPath(mPath, mPaint);
+
+mPath.close();
+
+<span style="color:#66d9ef">end</span>)
+
+ll.background<span style="color:#f92672">=</span>myLuaDrawable
+
+myLuaDrawable<span style="color:#f92672">=</span>LuaDrawable(<span style="color:#66d9ef">function</span>(mCanvas,mPaint,mDrawable)
+
+mPaint.setColor(<span style="color:#ae81ff">0x21000000</span>)
+
+mPaint.setAntiAlias(<span style="color:#66d9ef">true</span>)
+
+mPaint.setStrokeWidth(dp2px(<span style="color:#ae81ff">4</span>))
+
+mPaint.setStyle(Paint.Style.FILL)
+
+mPaint.setStrokeCap(Paint.Cap.ROUND)
+
+w<span style="color:#f92672">=</span>mDrawable.getBounds().right
+
+h<span style="color:#f92672">=</span>mDrawable.getBounds().bottom
+
+mPath<span style="color:#f92672">=</span>Path()
+
+mPath.moveTo(w, h);
+
+mPath.lineTo(<span style="color:#ae81ff">0</span>, h);
+
+mPath.lineTo(<span style="color:#ae81ff">0</span>, h<span style="color:#f92672">-</span>dp2px(<span style="color:#ae81ff">56</span>));
+
+mPath.lineTo(w<span style="color:#f92672">-</span>dp2px(<span style="color:#ae81ff">56</span><span style="color:#f92672">+</span><span style="color:#ae81ff">16</span><span style="color:#f92672">+</span><span style="color:#ae81ff">16</span><span style="color:#f92672">+</span><span style="color:#ae81ff">8</span>), h<span style="color:#f92672">-</span>dp2px(<span style="color:#ae81ff">56</span>));
+
+mPath.rQuadTo(dp2px(<span style="color:#ae81ff">8</span>), dp2px(<span style="color:#ae81ff">0</span>),dp2px(<span style="color:#ae81ff">8</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>), dp2px(<span style="color:#ae81ff">8</span>))
+
+mPath.rCubicTo(dp2px(<span style="color:#ae81ff">8</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>), dp2px(<span style="color:#ae81ff">28</span><span style="color:#f92672">+</span><span style="color:#ae81ff">4</span>),dp2px(<span style="color:#ae81ff">56</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>), dp2px(<span style="color:#ae81ff">28</span><span style="color:#f92672">+</span><span style="color:#ae81ff">4</span>),dp2px(<span style="color:#ae81ff">56</span><span style="color:#f92672">+</span><span style="color:#ae81ff">8</span><span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>), dp2px(<span style="color:#ae81ff">0</span>))
+
+mPath.rQuadTo(dp2px(<span style="color:#ae81ff">1</span>), dp2px(<span style="color:#f92672">-</span><span style="color:#ae81ff">8</span>),dp2px(<span style="color:#ae81ff">8</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>), dp2px(<span style="color:#f92672">-</span><span style="color:#ae81ff">8</span>))
+
+mPath.rLineTo(w, <span style="color:#ae81ff">0</span>);
+
+mCanvas.drawColor(<span style="color:#ae81ff">0x00000000</span>)
+
+mPaint.setShadowLayer(dp2px(<span style="color:#ae81ff">1</span>), <span style="color:#ae81ff">0</span>, dp2px(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>), <span style="color:#ae81ff">0x70FFFFFF</span>);
+
+mCanvas.drawPath(mPath, mPaint);
+
+mPath.close();
+
+<span style="color:#66d9ef">end</span>)
+
+llb.background<span style="color:#f92672">=</span>myLuaDrawable
+</code></pre></div>
+    </div>
+  </label>
+</div>
+
+<h3 id="带颜色的字体">
+  带颜色的字体
+  <a class="anchor" href="#%e5%b8%a6%e9%a2%9c%e8%89%b2%e7%9a%84%e5%ad%97%e4%bd%93">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+import <span style="color:#e6db74">&#34;android.text.SpannableString&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.text.style.ForegroundColorSpan&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.text.Spannable&#34;</span>
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">颜色字体</span>(t,c)
+
+<span style="color:#66d9ef">local</span> sp <span style="color:#f92672">=</span> SpannableString(t)
+
+sp.setSpan(ForegroundColorSpan(c),<span style="color:#ae81ff">0</span>,<span style="color:#f92672">#</span>sp,Spannable.SPAN_EXCLUSIVE_INCLUSIVE)
+
+<span style="color:#66d9ef">return</span> sp
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#75715e">--调用示例</span>
+
+activity.setTitle(<span style="color:#960050;background-color:#1e0010">颜色字体</span>(<span style="color:#e6db74">&#34;MLua手册 qwq&#34;</span>,<span style="color:#ae81ff">0xff2196f3</span>))<span style="color:#75715e">--设置标题为0xff2196f3颜色的 MLua手册 qwq</span>
+
+</code></pre></div><h3 id="适配异形屏的全屏">
+  适配异形屏的全屏
+  <a class="anchor" href="#%e9%80%82%e9%85%8d%e5%bc%82%e5%bd%a2%e5%b1%8f%e7%9a%84%e5%85%a8%e5%b1%8f">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua"><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">全屏</span>()
+
+window <span style="color:#f92672">=</span> activity.getWindow();
+
+window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN<span style="color:#f92672">|</span>View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+
+window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+
+xpcall(<span style="color:#66d9ef">function</span>()
+
+lp <span style="color:#f92672">=</span> window.getAttributes();
+
+lp.layoutInDisplayCutoutMode <span style="color:#f92672">=</span> WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
+
+window.setAttributes(lp);
+
+<span style="color:#66d9ef">end</span>,
+
+<span style="color:#66d9ef">function</span>(e)
+
+<span style="color:#66d9ef">end</span>)
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#75715e">--使用该代码可能需要隐藏ActionBar</span>
+
+<span style="color:#75715e">--调用示例</span>
+
+<span style="color:#960050;background-color:#1e0010">全屏</span>()
+
+</code></pre></div><h2 id="图片处理">
+  图片处理
+  <a class="anchor" href="#%e5%9b%be%e7%89%87%e5%a4%84%e7%90%86">#</a>
+</h2>
+<hr>
+<h3 id="高斯模糊">
+  高斯模糊
+  <a class="anchor" href="#%e9%ab%98%e6%96%af%e6%a8%a1%e7%b3%8a">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">import <span style="color:#e6db74">&#34;android.renderscript.Element&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.renderscript.Allocation&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.renderscript.RenderScript&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.graphics.Bitmap&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.renderscript.ScriptIntrinsicBlur&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.graphics.Matrix&#34;</span>
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">高斯模糊</span>(id,tp,radius1,radius2)
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">blur</span>( context, bitmap, blurRadius)
+
+renderScript <span style="color:#f92672">=</span> RenderScript.create(context);
+
+blurScript <span style="color:#f92672">=</span> ScriptIntrinsicBlur.create(renderScript, Element.U8_4(renderScript));
+
+inAllocation <span style="color:#f92672">=</span> Allocation.createFromBitmap(renderScript, bitmap);
+
+outputBitmap <span style="color:#f92672">=</span> bitmap;
+
+outAllocation <span style="color:#f92672">=</span> Allocation.createTyped(renderScript, inAllocation.getType());
+
+blurScript.setRadius(blurRadius);
+
+blurScript.setInput(inAllocation);
+
+blurScript.forEach(outAllocation);
+
+outAllocation.copyTo(outputBitmap);
+
+inAllocation.destroy();
+
+outAllocation.destroy();
+
+renderScript.destroy();
+
+blurScript.destroy();
+
+<span style="color:#66d9ef">return</span> outputBitmap;
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">zoomBitmap</span>(bitmap,scale)
+
+w <span style="color:#f92672">=</span> bitmap.getWidth();
+
+h <span style="color:#f92672">=</span> bitmap.getHeight();
+
+matrix <span style="color:#f92672">=</span> Matrix();
+
+matrix.postScale(scale, scale);
+
+bitmap <span style="color:#f92672">=</span> Bitmap.createBitmap(bitmap, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, w, h, matrix, <span style="color:#66d9ef">true</span>);
+
+<span style="color:#66d9ef">return</span> bitmap;
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">blurAndZoom</span>(context,bitmap,blurRadius,scale)
+
+<span style="color:#66d9ef">return</span> zoomBitmap(blur(context,zoomBitmap(bitmap, <span style="color:#ae81ff">1</span> <span style="color:#f92672">/</span> scale), blurRadius), scale);
+
+<span style="color:#66d9ef">end</span>
+
+id.setImageBitmap(blurAndZoom(activity,tp,radius1,radius2))
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#75715e">--[[
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">高斯模糊(id,tp,radius1,radius2)
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">radius1 范围：1-25
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">radius2 范围：1-？(据图片而定太大报错)
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">]]</span>
+
+<span style="color:#75715e">--调用例子</span>
+
+img<span style="color:#f92672">=</span>ImageView(activity)
+
+activity.setContentView(img)
+
+<span style="color:#960050;background-color:#1e0010">高斯模糊</span>(img,loadbitmap(<span style="color:#e6db74">&#34;https://image.uisdc.com/wp-content/uploads/2019/06/uisdc-banner-20190614-2.jpg&#34;</span>),<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">2</span>)
+
+</code></pre></div><h3 id="圆形图片">
+  圆形图片
+  <a class="anchor" href="#%e5%9c%86%e5%bd%a2%e5%9b%be%e7%89%87">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua"><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">圆形图片</span>(bitmap)
+
+import <span style="color:#e6db74">&#34;android.graphics.PorterDuffXfermode&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.graphics.Paint&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.graphics.RectF&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.graphics.Bitmap&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.graphics.PorterDuff$Mode&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.graphics.Rect&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.graphics.Canvas&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.util.Config&#34;</span>
+
+width <span style="color:#f92672">=</span> bitmap.getWidth()
+
+output <span style="color:#f92672">=</span> Bitmap.createBitmap(width, bitmap.getHeight(),Bitmap.Config.ARGB_8888)
+
+canvas <span style="color:#f92672">=</span> Canvas(output);
+
+color <span style="color:#f92672">=</span> <span style="color:#ae81ff">0xff424242</span>;
+
+paint <span style="color:#f92672">=</span> Paint()
+
+rect <span style="color:#f92672">=</span> Rect(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, bitmap.getWidth(), bitmap.getHeight());
+
+rectF <span style="color:#f92672">=</span> RectF(rect);
+
+paint.setAntiAlias(<span style="color:#66d9ef">true</span>);
+
+canvas.drawARGB(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>);
+
+paint.setColor(color);
+
+canvas.drawRoundRect(rectF, width<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>, bitmap.getHeight()<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>, paint);
+
+paint.setXfermode(PorterDuffXfermode(Mode.SRC_IN));
+
+canvas.drawBitmap(bitmap, rect, rect, paint);
+
+<span style="color:#66d9ef">return</span> output;
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#75715e">--调用示例</span>
+
+img<span style="color:#f92672">=</span>ImageView(activity)
+
+activity.setContentView(img)
+
+img.setImageBitmap(<span style="color:#960050;background-color:#1e0010">圆形图片</span>(loadbitmap(<span style="color:#e6db74">&#34;https://api.yimian.xyz/img/?path=head/img_19_212x210_96_acg-head_normal.png&#34;</span>)))
+</code></pre></div><h3 id="获取控件图片">
+  获取控件图片
+  <a class="anchor" href="#%e8%8e%b7%e5%8f%96%e6%8e%a7%e4%bb%b6%e5%9b%be%e7%89%87">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">import <span style="color:#e6db74">&#34;android.graphics.Bitmap&#34;</span>
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">获取控件图片</span>(view)
+<span style="color:#66d9ef">local</span> linearParams <span style="color:#f92672">=</span> view.getLayoutParams()
+<span style="color:#66d9ef">local</span> vw<span style="color:#f92672">=</span>linearParams.width
+<span style="color:#66d9ef">local</span> linearParams <span style="color:#f92672">=</span> view.getLayoutParams()
+<span style="color:#66d9ef">local</span> vh<span style="color:#f92672">=</span>linearParams.height
+
+view.setDrawingCacheEnabled(<span style="color:#66d9ef">true</span>)
+view.layout(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,vw,vh)
+<span style="color:#66d9ef">return</span> Bitmap.createBitmap(view.getDrawingCache())
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#75715e">--调用示例</span>
+layout<span style="color:#f92672">=</span>{
+LinearLayout,
+layout_width<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;-1&#34;</span>,
+layout_height<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;-1&#34;</span>,
+orientation<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;vertical&#34;</span>;
+{
+TextView,
+textSize<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;14sp&#34;</span>;
+layout_width<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;56dp&#34;</span>,
+layout_height<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;42dp&#34;</span>,
+text<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;TextView1&#34;</span>,
+textColor<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#FFFFFFFF&#34;</span>;
+background<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#212121&#34;</span>,
+id<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;tv&#34;</span>;
+},
+{
+ImageView,
+layout_width<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;-1&#34;</span>,
+layout_height<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;-1&#34;</span>,
+id<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;img&#34;</span>;
+},
+}
+
+<span style="color:#75715e">--设置布局</span>
+activity.setContentView(loadlayout(layout))
+<span style="color:#75715e">--获取tv的图片设置给img</span>
+img.setImageBitmap(<span style="color:#960050;background-color:#1e0010">获取控件图片</span>(tv))
+
+</code></pre></div><h2 id="图片圆角">
+  图片圆角
+  <a class="anchor" href="#%e5%9b%be%e7%89%87%e5%9c%86%e8%a7%92">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">GetRoundedCornerBitmap</span>(bitmap,roundPx)
+
+import <span style="color:#e6db74">&#34;android.graphics.PorterDuffXfermode&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.graphics.Paint&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.graphics.RectF&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.graphics.Bitmap&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.graphics.PorterDuff$Mode&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.graphics.Rect&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.graphics.Canvas&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.util.Config&#34;</span>
+
+width <span style="color:#f92672">=</span> bitmap.getWidth()
+
+output <span style="color:#f92672">=</span> Bitmap.createBitmap(width, width,Bitmap.Config.ARGB_8888)
+
+canvas <span style="color:#f92672">=</span> Canvas(output);
+
+color <span style="color:#f92672">=</span> <span style="color:#ae81ff">0xff424242</span>;
+
+paint <span style="color:#f92672">=</span> Paint()
+
+rect <span style="color:#f92672">=</span> Rect(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, bitmap.getWidth(), bitmap.getHeight());
+
+rectF <span style="color:#f92672">=</span> RectF(rect);
+
+paint.setAntiAlias(<span style="color:#66d9ef">true</span>);
+
+canvas.drawARGB(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>);
+
+paint.setColor(color);
+
+canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
+
+paint.setXfermode(PorterDuffXfermode(Mode.SRC_IN));
+
+canvas.drawBitmap(bitmap, rect, rect, paint);
+
+<span style="color:#66d9ef">return</span> output;
+
+<span style="color:#66d9ef">end</span>
+
+import <span style="color:#e6db74">&#34;android.graphics.drawable.BitmapDrawable&#34;</span>
+
+<span style="color:#960050;background-color:#1e0010">圆角弧度</span><span style="color:#f92672">=</span><span style="color:#ae81ff">50</span>
+
+bitmap<span style="color:#f92672">=</span>loadbitmap(picturePath)
+
+RoundPic<span style="color:#f92672">=</span>GetRoundedCornerBitmap(bitmap)
+</code></pre></div><h2 id="缩放图片">
+  缩放图片
+  <a class="anchor" href="#%e7%bc%a9%e6%94%be%e5%9b%be%e7%89%87">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">rotateToFit</span>(bm,degrees)
+
+import <span style="color:#e6db74">&#34;android.graphics.Matrix&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.graphics.Bitmap&#34;</span>
+
+width <span style="color:#f92672">=</span> bm.getWidth()
+
+height <span style="color:#f92672">=</span> bm.getHeight()
+
+matrix <span style="color:#f92672">=</span> Matrix()
+
+matrix.postRotate(degrees)
+
+bmResult <span style="color:#f92672">=</span> Bitmap.createBitmap(bm, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, width, height, matrix, <span style="color:#66d9ef">true</span>)
+
+<span style="color:#66d9ef">return</span> bmResult
+
+<span style="color:#66d9ef">end</span>
+
+bm<span style="color:#f92672">=</span>loadbitmap(<span style="color:#960050;background-color:#1e0010">图片路径</span>)
+
+<span style="color:#960050;background-color:#1e0010">缩放级别</span><span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>
+
+rotateToFit(bm,degrees)
+
+<span style="color:#75715e">--非原创</span>
+</code></pre></div><h2 id="自定义布局对话框">
+  自定义布局对话框
+  <a class="anchor" href="#%e8%87%aa%e5%ae%9a%e4%b9%89%e5%b8%83%e5%b1%80%e5%af%b9%e8%af%9d%e6%a1%86">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#66d9ef">local</span> dl<span style="color:#f92672">=</span>AlertDialog.Builder(activity)
+
+.setTitle(<span style="color:#e6db74">&#34;自定义布局对话框&#34;</span>)
+
+.setView(loadlayout(layout))
+
+dl.show()
+</code></pre></div></article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#布局基础">布局基础</a></li>
+    <li><a href="#获取listview垂直坐标">获取ListView垂直坐标</a></li>
+    <li><a href="#设置控件图片">设置控件图片</a></li>
+    <li><a href="#获取控件宽高">获取控件宽高</a></li>
+    <li><a href="#隐藏滚动条">隐藏滚动条</a></li>
+    <li><a href="#禁用编辑框">禁用编辑框</a></li>
+    <li><a href="#标题栏返回按钮">标题栏返回按钮</a></li>
+    <li><a href="#列表长按事件">列表长按事件</a></li>
+    <li><a href="#列表点击事件">列表点击事件</a></li>
+    <li><a href="#隐藏标题栏">隐藏标题栏</a></li>
+    <li><a href="#设置控件大小">设置控件大小</a></li>
+    <li><a href="#载入窗口传参">载入窗口传参</a></li>
+    <li><a href="#edittext只能输数字">EditText只能输数字</a></li>
+    <li><a href="#窗口全屏">窗口全屏</a></li>
+    <li><a href="#关闭当前窗口">关闭当前窗口</a></li>
+    <li><a href="#textview文本可选择复制">TextView文本可选择复制</a></li>
+    <li><a href="#edittext文本被改变事件">EditText文本被改变事件</a></li>
+    <li><a href="#标题栏菜单按钮">标题栏菜单按钮</a></li>
+    <li><a href="#标题栏actionbar">标题栏(ActionBar)</a></li>
+    <li><a href="#五大布局">五大布局</a></li>
+    <li><a href="#widget普通控件">Widget(普通控件)</a></li>
+    <li><a href="#check-view检查控件">Check View(检查控件)</a></li>
+    <li><a href="#seekbar拖动条">SeekBar(拖动条)</a></li>
+    <li><a href="#progressbar进度条">ProgressBar(进度条)</a></li>
+    <li><a href="#adapter-view适配器控件">Adapter View(适配器控件)</a></li>
+    <li><a href="#luawebview浏览器控件">LuaWebView(浏览器控件)</a></li>
+    <li><a href="#autocompletetextview自动补全文本框">AutoCompleteTextView(自动补全文本框)</a></li>
+    <li><a href="#timepicker时间选择器">TimePicker(时间选择器)</a></li>
+    <li><a href="#datepicker日期选择器">DatePicker(日期选择器)</a></li>
+    <li><a href="#nemberpicker数值选择器">NemberPicker(数值选择器)</a></li>
+    <li><a href="#alertdialog对话框">AlertDialog(对话框)</a></li>
+    <li><a href="#progressdialog进度对话框">ProgressDialog(进度对话框)</a></li>
+    <li><a href="#inputmethodmanager输入法管理器">InputMethodManager(输入法管理器)</a></li>
+    <li><a href="#popmenu弹出式菜单">PopMenu(弹出式菜单)</a></li>
+    <li><a href="#popwindow弹出式窗口">PopWindow(弹出式窗口)</a></li>
+    <li><a href="#toast提示">Toast(提示)</a></li>
+    <li><a href="#控件常用属性">控件常用属性</a></li>
+    <li><a href="#关于侧滑">关于侧滑</a></li>
+    <li><a href="#关于输入法影响布局的问题">关于输入法影响布局的问题</a></li>
+    <li><a href="#布局效果实现">布局效果实现</a></li>
+    <li><a href="#textview设置字体样式">TextView设置字体样式</a></li>
+    <li><a href="#布局设置点击效果">布局设置点击效果</a></li>
+    <li><a href="#图片着色">图片着色</a></li>
+    <li><a href="#沉浸状态栏">沉浸状态栏</a></li>
+    <li><a href="#drawable着色">Drawable着色</a></li>
+    <li><a href="#设置textview字体风格">设置TextView字体风格</a></li>
+    <li><a href="#修改对话框按钮颜色">修改对话框按钮颜色</a></li>
+    <li><a href="#控件颜色修改">控件颜色修改</a></li>
+    <li><a href="#控件圆角">控件圆角</a></li>
+    <li><a href="#控件背景渐变动画">控件背景渐变动画</a>
+      <ul>
+        <li><a href="#dppxsp之间的转换">dp、px、sp之间的转换</a></li>
+        <li><a href="#设置activity背景颜色">设置activity背景颜色</a></li>
+        <li><a href="#控件点击波纹背景">控件点击波纹背景</a></li>
+        <li><a href="#mlua手册底栏贝塞尔曲线">MLua手册底栏贝塞尔曲线</a></li>
+        <li><a href="#带颜色的字体">带颜色的字体</a></li>
+        <li><a href="#适配异形屏的全屏">适配异形屏的全屏</a></li>
+      </ul>
+    </li>
+    <li><a href="#图片处理">图片处理</a>
+      <ul>
+        <li><a href="#高斯模糊">高斯模糊</a></li>
+        <li><a href="#圆形图片">圆形图片</a></li>
+        <li><a href="#获取控件图片">获取控件图片</a></li>
+      </ul>
+    </li>
+    <li><a href="#图片圆角">图片圆角</a></li>
+    <li><a href="#缩放图片">缩放图片</a></li>
+    <li><a href="#自定义布局对话框">自定义布局对话框</a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

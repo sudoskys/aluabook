@@ -1,0 +1,2104 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="系统 #   From MLUA  申请root权限 #  --shell命令的方法 os.execute(&#34;su&#34;) 分享文字 #  import &#34;android.content.*&#34; text=&#34;分享的内容&#34; intent=Intent(Intent.ACTION_SEND); intent.setType(&#34;text/plain&#34;); intent.putExtra(Intent.EXTRA_SUBJECT, &#34;分享&#34;); intent.putExtra(Intent.EXTRA_TEXT, text); intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); activity.startActivity(Intent.createChooser(intent,&#34;分享到:&#34;)); 设置横屏竖屏 #  --横屏 activity.setRequestedOrientation(0); --竖屏 activity.setRequestedOrientation(1); Shell执行 #  function exec(cmd) local p=io.popen(string.format(&#39;%s&#39;,cmd)) local s=p:read(&#34;*a&#34;) p:close() return s end print(exec(&#34;echo ....&#34;)) 部分常用命令: --删除文件或文件夹 rm -r /路径 --复制文件或文件夹 cp -r inpath outpath --移动文件或文件夹 mv -r inpath outpath --挂载系统目录 mount -o remount,rw path --修改系统文件权限 chmod 755 /system/build.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="03-06 系统调用" />
+<meta property="og:description" content="系统 #   From MLUA  申请root权限 #  --shell命令的方法 os.execute(&#34;su&#34;) 分享文字 #  import &#34;android.content.*&#34; text=&#34;分享的内容&#34; intent=Intent(Intent.ACTION_SEND); intent.setType(&#34;text/plain&#34;); intent.putExtra(Intent.EXTRA_SUBJECT, &#34;分享&#34;); intent.putExtra(Intent.EXTRA_TEXT, text); intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); activity.startActivity(Intent.createChooser(intent,&#34;分享到:&#34;)); 设置横屏竖屏 #  --横屏 activity.setRequestedOrientation(0); --竖屏 activity.setRequestedOrientation(1); Shell执行 #  function exec(cmd) local p=io.popen(string.format(&#39;%s&#39;,cmd)) local s=p:read(&#34;*a&#34;) p:close() return s end print(exec(&#34;echo ....&#34;)) 部分常用命令: --删除文件或文件夹 rm -r /路径 --复制文件或文件夹 cp -r inpath outpath --移动文件或文件夹 mv -r inpath outpath --挂载系统目录 mount -o remount,rw path --修改系统文件权限 chmod 755 /system/build." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://lua.dianas.cyou/docs/05/0306system/" /><meta property="article:section" content="docs" />
+
+
+
+<title>03-06 系统调用 | LUA book</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.82c5dbd23447cee0b4c2aa3ed08ce0961faa40e1fa370eee4f8c9f02e0d46b5f.css" integrity="sha256-gsXb0jRHzuC0wqo&#43;0Izglh&#43;qQOH6Nw7uT4yfAuDUa18=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.373325582531ec679f42f0a5df1396215156a0cf2124262a48b4ae3559158cd5.js" integrity="sha256-NzMlWCUx7GefQvCl3xOWIVFWoM8hJCYqSLSuNVkVjNU=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>LUA book</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/01/" class="">01-00 初步认识LUA</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/01/0101sudo/" class="">01-01 开发素养</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/01/0102alua/" class="">01-02 认识Alua写法</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/02/" class="">02-00 教程</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/02/0201string/" class="">02-01 String</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/02/0202layout/" class="">02-02 Layout</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/05/" class="">03-00 MLUA教程</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/05/0301when/" class="">03-01 when的用法</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/05/0302defer/" class="">03-02 Defer关键字</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/05/0303luawebviewzidingyi/" class="">03-03 LuaWebView自定义进度条</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/05/0304string/" class="">03-04 字符串</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/05/0305layout/" class="">03-05 界面&amp;布局</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/05/0306system/" class=" active">03-06 系统调用</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/05/0307caculate/" class="">03-07 各式算法</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/05/0308sent/" class="">03-08 信息&amp;发送</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/05/0309sthing/" class="">03-09 事件</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/05/0310file/" class="">03-10 文件处理</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/05/0311animation/" class="">03-11 动画</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/03/" class="">03-00 工程笔记</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/03/0301/" class="">03-01 案例分析01</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/" >
+        Blog
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>03-06 系统调用</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#申请root权限">申请root权限</a></li>
+    <li><a href="#分享文字">分享文字</a></li>
+    <li><a href="#设置横屏竖屏">设置横屏竖屏</a></li>
+    <li><a href="#shell执行">Shell执行</a></li>
+    <li><a href="#震动">震动</a></li>
+    <li><a href="#发送短信">发送短信</a></li>
+    <li><a href="#分享">分享</a></li>
+    <li><a href="#传感器">传感器</a></li>
+    <li><a href="#使用系统tts播报语音">使用系统TTS播报语音</a></li>
+    <li><a href="#返回桌面">返回桌面</a></li>
+    <li><a href="#模拟按键">模拟按键</a></li>
+    <li><a href="#权限">权限</a>
+      <ul>
+        <li><a href="#判断有无悬浮窗权限">判断有无悬浮窗权限</a></li>
+        <li><a href="#获取悬浮窗权限">获取悬浮窗权限</a></li>
+      </ul>
+    </li>
+    <li><a href="#应用交互">应用交互</a></li>
+    <li><a href="#调用其它程序打开文件">调用其它程序打开文件</a>
+      <ul>
+        <li><a href="#qq名片">QQ名片</a></li>
+        <li><a href="#浏览器">浏览器</a></li>
+        <li><a href="#打开其它程序">打开其它程序</a></li>
+        <li><a href="#安装其他程序">安装其他程序</a></li>
+        <li><a href="#卸载其他程序">卸载其他程序</a></li>
+      </ul>
+    </li>
+    <li><a href="#系统交互">系统交互</a>
+      <ul>
+        <li><a href="#播放mp4">播放Mp4</a></li>
+        <li><a href="#播放mp3">播放Mp3</a></li>
+        <li><a href="#搜索应用">搜索应用</a></li>
+        <li><a href="#调用系统设置">调用系统设置</a></li>
+        <li><a href="#调用系统打开文件">调用系统打开文件</a></li>
+        <li><a href="#调用图库">调用图库</a></li>
+        <li><a href="#调用文件管理器选择文件">调用文件管理器选择文件</a></li>
+        <li><a href="#分享文件">分享文件</a></li>
+        <li><a href="#调用通信">调用通信</a></li>
+      </ul>
+    </li>
+    <li><a href="#调用应用商店搜索应用">调用应用商店搜索应用</a></li>
+    <li><a href="#设备信息">设备信息</a></li>
+    <li><a href="#获取系统sdkandroid版本及设备型号">获取系统SDK，Android版本及设备型号</a></li>
+    <li><a href="#获取设备标识码">获取设备标识码</a></li>
+    <li><a href="#获取imei">获取IMEI</a></li>
+    <li><a href="#精准获取屏幕尺寸">精准获取屏幕尺寸</a></li>
+    <li><a href="#获取手机存储空间">获取手机存储空间</a></li>
+    <li><a href="#获取手机内置存储路径">获取手机内置存储路径</a></li>
+    <li><a href="#获取已安装程序的包名版本号最后更新时间图标应用名称">获取已安装程序的包名、版本号、最后更新时间、图标、应用名称</a></li>
+    <li><a href="#获取指定安装包的包名图标应用名">获取指定安装包的包名,图标,应用名</a></li>
+    <li><a href="#获取某程序是否安装">获取某程序是否安装</a></li>
+    <li><a href="#获取imei号">获取IMEI号</a></li>
+    <li><a href="#获取运营商名称">获取运营商名称</a></li>
+    <li><a href="#获取本地时间">获取本地时间</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="系统">
+  系统
+  <a class="anchor" href="#%e7%b3%bb%e7%bb%9f">#</a>
+</h1>
+<hr>
+<blockquote class="book-hint info">
+  <strong>From MLUA</strong>
+</blockquote>
+
+<h2 id="申请root权限">
+  申请root权限
+  <a class="anchor" href="#%e7%94%b3%e8%af%b7root%e6%9d%83%e9%99%90">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#75715e">--shell命令的方法</span>
+
+os.execute(<span style="color:#e6db74">&#34;su&#34;</span>)
+</code></pre></div><h2 id="分享文字">
+  分享文字
+  <a class="anchor" href="#%e5%88%86%e4%ba%ab%e6%96%87%e5%ad%97">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+import <span style="color:#e6db74">&#34;android.content.*&#34;</span>
+
+text<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;分享的内容&#34;</span>
+
+intent<span style="color:#f92672">=</span>Intent(Intent.ACTION_SEND);
+
+intent.setType(<span style="color:#e6db74">&#34;text/plain&#34;</span>);
+
+intent.putExtra(Intent.EXTRA_SUBJECT, <span style="color:#e6db74">&#34;分享&#34;</span>);
+
+intent.putExtra(Intent.EXTRA_TEXT, text);
+
+intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+activity.startActivity(Intent.createChooser(intent,<span style="color:#e6db74">&#34;分享到:&#34;</span>));
+</code></pre></div><h2 id="设置横屏竖屏">
+  设置横屏竖屏
+  <a class="anchor" href="#%e8%ae%be%e7%bd%ae%e6%a8%aa%e5%b1%8f%e7%ab%96%e5%b1%8f">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#75715e">--横屏</span>
+
+activity.setRequestedOrientation(<span style="color:#ae81ff">0</span>);
+
+<span style="color:#75715e">--竖屏</span>
+
+activity.setRequestedOrientation(<span style="color:#ae81ff">1</span>);
+</code></pre></div><h2 id="shell执行">
+  Shell执行
+  <a class="anchor" href="#shell%e6%89%a7%e8%a1%8c">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">exec</span>(cmd)
+
+<span style="color:#66d9ef">local</span> p<span style="color:#f92672">=</span>io.popen(string.format(<span style="color:#e6db74">&#39;%s&#39;</span>,cmd))
+
+<span style="color:#66d9ef">local</span> s<span style="color:#f92672">=</span>p:read(<span style="color:#e6db74">&#34;*a&#34;</span>)
+
+p:close()
+
+<span style="color:#66d9ef">return</span> s
+
+<span style="color:#66d9ef">end</span>
+
+print(exec(<span style="color:#e6db74">&#34;echo ....&#34;</span>))
+
+<span style="color:#960050;background-color:#1e0010">部分常用命令</span>:
+
+<span style="color:#75715e">--删除文件或文件夹</span>
+
+rm <span style="color:#f92672">-</span>r <span style="color:#f92672">/</span><span style="color:#960050;background-color:#1e0010">路径</span>
+
+<span style="color:#75715e">--复制文件或文件夹</span>
+
+cp <span style="color:#f92672">-</span>r inpath outpath
+
+<span style="color:#75715e">--移动文件或文件夹</span>
+
+mv <span style="color:#f92672">-</span>r inpath outpath
+
+<span style="color:#75715e">--挂载系统目录</span>
+
+mount <span style="color:#f92672">-</span>o remount,rw path
+
+<span style="color:#75715e">--修改系统文件权限</span>
+
+chmod <span style="color:#ae81ff">755</span> <span style="color:#f92672">/</span>system<span style="color:#f92672">/</span>build.prop
+
+<span style="color:#75715e">--重启</span>
+
+reboot<span style="color:#960050;background-color:#1e0010">�</span>
+
+<span style="color:#75715e">--关机</span>
+
+reboot <span style="color:#f92672">-</span>p
+
+<span style="color:#75715e">--重启至recovery</span>
+
+reboot recovery
+</code></pre></div><h2 id="震动">
+  震动
+  <a class="anchor" href="#%e9%9c%87%e5%8a%a8">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+import <span style="color:#e6db74">&#34;android.content.Context&#34;</span>
+
+<span style="color:#75715e">--导入包</span>
+
+vibrator <span style="color:#f92672">=</span> activity.getSystemService(Context.VIBRATOR_SERVICE)
+
+vibrator.vibrate( long{<span style="color:#ae81ff">100</span>,<span style="color:#ae81ff">800</span>} ,<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+
+<span style="color:#75715e">--{等待时间,振动时间,等待时间,振动时间,…}</span>
+
+<span style="color:#75715e">--{0,1000,500,1000,500,1000}</span>
+
+<span style="color:#75715e">--别忘了申明权限</span>
+</code></pre></div><h2 id="发送短信">
+  发送短信
+  <a class="anchor" href="#%e5%8f%91%e9%80%81%e7%9f%ad%e4%bf%a1">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#75715e">--后台发送短信</span>
+
+require <span style="color:#e6db74">&#34;import&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.telephony.*&#34;</span>
+
+SmsManager.getDefault().sendTextMessage(tostring(<span style="color:#960050;background-color:#1e0010">号码</span>), <span style="color:#66d9ef">nil</span>, tostring(<span style="color:#960050;background-color:#1e0010">内容</span>), <span style="color:#66d9ef">nil</span>, <span style="color:#66d9ef">nil</span>)
+
+<span style="color:#75715e">--调用系统发送短信</span>
+
+import <span style="color:#e6db74">&#34;android.content.Intent&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.net.Uri&#34;</span>
+
+uri <span style="color:#f92672">=</span> Uri.parse(<span style="color:#e6db74">&#34;smsto:&#34;</span><span style="color:#f92672">..</span><span style="color:#960050;background-color:#1e0010">号码</span>)
+
+intent <span style="color:#f92672">=</span> Intent(Intent.ACTION_SENDTO, uri)
+
+intent.putExtra(<span style="color:#e6db74">&#34;sms_body&#34;</span>,<span style="color:#960050;background-color:#1e0010">内容</span>)
+
+intent.setAction(<span style="color:#e6db74">&#34;android.intent.action.VIEW&#34;</span>)
+
+activity.startActivity(intent)
+</code></pre></div><h2 id="分享">
+  分享
+  <a class="anchor" href="#%e5%88%86%e4%ba%ab">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#75715e">--分享文件</span>
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">Sharing</span>(path)
+
+import <span style="color:#e6db74">&#34;android.webkit.MimeTypeMap&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.content.Intent&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.net.Uri&#34;</span>
+
+import <span style="color:#e6db74">&#34;java.io.File&#34;</span>
+
+FileName<span style="color:#f92672">=</span>tostring(File(path).Name)
+
+ExtensionName<span style="color:#f92672">=</span>FileName:match(<span style="color:#e6db74">&#34;%.(.+)&#34;</span>)
+
+Mime<span style="color:#f92672">=</span>MimeTypeMap.getSingleton().getMimeTypeFromExtension(ExtensionName)
+
+intent <span style="color:#f92672">=</span> Intent();
+
+intent.setAction(Intent.ACTION_SEND);
+
+intent.setType(Mime);
+
+file <span style="color:#f92672">=</span> File(path);
+
+uri <span style="color:#f92672">=</span> Uri.fromFile(file);
+
+intent.putExtra(Intent.EXTRA_STREAM,uri);
+
+intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+activity.startActivity(Intent.createChooser(intent, <span style="color:#e6db74">&#34;分享到:&#34;</span>));
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#75715e">--分享文字</span>
+
+text<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;分享的内容&#34;</span>
+
+intent<span style="color:#f92672">=</span>Intent(Intent.ACTION_SEND);
+
+intent.setType(<span style="color:#e6db74">&#34;text/plain&#34;</span>);
+
+intent.putExtra(Intent.EXTRA_SUBJECT, <span style="color:#e6db74">&#34;分享&#34;</span>);
+
+intent.putExtra(Intent.EXTRA_TEXT, text);
+
+intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+activity.startActivity(Intent.createChooser(intent,<span style="color:#e6db74">&#34;分享到:&#34;</span>));
+</code></pre></div><h2 id="传感器">
+  传感器
+  <a class="anchor" href="#%e4%bc%a0%e6%84%9f%e5%99%a8">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#960050;background-color:#1e0010">传感器</span> <span style="color:#f92672">=</span> activity.getSystemService(Context.SENSOR_SERVICE)
+
+<span style="color:#66d9ef">local</span> <span style="color:#960050;background-color:#1e0010">加速度传感器</span> <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">传感器</span>.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+
+<span style="color:#960050;background-color:#1e0010">传感器</span>.registerListener(SensorEventListener({
+
+onSensorChanged<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(event)
+
+x轴 <span style="color:#f92672">=</span> event.values[<span style="color:#ae81ff">0</span>]
+
+y轴 <span style="color:#f92672">=</span> event.values[<span style="color:#ae81ff">1</span>]
+
+z轴 <span style="color:#f92672">=</span> event.values[<span style="color:#ae81ff">2</span>]
+
+<span style="color:#66d9ef">end</span>,<span style="color:#66d9ef">nil</span>}), <span style="color:#960050;background-color:#1e0010">加速度传感器</span>, SensorManager.SENSOR_DELAY_NORMAL)
+
+<span style="color:#66d9ef">local</span> <span style="color:#960050;background-color:#1e0010">光线传感器</span> <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">传感器</span>.getDefaultSensor(Sensor.TYPE_LIGHT)
+
+<span style="color:#960050;background-color:#1e0010">传感器</span>.registerListener(SensorEventListener({
+
+onSensorChanged<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(event)
+
+<span style="color:#960050;background-color:#1e0010">光线</span> <span style="color:#f92672">=</span> event.values[<span style="color:#ae81ff">0</span>]
+
+<span style="color:#66d9ef">end</span>,<span style="color:#66d9ef">nil</span>}), <span style="color:#960050;background-color:#1e0010">光线传感器</span>, SensorManager.SENSOR_DELAY_NORMAL)
+
+<span style="color:#66d9ef">local</span> <span style="color:#960050;background-color:#1e0010">距离传感器</span> <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">传感器</span>.getDefaultSensor(Sensor.TYPE_PROXIMITY)
+
+<span style="color:#960050;background-color:#1e0010">传感器</span>.registerListener(SensorEventListener({
+
+onSensorChanged<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(event)
+
+<span style="color:#960050;background-color:#1e0010">距离</span> <span style="color:#f92672">=</span> event.values[<span style="color:#ae81ff">0</span>]
+
+<span style="color:#66d9ef">end</span>,<span style="color:#66d9ef">nil</span>}), <span style="color:#960050;background-color:#1e0010">距离传感器</span>, SensorManager.SENSOR_DELAY_NORMAL)
+
+<span style="color:#66d9ef">local</span> <span style="color:#960050;background-color:#1e0010">磁场传感器</span> <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">传感器</span>.getDefaultSensor(Sensor.TYPE_ORIENTATION)
+
+<span style="color:#960050;background-color:#1e0010">传感器</span>.registerListener(SensorEventListener({
+
+onSensorChanged<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(event)
+
+<span style="color:#960050;background-color:#1e0010">磁场</span> <span style="color:#f92672">=</span> event.values[<span style="color:#ae81ff">0</span>]
+
+<span style="color:#66d9ef">end</span>,<span style="color:#66d9ef">nil</span>}), <span style="color:#960050;background-color:#1e0010">磁场传感器</span>, SensorManager.SENSOR_DELAY_NORMAL)
+
+<span style="color:#66d9ef">local</span> <span style="color:#960050;background-color:#1e0010">温度传感器</span> <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">传感器</span>.getDefaultSensor(Sensor.TYPE_TEMPERATURE)
+
+<span style="color:#960050;background-color:#1e0010">传感器</span>.registerListener(SensorEventListener({
+
+onSensorChanged<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(event)
+
+<span style="color:#960050;background-color:#1e0010">温度</span> <span style="color:#f92672">=</span> event.values[<span style="color:#ae81ff">0</span>]
+
+<span style="color:#66d9ef">end</span>,<span style="color:#66d9ef">nil</span>}), <span style="color:#960050;background-color:#1e0010">温度传感器</span>, SensorManager.SENSOR_DELAY_NORMAL)
+
+<span style="color:#66d9ef">local</span> <span style="color:#960050;background-color:#1e0010">陀螺仪传感器</span> <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">传感器</span>.getDefaultSensor(Sensor.TYPE_GYROSCOPE)
+
+<span style="color:#960050;background-color:#1e0010">传感器</span>.registerListener(SensorEventListener({
+
+onSensorChanged<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(event)
+
+<span style="color:#960050;background-color:#1e0010">陀螺仪</span> <span style="color:#f92672">=</span> event.values[<span style="color:#ae81ff">0</span>]
+
+<span style="color:#66d9ef">end</span>,<span style="color:#66d9ef">nil</span>}), <span style="color:#960050;background-color:#1e0010">陀螺仪传感器</span>, SensorManager.SENSOR_DELAY_NORMAL)
+
+<span style="color:#66d9ef">local</span> <span style="color:#960050;background-color:#1e0010">重力传感器</span> <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">传感器</span>.getDefaultSensor(Sensor.TYPE_GRAVITY)
+
+<span style="color:#960050;background-color:#1e0010">传感器</span>.registerListener(SensorEventListener({
+
+onSensorChanged<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(event)
+
+<span style="color:#960050;background-color:#1e0010">重力</span> <span style="color:#f92672">=</span> event.values[<span style="color:#ae81ff">0</span>]
+
+<span style="color:#66d9ef">end</span>,<span style="color:#66d9ef">nil</span>}), <span style="color:#960050;background-color:#1e0010">重力传感器</span>, SensorManager.SENSOR_DELAY_NORMAL)
+
+<span style="color:#66d9ef">local</span> <span style="color:#960050;background-color:#1e0010">压力传感器</span> <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">传感器</span>.getDefaultSensor(Sensor.TYPE_PRESSURE)
+
+<span style="color:#960050;background-color:#1e0010">传感器</span>.registerListener(SensorEventListener({
+
+onSensorChanged<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(event)
+
+<span style="color:#960050;background-color:#1e0010">压力</span> <span style="color:#f92672">=</span> event.values[<span style="color:#ae81ff">0</span>]
+
+<span style="color:#66d9ef">end</span>,<span style="color:#66d9ef">nil</span>}), <span style="color:#960050;background-color:#1e0010">压力传感器</span>, SensorManager.SENSOR_DELAY_NORMAL)
+</code></pre></div><h2 id="使用系统tts播报语音">
+  使用系统TTS播报语音
+  <a class="anchor" href="#%e4%bd%bf%e7%94%a8%e7%b3%bb%e7%bb%9ftts%e6%92%ad%e6%8a%a5%e8%af%ad%e9%9f%b3">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+import <span style="color:#e6db74">&#34;android.speech.tts.*&#34;</span>
+
+mTextSpeech <span style="color:#f92672">=</span> TextToSpeech(activity, TextToSpeech.OnInitListener{
+
+onInit<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(status)
+
+<span style="color:#75715e">--如果装载TTS成功</span>
+
+<span style="color:#66d9ef">if</span> (status <span style="color:#f92672">==</span> TextToSpeech.SUCCESS)
+
+result <span style="color:#f92672">=</span> mTextSpeech.setLanguage(Locale.CHINESE);
+
+<span style="color:#75715e">--[[LANG_MISSING_DATA--&gt;语言的数据丢失
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">LANG_NOT_SUPPORTED--&gt;语言不支持]]</span>
+
+<span style="color:#66d9ef">if</span> (result <span style="color:#f92672">==</span> TextToSpeech.LANG_MISSING_DATA <span style="color:#f92672">or</span> result <span style="color:#f92672">==</span> TextToSpeech.LANG_NOT_SUPPORTED)
+
+<span style="color:#75715e">--不支持中文</span>
+
+print(<span style="color:#e6db74">&#34;您的手机不支持中文语音播报功能。&#34;</span>);
+
+result <span style="color:#f92672">=</span> mTextSpeech.setLanguage(Locale.ENGLISH);
+
+<span style="color:#66d9ef">if</span> (result <span style="color:#f92672">==</span> TextToSpeech.LANG_MISSING_DATA <span style="color:#f92672">or</span> result <span style="color:#f92672">==</span> TextToSpeech.LANG_NOT_SUPPORTED)
+
+<span style="color:#75715e">--不支持中文和英文</span>
+
+print(<span style="color:#e6db74">&#34;您的手机不支持语音播报功能。&#34;</span>);
+
+<span style="color:#66d9ef">else</span>
+
+<span style="color:#75715e">--不支持中文但支持英文</span>
+
+<span style="color:#75715e">--语调,1.0默认</span>
+
+mTextSpeech.setPitch(<span style="color:#ae81ff">1</span>);
+
+<span style="color:#75715e">--语速,1.0默认</span>
+
+mTextSpeech.setSpeechRate(<span style="color:#ae81ff">1</span>);
+
+mTextSpeech.speak(<span style="color:#e6db74">&#34;hello,MLua Manual.Hello,World!&#34;</span>, TextToSpeech.QUEUE_FLUSH, <span style="color:#66d9ef">nil</span>);
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">else</span>
+
+<span style="color:#75715e">--支持中文</span>
+
+<span style="color:#75715e">--语调,1.0默认</span>
+
+mTextSpeech.setPitch(<span style="color:#ae81ff">1</span>);
+
+<span style="color:#75715e">--语速,1.0默认</span>
+
+mTextSpeech.setSpeechRate(<span style="color:#ae81ff">1</span>);
+
+mTextSpeech.speak(<span style="color:#e6db74">&#34;你好，MLua手册。你好，世界！&#34;</span>, TextToSpeech.QUEUE_FLUSH, <span style="color:#66d9ef">nil</span>);
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">end</span>
+
+})
+
+</code></pre></div><hr>
+<h2 id="返回桌面">
+  返回桌面
+  <a class="anchor" href="#%e8%bf%94%e5%9b%9e%e6%a1%8c%e9%9d%a2">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-LUA" data-lang="LUA">import <span style="color:#e6db74">&#34;android.content.Intent&#34;</span>
+
+home<span style="color:#f92672">=</span>Intent(Intent.ACTION_MAIN);
+
+home.addCategory(Intent.CATEGORY_HOME);
+
+activity.startActivity(home);
+
+</code></pre></div><hr>
+<h2 id="模拟按键">
+  模拟按键
+  <a class="anchor" href="#%e6%a8%a1%e6%8b%9f%e6%8c%89%e9%94%ae">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua"><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">sendKeyCode</span>(keyCode)
+
+xpcall(<span style="color:#66d9ef">function</span>()
+
+Runtime.getRuntime().exec(<span style="color:#e6db74">&#34;input keyevent &#34;</span> <span style="color:#f92672">..</span> keyCode)
+
+<span style="color:#66d9ef">end</span>,<span style="color:#66d9ef">function</span>(e)
+
+print(e)
+
+<span style="color:#66d9ef">end</span>)
+
+<span style="color:#66d9ef">end</span>
+
+sendKeyCode(KeyEvent.KEYCODE_VOLUME_DOWN)<span style="color:#75715e">--音量-</span>
+
+
+</code></pre></div>
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>参数</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-MARKDOWN" data-lang="MARKDOWN">
+--[[
+
+KEYCODE_0 &#39;0&#39; key. 7
+
+KEYCODE_1 &#39;1&#39; key. 8
+
+KEYCODE_2 &#39;2&#39; key. 9
+
+KEYCODE_3 &#39;3&#39; key. 10
+
+KEYCODE_4 &#39;4&#39; key. 11
+
+KEYCODE_5 &#39;5&#39; key. 12
+
+KEYCODE_6 &#39;6&#39; key. 13
+
+KEYCODE_7 &#39;7&#39; key. 14
+
+KEYCODE_8 &#39;8&#39; key. 15
+
+KEYCODE_9 &#39;9&#39; key. 16
+
+KEYCODE_A &#39;A&#39; key. 29
+
+KEYCODE_B &#39;B&#39; key. 30
+
+KEYCODE_C &#39;C&#39; key. 31
+
+KEYCODE_D &#39;D&#39; key. 32
+
+KEYCODE_E &#39;E&#39; key. 33
+
+KEYCODE_F &#39;F&#39; key. 34
+
+KEYCODE_G &#39;G&#39; key. 35
+
+KEYCODE_H &#39;H&#39; key. 36
+
+KEYCODE_I &#39;I&#39; key. 37
+
+KEYCODE_J &#39;J&#39; key. 38
+
+KEYCODE_K &#39;K&#39; key. 39
+
+KEYCODE_L &#39;L&#39; key. 40
+
+KEYCODE_M &#39;M&#39; key. 41
+
+KEYCODE_N &#39;N&#39; key. 42
+
+KEYCODE_O &#39;O&#39; key. 43
+
+KEYCODE_P &#39;P&#39; key. 44
+
+KEYCODE_Q &#39;Q&#39; key. 45
+
+KEYCODE_R &#39;R&#39; key. 46
+
+KEYCODE_S &#39;S&#39; key. 47
+
+KEYCODE_T &#39;T&#39; key. 48
+
+KEYCODE_U &#39;U&#39; key. 49
+
+KEYCODE_V &#39;V&#39; key. 50
+
+KEYCODE_W &#39;W&#39; key. 51
+
+KEYCODE_X &#39;X&#39; key. 52
+
+KEYCODE_Y &#39;Y&#39; key. 53
+
+KEYCODE_Z &#39;Z&#39; key. 54
+
+META_ALT_LEFT_ON This mask is used to check whether the left ALT meta key is pressed. 16
+
+META_ALT_MASK This mask is a combination of META_ALT_ON, META_ALT_LEFT_ON and META_ALT_RIGHT_ON. 50
+
+META_ALT_ON This mask is used to check whether one of the ALT meta keys is pressed. 2
+
+META_ALT_RIGHT_ON This mask is used to check whether the right the ALT meta key is pressed. 32
+
+META_CAPS_LOCK_ON This mask is used to check whether the CAPS LOCK meta key is on. 1048576
+
+META_CTRL_LEFT_ON This mask is used to check whether the left CTRL meta key is pressed. 8192
+
+META_CTRL_MASK This mask is a combination of META_CTRL_ON, META_CTRL_LEFT_ON and META_CTRL_RIGHT_ON. 28672
+
+META_CTRL_ON This mask is used to check whether one of the CTRL meta keys is pressed. 4096
+
+META_CTRL_RIGHT_ON This mask is used to check whether the right CTRL meta key is pressed. 16384
+
+META_FUNCTION_ON This mask is used to check whether the FUNCTION meta key is pressed. 8
+
+META_META_LEFT_ON This mask is used to check whether the left META meta key is pressed. 131072
+
+META_META_MASK This mask is a combination of META_META_ON, META_META_LEFT_ON and META_META_RIGHT_ON. 458752
+
+META_META_ON This mask is used to check whether one of the META meta keys is pressed. 65536
+
+META_META_RIGHT_ON This mask is used to check whether the right META meta key is pressed. 262144
+
+META_NUM_LOCK_ON This mask is used to check whether the NUM LOCK meta key is on. 2097152
+
+META_SCROLL_LOCK_ON This mask is used to check whether the SCROLL LOCK meta key is on. 4194304
+
+META_SHIFT_LEFT_ON This mask is used to check whether the left SHIFT meta key is pressed. 64
+
+META_SHIFT_MASK This mask is a combination of META_SHIFT_ON, META_SHIFT_LEFT_ON and META_SHIFT_RIGHT_ON. 193
+
+META_SHIFT_ON This mask is used to check whether one of the SHIFT meta keys is pressed. 1
+
+META_SHIFT_RIGHT_ON This mask is used to check whether the right SHIFT meta key is pressed. 128
+
+META_SYM_ON This mask is used to check whether the SYM meta key is pressed. 4
+
+KEYCODE_APOSTROPHE &#39;&#39;&#39; key. 75
+
+KEYCODE_AT &#39;@&#39; key. 77
+
+KEYCODE_BACKSLASH &#39;\&#39; key. 73
+
+KEYCODE_COMMA &#39;,&#39; key. 55
+
+KEYCODE_EQUALS &#39;=&#39; key. 70
+
+KEYCODE_GRAVE &#39;`&#39; key. 68
+
+KEYCODE_LEFT_BRACKET &#39;[&#39; key. 71
+
+KEYCODE_MINUS &#39;-&#39; key. 69
+
+KEYCODE_PERIOD &#39;.&#39; key. 56
+
+KEYCODE_PLUS &#39;+&#39; key. 81
+
+KEYCODE_POUND &#39;#&#39; key. 18
+
+KEYCODE_RIGHT_BRACKET &#39;]&#39; key. 72
+
+KEYCODE_SEMICOLON &#39;;&#39; key. 74
+
+KEYCODE_SLASH &#39;/&#39; key. 76
+
+KEYCODE_STAR &#39;*&#39; key. 17
+
+KEYCODE_SPACE Space key. 62
+
+KEYCODE_TAB Tab key. 61
+
+KEYCODE_ENTER Enter key. 66
+
+KEYCODE_ESCAPE Escape key. 111
+
+KEYCODE_CAPS_LOCK Caps Lock key. 115
+
+KEYCODE_CLEAR Clear key. 28
+
+KEYCODE_PAGE_DOWN Page Down key. 93
+
+KEYCODE_PAGE_UP Page Up key. 92
+
+KEYCODE_SCROLL_LOCK Scroll Lock key. 116
+
+KEYCODE_MOVE_END End. 123
+
+KEYCODE_MOVE_HOME Home. 122
+
+KEYCODE_INSERT Insert key. 124
+
+KEYCODE_SHIFT_LEFT Left Shift. 59
+
+KEYCODE_SHIFT_RIGHT Right Shift. 60
+
+KEYCODE_F1 F1 key. 131
+
+KEYCODE_F2 F2 key. 132
+
+KEYCODE_F3 F3 key. 133
+
+KEYCODE_F4 F4 key. 134
+
+KEYCODE_F5 F5 key. 135
+
+KEYCODE_F6 F6 key. 136
+
+KEYCODE_F7 F7 key. 137
+
+KEYCODE_F8 F8 key. 138
+
+KEYCODE_F9 F9 key. 139
+
+KEYCODE_F10 F10 key. 140
+
+KEYCODE_F11 F11 key. 141
+
+KEYCODE_F12 F12 key. 142
+
+KEYCODE_BACK Back key. 4
+
+KEYCODE_CALL Call key. 5
+
+KEYCODE_ENDCALL End Call key. 6
+
+KEYCODE_CAMERA Camera key. 27
+
+KEYCODE_FOCUS Camera Focus key. 80
+
+KEYCODE_VOLUME_UP Volume Up key. 24
+
+KEYCODE_VOLUME_DOWN Volume Down key. 25
+
+KEYCODE_VOLUME_MUTE Volume Mute key. 164
+
+KEYCODE_MENU Menu key. 82
+
+KEYCODE_HOME Home key. 3
+
+KEYCODE_POWER Power key. 26
+
+KEYCODE_SEARCH Search key. 84
+
+KEYCODE_NOTIFICATION Notification key. 83
+
+KEYCODE_NUM Number modifier key. 78
+
+KEYCODE_SYM Symbol modifier key. 63
+
+KEYCODE_SETTINGS Settings key. 176
+
+KEYCODE_DEL Backspace key. Deletes characters before the insertion point, unlike KEYCODE_FORWARD_DEL. 67
+
+KEYCODE_FORWARD_DEL Forward Delete key. Deletes characters ahead of the insertion point, unlike KEYCODE_DEL. 112
+
+KEYCODE_NUMPAD_0 Numeric keypad &#39;0&#39; key. 144
+
+KEYCODE_NUMPAD_1 Numeric keypad &#39;1&#39; key. 145
+
+KEYCODE_NUMPAD_2 Numeric keypad &#39;2&#39; key. 146
+
+KEYCODE_NUMPAD_3 Numeric keypad &#39;3&#39; key. 147
+
+KEYCODE_NUMPAD_4 Numeric keypad &#39;4&#39; key. 148
+
+KEYCODE_NUMPAD_5 Numeric keypad &#39;5&#39; key. 149
+
+KEYCODE_NUMPAD_6 Numeric keypad &#39;6&#39; key. 150
+
+KEYCODE_NUMPAD_7 Numeric keypad &#39;7&#39; key. 151
+
+KEYCODE_NUMPAD_8 Numeric keypad &#39;8&#39; key. 152
+
+KEYCODE_NUMPAD_9 Numeric keypad &#39;9&#39; key. 153
+
+KEYCODE_NUMPAD_ADD Numeric keypad &#39;+&#39; key 157
+
+KEYCODE_NUMPAD_COMMA Numeric keypad &#39;,&#39; key 159
+
+KEYCODE_NUMPAD_DIVIDE Numeric keypad &#39;/&#39; key 154
+
+KEYCODE_NUMPAD_DOT Numeric keypad &#39;.&#39; key 158
+
+KEYCODE_NUMPAD_EQUALS Numeric keypad &#39;=&#39; key. 161
+
+KEYCODE_NUMPAD_LEFT_PAREN Numeric keypad &#39;(&#39; key. 162
+
+KEYCODE_NUMPAD_MULTIPLY Numeric keypad &#39;*&#39; key 155
+
+KEYCODE_NUMPAD_RIGHT_PAREN Numeric keypad &#39;)&#39; key. 163
+
+KEYCODE_NUMPAD_SUBTRACT Numeric keypad &#39;-&#39; key 156
+
+KEYCODE_NUMPAD_ENTER Numeric keypad Enter key. 160
+
+KEYCODE_NUM_LOCK Numeric keypad Num Lock key. 143
+
+KEYCODE_MEDIA_FAST_FORWARD Fast Forward media key. 90
+
+KEYCODE_MEDIA_NEXT Play Next media key. 87
+
+KEYCODE_MEDIA_PAUSE Pause media key. 127
+
+KEYCODE_MEDIA_PLAY Play media key. 126
+
+KEYCODE_MEDIA_PLAY_PAUSE Play/Pause media key. 85
+
+KEYCODE_MEDIA_PREVIOUS Play Previous media key. 88
+
+KEYCODE_MEDIA_RECORD Record media key. 130
+
+KEYCODE_MEDIA_REWIND Rewind media key. 89
+
+KEYCODE_MEDIA_STOP Stop media key. 86
+
+]]
+</code></pre></div>
+    </div>
+  </label>
+</div>
+
+<hr>
+<h2 id="权限">
+  权限
+  <a class="anchor" href="#%e6%9d%83%e9%99%90">#</a>
+</h2>
+<h3 id="判断有无悬浮窗权限">
+  判断有无悬浮窗权限
+  <a class="anchor" href="#%e5%88%a4%e6%96%ad%e6%9c%89%e6%97%a0%e6%82%ac%e6%b5%ae%e7%aa%97%e6%9d%83%e9%99%90">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">import <span style="color:#e6db74">&#34;android.provider.Settings&#34;</span>
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">判断悬浮窗权限</span>()
+
+<span style="color:#66d9ef">if</span> (Build.VERSION.SDK_INT <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">23</span> <span style="color:#f92672">and</span> <span style="color:#f92672">not</span> Settings.canDrawOverlays(this)) <span style="color:#66d9ef">then</span>
+
+<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>
+
+<span style="color:#66d9ef">elseif</span> Build.VERSION.SDK_INT <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">23</span> <span style="color:#66d9ef">then</span>
+
+<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>
+
+<span style="color:#66d9ef">else</span>
+
+<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">end</span>
+</code></pre></div><p>Build.VERSION.SDK_INT &gt;= 23 是因为安卓6.0以下没有统一判断悬浮窗权限的方法</p>
+<p>当安卓版本大于6.0且有悬浮窗权限时返回true，当安卓版本大于6.0且无悬浮窗权限时返回false，当安卓版本小于6.0时无法判断返回nil</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua"><span style="color:#75715e">--调用例子</span>
+print(<span style="color:#960050;background-color:#1e0010">判断悬浮窗权限</span>())
+
+</code></pre></div><h3 id="获取悬浮窗权限">
+  获取悬浮窗权限
+  <a class="anchor" href="#%e8%8e%b7%e5%8f%96%e6%82%ac%e6%b5%ae%e7%aa%97%e6%9d%83%e9%99%90">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">import <span style="color:#e6db74">&#34;android.net.Uri&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.content.Intent&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.provider.Settings&#34;</span>
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">获取悬浮窗权限</span>()
+
+intent <span style="color:#f92672">=</span> Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
+
+intent.setData(Uri.parse(<span style="color:#e6db74">&#34;package:&#34;</span> <span style="color:#f92672">..</span> activity.getPackageName()));
+
+activity.startActivityForResult(intent, <span style="color:#ae81ff">100</span>);
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#75715e">--调用示例</span>
+
+<span style="color:#960050;background-color:#1e0010">获取悬浮窗权限</span>()
+</code></pre></div><hr>
+<h2 id="应用交互">
+  应用交互
+  <a class="anchor" href="#%e5%ba%94%e7%94%a8%e4%ba%a4%e4%ba%92">#</a>
+</h2>
+<h2 id="调用其它程序打开文件">
+  调用其它程序打开文件
+  <a class="anchor" href="#%e8%b0%83%e7%94%a8%e5%85%b6%e5%ae%83%e7%a8%8b%e5%ba%8f%e6%89%93%e5%bc%80%e6%96%87%e4%bb%b6">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">OpenFile</span>(path)
+
+import <span style="color:#e6db74">&#34;android.webkit.MimeTypeMap&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.content.Intent&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.net.Uri&#34;</span>
+
+import <span style="color:#e6db74">&#34;java.io.File&#34;</span>
+
+FileName<span style="color:#f92672">=</span>tostring(File(path).Name)
+
+ExtensionName<span style="color:#f92672">=</span>FileName:match(<span style="color:#e6db74">&#34;%.(.+)&#34;</span>)
+
+Mime<span style="color:#f92672">=</span>MimeTypeMap.getSingleton().getMimeTypeFromExtension(ExtensionName)
+
+<span style="color:#66d9ef">if</span> Mime <span style="color:#66d9ef">then</span>
+
+intent <span style="color:#f92672">=</span> Intent();
+
+intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+intent.setAction(Intent.ACTION_VIEW);
+
+intent.setDataAndType(Uri.fromFile(File(path)), Mime);
+
+activity.startActivity(intent);
+
+<span style="color:#66d9ef">else</span>
+
+Toastc(<span style="color:#e6db74">&#34;找不到可以用来打开此文件的程序&#34;</span>)
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">end</span>
+</code></pre></div><h3 id="qq名片">
+  QQ名片
+  <a class="anchor" href="#qq%e5%90%8d%e7%89%87">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">import <span style="color:#e6db74">&#34;android.net.Uri&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.content.Intent&#34;</span>
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">QQ群</span>(h)
+
+url<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;mqqapi://card/show_pslcard?src_type=internal&amp;version=1&amp;uin=&#34;</span><span style="color:#f92672">..</span>h<span style="color:#f92672">..</span><span style="color:#e6db74">&#34;&amp;card_type=group&amp;source=qrcode&#34;</span>
+
+activity.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">QQ</span>(h)
+
+url<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;mqqapi://card/show_pslcard?src_type=internal&amp;source=sharecard&amp;version=1&amp;uin=&#34;</span><span style="color:#f92672">..</span>h
+
+activity.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#75715e">--调用</span>
+
+QQ群(<span style="color:#e6db74">&#34;686976850&#34;</span>)
+
+QQ(<span style="color:#e6db74">&#34;1773798610&#34;</span>)
+
+</code></pre></div><h3 id="浏览器">
+  浏览器
+  <a class="anchor" href="#%e6%b5%8f%e8%a7%88%e5%99%a8">#</a>
+</h3>
+<h5 id="搜索关键字">
+  搜索关键字
+  <a class="anchor" href="#%e6%90%9c%e7%b4%a2%e5%85%b3%e9%94%ae%e5%ad%97">#</a>
+</h5>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#75715e">--搜索关键字</span>
+
+import <span style="color:#e6db74">&#34;android.content.Intent&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.app.SearchManager&#34;</span>
+
+intent <span style="color:#f92672">=</span> Intent()
+
+intent.setAction(Intent.ACTION_WEB_SEARCH)
+
+intent.putExtra(SearchManager.QUERY,<span style="color:#e6db74">&#34;Alua开发手册&#34;</span>)
+
+activity.startActivity(intent)
+
+</code></pre></div><h4 id="打开网页">
+  打开网页
+  <a class="anchor" href="#%e6%89%93%e5%bc%80%e7%bd%91%e9%a1%b5">#</a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">import <span style="color:#e6db74">&#34;android.content.Intent&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.net.Uri&#34;</span>
+
+url<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;http://www.androlua.cn&#34;</span>
+
+viewIntent <span style="color:#f92672">=</span> Intent(<span style="color:#e6db74">&#34;android.intent.action.VIEW&#34;</span>,Uri.parse(url))
+
+activity.startActivity(viewIntent)
+
+</code></pre></div><h3 id="打开其它程序">
+  打开其它程序
+  <a class="anchor" href="#%e6%89%93%e5%bc%80%e5%85%b6%e5%ae%83%e7%a8%8b%e5%ba%8f">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">packageName<span style="color:#f92672">=</span><span style="color:#960050;background-color:#1e0010">程序包名</span>
+
+import <span style="color:#e6db74">&#34;android.content.Intent&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.content.pm.PackageManager&#34;</span>
+
+manager <span style="color:#f92672">=</span> activity.getPackageManager()
+
+open <span style="color:#f92672">=</span> manager.getLaunchIntentForPackage(packageName)
+
+this.startActivity(open)
+
+</code></pre></div><h3 id="安装其他程序">
+  安装其他程序
+  <a class="anchor" href="#%e5%ae%89%e8%a3%85%e5%85%b6%e4%bb%96%e7%a8%8b%e5%ba%8f">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+import <span style="color:#e6db74">&#34;android.content.Intent&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.net.Uri&#34;</span>
+
+intent <span style="color:#f92672">=</span> Intent(Intent.ACTION_VIEW)
+
+<span style="color:#960050;background-color:#1e0010">安装包路径</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/sdcard/a.apk&#34;</span>
+
+intent.setDataAndType(Uri.parse(<span style="color:#e6db74">&#34;file://&#34;</span><span style="color:#f92672">..</span><span style="color:#960050;background-color:#1e0010">安装包路径</span>), <span style="color:#e6db74">&#34;application/vnd.android.package-archive&#34;</span>)
+
+intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+
+activity.startActivity(intent)
+</code></pre></div><h3 id="卸载其他程序">
+  卸载其他程序
+  <a class="anchor" href="#%e5%8d%b8%e8%bd%bd%e5%85%b6%e4%bb%96%e7%a8%8b%e5%ba%8f">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">import <span style="color:#e6db74">&#34;android.net.Uri&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.content.Intent&#34;</span>
+
+<span style="color:#960050;background-color:#1e0010">包名</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;com.huluxia.gametools&#34;</span>
+
+uri <span style="color:#f92672">=</span> Uri.parse(<span style="color:#e6db74">&#34;package:&#34;</span><span style="color:#f92672">..</span><span style="color:#960050;background-color:#1e0010">包名</span>)
+
+intent <span style="color:#f92672">=</span> Intent(Intent.ACTION_DELETE,uri)
+
+activity.startActivity(intent)
+</code></pre></div><hr>
+<h2 id="系统交互">
+  系统交互
+  <a class="anchor" href="#%e7%b3%bb%e7%bb%9f%e4%ba%a4%e4%ba%92">#</a>
+</h2>
+<h3 id="播放mp4">
+  播放Mp4
+  <a class="anchor" href="#%e6%92%ad%e6%94%bemp4">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">import <span style="color:#e6db74">&#34;android.content.Intent&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.net.Uri&#34;</span>
+
+intent <span style="color:#f92672">=</span> Intent(Intent.ACTION_VIEW)
+
+uri <span style="color:#f92672">=</span> Uri.parse(<span style="color:#e6db74">&#34;file:///sdcard/a.mp4&#34;</span>)
+
+intent.setDataAndType(uri, <span style="color:#e6db74">&#34;video/mp4&#34;</span>)
+
+activity.startActivity(intent)
+</code></pre></div><h3 id="播放mp3">
+  播放Mp3
+  <a class="anchor" href="#%e6%92%ad%e6%94%bemp3">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">import <span style="color:#e6db74">&#34;android.content.Intent&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.net.Uri&#34;</span>
+
+intent <span style="color:#f92672">=</span> Intent(Intent.ACTION_VIEW)
+
+uri <span style="color:#f92672">=</span> Uri.parse(<span style="color:#e6db74">&#34;file:///sdcard/song.mp3&#34;</span>)
+
+intent.setDataAndType(uri, <span style="color:#e6db74">&#34;audio/mp3&#34;</span>)
+
+this.startActivity(intent)
+
+</code></pre></div><h3 id="搜索应用">
+  搜索应用
+  <a class="anchor" href="#%e6%90%9c%e7%b4%a2%e5%ba%94%e7%94%a8">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+import <span style="color:#e6db74">&#34;android.content.Intent&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.net.Uri&#34;</span>
+
+intent <span style="color:#f92672">=</span> Intent(<span style="color:#e6db74">&#34;android.intent.action.VIEW&#34;</span>)
+
+intent .setData(Uri.parse( <span style="color:#e6db74">&#34;market://details?id=&#34;</span><span style="color:#f92672">..</span>activity.getPackageName()))
+
+this.startActivity(intent)
+</code></pre></div><h3 id="调用系统设置">
+  调用系统设置
+  <a class="anchor" href="#%e8%b0%83%e7%94%a8%e7%b3%bb%e7%bb%9f%e8%ae%be%e7%bd%ae">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+import <span style="color:#e6db74">&#34;android.content.Intent&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.provider.Settings&#34;</span>
+
+intent <span style="color:#f92672">=</span> Intent(Settings.ACTION_BLUETOOTH_SETTINGS)
+
+this.startActivity(intent)
+
+<span style="color:#75715e">--[[
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">原代码：
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">intent = Intent(android.provider.Settings.ACTION_SETTINGS)
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">this.startActivity(intent)
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">19-10-03修正错误]]</span>
+</code></pre></div>
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>字段补充</span>
+      <span>...</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <h4 id="设置">设置</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+ACTION_SETTINGS <span style="color:#960050;background-color:#1e0010">系统设置</span>
+
+CTION_APN_SETTINGS APN设置
+
+ACTION_LOCATION_SOURCE_SETTINGS <span style="color:#960050;background-color:#1e0010">位置和访问信息</span>
+
+ACTION_WIRELESS_SETTINGS <span style="color:#960050;background-color:#1e0010">网络设置</span>
+
+ACTION_AIRPLANE_MODE_SETTINGS <span style="color:#960050;background-color:#1e0010">无线和网络热点设置</span>
+
+ACTION_SECURITY_SETTINGS <span style="color:#960050;background-color:#1e0010">位置和安全设置</span>
+
+ACTION_WIFI_SETTINGS <span style="color:#960050;background-color:#1e0010">无线网</span>WIFI设置
+
+ACTION_WIFI_IP_SETTINGS <span style="color:#960050;background-color:#1e0010">无线网</span>IP设置
+
+ACTION_BLUETOOTH_SETTINGS <span style="color:#960050;background-color:#1e0010">蓝牙设置</span>
+
+ACTION_DATE_SETTINGS <span style="color:#960050;background-color:#1e0010">时间和日期设置</span>
+
+ACTION_SOUND_SETTINGS <span style="color:#960050;background-color:#1e0010">声音设置</span>
+
+ACTION_DISPLAY_SETTINGS <span style="color:#960050;background-color:#1e0010">显示设置——字体大小等</span>
+
+ACTION_LOCALE_SETTINGS <span style="color:#960050;background-color:#1e0010">语言设置</span>
+
+ACTION_INPUT_METHOD_SETTINGS <span style="color:#960050;background-color:#1e0010">输入法设置</span>
+
+ACTION_USER_DICTIONARY_SETTINGS <span style="color:#960050;background-color:#1e0010">用户词典</span>
+
+ACTION_APPLICATION_SETTINGS <span style="color:#960050;background-color:#1e0010">应用程序设置</span>
+
+ACTION_APPLICATION_DEVELOPMENT_SETTINGS <span style="color:#960050;background-color:#1e0010">应用程序设置</span>
+
+ACTION_QUICK_LAUNCH_SETTINGS <span style="color:#960050;background-color:#1e0010">快速启动设置</span>
+
+ACTION_MANAGE_APPLICATIONS_SETTINGS <span style="color:#960050;background-color:#1e0010">已下载（安装）软件列表</span>
+
+ACTION_SYNC_SETTINGS <span style="color:#960050;background-color:#1e0010">应用程序数据同步设置</span>
+
+ACTION_NETWORK_OPERATOR_SETTINGS <span style="color:#960050;background-color:#1e0010">可用网络搜索</span>
+
+ACTION_DATA_ROAMING_SETTINGS <span style="color:#960050;background-color:#1e0010">移动网络设置</span>
+
+ACTION_INTERNAL_STORAGE_SETTINGS <span style="color:#960050;background-color:#1e0010">手机存储设置</span>
+</code></pre></div>
+    </div>
+  </label>
+</div>
+
+<h3 id="调用系统打开文件">
+  调用系统打开文件
+  <a class="anchor" href="#%e8%b0%83%e7%94%a8%e7%b3%bb%e7%bb%9f%e6%89%93%e5%bc%80%e6%96%87%e4%bb%b6">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">OpenFile</span>(path)
+
+import <span style="color:#e6db74">&#34;android.webkit.MimeTypeMap&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.content.Intent&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.net.Uri&#34;</span>
+
+import <span style="color:#e6db74">&#34;java.io.File&#34;</span>
+
+FileName<span style="color:#f92672">=</span>tostring(File(path).Name)
+
+ExtensionName<span style="color:#f92672">=</span>FileName:match(<span style="color:#e6db74">&#34;%.(.+)&#34;</span>)
+
+Mime<span style="color:#f92672">=</span>MimeTypeMap.getSingleton().getMimeTypeFromExtension(ExtensionName)
+
+<span style="color:#66d9ef">if</span> Mime <span style="color:#66d9ef">then</span>
+
+intent <span style="color:#f92672">=</span> Intent()
+
+intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+
+intent.setAction(Intent.ACTION_VIEW);
+
+intent.setDataAndType(Uri.fromFile(File(path)), Mime);
+
+activity.startActivity(intent)
+
+<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>
+
+<span style="color:#66d9ef">else</span>
+
+<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">end</span>
+
+OpenFile(<span style="color:#960050;background-color:#1e0010">文件路径</span>)
+</code></pre></div><h3 id="调用图库">
+  调用图库
+  <a class="anchor" href="#%e8%b0%83%e7%94%a8%e5%9b%be%e5%ba%93">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+import <span style="color:#e6db74">&#34;android.content.Intent&#34;</span>
+
+<span style="color:#66d9ef">local</span> intent<span style="color:#f92672">=</span> Intent(Intent.ACTION_PICK)
+
+intent.setType(<span style="color:#e6db74">&#34;image/*&#34;</span>)
+
+this.startActivityForResult(intent, <span style="color:#ae81ff">1</span>)
+
+<span style="color:#75715e">-------</span>
+
+<span style="color:#75715e">--回调</span>
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onActivityResult</span>(requestCode,resultCode,intent)
+
+<span style="color:#66d9ef">if</span> intent <span style="color:#66d9ef">then</span>
+
+<span style="color:#66d9ef">local</span> cursor <span style="color:#f92672">=</span>this.getContentResolver ().query(intent.getData(), <span style="color:#66d9ef">nil</span>, <span style="color:#66d9ef">nil</span>, <span style="color:#66d9ef">nil</span>, <span style="color:#66d9ef">nil</span>)
+
+cursor.moveToFirst()
+
+import <span style="color:#e6db74">&#34;android.provider.MediaStore&#34;</span>
+
+<span style="color:#66d9ef">local</span> idx <span style="color:#f92672">=</span> cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA)
+
+fileSrc <span style="color:#f92672">=</span> cursor.getString(idx)
+
+bit<span style="color:#f92672">=</span><span style="color:#66d9ef">nil</span>
+
+<span style="color:#75715e">--fileSrc回调路径路径</span>
+
+import <span style="color:#e6db74">&#34;android.graphics.BitmapFactory&#34;</span>
+
+bit <span style="color:#f92672">=</span>BitmapFactory.decodeFile(fileSrc)
+
+<span style="color:#75715e">-- iv.setImageBitmap(bit)</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">end</span><span style="color:#75715e">--nirenr</span>
+</code></pre></div><h3 id="调用文件管理器选择文件">
+  调用文件管理器选择文件
+  <a class="anchor" href="#%e8%b0%83%e7%94%a8%e6%96%87%e4%bb%b6%e7%ae%a1%e7%90%86%e5%99%a8%e9%80%89%e6%8b%a9%e6%96%87%e4%bb%b6">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">ChooseFile</span>()
+
+import <span style="color:#e6db74">&#34;android.content.Intent&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.net.Uri&#34;</span>
+
+import <span style="color:#e6db74">&#34;java.net.URLDecoder&#34;</span>
+
+import <span style="color:#e6db74">&#34;java.io.File&#34;</span>
+
+intent <span style="color:#f92672">=</span> Intent(Intent.ACTION_GET_CONTENT)
+
+intent.setType(<span style="color:#e6db74">&#34;*/&#34;</span>);
+
+intent.addCategory(Intent.CATEGORY_OPENABLE)
+
+activity.startActivityForResult(intent,<span style="color:#ae81ff">1</span>);
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onActivityResult</span>(requestCode,resultCode,data)
+
+<span style="color:#66d9ef">if</span> resultCode <span style="color:#f92672">==</span> Activity.RESULT_OK <span style="color:#66d9ef">then</span>
+
+<span style="color:#66d9ef">local</span> str <span style="color:#f92672">=</span> data.getData().toString()
+
+<span style="color:#66d9ef">local</span> decodeStr <span style="color:#f92672">=</span> URLDecoder.decode(str,<span style="color:#e6db74">&#34;UTF-8&#34;</span>)
+
+print(decodeStr)
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">end</span>
+
+ChooseFile()
+
+</code></pre></div><h3 id="分享文件">
+  分享文件
+  <a class="anchor" href="#%e5%88%86%e4%ba%ab%e6%96%87%e4%bb%b6">#</a>
+</h3>
+<pre tabindex="0"><code>function Sharing(path)
+
+import &quot;android.webkit.MimeTypeMap&quot;
+
+import &quot;android.content.Intent&quot;
+
+import &quot;android.net.Uri&quot;
+
+import &quot;java.io.File&quot;
+
+FileName=tostring(File(path).Name)
+
+ExtensionName=FileName:match(&quot;%.(.+)&quot;)
+
+Mime=MimeTypeMap.getSingleton().getMimeTypeFromExtension(ExtensionName)
+
+intent = Intent()
+
+intent.setAction(Intent.ACTION_SEND)
+
+intent.setType(Mime)
+
+file = File(path)
+
+uri = Uri.fromFile(file)
+
+intent.putExtra(Intent.EXTRA_STREAM,uri)
+
+intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+
+activity.startActivity(Intent.createChooser(intent, &quot;分享到:&quot;))
+
+end
+
+Sharing(文件路径)
+
+</code></pre><hr>
+<h3 id="调用通信">
+  调用通信
+  <a class="anchor" href="#%e8%b0%83%e7%94%a8%e9%80%9a%e4%bf%a1">#</a>
+</h3>
+<h4 id="发送短信-1">
+  发送短信
+  <a class="anchor" href="#%e5%8f%91%e9%80%81%e7%9f%ad%e4%bf%a1-1">#</a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+import <span style="color:#e6db74">&#34;android.net.Uri&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.content.Intent&#34;</span>
+
+uri <span style="color:#f92672">=</span> Uri.parse(<span style="color:#e6db74">&#34;smsto:10010&#34;</span>)
+
+intent <span style="color:#f92672">=</span> Intent(Intent.ACTION_SENDTO, uri)
+
+intent.putExtra(<span style="color:#e6db74">&#34;sms_body&#34;</span>,<span style="color:#e6db74">&#34;cxll&#34;</span>)
+
+intent.setAction(<span style="color:#e6db74">&#34;android.intent.action.VIEW&#34;</span>)
+
+activity.startActivity(intent)
+
+</code></pre></div><h4 id="发送彩信">
+  发送彩信
+  <a class="anchor" href="#%e5%8f%91%e9%80%81%e5%bd%a9%e4%bf%a1">#</a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+import <span style="color:#e6db74">&#34;android.net.Uri&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.content.Intent&#34;</span>
+
+uri<span style="color:#f92672">=</span>Uri.parse(<span style="color:#e6db74">&#34;file:///sdcard/a.png&#34;</span>) <span style="color:#75715e">--图片路径</span>
+
+intent<span style="color:#f92672">=</span> Intent();
+
+intent.setAction(Intent.ACTION_SEND);
+
+intent.putExtra(<span style="color:#e6db74">&#34;address&#34;</span>,mobile) <span style="color:#75715e">--邮件地址</span>
+
+intent.putExtra(<span style="color:#e6db74">&#34;sms_body&#34;</span>,content) <span style="color:#75715e">--邮件内容</span>
+
+intent.putExtra(Intent.EXTRA_STREAM,uri)
+
+intent.setType(<span style="color:#e6db74">&#34;image/png&#34;</span>) <span style="color:#75715e">--设置类型</span>
+
+this.startActivity(intent)
+</code></pre></div><h4 id="拨打电话">
+  拨打电话
+  <a class="anchor" href="#%e6%8b%a8%e6%89%93%e7%94%b5%e8%af%9d">#</a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">import <span style="color:#e6db74">&#34;android.net.Uri&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.content.Intent&#34;</span>
+
+uri <span style="color:#f92672">=</span> Uri.parse(<span style="color:#e6db74">&#34;tel:10010&#34;</span>)
+
+intent <span style="color:#f92672">=</span> Intent(Intent.ACTION_CALL, uri)
+
+intent.setAction(<span style="color:#e6db74">&#34;android.intent.action.VIEW&#34;</span>)
+
+activity.startActivity(intent)
+
+</code></pre></div><h2 id="调用应用商店搜索应用">
+  调用应用商店搜索应用
+  <a class="anchor" href="#%e8%b0%83%e7%94%a8%e5%ba%94%e7%94%a8%e5%95%86%e5%ba%97%e6%90%9c%e7%b4%a2%e5%ba%94%e7%94%a8">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+import <span style="color:#e6db74">&#34;android.content.Intent&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.net.Uri&#34;</span>
+
+intent <span style="color:#f92672">=</span> Intent(<span style="color:#e6db74">&#34;android.intent.action.VIEW&#34;</span>)
+
+intent .setData(Uri.parse( <span style="color:#e6db74">&#34;market://details?id=&#34;</span><span style="color:#f92672">..</span>activity.getPackageName()))
+
+this.startActivity(intent)
+</code></pre></div><h2 id="设备信息">
+  设备信息
+  <a class="anchor" href="#%e8%ae%be%e5%a4%87%e4%bf%a1%e6%81%af">#</a>
+</h2>
+<h2 id="获取系统sdkandroid版本及设备型号">
+  获取系统SDK，Android版本及设备型号
+  <a class="anchor" href="#%e8%8e%b7%e5%8f%96%e7%b3%bb%e7%bb%9fsdkandroid%e7%89%88%e6%9c%ac%e5%8f%8a%e8%ae%be%e5%a4%87%e5%9e%8b%e5%8f%b7">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+device_model <span style="color:#f92672">=</span> Build.MODEL <span style="color:#75715e">--设备型号</span>
+
+version_sdk <span style="color:#f92672">=</span> Build.VERSION.SDK <span style="color:#75715e">--设备SDK版本</span>
+
+version_release <span style="color:#f92672">=</span> Build.VERSION.RELEASE <span style="color:#75715e">--设备的系统版本</span>
+</code></pre></div><h2 id="获取设备标识码">
+  获取设备标识码
+  <a class="anchor" href="#%e8%8e%b7%e5%8f%96%e8%ae%be%e5%a4%87%e6%a0%87%e8%af%86%e7%a0%81">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+import <span style="color:#e6db74">&#34;android.provider.Settings$Secure&#34;</span>
+
+android_id <span style="color:#f92672">=</span> Secure.getString(activity.getContentResolver(), Secure.ANDROID_ID)
+</code></pre></div><h2 id="获取imei">
+  获取IMEI
+  <a class="anchor" href="#%e8%8e%b7%e5%8f%96imei">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+import <span style="color:#e6db74">&#34;android.content.Context&#34;</span>
+
+imei<span style="color:#f92672">=</span>activity.getSystemService(Context.TELEPHONY_SERVICE).getDeviceId()
+</code></pre></div><h2 id="精准获取屏幕尺寸">
+  精准获取屏幕尺寸
+  <a class="anchor" href="#%e7%b2%be%e5%87%86%e8%8e%b7%e5%8f%96%e5%b1%8f%e5%b9%95%e5%b0%ba%e5%af%b8">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getScreenPhysicalSize</span>(ctx)
+
+import <span style="color:#e6db74">&#34;android.util.DisplayMetrics&#34;</span>
+
+dm <span style="color:#f92672">=</span> DisplayMetrics();
+
+ctx.getWindowManager().getDefaultDisplay().getMetrics(dm);
+
+diagonalPixels <span style="color:#f92672">=</span> Math.sqrt(Math.pow(dm.widthPixels, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">+</span> Math.pow(dm.heightPixels, <span style="color:#ae81ff">2</span>));
+
+<span style="color:#66d9ef">return</span> diagonalPixels <span style="color:#f92672">/</span> (<span style="color:#ae81ff">160</span> <span style="color:#f92672">*</span> dm.density);
+
+<span style="color:#66d9ef">end</span>
+
+print(getScreenPhysicalSize(activity))
+</code></pre></div><h2 id="获取手机存储空间">
+  获取手机存储空间
+  <a class="anchor" href="#%e8%8e%b7%e5%8f%96%e6%89%8b%e6%9c%ba%e5%ad%98%e5%82%a8%e7%a9%ba%e9%97%b4">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#75715e">--获取手机内置剩余存储空间</span>
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">GetSurplusSpace</span>()
+
+fs <span style="color:#f92672">=</span> StatFs(Environment.getDataDirectory().getPath())
+
+<span style="color:#66d9ef">return</span> Formatter.formatFileSize(activity, (fs.getAvailableBytes()))
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#75715e">--获取手机内置存储总空间</span>
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">GetTotalSpace</span>()
+
+path <span style="color:#f92672">=</span> Environment.getExternalStorageDirectory()
+
+stat <span style="color:#f92672">=</span> StatFs(path.getPath())
+
+blockSize <span style="color:#f92672">=</span> stat.getBlockSize()
+
+totalBlocks <span style="color:#f92672">=</span> stat.getBlockCount()
+
+<span style="color:#66d9ef">return</span> Formatter.formatFileSize(activity, blockSize <span style="color:#f92672">*</span> totalBlocks)
+
+<span style="color:#66d9ef">end</span>
+</code></pre></div><h2 id="获取手机内置存储路径">
+  获取手机内置存储路径
+  <a class="anchor" href="#%e8%8e%b7%e5%8f%96%e6%89%8b%e6%9c%ba%e5%86%85%e7%bd%ae%e5%ad%98%e5%82%a8%e8%b7%af%e5%be%84">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+Environment.getExternalStorageDirectory().toString()
+</code></pre></div><h2 id="获取已安装程序的包名版本号最后更新时间图标应用名称">
+  获取已安装程序的包名、版本号、最后更新时间、图标、应用名称
+  <a class="anchor" href="#%e8%8e%b7%e5%8f%96%e5%b7%b2%e5%ae%89%e8%a3%85%e7%a8%8b%e5%ba%8f%e7%9a%84%e5%8c%85%e5%90%8d%e7%89%88%e6%9c%ac%e5%8f%b7%e6%9c%80%e5%90%8e%e6%9b%b4%e6%96%b0%e6%97%b6%e9%97%b4%e5%9b%be%e6%a0%87%e5%ba%94%e7%94%a8%e5%90%8d%e7%a7%b0">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">GetAppInfo</span>(<span style="color:#960050;background-color:#1e0010">包名</span>)
+
+import <span style="color:#e6db74">&#34;android.content.pm.PackageManager&#34;</span>
+
+<span style="color:#66d9ef">local</span> pm <span style="color:#f92672">=</span> activity.getPackageManager();
+
+<span style="color:#66d9ef">local</span> <span style="color:#960050;background-color:#1e0010">图标</span> <span style="color:#f92672">=</span> pm.getApplicationInfo(tostring(<span style="color:#960050;background-color:#1e0010">包名</span>),<span style="color:#ae81ff">0</span>)
+
+<span style="color:#66d9ef">local</span> <span style="color:#960050;background-color:#1e0010">图标</span> <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">图标</span>.loadIcon(pm);
+
+<span style="color:#66d9ef">local</span> pkg <span style="color:#f92672">=</span> activity.getPackageManager().getPackageInfo(<span style="color:#960050;background-color:#1e0010">包名</span>, <span style="color:#ae81ff">0</span>);
+
+<span style="color:#66d9ef">local</span> <span style="color:#960050;background-color:#1e0010">应用名称</span> <span style="color:#f92672">=</span> pkg.applicationInfo.loadLabel(activity.getPackageManager())
+
+<span style="color:#66d9ef">local</span> <span style="color:#960050;background-color:#1e0010">版本号</span> <span style="color:#f92672">=</span> activity.getPackageManager().getPackageInfo(<span style="color:#960050;background-color:#1e0010">包名</span>, <span style="color:#ae81ff">0</span>).versionName
+
+<span style="color:#66d9ef">local</span> <span style="color:#960050;background-color:#1e0010">最后更新时间</span> <span style="color:#f92672">=</span> activity.getPackageManager().getPackageInfo(<span style="color:#960050;background-color:#1e0010">包名</span>, <span style="color:#ae81ff">0</span>).lastUpdateTime
+
+<span style="color:#66d9ef">local</span> cal <span style="color:#f92672">=</span> Calendar.getInstance();
+
+cal.setTimeInMillis(<span style="color:#960050;background-color:#1e0010">最后更新时间</span>);
+
+<span style="color:#66d9ef">local</span> <span style="color:#960050;background-color:#1e0010">最后更新时间</span> <span style="color:#f92672">=</span> cal.getTime().toLocaleString()
+
+<span style="color:#66d9ef">return</span> <span style="color:#960050;background-color:#1e0010">包名</span>,<span style="color:#960050;background-color:#1e0010">版本号</span>,<span style="color:#960050;background-color:#1e0010">最后更新时间</span>,<span style="color:#960050;background-color:#1e0010">图标</span>,<span style="color:#960050;background-color:#1e0010">应用名称</span>
+
+<span style="color:#66d9ef">end</span>
+</code></pre></div><h2 id="获取指定安装包的包名图标应用名">
+  获取指定安装包的包名,图标,应用名
+  <a class="anchor" href="#%e8%8e%b7%e5%8f%96%e6%8c%87%e5%ae%9a%e5%ae%89%e8%a3%85%e5%8c%85%e7%9a%84%e5%8c%85%e5%90%8d%e5%9b%be%e6%a0%87%e5%ba%94%e7%94%a8%e5%90%8d">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+import <span style="color:#e6db74">&#34;android.content.pm.PackageManager&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.content.pm.ApplicationInfo&#34;</span>
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">GetApkInfo</span>(archiveFilePath)
+
+pm <span style="color:#f92672">=</span> activity.getPackageManager()
+
+info <span style="color:#f92672">=</span> pm.getPackageArchiveInfo(archiveFilePath, PackageManager.GET_ACTIVITIES);
+
+<span style="color:#66d9ef">if</span> info <span style="color:#f92672">~=</span> <span style="color:#66d9ef">nil</span> <span style="color:#66d9ef">then</span>
+
+appInfo <span style="color:#f92672">=</span> info.applicationInfo;
+
+appName <span style="color:#f92672">=</span> tostring(pm.getApplicationLabel(appInfo))
+
+packageName <span style="color:#f92672">=</span> appInfo.packageName; <span style="color:#75715e">--安装包名称</span>
+
+version<span style="color:#f92672">=</span>info.versionName; <span style="color:#75715e">--版本信息</span>
+
+icon <span style="color:#f92672">=</span> pm.getApplicationIcon(appInfo);<span style="color:#75715e">--图标</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">return</span> packageName,version,icon
+
+<span style="color:#66d9ef">end</span>
+</code></pre></div><h2 id="获取某程序是否安装">
+  获取某程序是否安装
+  <a class="anchor" href="#%e8%8e%b7%e5%8f%96%e6%9f%90%e7%a8%8b%e5%ba%8f%e6%98%af%e5%90%a6%e5%ae%89%e8%a3%85">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#66d9ef">if</span> pcall(<span style="color:#66d9ef">function</span>() activity.getPackageManager().getPackageInfo(<span style="color:#e6db74">&#34;包名&#34;</span>,<span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">end</span>) <span style="color:#66d9ef">then</span>
+
+print(<span style="color:#e6db74">&#34;已安装&#34;</span>)
+
+<span style="color:#66d9ef">else</span>
+
+print(<span style="color:#e6db74">&#34;未安装&#34;</span>)
+
+<span style="color:#66d9ef">end</span>
+</code></pre></div><h2 id="获取imei号">
+  获取IMEI号
+  <a class="anchor" href="#%e8%8e%b7%e5%8f%96imei%e5%8f%b7">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+import <span style="color:#e6db74">&#34;android.content.*&#34;</span>
+
+<span style="color:#75715e">--导入包</span>
+
+imei<span style="color:#f92672">=</span>activity.getSystemService(Context.TELEPHONY_SERVICE).getDeviceId();
+
+print(imei)
+
+<span style="color:#75715e">--别忘了添加权限&#34;READ_PHONE_STATE&#34;</span>
+</code></pre></div><h2 id="获取运营商名称">
+  获取运营商名称
+  <a class="anchor" href="#%e8%8e%b7%e5%8f%96%e8%bf%90%e8%90%a5%e5%95%86%e5%90%8d%e7%a7%b0">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+import <span style="color:#e6db74">&#34;android.content.Context&#34;</span>
+
+<span style="color:#960050;background-color:#1e0010">运营商名称</span> <span style="color:#f92672">=</span> this.getSystemService(Context.TELEPHONY_SERVICE).getNetworkOperatorName()
+
+print(<span style="color:#960050;background-color:#1e0010">运营商名称</span>)
+
+<span style="color:#75715e">--添加权限 READ_PHONE_STATE</span>
+</code></pre></div><h2 id="获取本地时间">
+  获取本地时间
+  <a class="anchor" href="#%e8%8e%b7%e5%8f%96%e6%9c%ac%e5%9c%b0%e6%97%b6%e9%97%b4">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#75715e">--格式的时间</span>
+
+os.date(<span style="color:#e6db74">&#34;%Y-%m-%d %H:%M:%S&#34;</span>)
+
+<span style="color:#75715e">--本地时间总和</span>
+
+os.clock()
+</code></pre></div></article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#申请root权限">申请root权限</a></li>
+    <li><a href="#分享文字">分享文字</a></li>
+    <li><a href="#设置横屏竖屏">设置横屏竖屏</a></li>
+    <li><a href="#shell执行">Shell执行</a></li>
+    <li><a href="#震动">震动</a></li>
+    <li><a href="#发送短信">发送短信</a></li>
+    <li><a href="#分享">分享</a></li>
+    <li><a href="#传感器">传感器</a></li>
+    <li><a href="#使用系统tts播报语音">使用系统TTS播报语音</a></li>
+    <li><a href="#返回桌面">返回桌面</a></li>
+    <li><a href="#模拟按键">模拟按键</a></li>
+    <li><a href="#权限">权限</a>
+      <ul>
+        <li><a href="#判断有无悬浮窗权限">判断有无悬浮窗权限</a></li>
+        <li><a href="#获取悬浮窗权限">获取悬浮窗权限</a></li>
+      </ul>
+    </li>
+    <li><a href="#应用交互">应用交互</a></li>
+    <li><a href="#调用其它程序打开文件">调用其它程序打开文件</a>
+      <ul>
+        <li><a href="#qq名片">QQ名片</a></li>
+        <li><a href="#浏览器">浏览器</a></li>
+        <li><a href="#打开其它程序">打开其它程序</a></li>
+        <li><a href="#安装其他程序">安装其他程序</a></li>
+        <li><a href="#卸载其他程序">卸载其他程序</a></li>
+      </ul>
+    </li>
+    <li><a href="#系统交互">系统交互</a>
+      <ul>
+        <li><a href="#播放mp4">播放Mp4</a></li>
+        <li><a href="#播放mp3">播放Mp3</a></li>
+        <li><a href="#搜索应用">搜索应用</a></li>
+        <li><a href="#调用系统设置">调用系统设置</a></li>
+        <li><a href="#调用系统打开文件">调用系统打开文件</a></li>
+        <li><a href="#调用图库">调用图库</a></li>
+        <li><a href="#调用文件管理器选择文件">调用文件管理器选择文件</a></li>
+        <li><a href="#分享文件">分享文件</a></li>
+        <li><a href="#调用通信">调用通信</a></li>
+      </ul>
+    </li>
+    <li><a href="#调用应用商店搜索应用">调用应用商店搜索应用</a></li>
+    <li><a href="#设备信息">设备信息</a></li>
+    <li><a href="#获取系统sdkandroid版本及设备型号">获取系统SDK，Android版本及设备型号</a></li>
+    <li><a href="#获取设备标识码">获取设备标识码</a></li>
+    <li><a href="#获取imei">获取IMEI</a></li>
+    <li><a href="#精准获取屏幕尺寸">精准获取屏幕尺寸</a></li>
+    <li><a href="#获取手机存储空间">获取手机存储空间</a></li>
+    <li><a href="#获取手机内置存储路径">获取手机内置存储路径</a></li>
+    <li><a href="#获取已安装程序的包名版本号最后更新时间图标应用名称">获取已安装程序的包名、版本号、最后更新时间、图标、应用名称</a></li>
+    <li><a href="#获取指定安装包的包名图标应用名">获取指定安装包的包名,图标,应用名</a></li>
+    <li><a href="#获取某程序是否安装">获取某程序是否安装</a></li>
+    <li><a href="#获取imei号">获取IMEI号</a></li>
+    <li><a href="#获取运营商名称">获取运营商名称</a></li>
+    <li><a href="#获取本地时间">获取本地时间</a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

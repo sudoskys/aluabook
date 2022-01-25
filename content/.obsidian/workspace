@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "docs/03/0301.md",
+            "file": "docs/03/_index.md",
             "mode": "source",
             "source": false
           }
@@ -21,7 +21,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "docs/03/_index.md",
+            "file": "posts/01NEW.md",
             "mode": "source",
             "source": false
           }
@@ -81,7 +81,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "docs/03/0301.md",
+                "file": "docs/03/_index.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -101,15 +101,15 @@
   },
   "active": "5d55494fb6a1488d",
   "lastOpenFiles": [
-    "docs/03/0301.md",
     "docs/03/_index.md",
-    "docs/02/0201string.md",
     "docs/02/_index.md",
-    "docs/02/0202layout.md",
-    "docs/01/0101sudo.md",
-    "docs/01/0102alua.md",
-    "docs/05/_index.md",
-    "docs/01/_index.md",
-    "_index.md"
+    "posts/02RES.md",
+    "posts/01NEW.md",
+    "posts/_index.md",
+    "docs/_index.md",
+    "docs/04/0401when.md",
+    "docs/04/0411Animation.md",
+    "docs/04/0410file.md",
+    "docs/04/0409sthing.md"
   ]
 }

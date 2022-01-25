@@ -5,17 +5,4 @@ title: "WELCOME"
 ---
 
 # Introduction
-
-
-
-```lua
-
-asoul=100000
-
-if a=1 then
-b=2
-end
-
-
-```
-
+摆了

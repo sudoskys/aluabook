@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>02 教程 on LUA book</title>
+    <title>02-00 教程 on LUA book</title>
     <link>https://lua.dianas.cyou/docs/02/</link>
-    <description>Recent content in 02 教程 on LUA book</description>
+    <description>Recent content in 02-00 教程 on LUA book</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language><atom:link href="https://lua.dianas.cyou/docs/02/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -22,7 +22,7 @@ str=&amp;#34;左中右&amp;#34; --取左 左=str:match(&amp;#34;(.+)中&amp;#34;
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://lua.dianas.cyou/docs/02/0202layout/</guid>
-      <description>布局 #  </description>
+      <description>布局 #  未完持续</description>
     </item>
     
   </channel>

@@ -1,0 +1,16 @@
+appname="BiliFanViewer"
+appver="0.0.2"
+appcode="1"
+appsdk="15"
+path_pattern=""
+packagename="com.sakura.BiliFanViewer"
+theme="Theme_Material_Light_Dialog_NoActionBar"
+app_key=""
+app_channel=""
+developer=""
+description=""
+debugmode=true
+user_permission={
+  "INTERNET",
+  "WRITE_EXTERNAL_STORAGE"
+}

@@ -1,0 +1,1558 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="事件 #  播放音频 #  --导入包 import &#34;android.media.MediaPlayer&#34; local 音频播放器=MediaPlayer() function 播放音频(路径) 音频播放器.reset() .setDataSource(路径) .prepare() .start() .setOnCompletionListener({ onCompletion=function() print(&#34;播放完毕&#34;) end}) end 强制结束自身并清除自身数据 #  os.execute(&#34;pm clear &#34;..activity.getPackageName()) 调用系统下载 #  --导入包 import &#34;android.content.Context&#34; import &#34;android.net.Uri&#34; downloadManager=activity.getSystemService(Context.DOWNLOAD_SERVICE); url=Uri.parse(&#34;绝对下载链接&#34;); request=DownloadManager.Request(url); request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_MOBILE|DownloadManager.Request.NETWORK_WIFI); request.setDestinationInExternalPublicDir(&#34;目录名，可以是Download&#34;,&#34;下载的文件名&#34;); request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED); downloadManager.enqueue(request); 获取本应用包名 #  activity.getPackageName() 删除ListView中某项 #  adp.remove(pos) 获取剪贴板内容 #  import&#34;android.content.*&#34; --导入包 a=activity.getSystemService(Context.CLIPBOARD_SERVICE).getText() 对话框Dialog #  --简单对话框 AlertDialog.Builder(this).setTitle(&#34;标题&#34;) .setMessage(&#34;简单消息框&#34;) .setPositiveButton(&#34;确定&#34;,nil) .show(); --带有三个按钮的对话框 AlertDialog.Builder(this) .setTitle(&#34;确认&#34;) .setMessage(&#34;确定吗？&#34;) .setPositiveButton(&#34;是&#34;,nil) .">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="03-09 事件" />
+<meta property="og:description" content="事件 #  播放音频 #  --导入包 import &#34;android.media.MediaPlayer&#34; local 音频播放器=MediaPlayer() function 播放音频(路径) 音频播放器.reset() .setDataSource(路径) .prepare() .start() .setOnCompletionListener({ onCompletion=function() print(&#34;播放完毕&#34;) end}) end 强制结束自身并清除自身数据 #  os.execute(&#34;pm clear &#34;..activity.getPackageName()) 调用系统下载 #  --导入包 import &#34;android.content.Context&#34; import &#34;android.net.Uri&#34; downloadManager=activity.getSystemService(Context.DOWNLOAD_SERVICE); url=Uri.parse(&#34;绝对下载链接&#34;); request=DownloadManager.Request(url); request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_MOBILE|DownloadManager.Request.NETWORK_WIFI); request.setDestinationInExternalPublicDir(&#34;目录名，可以是Download&#34;,&#34;下载的文件名&#34;); request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED); downloadManager.enqueue(request); 获取本应用包名 #  activity.getPackageName() 删除ListView中某项 #  adp.remove(pos) 获取剪贴板内容 #  import&#34;android.content.*&#34; --导入包 a=activity.getSystemService(Context.CLIPBOARD_SERVICE).getText() 对话框Dialog #  --简单对话框 AlertDialog.Builder(this).setTitle(&#34;标题&#34;) .setMessage(&#34;简单消息框&#34;) .setPositiveButton(&#34;确定&#34;,nil) .show(); --带有三个按钮的对话框 AlertDialog.Builder(this) .setTitle(&#34;确认&#34;) .setMessage(&#34;确定吗？&#34;) .setPositiveButton(&#34;是&#34;,nil) ." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://lua.dianas.cyou/docs/05/0309sthing/" /><meta property="article:section" content="docs" />
+
+
+
+<title>03-09 事件 | LUA book</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.82c5dbd23447cee0b4c2aa3ed08ce0961faa40e1fa370eee4f8c9f02e0d46b5f.css" integrity="sha256-gsXb0jRHzuC0wqo&#43;0Izglh&#43;qQOH6Nw7uT4yfAuDUa18=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.373325582531ec679f42f0a5df1396215156a0cf2124262a48b4ae3559158cd5.js" integrity="sha256-NzMlWCUx7GefQvCl3xOWIVFWoM8hJCYqSLSuNVkVjNU=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>LUA book</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/01/" class="">01-00 初步认识LUA</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/01/0101sudo/" class="">01-01 开发素养</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/01/0102alua/" class="">01-02 认识Alua写法</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/02/" class="">02-00 教程</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/02/0201string/" class="">02-01 String</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/02/0202layout/" class="">02-02 Layout</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/05/" class="">03-00 MLUA教程</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/05/0301when/" class="">03-01 when的用法</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/05/0302defer/" class="">03-02 Defer关键字</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/05/0303luawebviewzidingyi/" class="">03-03 LuaWebView自定义进度条</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/05/0304string/" class="">03-04 字符串</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/05/0305layout/" class="">03-05 界面&amp;布局</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/05/0306system/" class="">03-06 系统调用</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/05/0307caculate/" class="">03-07 各式算法</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/05/0308sent/" class="">03-08 信息&amp;发送</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/05/0309sthing/" class=" active">03-09 事件</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/05/0310file/" class="">03-10 文件处理</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/05/0311animation/" class="">03-11 动画</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/03/" class="">03-00 工程笔记</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/03/0301/" class="">03-01 案例分析01</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/" >
+        Blog
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>03-09 事件</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#播放音频">播放音频</a></li>
+    <li><a href="#强制结束自身并清除自身数据">强制结束自身并清除自身数据</a></li>
+    <li><a href="#调用系统下载">调用系统下载</a></li>
+    <li><a href="#获取本应用包名">获取本应用包名</a></li>
+    <li><a href="#删除listview中某项">删除ListView中某项</a></li>
+    <li><a href="#获取剪贴板内容">获取剪贴板内容</a></li>
+    <li><a href="#对话框dialog">对话框Dialog</a></li>
+    <li><a href="#关于v4的圆形下拉刷新">关于V4的圆形下拉刷新</a></li>
+    <li><a href="#窗口回调事件">窗口回调事件</a></li>
+    <li><a href="#列表下滑到最底事件">列表下滑到最底事件</a></li>
+    <li><a href="#按两次返回键退出">按两次返回键退出</a></li>
+    <li><a href="#延迟">延迟</a></li>
+    <li><a href="#定时器">定时器</a></li>
+    <li><a href="#复制文本到剪贴板">复制文本到剪贴板</a></li>
+    <li><a href="#保存图片到本地">保存图片到本地</a></li>
+    <li><a href="#查询本地所有图片">查询本地所有图片</a></li>
+    <li><a href="#递归查找文件">递归查找文件</a></li>
+    <li><a href="#查询本地所有视频">查询本地所有视频</a></li>
+    <li><a href="#播放音乐与视频">播放音乐与视频</a></li>
+    <li><a href="#自定义默认弹窗标题消息按钮的颜色">自定义默认弹窗标题,消息,按钮的颜色</a></li>
+    <li><a href="#获取视频第一帧">获取视频第一帧</a></li>
+    <li><a href="#选择文件模块">选择文件模块</a></li>
+    <li><a href="#选择路径模块">选择路径模块</a></li>
+    <li><a href="#获取视图中的所有文本">获取视图中的所有文本</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="事件">
+  事件
+  <a class="anchor" href="#%e4%ba%8b%e4%bb%b6">#</a>
+</h1>
+<h2 id="播放音频">
+  播放音频
+  <a class="anchor" href="#%e6%92%ad%e6%94%be%e9%9f%b3%e9%a2%91">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#75715e">--导入包</span>
+
+import <span style="color:#e6db74">&#34;android.media.MediaPlayer&#34;</span>
+
+<span style="color:#66d9ef">local</span> <span style="color:#960050;background-color:#1e0010">音频播放器</span><span style="color:#f92672">=</span>MediaPlayer()
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">播放音频</span>(<span style="color:#960050;background-color:#1e0010">路径</span>)
+
+<span style="color:#960050;background-color:#1e0010">音频播放器</span>.reset()
+
+.setDataSource(<span style="color:#960050;background-color:#1e0010">路径</span>)
+
+.prepare()
+
+.start()
+
+.setOnCompletionListener({
+
+onCompletion<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>()
+
+print(<span style="color:#e6db74">&#34;播放完毕&#34;</span>)
+
+<span style="color:#66d9ef">end</span>})
+
+<span style="color:#66d9ef">end</span>
+</code></pre></div><h2 id="强制结束自身并清除自身数据">
+  强制结束自身并清除自身数据
+  <a class="anchor" href="#%e5%bc%ba%e5%88%b6%e7%bb%93%e6%9d%9f%e8%87%aa%e8%ba%ab%e5%b9%b6%e6%b8%85%e9%99%a4%e8%87%aa%e8%ba%ab%e6%95%b0%e6%8d%ae">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+os.execute(<span style="color:#e6db74">&#34;pm clear &#34;</span><span style="color:#f92672">..</span>activity.getPackageName())
+</code></pre></div><h2 id="调用系统下载">
+  调用系统下载
+  <a class="anchor" href="#%e8%b0%83%e7%94%a8%e7%b3%bb%e7%bb%9f%e4%b8%8b%e8%bd%bd">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#75715e">--导入包</span>
+
+import <span style="color:#e6db74">&#34;android.content.Context&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.net.Uri&#34;</span>
+
+downloadManager<span style="color:#f92672">=</span>activity.getSystemService(Context.DOWNLOAD_SERVICE);
+
+url<span style="color:#f92672">=</span>Uri.parse(<span style="color:#e6db74">&#34;绝对下载链接&#34;</span>);
+
+request<span style="color:#f92672">=</span>DownloadManager.Request(url);
+
+request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_MOBILE<span style="color:#f92672">|</span>DownloadManager.Request.NETWORK_WIFI);
+
+request.setDestinationInExternalPublicDir(<span style="color:#e6db74">&#34;目录名，可以是Download&#34;</span>,<span style="color:#e6db74">&#34;下载的文件名&#34;</span>);
+
+request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+
+downloadManager.enqueue(request);
+</code></pre></div><h2 id="获取本应用包名">
+  获取本应用包名
+  <a class="anchor" href="#%e8%8e%b7%e5%8f%96%e6%9c%ac%e5%ba%94%e7%94%a8%e5%8c%85%e5%90%8d">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+activity.getPackageName()
+</code></pre></div><h2 id="删除listview中某项">
+  删除ListView中某项
+  <a class="anchor" href="#%e5%88%a0%e9%99%a4listview%e4%b8%ad%e6%9f%90%e9%a1%b9">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+adp.remove(pos)
+</code></pre></div><h2 id="获取剪贴板内容">
+  获取剪贴板内容
+  <a class="anchor" href="#%e8%8e%b7%e5%8f%96%e5%89%aa%e8%b4%b4%e6%9d%bf%e5%86%85%e5%ae%b9">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+import<span style="color:#e6db74">&#34;android.content.*&#34;</span>
+
+<span style="color:#75715e">--导入包</span>
+
+a<span style="color:#f92672">=</span>activity.getSystemService(Context.CLIPBOARD_SERVICE).getText()
+</code></pre></div><h2 id="对话框dialog">
+  对话框Dialog
+  <a class="anchor" href="#%e5%af%b9%e8%af%9d%e6%a1%86dialog">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#75715e">--简单对话框</span>
+
+AlertDialog.Builder(this).setTitle(<span style="color:#e6db74">&#34;标题&#34;</span>)
+
+.setMessage(<span style="color:#e6db74">&#34;简单消息框&#34;</span>)
+
+.setPositiveButton(<span style="color:#e6db74">&#34;确定&#34;</span>,<span style="color:#66d9ef">nil</span>)
+
+.show();
+
+<span style="color:#75715e">--带有三个按钮的对话框</span>
+
+AlertDialog.Builder(this)
+
+.setTitle(<span style="color:#e6db74">&#34;确认&#34;</span>)
+
+.setMessage(<span style="color:#e6db74">&#34;确定吗？&#34;</span>)
+
+.setPositiveButton(<span style="color:#e6db74">&#34;是&#34;</span>,<span style="color:#66d9ef">nil</span>)
+
+.setNegativeButton(<span style="color:#e6db74">&#34;否&#34;</span>,<span style="color:#66d9ef">nil</span>)
+
+.setNeutralButton(<span style="color:#e6db74">&#34;不知道&#34;</span>,<span style="color:#66d9ef">nil</span>)
+
+.show();
+
+<span style="color:#75715e">--带输入框的</span>
+
+AlertDialog.Builder(this)
+
+.setTitle(<span style="color:#e6db74">&#34;请输入&#34;</span>)
+
+.setIcon(android.R.drawable.ic_dialog_info)
+
+.setView(EditText(this))
+
+.setPositiveButton(<span style="color:#e6db74">&#34;确定&#34;</span>, <span style="color:#66d9ef">nil</span>)
+
+.setNegativeButton(<span style="color:#e6db74">&#34;取消&#34;</span>, <span style="color:#66d9ef">nil</span>)
+
+.show();
+
+<span style="color:#75715e">--单选的</span>
+
+AlertDialog.Builder(this)
+
+.setTitle(<span style="color:#e6db74">&#34;请选择&#34;</span>)
+
+.setIcon(android.R.drawable.ic_dialog_info)
+
+.setSingleChoiceItems({<span style="color:#e6db74">&#34;选项1&#34;</span>,<span style="color:#e6db74">&#34;选项2&#34;</span>,<span style="color:#e6db74">&#34;选项3&#34;</span>,<span style="color:#e6db74">&#34;选项4&#34;</span>}, <span style="color:#ae81ff">0</span>,
+
+DialogInterface.OnClickListener() {
+
+onClick(dialog,which) {
+
+dialog.dismiss();
+
+}
+
+}
+
+)
+
+.setNegativeButton(<span style="color:#e6db74">&#34;取消&#34;</span>, null)
+
+.show();
+
+<span style="color:#75715e">--多选的</span>
+
+AlertDialog.Builder(this)
+
+.setTitle(<span style="color:#e6db74">&#34;多选框&#34;</span>)
+
+.setMultiChoiceItems({<span style="color:#e6db74">&#34;选项1&#34;</span>,<span style="color:#e6db74">&#34;选项2&#34;</span>,<span style="color:#e6db74">&#34;选项3&#34;</span>,<span style="color:#e6db74">&#34;选项4&#34;</span>}, null, null)
+
+.setPositiveButton(<span style="color:#e6db74">&#34;确定&#34;</span>, null)
+
+.setNegativeButton(<span style="color:#e6db74">&#34;取消&#34;</span>, null)
+
+.show();
+
+<span style="color:#75715e">--列表的</span>
+
+AlertDialog.Builder(this)
+
+.setTitle(<span style="color:#e6db74">&#34;列表框&#34;</span>)
+
+.setItems({<span style="color:#e6db74">&#34;列表项1&#34;</span>,<span style="color:#e6db74">&#34;列表项2&#34;</span>,<span style="color:#e6db74">&#34;列表项3&#34;</span>},<span style="color:#66d9ef">nil</span>)
+
+.setNegativeButton(<span style="color:#e6db74">&#34;确定&#34;</span>,<span style="color:#66d9ef">nil</span>)
+
+.show();
+
+<span style="color:#75715e">--图片的</span>
+
+img <span style="color:#f92672">=</span> ImageView(this);
+
+img.setImageResource(R.drawable.icon);
+
+AlertDialog.Builder(this)
+
+.setTitle(<span style="color:#e6db74">&#34;图片框&#34;</span>)
+
+.setView(img)
+
+.setPositiveButton(<span style="color:#e6db74">&#34;确定&#34;</span>,<span style="color:#66d9ef">nil</span>)
+
+.show();
+</code></pre></div><h2 id="关于v4的圆形下拉刷新">
+  关于V4的圆形下拉刷新
+  <a class="anchor" href="#%e5%85%b3%e4%ba%8ev4%e7%9a%84%e5%9c%86%e5%bd%a2%e4%b8%8b%e6%8b%89%e5%88%b7%e6%96%b0">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#75715e">--设置下拉刷新监听事件</span>
+
+swipeRefreshLayout.setOnRefreshListener(this);
+
+<span style="color:#75715e">--设置进度条的颜色</span>
+
+swipeRefreshLayout.setColorSchemeColors(Color.RED, Color.BLUE, Color.GREEN);
+
+<span style="color:#75715e">--设置圆形进度条大小</span>
+
+swipeRefreshLayout.setSize(SwipeRefreshLayout.LARGE);
+
+<span style="color:#75715e">--设置进度条背景颜色</span>
+
+swipeRefreshLayout.setProgressBackgroundColorSchemeColor(Color.DKGRAY);
+
+<span style="color:#75715e">--设置下拉多少距离之后开始刷新数据</span>
+
+swipeRefreshLayout.setDistanceToTriggerSync(<span style="color:#ae81ff">50</span>);
+</code></pre></div><h2 id="窗口回调事件">
+  窗口回调事件
+  <a class="anchor" href="#%e7%aa%97%e5%8f%a3%e5%9b%9e%e8%b0%83%e4%ba%8b%e4%bb%b6">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onActivityResult</span>()
+
+<span style="color:#75715e">--事件</span>
+
+<span style="color:#66d9ef">end</span>
+</code></pre></div><h2 id="列表下滑到最底事件">
+  列表下滑到最底事件
+  <a class="anchor" href="#%e5%88%97%e8%a1%a8%e4%b8%8b%e6%bb%91%e5%88%b0%e6%9c%80%e5%ba%95%e4%ba%8b%e4%bb%b6">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+list.setOnScrollListener{
+
+onScrollStateChanged<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(l,s)
+
+<span style="color:#66d9ef">if</span> list.getLastVisiblePosition()<span style="color:#f92672">==</span>list.getCount()<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">then</span>
+
+<span style="color:#75715e">--事件</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">end</span>}
+</code></pre></div><h2 id="按两次返回键退出">
+  按两次返回键退出
+  <a class="anchor" href="#%e6%8c%89%e4%b8%a4%e6%ac%a1%e8%bf%94%e5%9b%9e%e9%94%ae%e9%80%80%e5%87%ba">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#960050;background-color:#1e0010">参数</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">onKeyDown</span>(code,event)
+
+<span style="color:#66d9ef">if</span> string.find(tostring(event),<span style="color:#e6db74">&#34;KEYCODE_BACK&#34;</span>) <span style="color:#f92672">~=</span> <span style="color:#66d9ef">nil</span> <span style="color:#66d9ef">then</span>
+
+<span style="color:#66d9ef">if</span> <span style="color:#960050;background-color:#1e0010">参数</span><span style="color:#f92672">+</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">&gt;</span> tonumber(os.time()) <span style="color:#66d9ef">then</span>
+
+activity.finish()
+
+<span style="color:#66d9ef">else</span>
+
+Toast.makeText(activity,<span style="color:#e6db74">&#34;再按一次返回键退出&#34;</span> , Toast.LENGTH_SHORT )
+
+.show()
+
+<span style="color:#960050;background-color:#1e0010">参数</span><span style="color:#f92672">=</span>tonumber(os.time())
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">end</span>
+</code></pre></div><h2 id="延迟">
+  延迟
+  <a class="anchor" href="#%e5%bb%b6%e8%bf%9f">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#75715e">--这个会卡进程，配合线程使用</span>
+
+Thread.sleep(<span style="color:#960050;background-color:#1e0010">延迟时间</span>)
+
+<span style="color:#75715e">--这个不会卡进程</span>
+
+<span style="color:#75715e">--500指延迟500毫秒</span>
+
+task(<span style="color:#ae81ff">500</span>,<span style="color:#66d9ef">function</span>()
+
+<span style="color:#75715e">--延迟之后执行的事件</span>
+
+<span style="color:#66d9ef">end</span>)
+</code></pre></div><h2 id="定时器">
+  定时器
+  <a class="anchor" href="#%e5%ae%9a%e6%97%b6%e5%99%a8">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#75715e">--timer定时器</span>
+
+t<span style="color:#f92672">=</span>timer(<span style="color:#66d9ef">function</span>()
+
+<span style="color:#75715e">--事件</span>
+
+<span style="color:#66d9ef">end</span>,<span style="color:#960050;background-color:#1e0010">延迟</span>,<span style="color:#960050;background-color:#1e0010">间隔</span>,<span style="color:#960050;background-color:#1e0010">初始化</span>)
+
+<span style="color:#75715e">--暂停timer定时器</span>
+
+t.Enable<span style="color:#f92672">=</span><span style="color:#66d9ef">false</span>
+
+<span style="color:#75715e">--启动timer定时器</span>
+
+t.Enable<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>
+
+<span style="color:#75715e">--Ticker定时器</span>
+
+ti<span style="color:#f92672">=</span>Ticker()
+
+ti.Period<span style="color:#f92672">=</span><span style="color:#960050;background-color:#1e0010">间隔</span>
+
+ti.onTick<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>()
+
+<span style="color:#75715e">--事件</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#75715e">--启动Ticker定时器</span>
+
+ti.start()
+
+<span style="color:#75715e">--停止Ticker定时器</span>
+
+ti.stop()
+</code></pre></div><h2 id="复制文本到剪贴板">
+  复制文本到剪贴板
+  <a class="anchor" href="#%e5%a4%8d%e5%88%b6%e6%96%87%e6%9c%ac%e5%88%b0%e5%89%aa%e8%b4%b4%e6%9d%bf">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#75715e">--先导入包</span>
+
+import <span style="color:#e6db74">&#34;android.content.*&#34;</span>
+
+activity.getSystemService(Context.CLIPBOARD_SERVICE).setText(<span style="color:#960050;background-color:#1e0010">文本</span>)
+</code></pre></div><h2 id="保存图片到本地">
+  保存图片到本地
+  <a class="anchor" href="#%e4%bf%9d%e5%ad%98%e5%9b%be%e7%89%87%e5%88%b0%e6%9c%ac%e5%9c%b0">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">SavePicture</span>(name,bm)
+
+<span style="color:#66d9ef">if</span> bm <span style="color:#66d9ef">then</span>
+
+import <span style="color:#e6db74">&#34;java.io.FileOutputStream&#34;</span>
+
+import <span style="color:#e6db74">&#34;java.io.File&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.graphics.Bitmap&#34;</span>
+
+name<span style="color:#f92672">=</span>tostring(name)
+
+f <span style="color:#f92672">=</span> File(name)
+
+out <span style="color:#f92672">=</span> FileOutputStream(f)
+
+bm.compress(Bitmap.CompressFormat.PNG,<span style="color:#ae81ff">90</span>, out)
+
+out.flush()
+
+out.close()
+
+<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>
+
+<span style="color:#66d9ef">else</span>
+
+<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">end</span>
+</code></pre></div><h2 id="查询本地所有图片">
+  查询本地所有图片
+  <a class="anchor" href="#%e6%9f%a5%e8%af%a2%e6%9c%ac%e5%9c%b0%e6%89%80%e6%9c%89%e5%9b%be%e7%89%87">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">QueryAllImage</span>()
+
+import <span style="color:#e6db74">&#34;android.provider.MediaStore&#34;</span>
+
+cursor <span style="color:#f92672">=</span> activity.ContentResolver
+
+mImageUri <span style="color:#f92672">=</span> MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+
+mCursor <span style="color:#f92672">=</span> cursor.query(mImageUri,<span style="color:#66d9ef">nil</span>,<span style="color:#66d9ef">nil</span>,<span style="color:#66d9ef">nil</span>,MediaStore.Images.Media.DATE_TAKEN)
+
+mCursor.moveToLast()
+
+imageTable<span style="color:#f92672">=</span>{}
+
+<span style="color:#66d9ef">while</span> mCursor.moveToPrevious() <span style="color:#66d9ef">do</span>
+
+path <span style="color:#f92672">=</span> mCursor.getString(mCursor.getColumnIndex(MediaStore.Images.Media.DATA))
+
+table.insert(imageTable,tostring(path))
+
+<span style="color:#66d9ef">end</span>
+
+mCursor.close()
+
+<span style="color:#66d9ef">return</span> imageTable
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#75715e">--返回一个表</span>
+</code></pre></div><h2 id="递归查找文件">
+  递归查找文件
+  <a class="anchor" href="#%e9%80%92%e5%bd%92%e6%9f%a5%e6%89%be%e6%96%87%e4%bb%b6">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">outPath</span>(ret)
+
+<span style="color:#66d9ef">for</span> i,p <span style="color:#66d9ef">in</span> pairs(luajava.astable(ret)) <span style="color:#66d9ef">do</span>
+
+print(p)
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">find</span>(catalog,name)
+
+<span style="color:#66d9ef">local</span> n<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+
+<span style="color:#66d9ef">local</span> t<span style="color:#f92672">=</span>os.clock()
+
+<span style="color:#66d9ef">local</span> ret<span style="color:#f92672">=</span>{}
+
+require <span style="color:#e6db74">&#34;import&#34;</span>
+
+import <span style="color:#e6db74">&#34;java.io.File&#34;</span>
+
+import <span style="color:#e6db74">&#34;java.lang.String&#34;</span>
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">FindFile</span>(catalog,name)
+
+<span style="color:#66d9ef">local</span> name<span style="color:#f92672">=</span>tostring(name)
+
+<span style="color:#66d9ef">local</span> ls<span style="color:#f92672">=</span>catalog.listFiles() <span style="color:#f92672">or</span> File{}
+
+<span style="color:#66d9ef">for</span> <span style="color:#960050;background-color:#1e0010">次数</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>,<span style="color:#f92672">#</span>ls<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">do</span>
+
+<span style="color:#75715e">--local 目录=tostring(ls[次数])</span>
+
+<span style="color:#66d9ef">local</span> f<span style="color:#f92672">=</span>ls[<span style="color:#960050;background-color:#1e0010">次数</span>]
+
+<span style="color:#66d9ef">if</span> f.isDirectory() <span style="color:#66d9ef">then</span><span style="color:#75715e">--如果是文件夹则继续匹配</span>
+
+FindFile(f,name)
+
+<span style="color:#66d9ef">else</span><span style="color:#75715e">--如果是文件则</span>
+
+n<span style="color:#f92672">=</span>n<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>
+
+<span style="color:#66d9ef">if</span> n<span style="color:#f92672">%</span><span style="color:#ae81ff">1000</span><span style="color:#f92672">==</span><span style="color:#ae81ff">0</span> <span style="color:#66d9ef">then</span>
+
+print(n,os.clock()<span style="color:#f92672">-</span>t)
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">local</span> nm<span style="color:#f92672">=</span>f.Name
+
+<span style="color:#66d9ef">if</span> string.find(nm,name) <span style="color:#66d9ef">then</span>
+
+<span style="color:#75715e">--thread(insert,目录)</span>
+
+table.insert(ret,tostring(f))
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">end</span>
+
+luajava.clear(f)
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">end</span>
+
+FindFile(catalog,name)
+
+call(<span style="color:#e6db74">&#34;outPath&#34;</span>,ret)
+
+<span style="color:#66d9ef">end</span>
+
+import <span style="color:#e6db74">&#34;java.io.File&#34;</span>
+
+catalog<span style="color:#f92672">=</span>File(<span style="color:#e6db74">&#34;/sdcard/AndroLua&#34;</span>)
+
+name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;.j?pn?g&#34;</span>
+
+thread(find,catalog,name)
+</code></pre></div><h2 id="查询本地所有视频">
+  查询本地所有视频
+  <a class="anchor" href="#%e6%9f%a5%e8%af%a2%e6%9c%ac%e5%9c%b0%e6%89%80%e6%9c%89%e8%a7%86%e9%a2%91">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">QueryAllVideo</span>()
+
+import <span style="color:#e6db74">&#34;android.provider.MediaStore&#34;</span>
+
+cursor <span style="color:#f92672">=</span> activity.ContentResolver
+
+mImageUri <span style="color:#f92672">=</span> MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
+
+mCursor <span style="color:#f92672">=</span> cursor.query(mImageUri,<span style="color:#66d9ef">nil</span>,<span style="color:#66d9ef">nil</span>,<span style="color:#66d9ef">nil</span>,MediaStore.Video.Media.DATE_TAKEN)
+
+mCursor.moveToLast()
+
+VideoTable<span style="color:#f92672">=</span>{}
+
+<span style="color:#66d9ef">while</span> mCursor.moveToPrevious() <span style="color:#66d9ef">do</span>
+
+path <span style="color:#f92672">=</span> mCursor.getString(mCursor.getColumnIndex(MediaStore.Video.Media.DATA))
+
+table.insert(VideoTable,tostring(path))
+
+<span style="color:#66d9ef">end</span>
+
+mCursor.close()
+
+<span style="color:#66d9ef">return</span> VideoTable
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#75715e">--返回一个表</span>
+</code></pre></div><h2 id="播放音乐与视频">
+  播放音乐与视频
+  <a class="anchor" href="#%e6%92%ad%e6%94%be%e9%9f%b3%e4%b9%90%e4%b8%8e%e8%a7%86%e9%a2%91">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+import <span style="color:#e6db74">&#34;android.media.MediaPlayer&#34;</span>
+
+mediaPlayer <span style="color:#f92672">=</span> MediaPlayer()
+
+<span style="color:#75715e">--初始化参数</span>
+
+mediaPlayer.reset()
+
+<span style="color:#75715e">--设置播放资源</span>
+
+mediaPlayer.setDataSource(<span style="color:#e6db74">&#34;storage/sdcard0/a.mp3&#34;</span>)
+
+<span style="color:#75715e">--开始缓冲资源</span>
+
+mediaPlayer.prepare()
+
+<span style="color:#75715e">--是否循环播放该资源</span>
+
+mediaPlayer.setLooping(<span style="color:#66d9ef">true</span>)
+
+<span style="color:#75715e">--缓冲完成的监听</span>
+
+mediaPlayer.setOnPreparedListener(MediaPlayer.OnPreparedListener() {
+
+onPrepared<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(mediaPlayer
+
+mediaPlayer.start()
+
+<span style="color:#66d9ef">end</span>});
+
+<span style="color:#75715e">--是否在播放</span>
+
+mediaPlayer.isPlaying()
+
+<span style="color:#75715e">--暂停播放</span>
+
+mediaPlayer.pause()
+
+<span style="color:#75715e">--从30位置开始播放</span>
+
+mediaPlayer.seekTo(<span style="color:#ae81ff">30</span>)
+
+<span style="color:#75715e">--停止播放</span>
+
+mediaPlayer.stop()
+
+<span style="color:#75715e">--播放视频</span>
+
+<span style="color:#75715e">--视频的播放与音乐播放过程一样：</span>
+
+<span style="color:#75715e">--先创建一个媒体对象</span>
+
+import <span style="color:#e6db74">&#34;android.media.MediaPlayer&#34;</span>
+
+mediaPlayer <span style="color:#f92672">=</span> MediaPlayer()
+
+<span style="color:#75715e">--初始化参数</span>
+
+mediaPlayer.reset()
+
+<span style="color:#75715e">--设置播放资源</span>
+
+mediaPlayer.setDataSource(<span style="color:#e6db74">&#34;storage/sdcard0/a.mp4&#34;</span>)
+
+<span style="color:#75715e">--拿到显示的SurfaceView</span>
+
+sh <span style="color:#f92672">=</span> surfaceView.getHolder()
+
+sh.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS)
+
+<span style="color:#75715e">--设置显示SurfaceView</span>
+
+mediaPlayer.setDisplay(sh)
+
+<span style="color:#75715e">--设置音频流格式</span>
+
+mediaPlayer.setAudioStreamType(AudioManager.Stream_Music)
+
+<span style="color:#75715e">--开始缓冲资源</span>
+
+mediaPlayer.prepare()
+
+<span style="color:#75715e">--缓冲完成的监听</span>
+
+mediaPlayer.setOnPreparedListener(MediaPlayer.OnPreparedListener{
+
+onPrepared<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(mediaPlayer)
+
+<span style="color:#75715e">--开始播放</span>
+
+mediaPlayer.start()
+
+<span style="color:#66d9ef">end</span>
+
+});
+
+<span style="color:#75715e">--释放播放器</span>
+
+mediaPlayer.release()
+
+<span style="color:#75715e">--非原创</span>
+</code></pre></div><h2 id="自定义默认弹窗标题消息按钮的颜色">
+  自定义默认弹窗标题,消息,按钮的颜色
+  <a class="anchor" href="#%e8%87%aa%e5%ae%9a%e4%b9%89%e9%bb%98%e8%ae%a4%e5%bc%b9%e7%aa%97%e6%a0%87%e9%a2%98%e6%b6%88%e6%81%af%e6%8c%89%e9%92%ae%e7%9a%84%e9%a2%9c%e8%89%b2">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+dialog<span style="color:#f92672">=</span>AlertDialog.Builder(this)
+
+.setTitle(<span style="color:#e6db74">&#34;标题&#34;</span>)
+
+.setMessage(<span style="color:#e6db74">&#34;消息&#34;</span>)
+
+.setPositiveButton(<span style="color:#e6db74">&#34;积极&#34;</span>,{onClick<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(v) print<span style="color:#e6db74">&#34;点击了积极按钮&#34;</span><span style="color:#66d9ef">end</span>})
+
+.setNeutralButton(<span style="color:#e6db74">&#34;中立&#34;</span>,<span style="color:#66d9ef">nil</span>)
+
+.setNegativeButton(<span style="color:#e6db74">&#34;否认&#34;</span>,<span style="color:#66d9ef">nil</span>)
+
+.show()
+
+dialog.create()
+
+<span style="color:#75715e">--更改消息颜色</span>
+
+message<span style="color:#f92672">=</span>dialog.findViewById(android.R.id.message)
+
+message.setTextColor(<span style="color:#ae81ff">0xff1DA6DD</span>)
+
+<span style="color:#75715e">--更改Button颜色</span>
+
+import <span style="color:#e6db74">&#34;android.graphics.Color&#34;</span>
+
+dialog.getButton(dialog.BUTTON_POSITIVE).setTextColor(<span style="color:#ae81ff">0xff1DA6DD</span>)
+
+dialog.getButton(dialog.BUTTON_NEGATIVE).setTextColor(<span style="color:#ae81ff">0xff1DA6DD</span>)
+
+dialog.getButton(dialog.BUTTON_NEUTRAL).setTextColor(<span style="color:#ae81ff">0xff1DA6DD</span>)
+
+<span style="color:#75715e">--更改Title颜色</span>
+
+import <span style="color:#e6db74">&#34;android.text.SpannableString&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.text.style.ForegroundColorSpan&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.text.Spannable&#34;</span>
+
+sp <span style="color:#f92672">=</span> SpannableString(<span style="color:#e6db74">&#34;标题&#34;</span>)
+
+sp.setSpan(ForegroundColorSpan(<span style="color:#ae81ff">0xff1DA6DD</span>),<span style="color:#ae81ff">0</span>,<span style="color:#f92672">#</span>sp,Spannable.SPAN_EXCLUSIVE_INCLUSIVE)
+
+dialog.setTitle(sp)
+</code></pre></div><h2 id="获取视频第一帧">
+  获取视频第一帧
+  <a class="anchor" href="#%e8%8e%b7%e5%8f%96%e8%a7%86%e9%a2%91%e7%ac%ac%e4%b8%80%e5%b8%a7">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">GetVideoFrame</span>(path)
+
+import <span style="color:#e6db74">&#34;android.media.MediaMetadataRetriever&#34;</span>
+
+media <span style="color:#f92672">=</span> MediaMetadataRetriever()
+
+media.setDataSource(tostring(path))
+
+<span style="color:#66d9ef">return</span> media.getFrameAtTime()
+
+<span style="color:#66d9ef">end</span>
+</code></pre></div><h2 id="选择文件模块">
+  选择文件模块
+  <a class="anchor" href="#%e9%80%89%e6%8b%a9%e6%96%87%e4%bb%b6%e6%a8%a1%e5%9d%97">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+import <span style="color:#e6db74">&#34;android.widget.ArrayAdapter&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.widget.LinearLayout&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.widget.TextView&#34;</span>
+
+import <span style="color:#e6db74">&#34;java.io.File&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.widget.ListView&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.app.AlertDialog&#34;</span>
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">ChoiceFile</span>(StartPath,callback)
+
+<span style="color:#75715e">--创建ListView作为文件列表</span>
+
+lv<span style="color:#f92672">=</span>ListView(activity).setFastScrollEnabled(<span style="color:#66d9ef">true</span>)
+
+<span style="color:#75715e">--创建路径标签</span>
+
+cp<span style="color:#f92672">=</span>TextView(activity)
+
+lay<span style="color:#f92672">=</span>LinearLayout(activity).setOrientation(<span style="color:#ae81ff">1</span>).addView(cp).addView(lv)
+
+ChoiceFile_dialog<span style="color:#f92672">=</span>AlertDialog.Builder(activity)<span style="color:#75715e">--创建对话框</span>
+
+.setTitle(<span style="color:#e6db74">&#34;选择文件&#34;</span>)
+
+.setView(lay)
+
+.show()
+
+adp<span style="color:#f92672">=</span>ArrayAdapter(activity,android.R.layout.simple_list_item_1)
+
+lv.setAdapter(adp)
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">SetItem</span>(path)
+
+path<span style="color:#f92672">=</span>tostring(path)
+
+adp.clear()<span style="color:#75715e">--清空适配器</span>
+
+cp.Text<span style="color:#f92672">=</span>tostring(path)<span style="color:#75715e">--设置当前路径</span>
+
+<span style="color:#66d9ef">if</span> path<span style="color:#f92672">~=</span><span style="color:#e6db74">&#34;/&#34;</span> <span style="color:#66d9ef">then</span><span style="color:#75715e">--不是根目录则加上../</span>
+
+adp.add(<span style="color:#e6db74">&#34;../&#34;</span>)
+
+<span style="color:#66d9ef">end</span>
+
+ls<span style="color:#f92672">=</span>File(path).listFiles()
+
+<span style="color:#66d9ef">if</span> ls<span style="color:#f92672">~=</span><span style="color:#66d9ef">nil</span> <span style="color:#66d9ef">then</span>
+
+ls<span style="color:#f92672">=</span>luajava.astable(File(path).listFiles()) <span style="color:#75715e">--全局文件列表变量</span>
+
+table.sort(ls,<span style="color:#66d9ef">function</span>(a,b)
+
+<span style="color:#66d9ef">return</span> (a.isDirectory()<span style="color:#f92672">~=</span>b.isDirectory() <span style="color:#f92672">and</span> a.isDirectory()) <span style="color:#f92672">or</span> ((a.isDirectory()<span style="color:#f92672">==</span>b.isDirectory()) <span style="color:#f92672">and</span> a.Name<span style="color:#f92672">&lt;</span>b.Name)
+
+<span style="color:#66d9ef">end</span>)
+
+<span style="color:#66d9ef">else</span>
+
+ls<span style="color:#f92672">=</span>{}
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">for</span> index,c <span style="color:#66d9ef">in</span> ipairs(ls) <span style="color:#66d9ef">do</span>
+
+<span style="color:#66d9ef">if</span> c.isDirectory() <span style="color:#66d9ef">then</span><span style="color:#75715e">--如果是文件夹则</span>
+
+adp.add(c.Name<span style="color:#f92672">..</span><span style="color:#e6db74">&#34;/&#34;</span>)
+
+<span style="color:#66d9ef">else</span><span style="color:#75715e">--如果是文件则</span>
+
+adp.add(c.Name)
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">end</span>
+
+lv.onItemClick<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(l,v,p,s)<span style="color:#75715e">--列表点击事件</span>
+
+<span style="color:#960050;background-color:#1e0010">项目</span><span style="color:#f92672">=</span>tostring(v.Text)
+
+<span style="color:#66d9ef">if</span> tostring(cp.Text)<span style="color:#f92672">==</span><span style="color:#e6db74">&#34;/&#34;</span> <span style="color:#66d9ef">then</span>
+
+<span style="color:#960050;background-color:#1e0010">路径</span><span style="color:#f92672">=</span>ls[p<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>]
+
+<span style="color:#66d9ef">else</span>
+
+<span style="color:#960050;background-color:#1e0010">路径</span><span style="color:#f92672">=</span>ls[p]
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">if</span> <span style="color:#960050;background-color:#1e0010">项目</span><span style="color:#f92672">==</span><span style="color:#e6db74">&#34;../&#34;</span> <span style="color:#66d9ef">then</span>
+
+SetItem(File(cp.Text).getParentFile())
+
+<span style="color:#66d9ef">elseif</span> <span style="color:#960050;background-color:#1e0010">路径</span>.isDirectory() <span style="color:#66d9ef">then</span>
+
+SetItem(<span style="color:#960050;background-color:#1e0010">路径</span>)
+
+<span style="color:#66d9ef">elseif</span> <span style="color:#960050;background-color:#1e0010">路径</span>.isFile() <span style="color:#66d9ef">then</span>
+
+callback(tostring(<span style="color:#960050;background-color:#1e0010">路径</span>))
+
+ChoiceFile_dialog.hide()
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">end</span>
+
+SetItem(StartPath)
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#75715e">--ChoiceFile(StartPath,callback)</span>
+
+<span style="color:#75715e">--第一个参数为初始化路径,第二个为回调函数</span>
+
+<span style="color:#75715e">--原创</span>
+</code></pre></div><h2 id="选择路径模块">
+  选择路径模块
+  <a class="anchor" href="#%e9%80%89%e6%8b%a9%e8%b7%af%e5%be%84%e6%a8%a1%e5%9d%97">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+require <span style="color:#e6db74">&#34;import&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.widget.ArrayAdapter&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.widget.LinearLayout&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.widget.TextView&#34;</span>
+
+import <span style="color:#e6db74">&#34;java.io.File&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.widget.ListView&#34;</span>
+
+import <span style="color:#e6db74">&#34;android.app.AlertDialog&#34;</span>
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">ChoicePath</span>(StartPath,callback)
+
+<span style="color:#75715e">--创建ListView作为文件列表</span>
+
+lv<span style="color:#f92672">=</span>ListView(activity).setFastScrollEnabled(<span style="color:#66d9ef">true</span>)
+
+<span style="color:#75715e">--创建路径标签</span>
+
+cp<span style="color:#f92672">=</span>TextView(activity)
+
+lay<span style="color:#f92672">=</span>LinearLayout(activity).setOrientation(<span style="color:#ae81ff">1</span>).addView(cp).addView(lv)
+
+ChoiceFile_dialog<span style="color:#f92672">=</span>AlertDialog.Builder(activity)<span style="color:#75715e">--创建对话框</span>
+
+.setTitle(<span style="color:#e6db74">&#34;选择路径&#34;</span>)
+
+.setPositiveButton(<span style="color:#e6db74">&#34;OK&#34;</span>,{
+
+onClick<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>()
+
+callback(tostring(cp.Text))
+
+<span style="color:#66d9ef">end</span>})
+
+.setNegativeButton(<span style="color:#e6db74">&#34;Canel&#34;</span>,<span style="color:#66d9ef">nil</span>)
+
+.setView(lay)
+
+.show()
+
+adp<span style="color:#f92672">=</span>ArrayAdapter(activity,android.R.layout.simple_list_item_1)
+
+lv.setAdapter(adp)
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">SetItem</span>(path)
+
+path<span style="color:#f92672">=</span>tostring(path)
+
+adp.clear()<span style="color:#75715e">--清空适配器</span>
+
+cp.Text<span style="color:#f92672">=</span>tostring(path)<span style="color:#75715e">--设置当前路径</span>
+
+<span style="color:#66d9ef">if</span> path<span style="color:#f92672">~=</span><span style="color:#e6db74">&#34;/&#34;</span> <span style="color:#66d9ef">then</span><span style="color:#75715e">--不是根目录则加上../</span>
+
+adp.add(<span style="color:#e6db74">&#34;../&#34;</span>)
+
+<span style="color:#66d9ef">end</span>
+
+ls<span style="color:#f92672">=</span>File(path).listFiles()
+
+<span style="color:#66d9ef">if</span> ls<span style="color:#f92672">~=</span><span style="color:#66d9ef">nil</span> <span style="color:#66d9ef">then</span>
+
+ls<span style="color:#f92672">=</span>luajava.astable(File(path).listFiles()) <span style="color:#75715e">--全局文件列表变量</span>
+
+table.sort(ls,<span style="color:#66d9ef">function</span>(a,b)
+
+<span style="color:#66d9ef">return</span> (a.isDirectory()<span style="color:#f92672">~=</span>b.isDirectory() <span style="color:#f92672">and</span> a.isDirectory()) <span style="color:#f92672">or</span> ((a.isDirectory()<span style="color:#f92672">==</span>b.isDirectory()) <span style="color:#f92672">and</span> a.Name<span style="color:#f92672">&lt;</span>b.Name)
+
+<span style="color:#66d9ef">end</span>)
+
+<span style="color:#66d9ef">else</span>
+
+ls<span style="color:#f92672">=</span>{}
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">for</span> index,c <span style="color:#66d9ef">in</span> ipairs(ls) <span style="color:#66d9ef">do</span>
+
+<span style="color:#66d9ef">if</span> c.isDirectory() <span style="color:#66d9ef">then</span><span style="color:#75715e">--如果是文件夹则</span>
+
+adp.add(c.Name<span style="color:#f92672">..</span><span style="color:#e6db74">&#34;/&#34;</span>)
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">end</span>
+
+lv.onItemClick<span style="color:#f92672">=</span><span style="color:#66d9ef">function</span>(l,v,p,s)<span style="color:#75715e">--列表点击事件</span>
+
+<span style="color:#960050;background-color:#1e0010">项目</span><span style="color:#f92672">=</span>tostring(v.Text)
+
+<span style="color:#66d9ef">if</span> tostring(cp.Text)<span style="color:#f92672">==</span><span style="color:#e6db74">&#34;/&#34;</span> <span style="color:#66d9ef">then</span>
+
+<span style="color:#960050;background-color:#1e0010">路径</span><span style="color:#f92672">=</span>ls[p<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>]
+
+<span style="color:#66d9ef">else</span>
+
+<span style="color:#960050;background-color:#1e0010">路径</span><span style="color:#f92672">=</span>ls[p]
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">if</span> <span style="color:#960050;background-color:#1e0010">项目</span><span style="color:#f92672">==</span><span style="color:#e6db74">&#34;../&#34;</span> <span style="color:#66d9ef">then</span>
+
+SetItem(File(cp.Text).getParentFile())
+
+<span style="color:#66d9ef">elseif</span> <span style="color:#960050;background-color:#1e0010">路径</span>.isDirectory() <span style="color:#66d9ef">then</span>
+
+SetItem(<span style="color:#960050;background-color:#1e0010">路径</span>)
+
+<span style="color:#66d9ef">elseif</span> <span style="color:#960050;background-color:#1e0010">路径</span>.isFile() <span style="color:#66d9ef">then</span>
+
+callback(tostring(<span style="color:#960050;background-color:#1e0010">路径</span>))
+
+ChoiceFile_dialog.hide()
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">end</span>
+
+SetItem(StartPath)
+
+<span style="color:#66d9ef">end</span>
+
+import <span style="color:#e6db74">&#34;android.os.*&#34;</span>
+
+ChoicePath(Environment.getExternalStorageDirectory().toString(),
+
+<span style="color:#66d9ef">function</span>(path)
+
+print(path)
+
+<span style="color:#66d9ef">end</span>)
+
+<span style="color:#75715e">--第一个参数为初始化路径,第二个为回调函数</span>
+
+<span style="color:#75715e">--原创</span>
+</code></pre></div><h2 id="获取视图中的所有文本">
+  获取视图中的所有文本
+  <a class="anchor" href="#%e8%8e%b7%e5%8f%96%e8%a7%86%e5%9b%be%e4%b8%ad%e7%9a%84%e6%89%80%e6%9c%89%e6%96%87%e6%9c%ac">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">GetAllText</span>(view)
+
+textTable<span style="color:#f92672">=</span>{}
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">GetText</span>(Parent)
+
+<span style="color:#66d9ef">local</span> number<span style="color:#f92672">=</span>Parent.getChildCount()
+
+<span style="color:#66d9ef">for</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>,number <span style="color:#66d9ef">do</span>
+
+<span style="color:#66d9ef">local</span> view<span style="color:#f92672">=</span>Parent.getChildAt(i)
+
+<span style="color:#66d9ef">if</span> pcall(<span style="color:#66d9ef">function</span>()view.addView(TextView(activity))<span style="color:#66d9ef">end</span>) <span style="color:#66d9ef">then</span>
+
+GetText(view)
+
+<span style="color:#66d9ef">elseif</span> pcall(<span style="color:#66d9ef">function</span>()view.getText()<span style="color:#66d9ef">end</span>) <span style="color:#66d9ef">then</span>
+
+table.insert(textTable,tostring(view.Text))
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">end</span>
+
+<span style="color:#66d9ef">end</span>
+
+GetText(view)
+
+<span style="color:#66d9ef">return</span> textTable
+
+<span style="color:#66d9ef">end</span>
+
+print(table.unpack(GetAllText(Parent)))
+</code></pre></div></article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#播放音频">播放音频</a></li>
+    <li><a href="#强制结束自身并清除自身数据">强制结束自身并清除自身数据</a></li>
+    <li><a href="#调用系统下载">调用系统下载</a></li>
+    <li><a href="#获取本应用包名">获取本应用包名</a></li>
+    <li><a href="#删除listview中某项">删除ListView中某项</a></li>
+    <li><a href="#获取剪贴板内容">获取剪贴板内容</a></li>
+    <li><a href="#对话框dialog">对话框Dialog</a></li>
+    <li><a href="#关于v4的圆形下拉刷新">关于V4的圆形下拉刷新</a></li>
+    <li><a href="#窗口回调事件">窗口回调事件</a></li>
+    <li><a href="#列表下滑到最底事件">列表下滑到最底事件</a></li>
+    <li><a href="#按两次返回键退出">按两次返回键退出</a></li>
+    <li><a href="#延迟">延迟</a></li>
+    <li><a href="#定时器">定时器</a></li>
+    <li><a href="#复制文本到剪贴板">复制文本到剪贴板</a></li>
+    <li><a href="#保存图片到本地">保存图片到本地</a></li>
+    <li><a href="#查询本地所有图片">查询本地所有图片</a></li>
+    <li><a href="#递归查找文件">递归查找文件</a></li>
+    <li><a href="#查询本地所有视频">查询本地所有视频</a></li>
+    <li><a href="#播放音乐与视频">播放音乐与视频</a></li>
+    <li><a href="#自定义默认弹窗标题消息按钮的颜色">自定义默认弹窗标题,消息,按钮的颜色</a></li>
+    <li><a href="#获取视频第一帧">获取视频第一帧</a></li>
+    <li><a href="#选择文件模块">选择文件模块</a></li>
+    <li><a href="#选择路径模块">选择路径模块</a></li>
+    <li><a href="#获取视图中的所有文本">获取视图中的所有文本</a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>03-00 MLUA教程 on LUA book</title>
+    <link>https://lua.dianas.cyou/docs/05/</link>
+    <description>Recent content in 03-00 MLUA教程 on LUA book</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language><atom:link href="https://lua.dianas.cyou/docs/05/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>03-01 when的用法</title>
+      <link>https://lua.dianas.cyou/docs/05/0301when/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://lua.dianas.cyou/docs/05/0301when/</guid>
+      <description>When的用法 #   From MLUA  When就相当于简化过的if，对于一些简单的判断使用when会爽不少
+例如下面这个栗子
+--以前判断要这样写 if 5&amp;gt;1 then print(&amp;#34;OK&amp;#34;) end 在androlua+4.3.3更新后可以这样写
+when 5&amp;gt;1 print(&amp;#34;OK&amp;#34;) 以前判断要这样写
+if 1&amp;gt;5 then print(&amp;#34;emmmm&amp;#34;) else print(&amp;#34;OK&amp;#34;) end 在androlua+4.3.3更新后可以这样写
+when 1&amp;gt;5 print(&amp;#34;emmmm&amp;#34;) else print(&amp;#34;OK&amp;#34;) </description>
+    </item>
+    
+    <item>
+      <title>03-02 Defer关键字</title>
+      <link>https://lua.dianas.cyou/docs/05/0302defer/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://lua.dianas.cyou/docs/05/0302defer/</guid>
+      <description>Defer关键字 #   From MLUA   延时执行，还有自动回收，可以在error时执行
+&amp;ndash;@ninenr语录
+ function test() print(1) print(2) print(3) print(4) end test() 运行这个函数，可以看到由上至下打印出1234
+function test() defer print(1) defer print(2) print(3) defer print(4) end test()--运行这个函数，可以看到打印出了3421 说明代码运行顺序是先运行无defer的，然后有defer的从下往上运行</description>
+    </item>
+    
+    <item>
+      <title>03-03 LuaWebView自定义进度条</title>
+      <link>https://lua.dianas.cyou/docs/05/0303luawebviewzidingyi/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://lua.dianas.cyou/docs/05/0303luawebviewzidingyi/</guid>
+      <description>LuaWebView #   From MLUA  自定义进度条 #   需要web.dex，稍微有点麻烦，详见视频教程
+删除进度条
+web.removeView(web.getChildAt(0)) 导包
+import &amp;#34;com.lua.*&amp;#34; 进度改变事件
+web.setWebChromeClient(LuaWebChrome(LuaWebChrome.IWebChrine{ onProgressChanged=function(view, newProgress) --事件 end, LuaWebView设置UA #   import &amp;#34;android.webkit.WebSettings&amp;#34; local webSettings = LuaWebViewID.getSettings(); local newUserAgent = &amp;#34;UA字符串&amp;#34;; webSettings.setUserAgentString(newUserAgent); 获取与设置cookie #   import &amp;#34;android.webkit.CookieSyncManager&amp;#34; import &amp;#34;android.webkit.CookieManager&amp;#34; function 设置Cookie(context,url,content) CookieSyncManager.createInstance(context) local cookieManager = CookieManager.getInstance() cookieManager.setAcceptCookie(true) cookieManager.removeSessionCookie() cookieManager.removeAllCookie() cookieManager.setCookie(url, content) CookieSyncManager.getInstance().sync() end function 获取Cookie(url) local cookieManager = CookieManager.getInstance(); return cookieManager.getCookie(url); end --示例 --获取https://www.</description>
+    </item>
+    
+    <item>
+      <title>03-04 字符串</title>
+      <link>https://lua.dianas.cyou/docs/05/0304string/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://lua.dianas.cyou/docs/05/0304string/</guid>
+      <description>字符串 #   From MLUA  字符串保留URL #   string.gkeepUrl=function(str) local strurltab={} for i,v in string.gfind(str,&amp;#34;https?://[-A-Za-z0-9+&amp;amp;@#/%?=~_|!:,.;]+[-A-Za-z0-9+&amp;amp;@#/%=~_|]&amp;#34;) do strurltab[#strurltab+1]=string.sub(str,i,v) end return strurltab end --返回的是table，该方式支持保留多个链接 --调用示例 str=&amp;#34;MLuaForum https://www.mukapp.top/ Lua优化性能小结 https://www.mukapp.top/?thread-19.htm&amp;#34; print(dump(str:gkeepUrl())) local str1=&amp;#34;&amp;#34; for i,v in ipairs(string.gkeepUrl(str)) do str1=str1..v..&amp;#34; &amp;#34; end print(str1) 字符串保留与过滤中文 #   --有中文符号会乱码 string.filterChinese=function(str)return string.gsub(str,&amp;#34;[\u4e00-\u9fa5]+&amp;#34;,&amp;#34;&amp;#34;)end string.keepChinese=function(str)return string.gsub(str,&amp;#34;[^\u4e00-\u9fa5]+&amp;#34;,&amp;#34;&amp;#34;)end --调用示例 str=&amp;#34;MLua手册是一个全新的Androlua+的手册&amp;#34; --过滤中文 print(string.filterChinese(str)) print(str:filterChinese()) --保留中文 print(string.keepChinese(str)) print(str:keepChinese()) Json解析 #   --导入 JSON=import &amp;#34;json&amp;#34; --json字符串 json_str=[==[ [ { &amp;#34;title&amp;#34;: &amp;#34;第一本书&amp;#34;, &amp;#34;bookId&amp;#34;: &amp;#34;book_1&amp;#34; }, { &amp;#34;title&amp;#34;: &amp;#34;第二本书&amp;#34;, &amp;#34;bookId&amp;#34;: &amp;#34;book_2&amp;#34; } ] ]==] --解析json json_o=JSON.</description>
+    </item>
+    
+    <item>
+      <title>03-05 界面&amp;布局</title>
+      <link>https://lua.dianas.cyou/docs/05/0305layout/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://lua.dianas.cyou/docs/05/0305layout/</guid>
+      <description>布局 #   From MLUA  布局基础 #   获取ListView垂直坐标 #  function getScrollY() c = ls.getChildAt(0); local firstVisiblePosition = ls.getFirstVisiblePosition(); local top = c.getTop(); return -top + firstVisiblePosition * c.getHeight() ; end 设置控件图片 #  --设置的图片也可以输入路径 ID.setImageBitmap(loadbitmap(&amp;#34;图片.png&amp;#34;)) 获取控件宽高 #  --导入包 import &amp;#34;android.content.Context&amp;#34; function getwh(view) view.measure(View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED),View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED)); height =view.getMeasuredHeight(); width =view.getMeasuredWidth(); return width,height end print(getwh(控件ID)) 隐藏滚动条 #  --横向 horizontalScrollBarEnabled=false; --竖向 VerticalScrollBarEnabled=false; 禁用编辑框 #  --代码中设置 editText.setFocusable(false); --布局表中设置 Focusable=false; 标题栏返回按钮 #  activity.</description>
+    </item>
+    
+    <item>
+      <title>03-06 系统调用</title>
+      <link>https://lua.dianas.cyou/docs/05/0306system/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://lua.dianas.cyou/docs/05/0306system/</guid>
+      <description>系统 #   From MLUA  申请root权限 #  --shell命令的方法 os.execute(&amp;#34;su&amp;#34;) 分享文字 #  import &amp;#34;android.content.*&amp;#34; text=&amp;#34;分享的内容&amp;#34; intent=Intent(Intent.ACTION_SEND); intent.setType(&amp;#34;text/plain&amp;#34;); intent.putExtra(Intent.EXTRA_SUBJECT, &amp;#34;分享&amp;#34;); intent.putExtra(Intent.EXTRA_TEXT, text); intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); activity.startActivity(Intent.createChooser(intent,&amp;#34;分享到:&amp;#34;)); 设置横屏竖屏 #  --横屏 activity.setRequestedOrientation(0); --竖屏 activity.setRequestedOrientation(1); Shell执行 #  function exec(cmd) local p=io.popen(string.format(&amp;#39;%s&amp;#39;,cmd)) local s=p:read(&amp;#34;*a&amp;#34;) p:close() return s end print(exec(&amp;#34;echo ....&amp;#34;)) 部分常用命令: --删除文件或文件夹 rm -r /路径 --复制文件或文件夹 cp -r inpath outpath --移动文件或文件夹 mv -r inpath outpath --挂载系统目录 mount -o remount,rw path --修改系统文件权限 chmod 755 /system/build.</description>
+    </item>
+    
+    <item>
+      <title>03-07 各式算法</title>
+      <link>https://lua.dianas.cyou/docs/05/0307caculate/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://lua.dianas.cyou/docs/05/0307caculate/</guid>
+      <description>各种算法 #  From MLUA  字符串MD5 #   代码详情 ...  function MD5(str) local HexTable = {&amp;#34;0&amp;#34;,&amp;#34;1&amp;#34;,&amp;#34;2&amp;#34;,&amp;#34;3&amp;#34;,&amp;#34;4&amp;#34;,&amp;#34;5&amp;#34;,&amp;#34;6&amp;#34;,&amp;#34;7&amp;#34;,&amp;#34;8&amp;#34;,&amp;#34;9&amp;#34;,&amp;#34;A&amp;#34;,&amp;#34;B&amp;#34;,&amp;#34;C&amp;#34;,&amp;#34;D&amp;#34;,&amp;#34;E&amp;#34;,&amp;#34;F&amp;#34;} local A = 0x67452301 local B = 0xefcdab89 local C = 0x98badcfe local D = 0x10325476 local S11 = 7 local S12 = 12 local S13 = 17 local S14 = 22 local S21 = 5 local S22 = 9 local S23 = 14 local S24 = 20 local S31 = 4 local S32 = 11 local S33 = 16 local S34 = 23 local S41 = 6 local S42 = 10 local S43 = 15 local S44 = 21 local function F(x,y,z) return (x &amp;amp; y) | ((~x) &amp;amp; z) end local function G(x,y,z) return (x &amp;amp; z) | (y &amp;amp; (~z)) end local function H(x,y,z) return x ~ y ~ z end local function I(x,y,z) return y ~ (x | (~z)) end local function FF(a,b,c,d,x,s,ac) a = a + F(b,c,d) + x + ac a = (((a &amp;amp; 0xffffffff) &amp;lt;&amp;lt; s) | ((a &amp;amp; 0xffffffff) &amp;gt;&amp;gt; 32 - s)) + b return a &amp;amp; 0xffffffff end local function GG(a,b,c,d,x,s,ac) a = a + G(b,c,d) + x + ac a = (((a &amp;amp; 0xffffffff) &amp;lt;&amp;lt; s) | ((a &amp;amp; 0xffffffff) &amp;gt;&amp;gt; 32 - s)) + b return a &amp;amp; 0xffffffff end local function HH(a,b,c,d,x,s,ac) a = a + H(b,c,d) + x + ac a = (((a &amp;amp; 0xffffffff) &amp;lt;&amp;lt; s) | ((a &amp;amp; 0xffffffff) &amp;gt;&amp;gt; 32 - s)) + b return a &amp;amp; 0xffffffff end local function II(a,b,c,d,x,s,ac) a = a + I(b,c,d) + x + ac a = (((a &amp;amp; 0xffffffff) &amp;lt;&amp;lt; s) | ((a &amp;amp; 0xffffffff) &amp;gt;&amp;gt; 32 - s)) + b return a &amp;amp; 0xffffffff end local function MD5StringFill(s) local len = s:len() local mod512 = len * 8 % 512 --需要填充的字节数 local fillSize = (448 - mod512) // 8 if mod512 &amp;gt; 448 then fillSize = (960 - mod512) // 8 end local rTab = {} --记录当前byte在4个字节的偏移 local byteIndex = 1 for i = 1,len do local index = (i - 1) // 4 + 1 rTab[index] = rTab[index] or 0 rTab[index] = rTab[index] | (s:byte(i) &amp;lt;&amp;lt; (byteIndex - 1) * 8) byteIndex = byteIndex + 1 if byteIndex == 5 then byteIndex = 1 end end --先将最后一个字节组成4字节一组 --表示0x80是否已插入 local b0x80 = false local tLen = #rTab if byteIndex ~= 1 then rTab[tLen] = rTab[tLen] | 0x80 &amp;lt;&amp;lt; (byteIndex - 1) * 8 b0x80 = true end --将余下的字节补齐 for i = 1,fillSize // 4 do if not b0x80 and i == 1 then rTab[tLen + i] = 0x80 else rTab[tLen + i] = 0x0 end end --后面加原始数据bit长度 local bitLen = math.</description>
+    </item>
+    
+    <item>
+      <title>03-08 信息&amp;发送</title>
+      <link>https://lua.dianas.cyou/docs/05/0308sent/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://lua.dianas.cyou/docs/05/0308sent/</guid>
+      <description>判断是否有网络 #  local wl=activity.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE).getActiveNetworkInfo(); if wl== nil then print(&amp;#34;无法连接到服务器&amp;#34;) end 发送邮件 #  import &amp;#34;android.content.Intent&amp;#34; i = Intent(Intent.ACTION_SEND) i.setType(&amp;#34;message/rfc822&amp;#34;) i.putExtra(Intent.EXTRA_EMAIL, {&amp;#34;2113075983@.com&amp;#34;}) i.putExtra(Intent.EXTRA_SUBJECT,&amp;#34;Feedback&amp;#34;) i.putExtra(Intent.EXTRA_TEXT,&amp;#34;Content&amp;#34;) activity.startActivity(Intent.createChooser(i, &amp;#34;Choice&amp;#34;)) 自带Http模块 #  获取内容 get函数 Http.get(url,cookie,charset,header,callback) url 网络请求的链接网址 cookie 使用的cookie，也就是服务器的身份识别信息 charset 内容编码 header 请求头 callback 请求完成后执行的函数 除了url和callback其他参数都不是必须的 回调函数接受四个参数值分别是 code 响应代码，2xx表示成功，4xx表示请求错误，5xx表示服务器错误，-1表示出错 content 内容，如果code是-1，则为出错信息 cookie 服务器返回的用户身份识别信息 header 服务器返回的头信息 向服务器发送数据 post函数 Http.post(url,data,cookie,charset,header,callback) 除了增加了一个data外，其他参数和get完全相同 data 向服务器发送的数据 下载文件 download函数 Http.download(url,path,cookie,header,callback) 参数中没有编码参数，其他同get， path 文件保存路径 需要特别注意一点，只支持同时有127个网络请求，否则会出错 Http其实是对Http.HttpTask的封装，Http.HttpTask使用的更加通用和灵活的形式 参数格式如下 Http.HttpTask( url, String method, cookie, charset, header, callback) 所有参数都是必选，没有则传入nil url 请求的网址 method 请求方法可以是get，post，put，delete等 cookie 身份验证信息 charset 内容编码 header 请求头 callback 回调函数 该函数返回的是一个HttpTask对象， 需要调用execute方法才可以执行， t=Http.</description>
+    </item>
+    
+    <item>
+      <title>03-09 事件</title>
+      <link>https://lua.dianas.cyou/docs/05/0309sthing/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://lua.dianas.cyou/docs/05/0309sthing/</guid>
+      <description>事件 #  播放音频 #  --导入包 import &amp;#34;android.media.MediaPlayer&amp;#34; local 音频播放器=MediaPlayer() function 播放音频(路径) 音频播放器.reset() .setDataSource(路径) .prepare() .start() .setOnCompletionListener({ onCompletion=function() print(&amp;#34;播放完毕&amp;#34;) end}) end 强制结束自身并清除自身数据 #  os.execute(&amp;#34;pm clear &amp;#34;..activity.getPackageName()) 调用系统下载 #  --导入包 import &amp;#34;android.content.Context&amp;#34; import &amp;#34;android.net.Uri&amp;#34; downloadManager=activity.getSystemService(Context.DOWNLOAD_SERVICE); url=Uri.parse(&amp;#34;绝对下载链接&amp;#34;); request=DownloadManager.Request(url); request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_MOBILE|DownloadManager.Request.NETWORK_WIFI); request.setDestinationInExternalPublicDir(&amp;#34;目录名，可以是Download&amp;#34;,&amp;#34;下载的文件名&amp;#34;); request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED); downloadManager.enqueue(request); 获取本应用包名 #  activity.getPackageName() 删除ListView中某项 #  adp.remove(pos) 获取剪贴板内容 #  import&amp;#34;android.content.*&amp;#34; --导入包 a=activity.getSystemService(Context.CLIPBOARD_SERVICE).getText() 对话框Dialog #  --简单对话框 AlertDialog.Builder(this).setTitle(&amp;#34;标题&amp;#34;) .setMessage(&amp;#34;简单消息框&amp;#34;) .setPositiveButton(&amp;#34;确定&amp;#34;,nil) .show(); --带有三个按钮的对话框 AlertDialog.Builder(this) .setTitle(&amp;#34;确认&amp;#34;) .setMessage(&amp;#34;确定吗？&amp;#34;) .setPositiveButton(&amp;#34;是&amp;#34;,nil) .</description>
+    </item>
+    
+    <item>
+      <title>03-10 文件处理</title>
+      <link>https://lua.dianas.cyou/docs/05/0310file/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://lua.dianas.cyou/docs/05/0310file/</guid>
+      <description>递归搜索文件实例 #  require &amp;#34;import&amp;#34; function find(catalog,name) local n=0 local t=os.clock() local ret={} require &amp;#34;import&amp;#34; import &amp;#34;java.io.File&amp;#34; import &amp;#34;java.lang.String&amp;#34; function FindFile(catalog,name) local name=tostring(name) local ls=catalog.listFiles() or File{} for 次数=0,#ls-1 do --local 目录=tostring(ls[次数]) local f=ls[次数] if f.isDirectory() then--如果是文件夹则继续匹配 FindFile(f,name) else--如果是文件则 n=n+1 if n%1000==0 then --print(n,os.clock()-t) end local nm=f.Name if string.find(nm,name) then --thread(insert,目录) table.insert(ret,nm) print(nm) end end luajava.clear(f) end end FindFile(catalog,name) print(&amp;#34;ok&amp;#34;,n,#ret) end import &amp;#34;java.io.File&amp;#34; catalog=File(&amp;#34;sdcard/&amp;#34;) name=&amp;#34;.j?pn?g&amp;#34; --task(find,catalog,name,print) thread(find,catalog,name) 获取Lua文件的执行路径 #  activity.</description>
+    </item>
+    
+    <item>
+      <title>03-11 动画</title>
+      <link>https://lua.dianas.cyou/docs/05/0311animation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://lua.dianas.cyou/docs/05/0311animation/</guid>
+      <description>控件旋转 #  --Z轴上的旋转角度 View.getRotation() --X轴上的旋转角度 View.getRotationX() --Y轴上的旋转角度 View.getRotationY() --设置Z轴上的旋转角度 View.setRotation(r) --设置X轴上的旋转角度 View.setRotationX(r) --设置Y轴上的旋转角度 View.setRotationY(r) --设置旋转中心点的X坐标 View.setPivotX(p) --设置旋转中心点的Y坐标 View.setPivotX(p) --设置摄像机的与旋转目标在Z轴上距离 View.setCameraDistance(d) 动画结束回调 #  --导入包 import &amp;#34;android.view.animation.*&amp;#34; import &amp;#34;android.view.animation.Animation$AnimationListener&amp;#34; --控件动画 控件.startAnimation(AlphaAnimation(1,0).setDuration(400).setFillAfter(true).setAnimationListener(AnimationListener{ onAnimationEnd=function() print&amp;#34;动画结束&amp;#34;) end})) 安卓跳转动画 #  android.R.anim.accelerate_decelerate_interpolator android.R.anim.accelerate_interpolator android.R.anim.anticipate_interpolator android.R.anim.anticipate_overshoot_interpolator android.R.anim.bounce_interpolator android.R.anim.cycle_interpolator android.R.anim.decelerate_interpolatoandroid.R.anim.r android.R.anim.fade_in android.R.anim.fade_out android.R.anim.linear_interpolator android.R.anim.overshoot_interpolator android.R.anim.slide_in_left android.R.anim.slide_out_right Animation(动画) #  --动画主要包括以下几种 Alpha:渐变透明度动画效果 Scale:渐变尺寸伸缩动画效果 Translate:画面转换位置移动动画效果 Rotate:画面转换位置移动动画效果 --共有的属性有 Duration --属性为动画持续时间 时间以毫秒为单位 fillAfter --当设置为true,该动画转化在动画结束后被应用 fillBefore --当设置为true,该动画转化在动画开始前被应用 repeatCount--动画的重复次数 repeatMode --定义重复的行为 startOffset --动画之间的时间间隔，从上次动画停多少时间开始执行下个动画 id.</description>
+    </item>
+    
+  </channel>
+</rss>
