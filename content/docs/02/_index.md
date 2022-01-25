@@ -1,7 +1,7 @@
 ---
 weight: 1
 bookFlatSection: true
-title: "02 教程"
+title: "02-00 教程"
 ---
 
 {{< hint info >}}

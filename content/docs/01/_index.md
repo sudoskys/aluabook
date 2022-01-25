@@ -1,7 +1,7 @@
 ---
 weight: 1
 bookFlatSection: true
-title: "01 初步认识LUA"
+title: "01-00 初步认识LUA"
 ---
 
 # 初步认识LUA
