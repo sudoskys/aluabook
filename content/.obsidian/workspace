@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "docs/03/0301.md",
+            "file": "docs/04/_index.md",
             "mode": "source",
             "source": false
           }
@@ -102,6 +102,7 @@
   "active": "eacb19f0522c6b73",
   "lastOpenFiles": [
     "docs/03/_index.md",
+    "docs/04/_index.md",
     "docs/03/0301.md",
     "posts/02RES.md",
     "posts/01NEW.md",
@@ -109,7 +110,6 @@
     "docs/04/0410file.md",
     "docs/04/0409sthing.md",
     "docs/04/0408sent.md",
-    "docs/04/0407caculate.md",
-    "docs/04/0406system.md"
+    "docs/04/0407caculate.md"
   ]
 }

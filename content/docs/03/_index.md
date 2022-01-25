@@ -12,11 +12,10 @@ title: "03-00 工程笔记"
 {{< /hint >}}
 
 ## 确定前缀
-本站
-```https://lua.dianas.cyou```
+
 GIT
-国外可以用``````https://raw.githubusercontent.com/sudoskys/aluabook/main/public``````
-国内可以用``````https://raw.fastgit.org/sudoskys/aluabook/main/public``````
+国外可以用``````https://raw.githubusercontent.com/sudoskys/aluabook/main/resources/res/``````
+国内可以用``````https://raw.fastgit.org/sudoskys/aluabook/main/resources/res/``````
 
 ## 确定后缀
 
