@@ -1,7 +1,7 @@
 ---
 weight: 1
 bookFlatSection: true
-title: "03-07 各式算法"
+title: "04-07 各式算法"
 ---
 # 各种算法
 {{< hint info >}}

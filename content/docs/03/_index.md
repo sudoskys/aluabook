@@ -4,18 +4,19 @@ bookFlatSection: true
 title: "03-00 工程笔记"
 ---
 
+
+
+# 源代码
 {{< hint info >}}
 **From sudoskys** 
 {{< /hint >}}
 
-# 源代码
-
 ## 确定前缀
 本站
-```https://luares.dianas.cyou```
+```https://lua.dianas.cyou```
 GIT
-国外可以用``````https://raw.githubusercontent.com/sudoskys/Aluabookres/main/``````
-国内可以用``````https://raw.fastgit.org/sudoskys/Aluabookres/main/``````
+国外可以用``````https://raw.githubusercontent.com/sudoskys/aluabook/main/public``````
+国内可以用``````https://raw.fastgit.org/sudoskys/aluabook/main/public``````
 
 ## 确定后缀
 
