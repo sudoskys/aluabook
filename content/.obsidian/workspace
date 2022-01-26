@@ -4,19 +4,7 @@
     "type": "split",
     "children": [
       {
-        "id": "5d55494fb6a1488d",
-        "type": "leaf",
-        "state": {
-          "type": "markdown",
-          "state": {
-            "file": "docs/04/0401when.md",
-            "mode": "source",
-            "source": false
-          }
-        }
-      },
-      {
-        "id": "eacb19f0522c6b73",
+        "id": "665d5780e32c0c5f",
         "type": "leaf",
         "state": {
           "type": "markdown",
@@ -99,17 +87,17 @@
     "width": 300,
     "collapsed": true
   },
-  "active": "eacb19f0522c6b73",
+  "active": "665d5780e32c0c5f",
   "lastOpenFiles": [
     "docs/03/_index.md",
+    "docs/_index.md",
+    "posts/02RES.md",
     "docs/04/0401when.md",
     "docs/04/_index.md",
     "docs/03/0301.md",
-    "posts/02RES.md",
     "posts/01NEW.md",
     "docs/04/0411Animation.md",
     "docs/04/0410file.md",
-    "docs/04/0409sthing.md",
-    "docs/04/0408sent.md"
+    "docs/04/0409sthing.md"
   ]
 }
