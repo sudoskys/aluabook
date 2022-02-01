@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="From Overdose &amp; sudoskys  https://iflynote.com/h/s/doc/W5zNYAzJvliY4Xbc
+题目：如何开发可能成功的作品，拒绝做糟糕的开发者。 #  如果您认为本建议内容与您的认知有冲突，请跳过。
+FusionApp这里指FusionApp 2.0 Beta 8.7.2
+ 一.设计流程 #  界面设计 #  设计风格统一，尽可能使用AndroidX与质感库的内容。 界面尽可能现代。请勿开发粗制滥造的作品。建议您使用Material Design。
+文件资源 #  您应使资源文件存放得当，不应使用户等待冗长的动画。应使动画自然流畅（请善用插值器）。
+功能设计 #  您应使功能稳定，应遵照用户情况增减功能。功能应围绕明确的主题。 您应使功能简单易用（复杂的功能应配有说明） 您可以或应当收费您耗费大量心血的核心功能，您应维持功能完整可靠。对于他人编写内容，请辨明开源协议！！
+三.质量建议 #  您的应用内不应出现过多易触发的漏洞 您的正式版内不应出现未完善的内容 小规模应用不应对大量的内容收费 大规模应用应具有完善的收费系统 您不应时常催促用户购买收费内容或向作者捐赠 您的应用提示语应礼貌得体
+四.迭代 #  您的应用迭代速度不应过于频繁！ 频次最好以两周一版本为好。太过频繁的更新会显著降低用户体验。内测的版本请开发完毕后再上线&hellip;. 用户不需要为应用迭代考虑过多
+迭代的版本号上调应符合规范（详细请自行查阅搜索引擎） 迭代的内容应列出日志，供用户随时查看，用户享有知情权。
+对于正在小范围测试的应用，迭代的内容不应过少 对于大规模被使用的应用，迭代内容不应过大 α（Alpha）版本不应向任何人供应 β（Beta）版本可小范围供部分用户测试
+五.相关 #  建议您独立编写协议（即使字数较少，也好于模板）。 您应在用户使用您的应用前告知协议。 您应说明您使用的开源内容，这是社区公约，法庭具有效力.
+六.安全 #  您不应出卖用户的隐私。 您不应获取过多用户的隐私。 您不应向他人展示用户的隐私。 您应保证他人不会通过您的应用获取他人的隐私。 您应优先修复安全漏洞。 您的热更新作用范围不应过大。">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="03-02 拒绝做糟糕的开发者[*]" />
+<meta property="og:description" content="From Overdose &amp; sudoskys  https://iflynote.com/h/s/doc/W5zNYAzJvliY4Xbc
+题目：如何开发可能成功的作品，拒绝做糟糕的开发者。 #  如果您认为本建议内容与您的认知有冲突，请跳过。
+FusionApp这里指FusionApp 2.0 Beta 8.7.2
+ 一.设计流程 #  界面设计 #  设计风格统一，尽可能使用AndroidX与质感库的内容。 界面尽可能现代。请勿开发粗制滥造的作品。建议您使用Material Design。
+文件资源 #  您应使资源文件存放得当，不应使用户等待冗长的动画。应使动画自然流畅（请善用插值器）。
+功能设计 #  您应使功能稳定，应遵照用户情况增减功能。功能应围绕明确的主题。 您应使功能简单易用（复杂的功能应配有说明） 您可以或应当收费您耗费大量心血的核心功能，您应维持功能完整可靠。对于他人编写内容，请辨明开源协议！！
+三.质量建议 #  您的应用内不应出现过多易触发的漏洞 您的正式版内不应出现未完善的内容 小规模应用不应对大量的内容收费 大规模应用应具有完善的收费系统 您不应时常催促用户购买收费内容或向作者捐赠 您的应用提示语应礼貌得体
+四.迭代 #  您的应用迭代速度不应过于频繁！ 频次最好以两周一版本为好。太过频繁的更新会显著降低用户体验。内测的版本请开发完毕后再上线&hellip;. 用户不需要为应用迭代考虑过多
+迭代的版本号上调应符合规范（详细请自行查阅搜索引擎） 迭代的内容应列出日志，供用户随时查看，用户享有知情权。
+对于正在小范围测试的应用，迭代的内容不应过少 对于大规模被使用的应用，迭代内容不应过大 α（Alpha）版本不应向任何人供应 β（Beta）版本可小范围供部分用户测试
+五.相关 #  建议您独立编写协议（即使字数较少，也好于模板）。 您应在用户使用您的应用前告知协议。 您应说明您使用的开源内容，这是社区公约，法庭具有效力.
+六.安全 #  您不应出卖用户的隐私。 您不应获取过多用户的隐私。 您不应向他人展示用户的隐私。 您应保证他人不会通过您的应用获取他人的隐私。 您应优先修复安全漏洞。 您的热更新作用范围不应过大。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://lua.dianas.cyou/docs/03/0302/" /><meta property="article:section" content="docs" />
+
+
+
+<title>03-02 拒绝做糟糕的开发者[*] | LUA book</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.82c5dbd23447cee0b4c2aa3ed08ce0961faa40e1fa370eee4f8c9f02e0d46b5f.css" integrity="sha256-gsXb0jRHzuC0wqo&#43;0Izglh&#43;qQOH6Nw7uT4yfAuDUa18=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.f9f7f053bfa1c84f8b9ffdfb7f717d0c0a95dae586445f05c1c064e697323b07.js" integrity="sha256-&#43;ffwU7&#43;hyE&#43;Ln/37f3F9DAqV2uWGRF8FwcBk5pcyOwc=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>LUA book</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/01/" class="">01-00 初步认识LUA</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/01/0101sudo/" class="">01-01 开发素养</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/01/0102alua/" class="">01-02 认识Alua写法</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/02/" class="">02-00 教程</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/02/0201string/" class="">02-01 String</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/02/0202layout/" class="">02-02 Layout</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/03/" class="">03-00 工程笔记</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/03/0301/" class="">03-01 案例分析01</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/03/0302/" class=" active">03-02 拒绝做糟糕的开发者[*]</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/04/" class="">04-00 MLUA教程</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/04/0401when/" class="">04-01 when的用法</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/04/0402defer/" class="">04-02 Defer关键字</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/04/0403luawebviewzidingyi/" class="">04-03 LuaWebView自定义进度条</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/04/0404string/" class="">04-04 字符串</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/04/0405layout/" class="">04-05 界面&amp;布局</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/04/0406system/" class="">04-06 系统调用</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/04/0407caculate/" class="">04-07 各式算法</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/04/0408sent/" class="">04-08 信息&amp;发送</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/04/0409sthing/" class="">04-09 事件</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/04/0410file/" class="">04-10 文件处理</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://lua.dianas.cyou/docs/04/0411animation/" class="">04-11 动画</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/" >
+        Blog
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>03-02 拒绝做糟糕的开发者[*]</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#一设计流程">一.设计流程</a>
+      <ul>
+        <li><a href="#界面设计">界面设计</a></li>
+        <li><a href="#文件资源">文件资源</a></li>
+        <li><a href="#功能设计">功能设计</a></li>
+      </ul>
+    </li>
+    <li><a href="#三质量建议">三.质量建议</a></li>
+    <li><a href="#四迭代">四.迭代</a></li>
+    <li><a href="#五相关">五.相关</a></li>
+    <li><a href="#六安全">六.安全</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><p><blockquote class="book-hint info">
+  <strong>From Overdose &amp; sudoskys</strong>
+</blockquote>
+
+<a href="https://iflynote.com/h/s/doc/W5zNYAzJvliY4Xbc">https://iflynote.com/h/s/doc/W5zNYAzJvliY4Xbc</a></p>
+<h1 id="题目如何开发可能成功的作品拒绝做糟糕的开发者">
+  题目：如何开发可能成功的作品，拒绝做糟糕的开发者。
+  <a class="anchor" href="#%e9%a2%98%e7%9b%ae%e5%a6%82%e4%bd%95%e5%bc%80%e5%8f%91%e5%8f%af%e8%83%bd%e6%88%90%e5%8a%9f%e7%9a%84%e4%bd%9c%e5%93%81%e6%8b%92%e7%bb%9d%e5%81%9a%e7%b3%9f%e7%b3%95%e7%9a%84%e5%bc%80%e5%8f%91%e8%80%85">#</a>
+</h1>
+<p>如果您认为本建议内容与您的认知有冲突，请跳过。</p>
+<p>FusionApp这里指FusionApp 2.0 Beta 8.7.2</p>
+<hr>
+<h2 id="一设计流程">
+  一.设计流程
+  <a class="anchor" href="#%e4%b8%80%e8%ae%be%e8%ae%a1%e6%b5%81%e7%a8%8b">#</a>
+</h2>
+<h3 id="界面设计">
+  界面设计
+  <a class="anchor" href="#%e7%95%8c%e9%9d%a2%e8%ae%be%e8%ae%a1">#</a>
+</h3>
+<p>设计风格统一，尽可能使用AndroidX与质感库的内容。
+界面尽可能现代。请勿开发粗制滥造的作品。建议您使用Material Design。</p>
+<h3 id="文件资源">
+  文件资源
+  <a class="anchor" href="#%e6%96%87%e4%bb%b6%e8%b5%84%e6%ba%90">#</a>
+</h3>
+<p>您应使资源文件存放得当，不应使用户等待冗长的动画。应使动画自然流畅（请善用插值器）。</p>
+<h3 id="功能设计">
+  功能设计
+  <a class="anchor" href="#%e5%8a%9f%e8%83%bd%e8%ae%be%e8%ae%a1">#</a>
+</h3>
+<p>您应使功能稳定，应遵照用户情况增减功能。功能应围绕明确的主题。
+您应使功能简单易用（复杂的功能应配有说明）
+您可以或应当收费您耗费大量心血的核心功能，您应维持功能完整可靠。对于他人编写内容，请辨明开源协议！！</p>
+<h2 id="三质量建议">
+  三.质量建议
+  <a class="anchor" href="#%e4%b8%89%e8%b4%a8%e9%87%8f%e5%bb%ba%e8%ae%ae">#</a>
+</h2>
+<p>您的应用内不应出现过多易触发的漏洞
+您的正式版内不应出现未完善的内容
+小规模应用不应对大量的内容收费
+大规模应用应具有完善的收费系统
+您不应时常催促用户购买收费内容或向作者捐赠
+您的应用提示语应礼貌得体</p>
+<h2 id="四迭代">
+  四.迭代
+  <a class="anchor" href="#%e5%9b%9b%e8%bf%ad%e4%bb%a3">#</a>
+</h2>
+<p>您的应用迭代速度不应过于频繁！
+频次最好以两周一版本为好。太过频繁的更新会显著降低用户体验。内测的版本请开发完毕后再上线&hellip;.
+用户不需要为应用迭代考虑过多</p>
+<p>迭代的版本号上调应符合规范（详细请自行查阅搜索引擎）
+迭代的内容应列出日志，供用户随时查看，用户享有知情权。</p>
+<p>对于正在小范围测试的应用，迭代的内容不应过少
+对于大规模被使用的应用，迭代内容不应过大
+α（Alpha）版本不应向任何人供应
+β（Beta）版本可小范围供部分用户测试</p>
+<h2 id="五相关">
+  五.相关
+  <a class="anchor" href="#%e4%ba%94%e7%9b%b8%e5%85%b3">#</a>
+</h2>
+<p>建议您独立编写协议（即使字数较少，也好于模板）。
+您应在用户使用您的应用前告知协议。
+您应说明您使用的开源内容，这是社区公约，法庭具有效力.</p>
+<h2 id="六安全">
+  六.安全
+  <a class="anchor" href="#%e5%85%ad%e5%ae%89%e5%85%a8">#</a>
+</h2>
+<p>您不应出卖用户的隐私。
+您不应获取过多用户的隐私。
+您不应向他人展示用户的隐私。
+您应保证他人不会通过您的应用获取他人的隐私。
+您应优先修复安全漏洞。
+您的热更新作用范围不应过大。</p>
+<p>密码最好采用不可逆算法加密后存储，防止被入侵。</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#一设计流程">一.设计流程</a>
+      <ul>
+        <li><a href="#界面设计">界面设计</a></li>
+        <li><a href="#文件资源">文件资源</a></li>
+        <li><a href="#功能设计">功能设计</a></li>
+      </ul>
+    </li>
+    <li><a href="#三质量建议">三.质量建议</a></li>
+    <li><a href="#四迭代">四.迭代</a></li>
+    <li><a href="#五相关">五.相关</a></li>
+    <li><a href="#六安全">六.安全</a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

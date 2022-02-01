@@ -36,6 +36,26 @@ str=&amp;#34;左中右&amp;#34; --取左 左=str:match(&amp;#34;(.+)中&amp;#34;
     </item>
     
     <item>
+      <title>03-02 拒绝做糟糕的开发者[*]</title>
+      <link>https://lua.dianas.cyou/docs/03/0302/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://lua.dianas.cyou/docs/03/0302/</guid>
+      <description>From Overdose &amp;amp; sudoskys  https://iflynote.com/h/s/doc/W5zNYAzJvliY4Xbc
+题目：如何开发可能成功的作品，拒绝做糟糕的开发者。 #  如果您认为本建议内容与您的认知有冲突，请跳过。
+FusionApp这里指FusionApp 2.0 Beta 8.7.2
+ 一.设计流程 #  界面设计 #  设计风格统一，尽可能使用AndroidX与质感库的内容。 界面尽可能现代。请勿开发粗制滥造的作品。建议您使用Material Design。
+文件资源 #  您应使资源文件存放得当，不应使用户等待冗长的动画。应使动画自然流畅（请善用插值器）。
+功能设计 #  您应使功能稳定，应遵照用户情况增减功能。功能应围绕明确的主题。 您应使功能简单易用（复杂的功能应配有说明） 您可以或应当收费您耗费大量心血的核心功能，您应维持功能完整可靠。对于他人编写内容，请辨明开源协议！！
+三.质量建议 #  您的应用内不应出现过多易触发的漏洞 您的正式版内不应出现未完善的内容 小规模应用不应对大量的内容收费 大规模应用应具有完善的收费系统 您不应时常催促用户购买收费内容或向作者捐赠 您的应用提示语应礼貌得体
+四.迭代 #  您的应用迭代速度不应过于频繁！ 频次最好以两周一版本为好。太过频繁的更新会显著降低用户体验。内测的版本请开发完毕后再上线&amp;hellip;. 用户不需要为应用迭代考虑过多
+迭代的版本号上调应符合规范（详细请自行查阅搜索引擎） 迭代的内容应列出日志，供用户随时查看，用户享有知情权。
+对于正在小范围测试的应用，迭代的内容不应过少 对于大规模被使用的应用，迭代内容不应过大 α（Alpha）版本不应向任何人供应 β（Beta）版本可小范围供部分用户测试
+五.相关 #  建议您独立编写协议（即使字数较少，也好于模板）。 您应在用户使用您的应用前告知协议。 您应说明您使用的开源内容，这是社区公约，法庭具有效力.
+六.安全 #  您不应出卖用户的隐私。 您不应获取过多用户的隐私。 您不应向他人展示用户的隐私。 您应保证他人不会通过您的应用获取他人的隐私。 您应优先修复安全漏洞。 您的热更新作用范围不应过大。</description>
+    </item>
+    
+    <item>
       <title>04-01 when的用法</title>
       <link>https://lua.dianas.cyou/docs/04/0401when/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -189,6 +209,27 @@ info|warning|danger
       
       <guid>https://lua.dianas.cyou/posts/02res/</guid>
       <description> . ├── 03 │ └── 01 │ └── BiliFanViewer │ └── BiliFanViewer.zip ├── frame.zip ├── lua_Kit.zip └── xiaohe_teach.zip </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://lua.dianas.cyou/posts/03vscode/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://lua.dianas.cyou/posts/03vscode/</guid>
+      <description>Lua-App编程上机的两个方案 #   原作sudoskys,同步于lua.dianas.cyou
+ 敲到键盘：Termux搭建code-server,实机调试 #    本篇教程可以让你：拥有一个随身Vscode（python环境），与不受限制的LUA应用编写体验。
+ 所需项目 #  Termux #   项目地址 https://gitee.com/mo2/linux
+   下载安装termux GIThub镜像站 https://ghproxy.com/ https://git.yumenaka.net/ APP源 https://f-droid.org/repository/browse/?fdid=com.termux https://github.com/termux/termux-app
+  直链(22年0201):
+  输入termux-setup-storage开启文件访问权限。
+  使用tmoe项目快速搭建debian(推荐)或其他linux环境（请选择proot） （参考https://haohe.fun/2021/04/tmoe-linux%EF%BC%9A%E5%9C%A8android-%E5%92%8Cwindows10%E4%B8%8A%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85-gnu-linux%E5%AE%B9%E5%99%A8/）
+  具体操作
+bash -c &amp;#34;$(curl -fsSL [https://gitee.com/mo2/linux/raw/2/2](https://gitee.com/mo2/linux/raw/2/2))&amp;#34; 耐心等待安装完毕，请勿熄屏！！！！！！！（要授权什么的）
+ 其中，具体选择中，可以创建新用户作为ROOT。（推荐） 这个用户以后使用 su 命令来登陆。 其中，运行proot容器我使用KDE,比较像WIN.容易操作。 其中，一定要看清楚说明信息呃 安装完毕请完全重新启动APP。 输入debian启动最近的容器，终端输入neofetch查看系统信息。 接着输入novnc开启局域网VNC链接，（请确认您安装novnc,tmoe已经为您预装）。
+打开局域网地址（终端输出信息），然后链接。就可以体验卡卡卡卡卡的桌面。
+ PS：命令执行都可以使用Ctrl +键盘敲击 C 来中断操作
+  CODE-server（VScode服务端） #  官方安装教程 https://github.</description>
     </item>
     
   </channel>
