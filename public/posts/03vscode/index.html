@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Lua-App编程上机的两个方案 #   原作sudoskys,同步于lua.dianas.cyou
- 敲到键盘：Termux搭建code-server,实机调试 #    本篇教程可以让你：拥有一个随身Vscode（python环境），与不受限制的LUA应用编写体验。
- 所需项目 #  Termux #   项目地址 https://gitee.com/mo2/linux
+<meta name="description" content="Lua-App编程上机的三个方案 #   原作sudoskys,同步于lua.dianas.cyou
+ 敲到键盘：Termux搭建code-server,实机调试 #    本篇教程可以让你：拥有一个随身Vscode（python环境），多机协同体验，（映射或反代后远程编写体验），可运行python脚本额外体验，与不受限制的LUA应用编写体验。
+ PS：你最好有一定的linux使用经验&hellip;&hellip;
+所需项目 #  Termux #   项目地址 https://gitee.com/mo2/linux
    下载安装termux GIThub镜像站 https://ghproxy.com/ https://git.yumenaka.net/ APP源 https://f-droid.org/repository/browse/?fdid=com.termux https://github.com/termux/termux-app
   直链(22年0201):
   输入termux-setup-storage开启文件访问权限。
@@ -18,9 +19,10 @@ bash -c &#34;$(curl -fsSL [https://gitee.com/mo2/linux/raw/2/2](https://gitee.co
   CODE-server（VScode服务端） #  官方安装教程 https://github.">
 <meta name="theme-color" content="#FFFFFF">
 <meta name="color-scheme" content="light dark"><meta property="og:title" content="" />
-<meta property="og:description" content="Lua-App编程上机的两个方案 #   原作sudoskys,同步于lua.dianas.cyou
- 敲到键盘：Termux搭建code-server,实机调试 #    本篇教程可以让你：拥有一个随身Vscode（python环境），与不受限制的LUA应用编写体验。
- 所需项目 #  Termux #   项目地址 https://gitee.com/mo2/linux
+<meta property="og:description" content="Lua-App编程上机的三个方案 #   原作sudoskys,同步于lua.dianas.cyou
+ 敲到键盘：Termux搭建code-server,实机调试 #    本篇教程可以让你：拥有一个随身Vscode（python环境），多机协同体验，（映射或反代后远程编写体验），可运行python脚本额外体验，与不受限制的LUA应用编写体验。
+ PS：你最好有一定的linux使用经验&hellip;&hellip;
+所需项目 #  Termux #   项目地址 https://gitee.com/mo2/linux
    下载安装termux GIThub镜像站 https://ghproxy.com/ https://git.yumenaka.net/ APP源 https://f-droid.org/repository/browse/?fdid=com.termux https://github.com/termux/termux-app
   直链(22年0201):
   输入termux-setup-storage开启文件访问权限。
@@ -41,7 +43,7 @@ bash -c &#34;$(curl -fsSL [https://gitee.com/mo2/linux/raw/2/2](https://gitee.co
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.82c5dbd23447cee0b4c2aa3ed08ce0961faa40e1fa370eee4f8c9f02e0d46b5f.css" integrity="sha256-gsXb0jRHzuC0wqo&#43;0Izglh&#43;qQOH6Nw7uT4yfAuDUa18=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.f9f7f053bfa1c84f8b9ffdfb7f717d0c0a95dae586445f05c1c064e697323b07.js" integrity="sha256-&#43;ffwU7&#43;hyE&#43;Ln/37f3F9DAqV2uWGRF8FwcBk5pcyOwc=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.f27f03602df14f004d9bcab2ff7d39e73b46250b4b3d914acb3042a16d8cac98.js" integrity="sha256-8n8DYC3xTwBNm8qy/3055ztGJQtLPZFKyzBCoW2MrJg=" crossorigin="anonymous"></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -448,6 +450,7 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#所需项目">所需项目</a></li>
       </ul>
     </li>
+    <li><a href="#模拟器搭载开发工具">模拟器搭载开发工具</a></li>
     <li><a href="#专业工具使用android-studio--安卓模拟器">专业工具:使用Android studio + 安卓模拟器</a>
       <ul>
         <li><a href="#所需项目-1">所需项目</a></li>
@@ -478,9 +481,9 @@ https://github.com/alex-shpak/hugo-book
 
 
 
-<h1 id="lua-app编程上机的两个方案">
-  Lua-App编程上机的两个方案
-  <a class="anchor" href="#lua-app%e7%bc%96%e7%a8%8b%e4%b8%8a%e6%9c%ba%e7%9a%84%e4%b8%a4%e4%b8%aa%e6%96%b9%e6%a1%88">#</a>
+<h1 id="lua-app编程上机的三个方案">
+  Lua-App编程上机的三个方案
+  <a class="anchor" href="#lua-app%e7%bc%96%e7%a8%8b%e4%b8%8a%e6%9c%ba%e7%9a%84%e4%b8%89%e4%b8%aa%e6%96%b9%e6%a1%88">#</a>
 </h1>
 <blockquote>
 <p>原作sudoskys,同步于lua.dianas.cyou</p>
@@ -491,8 +494,9 @@ https://github.com/alex-shpak/hugo-book
 </h2>
 <hr>
 <blockquote>
-<p>本篇教程可以让你：拥有一个随身Vscode（python环境），与不受限制的LUA应用编写体验。</p>
+<p>本篇教程可以让你：拥有一个随身Vscode（python环境），多机协同体验，（映射或反代后远程编写体验），可运行python脚本额外体验，与不受限制的LUA应用编写体验。</p>
 </blockquote>
+<p>PS：你最好有一定的linux使用经验&hellip;&hellip;</p>
 <h3 id="所需项目">
   所需项目
   <a class="anchor" href="#%e6%89%80%e9%9c%80%e9%a1%b9%e7%9b%ae">#</a>
@@ -591,6 +595,29 @@ System has not been booted with systemd as init system (PID 1). Can't operate. F
 
 </blockquote>
 
+<p><strong>安装完毕的配置</strong></p>
+<p>可以链接vnc（推荐），打开文件管理器的（显示隐藏文件选项）
+打开 <strong>~/.config/code-server/config.yaml</strong>
+也可以使用vim呃</p>
+<pre tabindex="0"><code>**vim   ~/.config/code-server/config.yaml**
+</code></pre><p>具体配置</p>
+<ul>
+<li>&ndash;port 9999指定端口运行，可以修改为80端口，这样就访问的时候就不需要输入端口号</li>
+<li>&ndash;host 0.0.0.0 默认是127.0.0.1，只能本地访问，无法外网访问，所以得改成0.0.0.0，才能各个浏览器都能访问</li>
+</ul>
+<p>结束&hellip;&hellip;</p>
+<p>服务器端（termux不用看）
+<a href="https://segmentfault.com/a/1190000022267386">https://segmentfault.com/a/1190000022267386</a>
+<a href="https://blog.csdn.net/day_to_die/article/details/105990565">https://blog.csdn.net/day_to_die/article/details/105990565</a>
+<a href="https://cloud.tencent.com/developer/article/1902378">https://cloud.tencent.com/developer/article/1902378</a></p>
+<h2 id="模拟器搭载开发工具">
+  模拟器搭载开发工具
+  <a class="anchor" href="#%e6%a8%a1%e6%8b%9f%e5%99%a8%e6%90%ad%e8%bd%bd%e5%bc%80%e5%8f%91%e5%b7%a5%e5%85%b7">#</a>
+</h2>
+<hr>
+<p>具体看这位的博客
+<a href="https://bk.yyge.net/?post=128">https://bk.yyge.net/?post=128</a></p>
+<p>或者自己下载模拟器安装开发工具即可&hellip;..</p>
 <h2 id="专业工具使用android-studio--安卓模拟器">
   专业工具:使用Android studio + 安卓模拟器
   <a class="anchor" href="#%e4%b8%93%e4%b8%9a%e5%b7%a5%e5%85%b7%e4%bd%bf%e7%94%a8android-studio--%e5%ae%89%e5%8d%93%e6%a8%a1%e6%8b%9f%e5%99%a8">#</a>
@@ -668,6 +695,7 @@ System has not been booted with systemd as init system (PID 1). Can't operate. F
         <li><a href="#所需项目">所需项目</a></li>
       </ul>
     </li>
+    <li><a href="#模拟器搭载开发工具">模拟器搭载开发工具</a></li>
     <li><a href="#专业工具使用android-studio--安卓模拟器">专业工具:使用Android studio + 安卓模拟器</a>
       <ul>
         <li><a href="#所需项目-1">所需项目</a></li>

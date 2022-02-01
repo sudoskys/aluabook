@@ -33,9 +33,10 @@ info|warning|danger
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://lua.dianas.cyou/posts/03vscode/</guid>
-      <description>Lua-App编程上机的两个方案 #   原作sudoskys,同步于lua.dianas.cyou
- 敲到键盘：Termux搭建code-server,实机调试 #    本篇教程可以让你：拥有一个随身Vscode（python环境），与不受限制的LUA应用编写体验。
- 所需项目 #  Termux #   项目地址 https://gitee.com/mo2/linux
+      <description>Lua-App编程上机的三个方案 #   原作sudoskys,同步于lua.dianas.cyou
+ 敲到键盘：Termux搭建code-server,实机调试 #    本篇教程可以让你：拥有一个随身Vscode（python环境），多机协同体验，（映射或反代后远程编写体验），可运行python脚本额外体验，与不受限制的LUA应用编写体验。
+ PS：你最好有一定的linux使用经验&amp;hellip;&amp;hellip;
+所需项目 #  Termux #   项目地址 https://gitee.com/mo2/linux
    下载安装termux GIThub镜像站 https://ghproxy.com/ https://git.yumenaka.net/ APP源 https://f-droid.org/repository/browse/?fdid=com.termux https://github.com/termux/termux-app
   直链(22年0201):
   输入termux-setup-storage开启文件访问权限。
