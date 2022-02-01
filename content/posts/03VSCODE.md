@@ -1,11 +1,13 @@
-# Lua-App编程上机的两个方案
+# Lua-App编程上机的三个方案
 
 > 原作sudoskys,同步于lua.dianas.cyou
 
 ##  敲到键盘：Termux搭建code-server,实机调试
 -------------
 
-> 本篇教程可以让你：拥有一个随身Vscode（python环境），与不受限制的LUA应用编写体验。
+> 本篇教程可以让你：拥有一个随身Vscode（python环境），多机协同体验，（映射或反代后远程编写体验），可运行python脚本额外体验，与不受限制的LUA应用编写体验。
+
+PS：你最好有一定的linux使用经验......
 
 ### 所需项目
 
@@ -129,7 +131,35 @@ System has not been booted with systemd as init system (PID 1). Can't operate. F
 {{< /hint >}}
 
 
+**安装完毕的配置**
 
+可以链接vnc（推荐），打开文件管理器的（显示隐藏文件选项）
+打开 **~/.config/code-server/config.yaml**
+也可以使用vim呃
+```
+**vim   ~/.config/code-server/config.yaml**
+```
+
+具体配置
+-   --port 9999指定端口运行，可以修改为80端口，这样就访问的时候就不需要输入端口号
+-   --host 0.0.0.0 默认是127.0.0.1，只能本地访问，无法外网访问，所以得改成0.0.0.0，才能各个浏览器都能访问
+
+
+结束......
+
+
+服务器端（termux不用看）
+https://segmentfault.com/a/1190000022267386
+https://blog.csdn.net/day_to_die/article/details/105990565
+https://cloud.tencent.com/developer/article/1902378
+
+
+## 模拟器搭载开发工具
+-------------
+具体看这位的博客
+https://bk.yyge.net/?post=128
+
+或者自己下载模拟器安装开发工具即可.....
 
 
 ## 专业工具:使用Android studio + 安卓模拟器
