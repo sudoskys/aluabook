@@ -14,11 +14,11 @@ weight: 10
 ---
 
 
-# Lua-App编程上机的三个方案
-
+Lua-App编程上机的三个方案
 三种，不是三步！！
 
 > 原作sudoskys,同步于lua.dianas.cyou
+> 
 
 ##  1.敲到键盘：Termux搭建code-server,实机调试
 -------------
@@ -193,8 +193,10 @@ https://bk.yyge.net/?post=128
 #### 一堆SDK
 
 #### Androlua 环境支持
+```
+https://github.com/xiao00kang/AndroLua_Project_Template
 
-- https://github.com/xiao00kang/AndroLua_Project_Template
+```
 
 这个方案我之前用过，可以用。
 具体安装教程网上大把，这里不再赘述。
