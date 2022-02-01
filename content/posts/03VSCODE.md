@@ -1,4 +1,4 @@
-202
+
 ---
 author: "sudoksys"
 date: 2022-02-1
@@ -16,9 +16,11 @@ weight: 10
 
 # Lua-App编程上机的三个方案
 
+三种，不是三步！！
+
 > 原作sudoskys,同步于lua.dianas.cyou
 
-##  敲到键盘：Termux搭建code-server,实机调试
+##  1.敲到键盘：Termux搭建code-server,实机调试
 -------------
 
 > 本篇教程可以让你：拥有一个随身Vscode（python环境），多机协同体验，（映射或反代后远程编写体验），可运行python脚本额外体验，与不受限制的LUA应用编写体验。
@@ -170,7 +172,7 @@ https://blog.csdn.net/day_to_die/article/details/105990565
 https://cloud.tencent.com/developer/article/1902378
 
 
-## 模拟器搭载开发工具
+## 2.模拟器搭载开发工具
 -------------
 具体看这位的博客
 https://bk.yyge.net/?post=128
@@ -178,7 +180,7 @@ https://bk.yyge.net/?post=128
 或者自己下载模拟器安装开发工具即可.....
 
 
-## 专业工具:使用Android studio + 安卓模拟器
+## 3.专业工具:使用Android studio + 安卓模拟器
 
 ---------------
 
