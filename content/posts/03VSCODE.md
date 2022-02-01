@@ -1,4 +1,4 @@
-
+202
 ---
 author: "sudoksys"
 date: 2022-02-1
@@ -10,6 +10,7 @@ next: /tutorials/github-pages-blog
 prev: /tutorials/automated-deployments
 title: Lua-App编程上机的三个方案
 weight: 10
+
 ---
 
 
@@ -51,7 +52,7 @@ https://github.com/termux/termux-app
 **具体操作**
 
 ```bash
-bash -c "$(curl -fsSL [https://gitee.com/mo2/linux/raw/2/2](https://gitee.com/mo2/linux/raw/2/2))"
+bash -c "$(curl -fsSL https://gitee.com/mo2/linux/raw/2/2)"
 ```
 
 耐心等待安装完毕，请勿熄屏！！！！！！！（要授权什么的）
