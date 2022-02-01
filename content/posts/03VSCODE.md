@@ -1,3 +1,18 @@
+
+---
+author: "sudoksys"
+date: 2022-02-1
+linktitle: VSCODE
+menu:
+  main:
+    parent: tutorials
+next: /tutorials/github-pages-blog
+prev: /tutorials/automated-deployments
+title: Lua-App编程上机的三个方案
+weight: 10
+---
+
+
 # Lua-App编程上机的三个方案
 
 > 原作sudoskys,同步于lua.dianas.cyou
