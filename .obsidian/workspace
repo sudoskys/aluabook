@@ -1,0 +1,103 @@
+{
+  "main": {
+    "id": "fb741b51ee215832",
+    "type": "split",
+    "children": [
+      {
+        "id": "ef4952ee2bc5b822",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "content/posts/03VSCODE.md",
+            "mode": "source",
+            "source": false
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "f0e044336d5e85d9",
+    "type": "split",
+    "children": [
+      {
+        "id": "5d2ac498adf533c6",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "24f48fa1de9d69c2",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "201d545f9c13eca4",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "c1eaaa368f3dc287",
+    "type": "split",
+    "children": [
+      {
+        "id": "f24b4be7c2eeb4cc",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "068552e2590e2ed0",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "content/posts/03VSCODE.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "ef4952ee2bc5b822",
+  "lastOpenFiles": [
+    "content/posts/03VSCODE.md",
+    "content/posts/02RES.md",
+    "content/posts/01NEW.md",
+    "content/posts/_index.md",
+    "content/docs/03/0301.md",
+    "content/docs/03/0302.md",
+    "content/docs/03/_index.md",
+    "content/docs/04/_index.md",
+    "content/docs/_index.md",
+    "content/_index.md"
+  ]
+}
