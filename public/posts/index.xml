@@ -40,17 +40,17 @@ info|warning|danger
  拥有一个随身Vscode（python环境） -多机协同体验，映射或反代后可以远程编写 -python环境  准备 #  PS：你最好有一定的linux使用经验&amp;hellip;&amp;hellip;
 ✨Termux #   项目地址 https://gitee.com/mo2/linux
  🍞下载
- 直链 https://drive.sakura-bbs.cn/api/v3/file/source/34998/com.termux_118.apk?sign=m8OT3cuEy2m7KVqg8U7BXd229aoN2o9Yd7n7dfvZ5vk%3D%3A0 其他渠道 GIThub镜像站 https://ghproxy.com/ https://git.yumenaka.net/  APP源 https://f-droid.org/repository/browse/?fdid=com.termux https://github.com/termux/termux-app
+  直链 https://drive.sakura-bbs.cn/api/v3/file/source/34998/com.termux_118.apk?sign=m8OT3cuEy2m7KVqg8U7BXd229aoN2o9Yd7n7dfvZ5vk%3D%3A0
+  其他渠道 GIThub镜像站 https://ghproxy.com/ https://git.yumenaka.net/
+  APP源 https://f-droid.org/repository/browse/?fdid=com.termux https://github.com/termux/termux-app
 🍞安装完毕，输入termux-setup-storage，开启文件访问权限。
- 使用tmoe项目快速搭建debian(推荐)或其他linux环境（请选择proot） （参考https://haohe.fun/2021/04/tmoe-linux%EF%BC%9A%E5%9C%A8android-%E5%92%8Cwindows10%E4%B8%8A%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85-gnu-linux%E5%AE%B9%E5%99%A8/）  🍞输入 bash -c &amp;ldquo;$(curl -fsSL(https://gitee.com/mo2/linux/raw/2/2))&#34;
-耐心等待安装完毕，请勿熄屏！（需要授权）
+ 使用tmoe项目快速搭建debian(推荐)或其他linux环境（请选择proot） （参考https://haohe.fun/2021/04/tmoe-linux%EF%BC%9A%E5%9C%A8android-%E5%92%8Cwindows10%E4%B8%8A%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85-gnu-linux%E5%AE%B9%E5%99%A8/）  🍞输入
+bash -c &amp;#34;$(curl -fsSL(https://gitee.com/mo2/linux/raw/2/2))&amp;#34; 耐心等待安装完毕，请勿熄屏！（需要授权）
 💡具体选择中，可以创建新用户作为ROOT。（推荐）
 💡这个用户以后使用 su 命令来登陆。
 💡运行proot容器我使用KDE,比较像WIN.容易操作。
 💡一定要看清楚说明信息呃
-安装完毕请完全重新启动APP。
-🍞输入debian启动最近的容器，终端输入 neofetch 查看系统信息。
-🍞输入 novnc 开启局域网VNC链接，（请确认您安装novnc,tmoe已经为您预装）。</description>
+安装完毕请完全重新启动APP。</description>
     </item>
     
   </channel>
