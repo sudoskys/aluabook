@@ -17,7 +17,6 @@ weight: 10
 
 ## 一🏁大佬助力：VScode APP
 
-
 https://www.coolapk.com/apk/com.nightmare.code
 
 ### 补充：局域网
@@ -47,6 +46,7 @@ PS：你最好有一定的linux使用经验......
 
 - 直链
   https://drive.sakura-bbs.cn/api/v3/file/source/34998/com.termux_118.apk?sign=m8OT3cuEy2m7KVqg8U7BXd229aoN2o9Yd7n7dfvZ5vk%3D%3A0
+  
 - 其他渠道
 GIThub镜像站
 https://ghproxy.com/
@@ -56,12 +56,15 @@ APP源
 https://f-droid.org/repository/browse/?fdid=com.termux
 https://github.com/termux/termux-app
 
-🍞安装完毕，输入termux-setup-storage，开启文件访问权限。
+🍞安装完毕，输入```termux-setup-storage```，开启文件访问权限。
 
 - 使用tmoe项目快速搭建debian(推荐)或其他linux环境（请选择proot） （参考https://haohe.fun/2021/04/tmoe-linux%EF%BC%9A%E5%9C%A8android-%E5%92%8Cwindows10%E4%B8%8A%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85-gnu-linux%E5%AE%B9%E5%99%A8/）
 
 🍞输入
+```shell
 bash -c "$(curl -fsSL(https://gitee.com/mo2/linux/raw/2/2))"
+
+```
 
 耐心等待安装完毕，请勿熄屏！（需要授权）
 
@@ -94,9 +97,11 @@ https://github.com/coder/code-server/blob/main/docs/termux.md#installation
 
 💡由于我们到VSCODE的链接不是很稳定，在线安装请全局全球化....！
 
-🍞安装NVM**（可选，大概，我也不知道）
+🍞安装NVM（可选，大概，我也不知道）
 
+```shell
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+```
 
 💡问题处理
 
@@ -130,7 +135,10 @@ System has not been booted with systemd as init system (PID 1). Can't operate. F
 可以链接vnc（推荐），打开文件管理器的（显示隐藏文件选项）
 打开 ~/.config/code-server/config.yaml
 也可以使用vim呃
+```shell
 vim   ~/.config/code-server/config.yaml
+```
+
 
 - --port 9999指定端口运行，可以修改为80端口，这样就访问的时候就不需要输入端口号
 - --host 0.0.0.0 默认是127.0.0.1，只能本地访问，无法外网访问，所以得改成0.0.0.0，才能各个浏览器都能访问
