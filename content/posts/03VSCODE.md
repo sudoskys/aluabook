@@ -114,11 +114,13 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 所以请使用以下命令安装Code-server！🌈
 
 🍞安装CODE-SERVER
-
+```shell
 curl -fsSL https://code-server.dev/install.sh | sh -s -- --dry-run
+```
 
+```shell
 curl -fsSL https://code-server.dev/install.sh | sh -s -- --version=3.12.0
-
+```
 🚧不支持启动服务
 sudo systemctl enable --now code-server@$USER
 
